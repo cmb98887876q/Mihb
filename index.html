@@ -20,7 +20,6 @@
             --border-radius: 20px;
             --card-grid-bg: #08143d; 
             --premium-bezier: cubic-bezier(0.4, 0, 0.2, 1);
-            --max-content-width: 1400px;
         }
 
         /* --- RESET --- */
@@ -33,7 +32,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa; 
+            background-color: #f0f0f0; 
             display: flex;
             justify-content: center;
             overflow-x: hidden;
@@ -41,19 +40,11 @@
 
         .app-container {
             width: 100%;
-            /* Mobile constraint: Keep 480px only on mobile screens */
-            max-width: 100%; 
+            max-width: 480px; 
             min-height: 100vh;
             background: white;
             position: relative;
-        }
-
-        /* Desktop Container Wrapper */
-        .desktop-content {
-            width: 100%;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
-            padding: 0 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
         }
 
         /* --- HEADER --- */
@@ -68,13 +59,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: box-shadow 0.3s var(--premium-bezier);
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
             width: 100%;
-            justify-content: space-between;
         }
 
         header.scrolled {
@@ -112,51 +97,8 @@
             font-family: 'Pacifico', cursive;
             font-size: 26px;
             color: var(--primary-navy);
-            margin-right: auto;
-            margin-left: 15px;
-        }
-
-        /* Desktop Nav (Hidden on Mobile) */
-        .desktop-nav {
-            display: none;
-            gap: 30px;
-            margin: 0 40px;
-        }
-
-        .desktop-nav a {
-            text-decoration: none;
-            color: var(--primary-navy);
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .desktop-nav a:hover { color: var(--accent-pink); }
-        
-        .desktop-nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--accent-pink);
-            border-radius: 2px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .desktop-action-link {
-            display: none;
-            text-decoration: none;
-            color: var(--primary-navy);
-            font-weight: 500;
-            font-size: 15px;
-            align-items: center;
-            gap: 6px;
+            margin-left: 15px; 
+            margin-right: auto; 
         }
 
         .login-btn {
@@ -172,7 +114,20 @@
 
         .login-btn:active { transform: scale(0.92); opacity: 0.9; }
 
-        /* --- NAVIGATION DRAWER (Mobile Only) --- */
+        /* Desktop navigation - hidden on mobile by default */
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav-links {
+            display: none;
+        }
+
+        .desktop-actions {
+            display: none;
+        }
+
+        /* --- REDESIGNED NAVIGATION DRAWER --- */
         .drawer-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -183,6 +138,7 @@
             visibility: hidden;
             transition: all 0.3s var(--premium-bezier);
             backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .nav-drawer {
@@ -216,33 +172,92 @@
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .close-drawer:active { transform: scale(0.9); }
+
+        .drawer-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: -2px;
+            font-weight: 400;
         }
 
-        .drawer-subtitle { font-size: 13px; color: var(--text-muted); margin-top: -2px; }
-
-        .drawer-content { flex: 1; overflow-y: auto; padding: 10px 12px; }
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 12px;
+        }
 
         .menu-section-label {
-            font-size: 11px; font-weight: 700; color: #9CA3AF;
-            text-transform: uppercase; letter-spacing: 1.2px; padding: 20px 14px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 20px 14px 10px;
         }
 
         .menu-item {
-            display: flex; align-items: center; height: 56px; padding: 0 16px;
-            color: var(--primary-navy); text-decoration: none; font-size: 15px;
-            font-weight: 500; border-radius: 14px; margin-bottom: 4px;
-            position: relative; overflow: hidden; transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            height: 56px;
+            padding: 0 16px;
+            color: var(--primary-navy);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 14px;
+            margin-bottom: 4px;
+            position: relative;
+            transition: all 0.2s var(--premium-bezier);
         }
 
         .menu-item:hover { background: #F9FAFB; }
-        .menu-item.active { background: #F0F4FF; font-weight: 600; }
 
-        .menu-icon-box { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+        .menu-item.active {
+            background: #F0F4FF;
+            font-weight: 600;
+        }
+
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 24px;
+            background: var(--primary-navy);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .menu-icon-box {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--primary-navy);
+            flex-shrink: 0;
+        }
+
         .menu-item svg { width: 22px; height: 22px; stroke-width: 1.8; }
+        .menu-item.active svg { color: var(--accent-pink); stroke-width: 2.2; }
 
-        .drawer-bottom { padding: 15px 12px 25px; border-top: 1px solid #F3F4F6; }
+        .drawer-bottom {
+            padding: 15px 12px 25px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .drawer-footer {
+            padding: 20px 14px 0;
+            text-align: left;
+        }
+
         .footer-logo { font-family: 'Pacifico', cursive; font-size: 18px; color: #D1D5DB; }
+        .footer-text { font-size: 11px; color: #9CA3AF; margin-top: 2px; }
 
+        /* Trigger States */
         .drawer-open { overflow: hidden; } 
         .drawer-open .nav-drawer { transform: translateX(100%); }
         .drawer-open .drawer-overlay { opacity: 1; visibility: visible; }
@@ -269,254 +284,281 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             transition: all 0.3s var(--premium-bezier);
             cursor: pointer;
-            position: relative;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        .search-wrapper:focus-within {
-            border-color: var(--accent-pink);
-            box-shadow: 0 0 0 4px rgba(255, 63, 142, 0.08);
         }
 
         .search-icon-left { color: #0A1745; display: flex; align-items: center; margin-right: 12px; }
         .search-input { border: none; background: transparent; outline: none; flex: 1; font-size: 15px; color: var(--text-dark); width: 100%; pointer-events: none; }
 
-        .shots-filter {
-            display: none;
-            padding: 0 15px;
-            border-left: 1px solid #E5E7EB;
-            border-right: 1px solid #E5E7EB;
-            height: 30px;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: var(--text-dark);
-            margin: 0 10px;
-        }
-
         .search-action-btn {
             background: var(--accent-pink); width: 42px; height: 42px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; border: none; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 63, 142, 0.25); transition: transform 0.2s;
-            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(255, 63, 142, 0.25); transition: transform 0.2s var(--premium-bezier);
         }
-        .search-action-btn:active { transform: scale(0.94); }
         .search-action-btn svg { width: 18px; height: 18px; stroke-width: 3; color: white; }
 
-        .search-btn-text { display: none; margin-left: 8px; font-weight: 600; color: white; }
-
-        /* --- SEARCH OVERLAY --- */
-        .search-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: white; z-index: 300; padding: 20px; animation: fadeIn 0.3s var(--premium-bezier);
-        }
-        .overlay-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; max-width: 800px; margin: 0 auto; }
-        .overlay-input { flex: 1; border: none; outline: none; font-size: 18px; font-family: 'Poppins'; color: var(--text-dark); }
-
         /* --- CATEGORIES GRID --- */
-        .menu-section { 
-            background: var(--card-grid-bg); 
-            padding: 30px 12px 60px; 
-            border-radius: 0; 
-        }
-
-        .section-header {
-            max-width: var(--max-content-width);
-            margin: 0 auto 30px;
-            padding: 0 10px;
-            display: none; /* Desktop only */
-        }
-
-        .section-header h2 { color: white; font-size: 28px; font-weight: 700; margin-bottom: 5px; }
-        .section-header p { color: rgba(255, 255, 255, 0.6); font-size: 14px; }
-
-        .grid-container { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 15px; 
-            max-width: var(--max-content-width);
-            margin: 0 auto;
-        }
-
-        .card { 
-            display: flex; flex-direction: column; align-items: center; text-align: center; 
-            cursor: pointer; border-radius: 18px; position: relative; overflow: hidden; 
-            padding-bottom: 10px; transition: all 0.3s var(--premium-bezier);
-        }
-        
-        .img-container { 
-            width: 100%; aspect-ratio: 1/1; background: white; border-radius: 18px; 
-            padding: 8px; margin-bottom: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.25); 
-            position: relative; overflow: hidden; pointer-events: none;
-            transition: transform 0.3s var(--premium-bezier);
-        }
-
+        .menu-section { background: var(--card-grid-bg); padding: 30px 12px; border-radius: 0; }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .card { display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; }
+        .img-container { width: 100%; aspect-ratio: 1/1; background: white; border-radius: 18px; padding: 8px; margin-bottom: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.25); position: relative; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .card-title { color: #ffffff; opacity: 0.85; font-size: 11px; font-weight: 500; line-height: 1.3; pointer-events: none; }
+        .card-title { color: #ffffff; opacity: 0.85; font-size: 11px; font-weight: 500; line-height: 1.3; }
         
         .badge-new { position: absolute; top: 0; left: 0; background: #ffcc00; color: #000; font-weight: 700; font-size: 10px; padding: 3px 10px; border-radius: 0 0 12px 0; z-index: 2; }
         .diagonal-new { position: absolute; top: 12px; left: -22px; background: #ffcc00; color: #000; font-weight: 800; font-size: 9px; width: 80px; text-align: center; transform: rotate(-45deg); z-index: 2; }
         .curved-label { position: absolute; top: 5px; left: 5%; width: 90%; background: #ffcc00; color: #000; font-size: 7px; font-weight: 800; padding: 3px 0; border-radius: 20px; z-index: 2; }
 
-        /* --- RIPPLE --- */
-        .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.4); transform: scale(0); animation: ripple-animation 0.6s ease-out; pointer-events: none; z-index: 99; }
-        @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
-
-        /* -------------------------------------------
-           RESPONSIVE OVERRIDES
-        ------------------------------------------- */
-
-        /* TABLET (768px - 1199px) */
+        /* ========== DESKTOP (768px and above) ========== */
         @media (min-width: 768px) {
-            .grid-container { grid-template-columns: repeat(4, 1fr); gap: 25px; }
-            .card-title { font-size: 14px; }
-            .app-container { max-width: 100%; }
-            body { background: white; }
-        }
-
-        /* DESKTOP (1200px and above) */
-        @media (min-width: 1200px) {
-            .menu-icon { display: none; }
-            .logo { margin-left: 0; font-size: 32px; }
-            
-            .desktop-nav { display: flex; }
-            .desktop-action-link { display: flex; }
-            .header-inner { max-width: var(--max-content-width); margin: 0 auto; padding: 0 20px; }
-            header { padding: 20px 0; }
-
-            .search-container { padding: 40px 20px; }
-            .search-wrapper { 
-                max-width: 1000px; 
-                height: 65px; 
-                border-radius: 20px;
-                padding-right: 12px;
+            body {
+                background-color: #f5f5f5;
             }
-            .search-input { pointer-events: auto; font-size: 16px; }
-            .shots-filter { display: flex; }
-            
-            .search-action-btn { 
-                width: auto; 
-                padding: 0 25px; 
-                border-radius: 14px; 
-                height: 45px;
-            }
-            .search-btn-text { display: block; }
 
-            .section-header { display: block; }
-            .menu-section { padding: 60px 20px 100px; }
-            .grid-container { grid-template-columns: repeat(4, 1fr); gap: 40px; }
+            .app-container {
+                max-width: 1400px;
+                width: 100%;
+                box-shadow: 0 0 40px rgba(0,0,0,0.08);
+            }
 
-            /* Desktop Card Hover Effects */
-            .card:hover .img-container {
-                transform: translateY(-10px);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 20px 32px;
+                height: 80px;
+                background: rgba(255, 255, 255, 0.95);
+                z-index: 150;
             }
-            .card:hover .img-container img {
-                transform: scale(1.05);
+
+            /* Hide hamburger on desktop */
+            .menu-icon {
+                display: none !important;
             }
-            .card:hover .card-title {
-                opacity: 1;
+
+            /* Logo */
+            .logo {
+                margin-left: 0;
+                margin-right: 0;
+                font-size: 28px;
+                flex-shrink: 0;
+            }
+
+            /* Desktop center nav links */
+            .desktop-nav-links {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 32px;
+                flex: 1;
+                margin: 0 24px;
+            }
+
+            .desktop-nav-links a {
+                color: var(--primary-navy);
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 500;
+                transition: color 0.25s var(--premium-bezier);
+                position: relative;
+                padding: 4px 0;
+            }
+
+            .desktop-nav-links a:hover,
+            .desktop-nav-links a.active {
                 color: var(--accent-pink);
             }
-            .img-container img { transition: transform 0.3s var(--premium-bezier); }
+
+            .desktop-nav-links a.active::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: var(--accent-pink);
+                border-radius: 2px;
+            }
+
+            /* Desktop right actions */
+            .desktop-actions {
+                display: flex !important;
+                align-items: center;
+                gap: 20px;
+                flex-shrink: 0;
+            }
+
+            .desktop-actions a {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: var(--primary-navy);
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 500;
+                transition: color 0.25s var(--premium-bezier);
+            }
+
+            .desktop-actions a:hover {
+                color: var(--accent-pink);
+            }
+
+            .desktop-actions a svg {
+                width: 20px;
+                height: 20px;
+                stroke-width: 1.8;
+            }
+
+            /* Keep login button visible */
+            .login-btn {
+                display: inline-flex !important;
+                padding: 10px 26px;
+                font-size: 14px;
+            }
+
+            /* Ensure drawer stays hidden / unused on desktop */
+            .drawer-overlay,
+            .nav-drawer {
+                display: none !important;
+            }
         }
 
-        /* LARGE DESKTOP (1440px and above) */
-        @media (min-width: 1440px) {
-            .grid-container { grid-template-columns: repeat(5, 1fr); }
-        }
+        /* Larger desktop refinements */
+        @media (min-width: 1024px) {
+            header {
+                padding: 20px 40px;
+            }
 
+            .desktop-nav-links {
+                gap: 36px;
+            }
+
+            .desktop-nav-links a {
+                font-size: 16px;
+            }
+
+            .desktop-actions {
+                gap: 24px;
+            }
+        }
     </style>
 </head>
 <body id="body">
 
 <div class="app-container" id="mainApp">
-    <!-- Navigation Drawer (Mobile Only) -->
+    
+    <!-- Redesigned Navigation Drawer Overlay -->
     <div class="drawer-overlay" id="drawerOverlay"></div>
+    
+    <!-- Redesigned Navigation Drawer -->
     <nav class="nav-drawer" id="navDrawer">
         <div class="drawer-header">
-            <button class="close-drawer" id="closeDrawer">
+            <button class="close-drawer" id="closeDrawer" aria-label="Close menu">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="logo">Food hub</div>
             <p class="drawer-subtitle">Delicious food, delivered.</p>
         </div>
+        
         <div class="drawer-content">
             <p class="menu-section-label">Main</p>
-            <a href="#" class="menu-item active">Home</a>
-            <a href="#" class="menu-item">Categories</a>
+            <a href="#" class="menu-item active">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                Home
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+                Categories
+            </a>
+
             <p class="menu-section-label">My Activity</p>
-            <a href="#" class="menu-item">Favorites</a>
-            <a href="#" class="menu-item">Cart</a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                Favorites
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+                Cart
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                Orders
+            </a>
+
+            <p class="menu-section-label">Discover</p>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg></div>
+                Offers
+            </a>
+        </div>
+
+        <div class="drawer-bottom">
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                Settings
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+                Help & Support
+            </a>
+            <div class="drawer-footer">
+                <div class="footer-logo">Food hub</div>
+                <p class="footer-text">Made with ❤️ for food lovers</p>
+            </div>
         </div>
     </nav>
 
-    <!-- Search Overlay -->
-    <div id="searchSection" class="search-overlay">
-        <div class="overlay-header">
-            <button id="closeSearch" class="back-btn" style="background:none; border:none; cursor:pointer;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            </button>
-            <input type="text" class="overlay-input" placeholder="Search for 'Pizza'..." id="overlayInput">
-        </div>
-    </div>
-
-    <!-- Responsive Header -->
+    <!-- Header -->
     <header id="appHeader">
-        <div class="header-inner">
-            <div class="menu-icon" id="hamburgerMenu">
-                <div></div><div></div><div></div>
-            </div>
-            
-            <div class="logo">Food hub</div>
-
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav">
-                <a href="#" class="active">Home</a>
-                <a href="#">Categories</a>
-                <a href="#">Offers</a>
-            </nav>
-
-            <div class="header-actions">
-                <a href="#" class="desktop-action-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    Favorites
-                </a>
-                <a href="#" class="desktop-action-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Cart
-                </a>
-                <a href="#" class="login-btn">Log in</a>
-            </div>
+        <!-- Mobile hamburger (hidden on desktop) -->
+        <div class="menu-icon" id="hamburgerMenu" role="button">
+            <div></div><div></div><div></div>
         </div>
+
+        <!-- Logo (always visible) -->
+        <div class="logo">Food hub</div>
+
+        <!-- Desktop center navigation links -->
+        <nav class="desktop-nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">Categories</a>
+            <a href="#">Offers</a>
+        </nav>
+
+        <!-- Desktop right actions -->
+        <div class="desktop-actions">
+            <a href="#" aria-label="Favorites">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                Favorites
+            </a>
+            <a href="#" aria-label="Cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Cart
+            </a>
+            <a href="#" class="login-btn">Log in</a>
+        </div>
+
+        <!-- Mobile login button (visible only on mobile) -->
+        <a href="#" class="login-btn mobile-login">Log in</a>
     </header>
 
-    <!-- Search Section -->
+    <!-- Search Bar (Existing) -->
     <div class="search-container">
-        <div class="search-wrapper" id="mainSearchTrigger">
+        <div class="search-wrapper">
             <div class="search-icon-left">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
-            <input type="text" class="search-input" placeholder="Search for pizza, burgers & more" id="searchMainInput">
-            
-            <div class="shots-filter">
-                Shots <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-
-            <button class="search-action-btn" id="actionSearchBtn">
+            <input type="text" class="search-input" placeholder="Search for pizza, burgers & more" readonly>
+            <button class="search-action-btn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <span class="search-btn-text">Search</span>
             </button>
         </div>
     </div>
 
-    <!-- Category Grid Section -->
+    <!-- Grid Section (Existing) -->
     <section class="menu-section">
-        <div class="section-header">
-            <h2>Explore Food</h2>
-            <p>Choose your favourite category</p>
-        </div>
         <div class="grid-container" id="foodGrid"></div>
     </section>
 </div>
@@ -549,51 +591,27 @@
     drawerOverlay.addEventListener('click', closeNav);
     closeDrawer.addEventListener('click', closeNav);
 
-    // Ripple Logic
-    function createRipple(e, element) {
-        const rect = element.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        const d = Math.max(element.clientWidth, element.clientHeight);
-        ripple.style.width = ripple.style.height = d + 'px';
-        const x = e.clientX - rect.left - d / 2;
-        const y = e.clientY - rect.top - d / 2;
-        ripple.style.left = x + 'px'; ripple.style.top = y + 'px';
-        element.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    }
-
-    // Search Logic
-    const mainSearch = document.getElementById('mainSearchTrigger');
-    const searchSection = document.getElementById('searchSection');
-    const overlayInput = document.getElementById('overlayInput');
-    const closeSearch = document.getElementById('closeSearch');
-
-    mainSearch.addEventListener('click', (e) => {
-        // Only trigger overlay on mobile. On desktop, focus the input.
-        if (window.innerWidth < 1200) {
-            searchSection.style.display = 'block'; 
-            overlayInput.focus(); 
-        } else {
-            document.getElementById('searchMainInput').focus();
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && app.classList.contains('drawer-open')) {
+            closeNav();
         }
     });
-    closeSearch.addEventListener('click', () => { searchSection.style.display = 'none'; });
 
-    // Grid Data
+    // Grid Data (Existing)
     const foodItems = [
-        { name: "Slices", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400", badge: "NEW_DIAGONAL" },
-        { name: "Midnight Menu", img: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400", badge: "CHEESE BOWL-CANO" },
-        { name: "Big Big Pizza", img: "https://images.unsplash.com/photo-1574071318508-1cdbad80ad50?w=400" },
-        { name: "Veg Pizza", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=400" },
-        { name: "Pizza Mania", img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400" },
-        { name: "Garlic Breads & Dips", img: "https://images.unsplash.com/photo-1573140401552-3fab0b24306f?w=400" },
-        { name: "Combos", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400" },
-        { name: "Cheese Burst Pizza", img: "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400" },
-        { name: "Cheese Lava", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400", badge: "NEW" },
-        { name: "Cheese Volcano", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400", badge: "NEW" },
-        { name: "Desserts", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400" },
-        { name: "Beverages", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400" }
+        { name: "Slices", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200", badge: "NEW_DIAGONAL" },
+        { name: "Midnight Menu", img: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=200", badge: "CHEESE BOWL-CANO" },
+        { name: "Big Big Pizza", img: "https://images.unsplash.com/photo-1574071318508-1cdbad80ad50?w=200" },
+        { name: "Veg Pizza", img: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=200" },
+        { name: "Pizza Mania", img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=200" },
+        { name: "Garlic Breads & Dips", img: "https://images.unsplash.com/photo-1573140401552-3fab0b24306f?w=200" },
+        { name: "Combos", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=200" },
+        { name: "Cheese Burst Pizza", img: "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=200" },
+        { name: "Cheese Lava", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200", badge: "NEW" },
+        { name: "Cheese Volcano", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200", badge: "NEW" },
+        { name: "Desserts", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=200" },
+        { name: "Beverages", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=200" }
     ];
 
     const grid = document.getElementById('foodGrid');
@@ -604,9 +622,7 @@
         if (item.badge === "NEW_DIAGONAL") badge = '<div class="diagonal-new">NEW</div>';
         else if (item.badge === "NEW") badge = '<div class="badge-new">NEW</div>';
         else if (item.badge) badge = `<div class="curved-label">${item.badge}</div>`;
-        
-        card.innerHTML = `<div class="img-container">${badge}<img src="${item.img}"></div><div class="card-title">${item.name}</div>`;
-        card.addEventListener('click', (e) => createRipple(e, card));
+        card.innerHTML = `<div class="img-container">\( {badge}<img src=" \){item.img}"></div><div class="card-title">${item.name}</div>`;
         grid.appendChild(card);
     });
 </script>
