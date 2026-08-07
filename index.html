@@ -1,315 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini SPA Demo</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+body{
+    background:#f4f4f4;
+}
+nav{
+    background:#1e88e5;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+nav button{
+    background:white;
+    color:#1e88e5;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
 
-    body {
-      background: #f5f7fb;
-      color: #111827;
-      padding: 20px;
-    }
+.page{
+    display:none;
+    padding:25px;
+}
 
-    header {
-      max-width: 1000px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
+.page.active{
+    display:block;
+}
 
-    header h1 {
-      color: #2563eb;
-    }
+.card{
+    background:#fff;
+    max-width:400px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
 
-    .cart-btn {
-      text-decoration: none;
-      background: #2563eb;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 8px;
-    }
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
 
-    .products {
-      max-width: 1000px;
-      margin: auto;
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .product {
-      background: white;
-      padding: 18px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    }
-
-    .product img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .product h2 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      color: #2563eb;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    button {
-      width: 100%;
-      border: none;
-      background: #2563eb;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-  </style>
+button.action{
+    width:100%;
+    padding:10px;
+    background:#1e88e5;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
 </head>
-
 <body>
 
-<header>
-  <h1>My Store</h1>
+<nav>
+    <h2>My App</h2>
+    <button onclick="go('/')">Home</button>
+</nav>
 
-  <a href="cart.html" class="cart-btn">
-    🛒 Cart
-  </a>
-</header>
-
-
-<div class="products">
-
-  <div class="product">
-
-    <img
-      src="https://via.placeholder.com/400x300"
-      alt="Wireless Headphones"
-    >
-
-    <h2>Wireless Headphones</h2>
-
-    <p class="price">₹999</p>
-
-    <button onclick="addToCart(
-      'Wireless Headphones',
-      999,
-      'https://via.placeholder.com/400x300'
-    )">
-      Add to Cart
-    </button>
-
-  </div>
-
-
-  <div class="product">
-
-    <img
-      src="https://via.placeholder.com/400x300"
-      alt="Gaming Mouse"
-    >
-
-    <h2>Gaming Mouse</h2>
-
-    <p class="price">₹599</p>
-
-    <button onclick="addToCart(
-      'Gaming Mouse',
-      599,
-      'https://via.placeholder.com/400x300'
-    )">
-      Add to Cart
-    </button>
-
-  </div>
-
-
-  <div class="product">
-
-    <img
-      src="https://via.placeholder.com/400x300"
-      alt="Mechanical Keyboard"
-    >
-
-    <h2>Mechanical Keyboard</h2>
-
-    <p class="price">₹1499</p>
-
-    <button onclick="addToCart(
-      'Mechanical Keyboard',
-      1499,
-      'https://via.placeholder.com/400x300'
-    )">
-      Add to Cart
-    </button>
-
-  </div>
-
+<!-- Home -->
+<div id="home" class="page active">
+    <div class="card">
+        <h2>🏠 Home</h2>
+        <p>This is Home Page.</p>
+        <br>
+        <button class="action" onclick="go('/login')">
+            Go to Login
+        </button>
+    </div>
 </div>
 
+<!-- Login -->
+<div id="login" class="page">
+    <div class="card">
+        <h2>Login</h2>
 
-<script type="module">
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
 
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        <button class="action" onclick="go('/dashboard')">
+            Login
+        </button>
+    </div>
+</div>
 
-  import {
-    getAuth,
-    signInAnonymously
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+<!-- Dashboard -->
+<div id="dashboard" class="page">
+    <div class="card">
+        <h2>Dashboard</h2>
+        <p>Welcome! You are logged in.</p>
+        <br>
 
-  import {
-    getDatabase,
-    ref,
-    push,
-    set
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+        <button class="action" onclick="go('/profile')">
+            Profile
+        </button>
+    </div>
+</div>
 
+<!-- Profile -->
+<div id="profile" class="page">
+    <div class="card">
+        <h2>Profile</h2>
+        <p>Name : Hassan</p>
+        <p>Email : demo@email.com</p>
 
-  // Firebase configuration
-  const configMovie = {
+        <br>
 
-    apiKey:
-      "AIzaSyCZQoxcRbowOLLjfRcV8c0vfiTLsfc2Gys",
+        <button class="action" onclick="go('/')">
+            Logout
+        </button>
+    </div>
+</div>
 
-    authDomain:
-      "movie-2-f1b16.firebaseapp.com",
+<script>
 
-    databaseURL:
-      "https://movie-2-f1b16-default-rtdb.firebaseio.com",
+function show(page){
+    document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
 
-    projectId:
-      "movie-2-f1b16"
-  };
+    document.getElementById(page)
+    .classList.add("active");
+}
 
+function go(path){
 
-  // Initialize Firebase
-  const app = initializeApp(configMovie);
+    history.pushState({}, "", path);
 
-  const auth = getAuth(app);
-
-  const database = getDatabase(app);
-
-
-  // Anonymous login
-  let currentUser;
-
-
-  async function loginUser() {
-
-    try {
-
-      const result = await signInAnonymously(auth);
-
-      currentUser = result.user;
-
-      console.log(
-        "Firebase User:",
-        currentUser.uid
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        "Firebase login failed. Check Anonymous Authentication."
-      );
-
+    if(path=="/"){
+        show("home");
     }
-
-  }
-
-
-  loginUser();
-
-
-  // Add product to Firebase cart
-  window.addToCart = async function(
-    name,
-    price,
-    image
-  ) {
-
-    if (!currentUser) {
-
-      alert("Please wait a moment...");
-      return;
-
+    else if(path=="/login"){
+        show("login");
     }
-
-
-    try {
-
-      const cartRef = ref(
-        database,
-        "users/" +
-        currentUser.uid +
-        "/cart"
-      );
-
-
-      const newCartItem = push(cartRef);
-
-
-      await set(newCartItem, {
-
-        name: name,
-
-        price: price,
-
-        image: image,
-
-        quantity: 1,
-
-        createdAt: Date.now()
-
-      });
-
-
-      alert(
-        name + " added to cart!"
-      );
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        "Could not add product."
-      );
-
+    else if(path=="/dashboard"){
+        show("dashboard");
     }
+    else if(path=="/profile"){
+        show("profile");
+    }
+}
 
-  };
+window.onpopstate=()=>{
+    go(location.pathname);
+};
+
+go(location.pathname);
 
 </script>
 
