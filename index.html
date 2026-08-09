@@ -15,90 +15,30 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        },
-                        darkBg: '#020617',
-                        darkCard: '#0f172a',
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+                        darkBg: '#020617', darkCard: '#0f172a'
                     },
-                    borderRadius: {
-                        '2xl': '1rem',
-                        '3xl': '1.5rem',
-                    }
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem' }
                 }
             }
         }
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
-        }
-
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; transition: all 0.3s ease; }
         .dark body { background-color: #020617; }
-
-        /* Smooth page transitions */
-        .page-enter {
-            animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .dark .glass {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Mesh Gradients for backgrounds */
-        .bg-mesh {
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(147, 197, 253, 0.1) 0, transparent 50%);
-        }
-
-        /* Modern Sidebar Active State */
-        .nav-item.active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
-            border-left: 4px solid #3b82f6;
-            color: #3b82f6;
-        }
-
-        /* Custom Scrollbar */
+        .page-enter { animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-item.active { background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%); border-left: 4px solid #3b82f6; color: #3b82f6; }
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
-
-        /* Glowing accents */
-        .glow-primary {
-            box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.3);
-        }
     </style>
 </head>
-<body class="text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden bg-mesh">
+<body class="text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- Sidebar Mobile Toggle Overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 z-40 hidden backdrop-blur-sm lg:hidden transition-opacity duration-300"></div>
 
     <div class="flex flex-1 relative h-screen overflow-hidden">
@@ -120,34 +60,18 @@
                 <a href="#" onclick="navigate('links')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="links">
                     <i data-lucide="link" class="w-5 h-5"></i> Manage Links
                 </a>
-                <a href="#" onclick="navigate('statistics')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="statistics">
-                    <i data-lucide="bar-chart-big" class="w-5 h-5"></i> Detailed Stats
-                </a>
-                
-                <p class="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-8 mb-2">Monetization</p>
                 <a href="#" onclick="navigate('earnings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="earnings">
-                    <i data-lucide="wallet-2" class="w-5 h-5"></i> My Earnings
-                </a>
-                <a href="#" onclick="navigate('withdraw')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="withdraw">
-                    <i data-lucide="banknote" class="w-5 h-5"></i> Withdrawals
-                </a>
-                
-                <p class="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-8 mb-2">Settings</p>
-                <a href="#" onclick="navigate('ad-settings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="ad-settings">
-                    <i data-lucide="settings-2" class="w-5 h-5"></i> Ad Settings
+                    <i data-lucide="wallet-2" class="w-5 h-5"></i> Earnings
                 </a>
                 <a href="#" onclick="navigate('settings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="settings">
-                    <i data-lucide="user-circle" class="w-5 h-5"></i> Profile Settings
+                    <i data-lucide="settings-2" class="w-5 h-5"></i> Account Settings
                 </a>
             </nav>
 
-            <!-- Sidebar Footer -->
             <div class="p-6">
-                <div class="p-4 rounded-2xl bg-gradient-to-br from-primary-600 to-blue-700 text-white shadow-xl shadow-blue-500/20 relative overflow-hidden group">
-                    <i data-lucide="sparkles" class="absolute -right-2 -top-2 w-16 h-16 opacity-20 rotate-12 group-hover:scale-125 transition-transform"></i>
-                    <p class="text-xs font-medium opacity-80">Referral Program</p>
-                    <p class="font-bold text-sm mt-1">Earn 20% Lifetime</p>
-                    <button onclick="navigate('referrals')" class="mt-3 w-full bg-white text-primary-700 py-2 rounded-xl text-xs font-extrabold hover:bg-blue-50 transition-colors">Invite Friends</button>
+                <div class="p-4 rounded-2xl bg-gradient-to-br from-primary-600 to-blue-700 text-white shadow-xl shadow-blue-500/20">
+                    <p class="text-xs font-medium opacity-80">Demo Status</p>
+                    <p class="font-bold text-sm mt-1">Simulated Redirection Active</p>
                 </div>
             </div>
         </aside>
@@ -161,394 +85,168 @@
                     <button id="mobile-toggle" class="lg:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
-                    <h2 id="view-title" class="text-xl font-bold tracking-tight hidden sm:block">Dashboard</h2>
+                    <h2 id="view-title" class="text-xl font-bold tracking-tight">Dashboard</h2>
                 </div>
 
-                <div class="flex items-center gap-3 sm:gap-6">
-                    <!-- Balance -->
-                    <div class="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-slate-800/50 rounded-2xl border dark:border-slate-700/50 group cursor-pointer hover:border-primary-500 transition-all">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-slate-800/50 rounded-2xl border dark:border-slate-700/50">
                         <div class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600">
                             <i data-lucide="dollar-sign" class="w-4 h-4"></i>
                         </div>
-                        <div class="hidden xs:block">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase leading-none">Balance</p>
-                            <p class="text-sm font-bold text-slate-700 dark:text-white">$0.00</p>
-                        </div>
+                        <p class="text-sm font-bold text-slate-700 dark:text-white" id="nav-balance">$0.00</p>
                     </div>
-
-                    <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800"></div>
-
-                    <!-- Actions -->
-                    <div class="flex items-center gap-2">
-                        <button onclick="toggleTheme()" class="p-2.5 rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
-                            <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
-                            <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
-                        </button>
-                        <div class="relative group">
-                            <button class="p-2.5 rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-slate-200 dark:hover:border-slate-700 relative">
-                                <i data-lucide="bell" class="w-5 h-5"></i>
-                                <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
-                            </button>
-                        </div>
-                        <button class="flex items-center gap-2 p-1.5 pr-3 rounded-2xl hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
-                            <img src="https://ui-avatars.com/api/?name=Alex+Doe&background=2563eb&color=fff" class="w-8 h-8 rounded-xl shadow-md" alt="User">
-                            <span class="text-sm font-bold hidden md:block">Alex Doe</span>
-                        </button>
-                    </div>
+                    <button onclick="toggleTheme()" class="p-2.5 rounded-xl border dark:border-slate-700">
+                        <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    </button>
                 </div>
             </header>
 
             <!-- Scrollable Page Container -->
             <div id="page-content" class="flex-1 overflow-y-auto p-6 lg:p-10 space-y-8">
                 
-                <!-- Dashboard Content (Initial) -->
+                <!-- Dashboard View -->
                 <section id="view-dashboard" class="page-enter space-y-8">
                     
-                    <!-- Top Section: Welcome & Shortener -->
                     <div class="flex flex-col xl:flex-row gap-8">
                         <!-- Shortener -->
-                        <div class="flex-1 bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50 shadow-sm relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
-                                <i data-lucide="zap" class="w-48 h-48"></i>
-                            </div>
-                            <div class="relative z-10">
-                                <h3 class="text-2xl font-extrabold mb-2">Create New Link</h3>
-                                <p class="text-slate-500 text-sm mb-8">Paste your long URL and get a branded short link in seconds.</p>
-                                
-                                <div class="flex flex-col md:flex-row gap-3">
-                                    <div class="flex-1 relative group">
-                                        <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary-500 transition-colors">
-                                            <i data-lucide="link" class="w-5 h-5"></i>
-                                        </div>
-                                        <input type="text" id="long-url" placeholder="https://example.com/very-long-path" class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 focus:bg-white dark:focus:bg-slate-900 outline-none transition-all font-medium">
+                        <div class="flex-1 bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50 shadow-sm">
+                            <h3 class="text-2xl font-extrabold mb-2">Shorten Your URL</h3>
+                            <p class="text-slate-500 text-sm mb-8">Paste your long link. The simulated redirect will track clicks.</p>
+                            
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <div class="flex-1 relative group">
+                                    <div class="absolute inset-y-0 left-5 flex items-center text-slate-400">
+                                        <i data-lucide="link" class="w-5 h-5"></i>
                                     </div>
-                                    <button onclick="shortenLink()" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 active:scale-95 transition-all flex items-center justify-center gap-2">
-                                        Shorten <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                    </button>
+                                    <input type="text" id="long-url" placeholder="https://google.com" class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-medium transition-all">
                                 </div>
-
-                                <div class="mt-4 flex flex-wrap gap-4">
-                                    <button onclick="toggleAdvanced()" class="text-xs font-bold text-slate-400 hover:text-primary-600 flex items-center gap-1.5 transition-colors">
-                                        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i> Advanced Options
-                                    </button>
-                                    <span class="text-xs font-bold text-slate-300">|</span>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Ad Type:</span>
-                                        <select class="bg-transparent text-xs font-bold text-primary-600 outline-none cursor-pointer">
-                                            <option>Interstitial Ad</option>
-                                            <option>Banner Ad</option>
-                                            <option>No Ad (Direct)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Advanced Panel -->
-                            <div id="advanced-panel" class="hidden mt-8 pt-8 border-t dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                <div>
-                                    <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Custom Alias</label>
-                                    <input type="text" id="custom-alias" placeholder="summer-sale" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border dark:border-slate-700 outline-none focus:border-primary-500 text-sm font-semibold">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Expiry Date</label>
-                                    <input type="date" id="expiry-date" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border dark:border-slate-700 outline-none focus:border-primary-500 text-sm font-semibold">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Password</label>
-                                    <input type="password" id="link-pass" placeholder="Optional" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border dark:border-slate-700 outline-none focus:border-primary-500 text-sm font-semibold">
-                                </div>
+                                <button onclick="shortenLink()" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 active:scale-95 transition-all flex items-center justify-center gap-2">
+                                    Shorten <i data-lucide="zap" class="w-5 h-5"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Result Card (Hidden by default) -->
-                        <div id="result-container" class="hidden w-full xl:w-96 bg-white dark:bg-darkCard p-8 rounded-[2rem] border-2 border-primary-500/20 shadow-xl shadow-primary-500/5 page-enter">
-                            <h4 class="text-lg font-bold mb-6 flex items-center gap-2">
-                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Link Ready
+                        <!-- Result Card -->
+                        <div id="result-container" class="hidden w-full xl:w-96 bg-white dark:bg-darkCard p-8 rounded-[2rem] border-2 border-primary-500/20 shadow-xl page-enter">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2 text-green-500">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i> Link Ready
                             </h4>
-                            <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl mb-6 break-all">
-                                <p id="short-url-text" class="text-primary-600 font-extrabold text-lg text-center tracking-tight"></p>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl mb-6">
+                                <p id="short-url-text" class="text-primary-600 font-extrabold text-lg text-center break-all"></p>
                             </div>
-                            <div class="grid grid-cols-2 gap-3">
-                                <button onclick="copyResult()" class="flex items-center justify-center gap-2 py-3 bg-primary-600 text-white rounded-xl font-bold text-sm hover:bg-primary-700 transition-all">
-                                    <i data-lucide="copy" class="w-4 h-4"></i> Copy
+                            <div class="grid grid-cols-1 gap-2">
+                                <button onclick="visitLink(document.getElementById('short-url-text').innerText)" class="flex items-center justify-center gap-2 py-3 bg-green-600 text-white rounded-xl font-bold text-sm hover:bg-green-700 transition-all">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Visit Link (Test Redirection)
                                 </button>
-                                <button onclick="openQR()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
-                                    <i data-lucide="qr-code" class="w-4 h-4"></i> QR Code
-                                </button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="copyResult()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                                        <i data-lucide="copy" class="w-4 h-4"></i> Copy
+                                    </button>
+                                    <button onclick="openQR()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                                        <i data-lucide="qr-code" class="w-4 h-4"></i> QR
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Statistics Grid -->
+                    <!-- Statistics -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- Stat Card -->
-                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 hover:shadow-xl transition-all group">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center text-primary-600 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="mouse-pointer-2" class="w-6 h-6"></i>
-                                </div>
-                                <span class="text-xs font-bold text-green-500 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-lg">+12.5%</span>
-                            </div>
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Total Views</p>
-                            <h4 class="text-3xl font-extrabold mt-1 counter-val" data-target="24850">0</h4>
+                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Total Clicks</p>
+                            <h4 class="text-3xl font-extrabold mt-1" id="stat-clicks">0</h4>
                         </div>
-                        
-                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 hover:shadow-xl transition-all group">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 bg-green-50 dark:bg-green-900/20 rounded-2xl flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="dollar-sign" class="w-6 h-6"></i>
-                                </div>
-                                <span class="text-xs font-bold text-green-500 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-lg">+5.2%</span>
-                            </div>
+                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
                             <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Revenue</p>
-                            <h4 class="text-3xl font-extrabold mt-1">$<span class="counter-val" data-target="152.40">0</span></h4>
+                            <h4 class="text-3xl font-extrabold mt-1" id="stat-revenue">$0.00</h4>
                         </div>
-
-                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 hover:shadow-xl transition-all group">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="users" class="w-6 h-6"></i>
-                                </div>
-                                <span class="text-xs font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">Target: 50</span>
-                            </div>
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Referrals</p>
-                            <h4 class="text-3xl font-extrabold mt-1 counter-val" data-target="32">0</h4>
+                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Links Created</p>
+                            <h4 class="text-3xl font-extrabold mt-1" id="stat-links">0</h4>
                         </div>
-
-                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 hover:shadow-xl transition-all group">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/20 rounded-2xl flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
-                                </div>
-                                <span class="text-xs font-bold text-orange-500 bg-orange-100 dark:bg-orange-900/30 px-2 py-1 rounded-lg">Avg</span>
-                            </div>
+                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
                             <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Average CPM</p>
-                            <h4 class="text-3xl font-extrabold mt-1">$<span class="counter-val" data-target="4.15">0</span></h4>
+                            <h4 class="text-3xl font-extrabold mt-1">$4.20</h4>
                         </div>
                     </div>
 
-                    <!-- Chart Section -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
-                            <div class="flex items-center justify-between mb-8">
-                                <div>
-                                    <h3 class="text-xl font-bold">Analytics Overview</h3>
-                                    <p class="text-sm text-slate-400">Visitor activity over the past 7 days</p>
-                                </div>
-                                <select class="bg-slate-50 dark:bg-slate-900 border dark:border-slate-700 rounded-xl px-4 py-2 text-xs font-bold outline-none">
-                                    <option>Last 7 Days</option>
-                                    <option>Last 30 Days</option>
-                                </select>
-                            </div>
-                            <div class="h-[350px]">
-                                <canvas id="mainChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
-                            <h3 class="text-xl font-bold mb-6">Device Distribution</h3>
-                            <div class="h-[250px] flex items-center justify-center">
-                                <canvas id="deviceChart"></canvas>
-                            </div>
-                            <div class="mt-8 space-y-4">
-                                <div class="flex items-center justify-between text-sm">
-                                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary-500"></span> Mobile</div>
-                                    <span class="font-bold">65%</span>
-                                </div>
-                                <div class="flex items-center justify-between text-sm">
-                                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-300"></span> Desktop</div>
-                                    <span class="font-bold">30%</span>
-                                </div>
-                                <div class="flex items-center justify-between text-sm">
-                                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-slate-300"></span> Tablet</div>
-                                    <span class="font-bold">5%</span>
-                                </div>
-                            </div>
+                    <div class="bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
+                        <h3 class="text-xl font-bold mb-6">Traffic Over Time</h3>
+                        <div class="h-[300px]">
+                            <canvas id="mainChart"></canvas>
                         </div>
                     </div>
                 </section>
 
-                <!-- Dynamic Page Content Container -->
                 <section id="dynamic-view" class="hidden page-enter"></section>
-
             </div>
         </main>
     </div>
 
     <!-- QR Modal -->
     <div id="qr-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-md">
-        <div class="bg-white dark:bg-darkCard p-8 rounded-[2.5rem] w-full max-w-sm shadow-2xl scale-in text-center">
-            <h3 class="text-2xl font-bold mb-2">Your QR Code</h3>
-            <p class="text-sm text-slate-500 mb-8">Scan to open the shortened link</p>
-            <div id="qr-target" class="bg-white p-4 rounded-3xl inline-block shadow-inner mb-8 border-4 border-slate-50 dark:border-slate-800"></div>
-            <div class="flex flex-col gap-3">
-                <button onclick="downloadQR()" class="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20">Download PNG</button>
-                <button onclick="closeQR()" class="w-full py-3 text-slate-400 font-bold hover:text-slate-600 dark:hover:text-slate-200 transition-colors">Close</button>
-            </div>
+        <div class="bg-white dark:bg-darkCard p-8 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center">
+            <div id="qr-target" class="bg-white p-4 rounded-3xl inline-block mb-6"></div>
+            <button onclick="closeQR()" class="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold">Close</button>
         </div>
     </div>
 
-    <!-- Toast Notifications -->
-    <div id="toast-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] pointer-events-none flex flex-col gap-3"></div>
+    <div id="toast-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] flex flex-col gap-3"></div>
 
     <script>
-        // --- Core UI State ---
         const state = {
             activePage: 'dashboard',
-            isDark: localStorage.getItem('theme') === 'dark',
             links: JSON.parse(localStorage.getItem('lf_links')) || [],
+            clicks: parseInt(localStorage.getItem('lf_clicks')) || 0
         };
 
-        // Initialize Lucide
-        lucide.createIcons();
-
-        // --- Navigation Logic ---
-        function navigate(page) {
-            state.activePage = page;
-            
-            // UI Toggle
-            document.querySelectorAll('.nav-item').forEach(el => {
-                const isActive = el.getAttribute('data-page') === page;
-                el.classList.toggle('active', isActive);
-                if (!isActive) {
-                    el.classList.add('text-slate-500', 'dark:text-slate-400');
-                    el.classList.remove('text-primary-600');
-                } else {
-                    el.classList.remove('text-slate-500', 'dark:text-slate-400');
-                    el.classList.add('text-primary-600');
-                }
-            });
-
-            const dashboardView = document.getElementById('view-dashboard');
-            const dynamicView = document.getElementById('dynamic-view');
-            const title = document.getElementById('view-title');
-
-            if (page === 'dashboard') {
-                dashboardView.classList.remove('hidden');
-                dynamicView.classList.add('hidden');
-                title.innerText = "Dashboard";
-                initCharts();
-                animateCounters();
-            } else {
-                dashboardView.classList.add('hidden');
-                dynamicView.classList.remove('hidden');
-                title.innerText = page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
-                renderDynamicPage(page);
-            }
-
-            if (window.innerWidth < 1024) toggleSidebar(false);
-        }
-
-        function renderDynamicPage(page) {
-            const container = document.getElementById('dynamic-view');
-            let html = '';
-
-            switch(page) {
-                case 'links':
-                    html = `
-                        <div class="space-y-8">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-2xl font-extrabold">Manage Links</h3>
-                                <div class="flex gap-2">
-                                    <div class="relative">
-                                        <input type="text" placeholder="Search links..." class="pl-10 pr-4 py-2 bg-white dark:bg-darkCard border dark:border-slate-800 rounded-xl text-sm focus:border-primary-500 outline-none">
-                                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 gap-4">
-                                ${state.links.length ? state.links.map(link => `
-                                    <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 flex flex-col md:flex-row items-center gap-6 hover:border-primary-500/50 transition-all">
-                                        <div class="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-center shrink-0 border dark:border-slate-800">
-                                            <i data-lucide="link-2" class="text-primary-600"></i>
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <h4 class="font-bold text-lg truncate">${link.short}</h4>
-                                            <p class="text-slate-400 text-sm truncate">${link.long}</p>
-                                        </div>
-                                        <div class="flex items-center gap-8">
-                                            <div class="text-center">
-                                                <p class="text-[10px] font-extrabold text-slate-400 uppercase">Clicks</p>
-                                                <p class="font-extrabold">${link.clicks}</p>
-                                            </div>
-                                            <div class="flex gap-2">
-                                                <button class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:text-primary-600 transition-colors"><i data-lucide="copy" class="w-4 h-4"></i></button>
-                                                <button class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:text-blue-500 transition-colors"><i data-lucide="bar-chart-2" class="w-4 h-4"></i></button>
-                                                <button class="p-2.5 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-500 hover:bg-red-500 hover:text-white transition-all"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('') : `
-                                    <div class="p-20 text-center bg-white dark:bg-darkCard rounded-[2.5rem] border-2 border-dashed dark:border-slate-800">
-                                        <i data-lucide="link" class="w-12 h-12 mx-auto text-slate-300 mb-4"></i>
-                                        <p class="text-slate-500 font-medium">No links created yet. Start shortening!</p>
-                                        <button onclick="navigate('dashboard')" class="mt-6 px-8 py-3 bg-primary-600 text-white rounded-2xl font-bold">Create Link</button>
-                                    </div>
-                                `}
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'earnings':
-                    html = `
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            <div class="lg:col-span-2 space-y-8">
-                                <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-10 rounded-[2.5rem] text-white relative overflow-hidden shadow-2xl">
-                                    <i data-lucide="wallet" class="absolute -right-10 -bottom-10 w-64 h-64 opacity-5 rotate-12"></i>
-                                    <p class="text-slate-400 font-bold uppercase tracking-widest text-xs mb-2">Available for withdrawal</p>
-                                    <h2 class="text-6xl font-black mb-10">$0.00</h2>
-                                    <div class="flex flex-wrap gap-4">
-                                        <button class="px-8 py-4 bg-primary-600 rounded-2xl font-extrabold hover:bg-primary-700 transition-all shadow-xl shadow-primary-600/20">Request Payout</button>
-                                        <button class="px-8 py-4 bg-white/10 backdrop-blur-md rounded-2xl font-extrabold hover:bg-white/20 transition-all">Earnings History</button>
-                                    </div>
-                                </div>
-                                <div class="bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
-                                    <h3 class="text-xl font-bold mb-6">Recent Transactions</h3>
-                                    <div class="text-center py-12 text-slate-400">
-                                        <p class="text-sm">No transaction history found.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space-y-6">
-                                <div class="bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
-                                    <h4 class="font-bold mb-4">Payment Methods</h4>
-                                    <div class="space-y-3">
-                                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-between">
-                                            <span class="font-bold text-sm">PayPal</span>
-                                            <span class="text-[10px] font-black text-primary-600 bg-primary-50 px-2 py-1 rounded">ACTIVE</span>
-                                        </div>
-                                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-between opacity-50">
-                                            <span class="font-bold text-sm">Bank Transfer</span>
-                                            <i data-lucide="plus" class="w-4 h-4"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                default:
-                    html = `<div class="p-20 text-center text-slate-500">View for <b>${page}</b> is coming soon in the production version.</div>`;
-            }
-            container.innerHTML = html;
+        function init() {
             lucide.createIcons();
+            updateStats();
+            initCharts();
+            if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
         }
 
-        // --- URL Logic ---
+        // --- Core Redirection Logic ---
+        function visitLink(shortUrlText) {
+            const linkObj = state.links.find(l => l.short === shortUrlText);
+            if (linkObj) {
+                // 1. Log the click locally
+                linkObj.clicks++;
+                state.clicks++;
+                
+                // 2. Persist
+                localStorage.setItem('lf_links', JSON.stringify(state.links));
+                localStorage.setItem('lf_clicks', state.clicks);
+                
+                // 3. Feedback
+                showToast("Redirecting & tracking click...", "success");
+                updateStats();
+
+                // 4. Perform actual redirect in new tab
+                setTimeout(() => {
+                    window.open(linkObj.long, '_blank');
+                }, 800);
+            } else {
+                showToast("Link not found in local storage", "error");
+            }
+        }
+
         function shortenLink() {
             const long = document.getElementById('long-url').value;
             if (!long || !long.startsWith('http')) {
-                showToast("Please enter a valid URL (http/https)", "error");
+                showToast("Invalid URL! Use http:// or https://", "error");
                 return;
             }
 
-            const alias = document.getElementById('custom-alias').value || Math.random().toString(36).substring(7);
-            const short = `linkflow.io/${alias}`;
+            const code = Math.random().toString(36).substring(7);
+            const short = `linkflow.io/${code}`;
 
             const newLink = {
                 id: Date.now(),
-                long,
-                short,
+                long: long,
+                short: short,
                 clicks: 0,
                 date: new Date().toLocaleDateString()
             };
@@ -556,169 +254,128 @@
             state.links.unshift(newLink);
             localStorage.setItem('lf_links', JSON.stringify(state.links));
 
-            // UI feedback
             document.getElementById('short-url-text').innerText = short;
             document.getElementById('result-container').classList.remove('hidden');
-            showToast("Short link generated!", "success");
+            
+            updateStats();
+            showToast("Short link generated locally!", "success");
+        }
+
+        function updateStats() {
+            const revenue = (state.clicks * 0.0042).toFixed(2);
+            document.getElementById('stat-clicks').innerText = state.clicks.toLocaleString();
+            document.getElementById('stat-revenue').innerText = `$${revenue}`;
+            document.getElementById('nav-balance').innerText = `$${revenue}`;
+            document.getElementById('stat-links').innerText = state.links.length;
+        }
+
+        function navigate(page) {
+            state.activePage = page;
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.getAttribute('data-page') === page));
+            
+            const dash = document.getElementById('view-dashboard');
+            const dyn = document.getElementById('dynamic-view');
+            const title = document.getElementById('view-title');
+
+            if (page === 'dashboard') {
+                dash.classList.remove('hidden');
+                dyn.classList.add('hidden');
+                title.innerText = "Dashboard";
+                initCharts();
+            } else {
+                dash.classList.add('hidden');
+                dyn.classList.remove('hidden');
+                title.innerText = page.charAt(0).toUpperCase() + page.slice(1);
+                renderLinksPage(page);
+            }
+            if (window.innerWidth < 1024) toggleSidebar(false);
+        }
+
+        function renderLinksPage(page) {
+            if (page !== 'links') {
+                document.getElementById('dynamic-view').innerHTML = `<div class="p-20 text-center text-slate-400">Settings page coming soon...</div>`;
+                return;
+            }
+            let html = `<h3 class="text-2xl font-bold mb-6">All Your Links</h3><div class="space-y-4">`;
+            state.links.forEach(link => {
+                html += `
+                    <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="min-w-0">
+                            <p class="font-bold text-primary-600 truncate">${link.short}</p>
+                            <p class="text-xs text-slate-400 truncate">${link.long}</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="text-center px-4">
+                                <p class="text-[10px] font-bold text-slate-400">CLICKS</p>
+                                <p class="font-bold">${link.clicks}</p>
+                            </div>
+                            <button onclick="visitLink('${link.short}')" class="p-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-all"><i data-lucide="external-link" class="w-4 h-4"></i></button>
+                            <button onclick="deleteLink(${link.id})" class="p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><i data-lucide="trash" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            if (state.links.length === 0) html += `<p class="text-center py-20 text-slate-400">No links created yet.</p>`;
+            html += `</div>`;
+            document.getElementById('dynamic-view').innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function deleteLink(id) {
+            state.links = state.links.filter(l => l.id !== id);
+            localStorage.setItem('lf_links', JSON.stringify(state.links));
+            renderLinksPage('links');
+            updateStats();
         }
 
         function copyResult() {
-            const text = document.getElementById('short-url-text').innerText;
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText(document.getElementById('short-url-text').innerText);
             showToast("Copied to clipboard!", "success");
         }
 
-        // --- Animation Utilities ---
-        function animateCounters() {
-            document.querySelectorAll('.counter-val').forEach(el => {
-                const target = parseFloat(el.getAttribute('data-target'));
-                const duration = 1500;
-                const startTime = performance.now();
-                const isFloat = el.getAttribute('data-target').includes('.');
-
-                function update(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const current = progress * target;
-                    
-                    el.innerText = isFloat ? current.toFixed(2) : Math.floor(current).toLocaleString();
-
-                    if (progress < 1) requestAnimationFrame(update);
-                }
-                requestAnimationFrame(update);
-            });
+        function showToast(m, t) {
+            const b = document.getElementById('toast-box');
+            const d = document.createElement('div');
+            d.className = `px-6 py-3 rounded-2xl text-white font-bold text-sm flex items-center gap-2 shadow-xl animate-bounce ${t==='success'?'bg-slate-900':'bg-red-500'}`;
+            d.innerHTML = m;
+            b.appendChild(d);
+            setTimeout(() => d.remove(), 3000);
         }
 
-        // --- Chart Initialization ---
-        let charts = {};
         function initCharts() {
-            const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-
-            // Main Area Chart
-            const ctxMain = document.getElementById('mainChart').getContext('2d');
-            if (charts.main) charts.main.destroy();
-            charts.main = new Chart(ctxMain, {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
-                        label: 'Views',
-                        data: [2100, 3400, 2800, 4500, 3900, 5200, 4800],
-                        borderColor: '#2563eb',
-                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                        fill: true,
+                        label: 'Clicks',
+                        data: [12, 19, 3, 5, 2, 3, state.clicks],
+                        borderColor: '#3b82f6',
                         tension: 0.4,
                         borderWidth: 4,
                         pointRadius: 0,
-                        pointHoverRadius: 6
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.05)'
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { border: { display: false }, grid: { color: gridColor }, ticks: { color: textColor, font: { weight: 'bold' } } },
-                        x: { border: { display: false }, grid: { display: false }, ticks: { color: textColor, font: { weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // Device Pie Chart
-            const ctxDevice = document.getElementById('deviceChart').getContext('2d');
-            if (charts.device) charts.device.destroy();
-            charts.device = new Chart(ctxDevice, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Mobile', 'Desktop', 'Tablet'],
-                    datasets: [{
-                        data: [65, 30, 5],
-                        backgroundColor: ['#2563eb', '#93c5fd', '#e2e8f0'],
-                        borderWidth: 0,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    cutout: '80%',
-                    plugins: { legend: { display: false } }
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
             });
         }
 
-        // --- Interaction Handlers ---
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            initCharts();
-        }
-
-        function toggleSidebar(show) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            if (show) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        function toggleAdvanced() {
-            document.getElementById('advanced-panel').classList.toggle('hidden');
-        }
-
-        function showToast(msg, type = 'success') {
-            const box = document.getElementById('toast-box');
-            const toast = document.createElement('div');
-            toast.className = `px-6 py-3 rounded-2xl shadow-2xl text-white font-bold text-sm flex items-center gap-3 animate-bounce-short pointer-events-auto ${type === 'success' ? 'bg-slate-900 dark:bg-primary-600' : 'bg-red-500'}`;
-            toast.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-4 h-4"></i> ${msg}`;
-            box.appendChild(toast);
-            lucide.createIcons();
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
-                toast.style.transition = 'all 0.4s';
-                setTimeout(() => toast.remove(), 400);
-            }, 3000);
-        }
-
-        // QR Code
-        let qrInstance;
-        function openQR() {
-            const url = document.getElementById('short-url-text').innerText;
-            const target = document.getElementById('qr-target');
-            target.innerHTML = '';
-            qrInstance = new QRCode(target, {
-                text: url,
-                width: 180,
-                height: 180,
-                colorDark: "#0f172a",
-                colorLight: "#ffffff"
-            });
-            document.getElementById('qr-modal').classList.remove('hidden');
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        function toggleSidebar(s) { const sb = document.getElementById('sidebar'); const o = document.getElementById('sidebar-overlay'); if(s) { sb.classList.remove('-translate-x-full'); o.classList.remove('hidden'); } else { sb.classList.add('-translate-x-full'); o.classList.add('hidden'); } }
+        function openQR() { 
+            const target = document.getElementById('qr-target'); 
+            target.innerHTML = ''; 
+            new QRCode(target, { text: document.getElementById('short-url-text').innerText, width: 150, height: 150 });
+            document.getElementById('qr-modal').classList.remove('hidden'); 
         }
         function closeQR() { document.getElementById('qr-modal').classList.add('hidden'); }
-        function downloadQR() {
-            const img = document.querySelector('#qr-target img');
-            const link = document.createElement('a');
-            link.download = 'linkflow-qr.png';
-            link.href = img.src;
-            link.click();
-        }
 
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            if (state.isDark) document.documentElement.classList.add('dark');
-            document.getElementById('mobile-toggle').addEventListener('click', () => toggleSidebar(true));
-            document.getElementById('sidebar-overlay').addEventListener('click', () => toggleSidebar(false));
-            initCharts();
-            animateCounters();
-        });
+        document.getElementById('mobile-toggle').addEventListener('click', () => toggleSidebar(true));
+        document.getElementById('sidebar-overlay').addEventListener('click', () => toggleSidebar(false));
+        window.onload = init;
     </script>
 </body>
 </html>
