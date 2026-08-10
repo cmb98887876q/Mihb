@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkFlow | Branded Custom Domains</title>
+    <title>LinkFlow | Premium URL Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -63,7 +63,17 @@
                 <a href="#" onclick="navigate('earnings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="earnings">
                     <i data-lucide="wallet-2" class="w-5 h-5"></i> Earnings
                 </a>
+                <a href="#" onclick="navigate('settings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="settings">
+                    <i data-lucide="settings-2" class="w-5 h-5"></i> Account Settings
+                </a>
             </nav>
+
+            <div class="p-6">
+                <div class="p-4 rounded-2xl bg-gradient-to-br from-primary-600 to-blue-700 text-white shadow-xl shadow-blue-500/20">
+                    <p class="text-xs font-medium opacity-80">Demo Status</p>
+                    <p class="font-bold text-sm mt-1">Simulated Redirection Active</p>
+                </div>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -102,32 +112,17 @@
                         <!-- Shortener -->
                         <div class="flex-1 bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50 shadow-sm">
                             <h3 class="text-2xl font-extrabold mb-2">Shorten Your URL</h3>
-                            <p class="text-slate-500 text-sm mb-8">Select a domain and paste your long link.</p>
+                            <p class="text-slate-500 text-sm mb-8">Paste your long link. The simulated redirect will track clicks.</p>
                             
-                            <div class="flex flex-col gap-4">
-                                <!-- Domain Selector -->
-                                <div class="flex flex-col sm:flex-row gap-3">
-                                    <div class="w-full sm:w-48">
-                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Domain</label>
-                                        <select id="domain-select" class="w-full px-4 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-bold text-primary-600 appearance-none cursor-pointer">
-                                            <option value="linkflow.io">linkflow.io</option>
-                                            <option value="youtube.io">youtube.io</option>
-                                            <option value="mybrand.ly">mybrand.ly</option>
-                                            <option value="gift.me">gift.me</option>
-                                        </select>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <div class="flex-1 relative group">
+                                    <div class="absolute inset-y-0 left-5 flex items-center text-slate-400">
+                                        <i data-lucide="link" class="w-5 h-5"></i>
                                     </div>
-                                    <div class="flex-1">
-                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Destination URL</label>
-                                        <div class="relative group">
-                                            <div class="absolute inset-y-0 left-5 flex items-center text-slate-400">
-                                                <i data-lucide="link" class="w-5 h-5"></i>
-                                            </div>
-                                            <input type="text" id="long-url" placeholder="https://youtube.com/watch?v=..." class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-medium transition-all">
-                                        </div>
-                                    </div>
+                                    <input type="text" id="long-url" placeholder="https://google.com" class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-medium transition-all">
                                 </div>
-                                <button onclick="shortenLink()" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 active:scale-95 transition-all flex items-center justify-center gap-2">
-                                    Generate Branded Link <i data-lucide="zap" class="w-5 h-5"></i>
+                                <button onclick="shortenLink()" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 active:scale-95 transition-all flex items-center justify-center gap-2">
+                                    Shorten <i data-lucide="zap" class="w-5 h-5"></i>
                                 </button>
                             </div>
                         </div>
@@ -135,14 +130,14 @@
                         <!-- Result Card -->
                         <div id="result-container" class="hidden w-full xl:w-96 bg-white dark:bg-darkCard p-8 rounded-[2rem] border-2 border-primary-500/20 shadow-xl page-enter">
                             <h4 class="text-lg font-bold mb-4 flex items-center gap-2 text-green-500">
-                                <i data-lucide="check-circle" class="w-5 h-5"></i> Branded Link Ready
+                                <i data-lucide="check-circle" class="w-5 h-5"></i> Link Ready
                             </h4>
                             <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl mb-6">
                                 <p id="short-url-text" class="text-primary-600 font-extrabold text-lg text-center break-all"></p>
                             </div>
                             <div class="grid grid-cols-1 gap-2">
                                 <button onclick="visitLink(document.getElementById('short-url-text').innerText)" class="flex items-center justify-center gap-2 py-3 bg-green-600 text-white rounded-xl font-bold text-sm hover:bg-green-700 transition-all">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Visit Branded Link
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Visit Link (Test Redirection)
                                 </button>
                                 <div class="grid grid-cols-2 gap-2">
                                     <button onclick="copyResult()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
@@ -175,6 +170,13 @@
                             <h4 class="text-3xl font-extrabold mt-1">$4.20</h4>
                         </div>
                     </div>
+
+                    <div class="bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50">
+                        <h3 class="text-xl font-bold mb-6">Traffic Over Time</h3>
+                        <div class="h-[300px]">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="dynamic-view" class="hidden page-enter"></section>
@@ -202,6 +204,7 @@
         function init() {
             lucide.createIcons();
             updateStats();
+            initCharts();
             if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
         }
 
@@ -209,29 +212,36 @@
         function visitLink(shortUrlText) {
             const linkObj = state.links.find(l => l.short === shortUrlText);
             if (linkObj) {
+                // 1. Log the click locally
                 linkObj.clicks++;
                 state.clicks++;
+                
+                // 2. Persist
                 localStorage.setItem('lf_links', JSON.stringify(state.links));
                 localStorage.setItem('lf_clicks', state.clicks);
-                showToast("Tracking branded redirect...", "success");
+                
+                // 3. Feedback
+                showToast("Redirecting & tracking click...", "success");
                 updateStats();
-                setTimeout(() => { window.open(linkObj.long, '_blank'); }, 800);
+
+                // 4. Perform actual redirect in new tab
+                setTimeout(() => {
+                    window.open(linkObj.long, '_blank');
+                }, 800);
             } else {
-                showToast("Branded link not found locally", "error");
+                showToast("Link not found in local storage", "error");
             }
         }
 
         function shortenLink() {
             const long = document.getElementById('long-url').value;
-            const domain = document.getElementById('domain-select').value;
-            
             if (!long || !long.startsWith('http')) {
                 showToast("Invalid URL! Use http:// or https://", "error");
                 return;
             }
 
             const code = Math.random().toString(36).substring(7);
-            const short = `${domain}/${code}`; // Ab aapka custom domain yahan use hoga!
+            const short = `linkflow.io/${code}`;
 
             const newLink = {
                 id: Date.now(),
@@ -248,7 +258,7 @@
             document.getElementById('result-container').classList.remove('hidden');
             
             updateStats();
-            showToast(`Link created on ${domain}`, "success");
+            showToast("Short link generated locally!", "success");
         }
 
         function updateStats() {
@@ -271,17 +281,22 @@
                 dash.classList.remove('hidden');
                 dyn.classList.add('hidden');
                 title.innerText = "Dashboard";
+                initCharts();
             } else {
                 dash.classList.add('hidden');
                 dyn.classList.remove('hidden');
                 title.innerText = page.charAt(0).toUpperCase() + page.slice(1);
                 renderLinksPage(page);
             }
+            if (window.innerWidth < 1024) toggleSidebar(false);
         }
 
         function renderLinksPage(page) {
-            if (page !== 'links') return;
-            let html = `<h3 class="text-2xl font-bold mb-6">Branded Links List</h3><div class="space-y-4">`;
+            if (page !== 'links') {
+                document.getElementById('dynamic-view').innerHTML = `<div class="p-20 text-center text-slate-400">Settings page coming soon...</div>`;
+                return;
+            }
+            let html = `<h3 class="text-2xl font-bold mb-6">All Your Links</h3><div class="space-y-4">`;
             state.links.forEach(link => {
                 html += `
                     <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -291,16 +306,26 @@
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="text-center px-4">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Clicks</p>
+                                <p class="text-[10px] font-bold text-slate-400">CLICKS</p>
                                 <p class="font-bold">${link.clicks}</p>
                             </div>
                             <button onclick="visitLink('${link.short}')" class="p-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-all"><i data-lucide="external-link" class="w-4 h-4"></i></button>
+                            <button onclick="deleteLink(${link.id})" class="p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><i data-lucide="trash" class="w-4 h-4"></i></button>
                         </div>
                     </div>
                 `;
             });
+            if (state.links.length === 0) html += `<p class="text-center py-20 text-slate-400">No links created yet.</p>`;
+            html += `</div>`;
             document.getElementById('dynamic-view').innerHTML = html;
             lucide.createIcons();
+        }
+
+        function deleteLink(id) {
+            state.links = state.links.filter(l => l.id !== id);
+            localStorage.setItem('lf_links', JSON.stringify(state.links));
+            renderLinksPage('links');
+            updateStats();
         }
 
         function copyResult() {
@@ -317,7 +342,29 @@
             setTimeout(() => d.remove(), 3000);
         }
 
+        function initCharts() {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Clicks',
+                        data: [12, 19, 3, 5, 2, 3, state.clicks],
+                        borderColor: '#3b82f6',
+                        tension: 0.4,
+                        borderWidth: 4,
+                        pointRadius: 0,
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.05)'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
+            });
+        }
+
         function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        function toggleSidebar(s) { const sb = document.getElementById('sidebar'); const o = document.getElementById('sidebar-overlay'); if(s) { sb.classList.remove('-translate-x-full'); o.classList.remove('hidden'); } else { sb.classList.add('-translate-x-full'); o.classList.add('hidden'); } }
         function openQR() { 
             const target = document.getElementById('qr-target'); 
             target.innerHTML = ''; 
@@ -326,6 +373,8 @@
         }
         function closeQR() { document.getElementById('qr-modal').classList.add('hidden'); }
 
+        document.getElementById('mobile-toggle').addEventListener('click', () => toggleSidebar(true));
+        document.getElementById('sidebar-overlay').addEventListener('click', () => toggleSidebar(false));
         window.onload = init;
     </script>
 </body>
