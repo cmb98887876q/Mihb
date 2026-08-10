@@ -32,6 +32,9 @@
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
         .dark .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
         .nav-item.active { background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%); border-left: 4px solid #3b82f6; color: #3b82f6; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
     </style>
 </head>
 <body class="text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
@@ -56,6 +59,9 @@
                 </a>
                 <a href="#" onclick="navigate('links')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="links">
                     <i data-lucide="link" class="w-5 h-5"></i> Manage Links
+                </a>
+                <a href="#" onclick="navigate('earnings')" class="nav-item flex items-center gap-3 px-4 py-3.5 rounded-r-xl transition-all font-semibold text-slate-500 dark:text-slate-400 hover:text-primary-600" data-page="earnings">
+                    <i data-lucide="wallet-2" class="w-5 h-5"></i> Earnings
                 </a>
             </nav>
         </aside>
@@ -86,70 +92,87 @@
                 </div>
             </header>
 
-            <!-- Page Container -->
+            <!-- Scrollable Page Container -->
             <div id="page-content" class="flex-1 overflow-y-auto p-6 lg:p-10 space-y-8">
                 
+                <!-- Dashboard View -->
                 <section id="view-dashboard" class="page-enter space-y-8">
+                    
                     <div class="flex flex-col xl:flex-row gap-8">
                         <!-- Shortener -->
                         <div class="flex-1 bg-white dark:bg-darkCard p-8 rounded-[2rem] border dark:border-slate-800/50 shadow-sm">
-                            <h3 class="text-2xl font-extrabold mb-2 text-primary-600">Create Branded Link</h3>
-                            <p class="text-slate-500 text-sm mb-8">Now supporting <b>youtube.com</b> custom simulation.</p>
+                            <h3 class="text-2xl font-extrabold mb-2">Shorten Your URL</h3>
+                            <p class="text-slate-500 text-sm mb-8">Select a domain and paste your long link.</p>
                             
-                            <div class="flex flex-col gap-5">
-                                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-                                    <div class="md:col-span-4">
-                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Domain Name</label>
-                                        <select id="domain-select" class="w-full px-4 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-red-500 outline-none font-bold text-slate-700 dark:text-white appearance-none cursor-pointer">
-                                            <option value="youtube.com">youtube.com (Simulated)</option>
-                                            <option value="linkflow.io">linkflow.io (Default)</option>
-                                            <option value="bit.ly">bit.ly</option>
+                            <div class="flex flex-col gap-4">
+                                <!-- Domain Selector -->
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <div class="w-full sm:w-48">
+                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Domain</label>
+                                        <select id="domain-select" class="w-full px-4 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-bold text-primary-600 appearance-none cursor-pointer">
+                                            <option value="linkflow.io">linkflow.io</option>
+                                            <option value="youtube.io">youtube.io</option>
+                                            <option value="mybrand.ly">mybrand.ly</option>
+                                            <option value="gift.me">gift.me</option>
                                         </select>
                                     </div>
-                                    <div class="md:col-span-8">
-                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Paste Long URL</label>
-                                        <input type="text" id="long-url" placeholder="https://www.google.com/search?q=LinkFlow" class="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-primary-500 outline-none font-medium transition-all">
+                                    <div class="flex-1">
+                                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Destination URL</label>
+                                        <div class="relative group">
+                                            <div class="absolute inset-y-0 left-5 flex items-center text-slate-400">
+                                                <i data-lucide="link" class="w-5 h-5"></i>
+                                            </div>
+                                            <input type="text" id="long-url" placeholder="https://youtube.com/watch?v=..." class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-primary-500 outline-none font-medium transition-all">
+                                        </div>
                                     </div>
                                 </div>
-                                <button onclick="shortenLink()" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 transition-all flex items-center justify-center gap-2">
-                                    Shorten with Custom Domain <i data-lucide="rocket" class="w-5 h-5"></i>
+                                <button onclick="shortenLink()" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/20 active:scale-95 transition-all flex items-center justify-center gap-2">
+                                    Generate Branded Link <i data-lucide="zap" class="w-5 h-5"></i>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Result Card -->
                         <div id="result-container" class="hidden w-full xl:w-96 bg-white dark:bg-darkCard p-8 rounded-[2rem] border-2 border-primary-500/20 shadow-xl page-enter">
-                            <h4 class="text-lg font-bold mb-4 text-green-500 flex items-center gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5"></i> Link Ready!
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2 text-green-500">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i> Branded Link Ready
                             </h4>
-                            <div class="p-5 bg-slate-50 dark:bg-slate-900 rounded-2xl mb-6 border dark:border-slate-800">
-                                <p id="short-url-text" class="text-primary-600 font-extrabold text-xl text-center break-all"></p>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl mb-6">
+                                <p id="short-url-text" class="text-primary-600 font-extrabold text-lg text-center break-all"></p>
                             </div>
                             <div class="grid grid-cols-1 gap-2">
-                                <button onclick="visitLink(document.getElementById('short-url-text').innerText)" class="flex items-center justify-center gap-2 py-3 bg-red-600 text-white rounded-xl font-bold text-sm hover:bg-red-700 transition-all">
-                                    <i data-lucide="play-circle" class="w-4 h-4"></i> Visit (Tracking Active)
+                                <button onclick="visitLink(document.getElementById('short-url-text').innerText)" class="flex items-center justify-center gap-2 py-3 bg-green-600 text-white rounded-xl font-bold text-sm hover:bg-green-700 transition-all">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i> Visit Branded Link
                                 </button>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <button onclick="copyResult()" class="py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700">Copy URL</button>
-                                    <button onclick="openQR()" class="py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-xs hover:bg-slate-200 dark:hover:bg-slate-700">QR Code</button>
+                                    <button onclick="copyResult()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                                        <i data-lucide="copy" class="w-4 h-4"></i> Copy
+                                    </button>
+                                    <button onclick="openQR()" class="flex items-center justify-center gap-2 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                                        <i data-lucide="qr-code" class="w-4 h-4"></i> QR
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Small Stats -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <!-- Statistics -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
-                            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Total Clicks</p>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Total Clicks</p>
                             <h4 class="text-3xl font-extrabold mt-1" id="stat-clicks">0</h4>
                         </div>
                         <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
-                            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Active Links</p>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Revenue</p>
+                            <h4 class="text-3xl font-extrabold mt-1" id="stat-revenue">$0.00</h4>
+                        </div>
+                        <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Links Created</p>
                             <h4 class="text-3xl font-extrabold mt-1" id="stat-links">0</h4>
                         </div>
                         <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800/50 shadow-sm">
-                            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Earned</p>
-                            <h4 class="text-3xl font-extrabold mt-1 text-green-500" id="stat-revenue">$0.00</h4>
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Average CPM</p>
+                            <h4 class="text-3xl font-extrabold mt-1">$4.20</h4>
                         </div>
                     </div>
                 </section>
@@ -162,7 +185,7 @@
     <!-- QR Modal -->
     <div id="qr-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-md">
         <div class="bg-white dark:bg-darkCard p-8 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center">
-            <div id="qr-target" class="bg-white p-4 rounded-3xl inline-block mb-6 border"></div>
+            <div id="qr-target" class="bg-white p-4 rounded-3xl inline-block mb-6"></div>
             <button onclick="closeQR()" class="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold">Close</button>
         </div>
     </div>
@@ -171,6 +194,7 @@
 
     <script>
         const state = {
+            activePage: 'dashboard',
             links: JSON.parse(localStorage.getItem('lf_links')) || [],
             clicks: parseInt(localStorage.getItem('lf_clicks')) || 0
         };
@@ -181,17 +205,33 @@
             if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
         }
 
+        // --- Core Redirection Logic ---
+        function visitLink(shortUrlText) {
+            const linkObj = state.links.find(l => l.short === shortUrlText);
+            if (linkObj) {
+                linkObj.clicks++;
+                state.clicks++;
+                localStorage.setItem('lf_links', JSON.stringify(state.links));
+                localStorage.setItem('lf_clicks', state.clicks);
+                showToast("Tracking branded redirect...", "success");
+                updateStats();
+                setTimeout(() => { window.open(linkObj.long, '_blank'); }, 800);
+            } else {
+                showToast("Branded link not found locally", "error");
+            }
+        }
+
         function shortenLink() {
             const long = document.getElementById('long-url').value;
             const domain = document.getElementById('domain-select').value;
             
             if (!long || !long.startsWith('http')) {
-                showToast("Please enter a valid URL (http/https)", "error");
+                showToast("Invalid URL! Use http:// or https://", "error");
                 return;
             }
 
             const code = Math.random().toString(36).substring(7);
-            const short = `${domain}/${code}`; // Branded Domain applied here
+            const short = `${domain}/${code}`; // Ab aapka custom domain yahan use hoga!
 
             const newLink = {
                 id: Date.now(),
@@ -208,31 +248,21 @@
             document.getElementById('result-container').classList.remove('hidden');
             
             updateStats();
-            showToast(`Branded link created on ${domain}!`, "success");
-        }
-
-        function visitLink(shortUrlText) {
-            const linkObj = state.links.find(l => l.short === shortUrlText);
-            if (linkObj) {
-                linkObj.clicks++;
-                state.clicks++;
-                localStorage.setItem('lf_links', JSON.stringify(state.links));
-                localStorage.setItem('lf_clicks', state.clicks);
-                showToast("Simulating branded redirect...", "success");
-                updateStats();
-                setTimeout(() => { window.open(linkObj.long, '_blank'); }, 800);
-            }
+            showToast(`Link created on ${domain}`, "success");
         }
 
         function updateStats() {
-            const revenue = (state.clicks * 0.005).toFixed(2);
-            document.getElementById('stat-clicks').innerText = state.clicks;
+            const revenue = (state.clicks * 0.0042).toFixed(2);
+            document.getElementById('stat-clicks').innerText = state.clicks.toLocaleString();
             document.getElementById('stat-revenue').innerText = `$${revenue}`;
             document.getElementById('nav-balance').innerText = `$${revenue}`;
             document.getElementById('stat-links').innerText = state.links.length;
         }
 
         function navigate(page) {
+            state.activePage = page;
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.getAttribute('data-page') === page));
+            
             const dash = document.getElementById('view-dashboard');
             const dyn = document.getElementById('dynamic-view');
             const title = document.getElementById('view-title');
@@ -244,25 +274,30 @@
             } else {
                 dash.classList.add('hidden');
                 dyn.classList.remove('hidden');
-                title.innerText = "Manage Links";
-                renderLinksPage();
+                title.innerText = page.charAt(0).toUpperCase() + page.slice(1);
+                renderLinksPage(page);
             }
         }
 
-        function renderLinksPage() {
-            let html = `<h3 class="text-2xl font-bold mb-6">Your Branded Links</h3><div class="space-y-4">`;
+        function renderLinksPage(page) {
+            if (page !== 'links') return;
+            let html = `<h3 class="text-2xl font-bold mb-6">Branded Links List</h3><div class="space-y-4">`;
             state.links.forEach(link => {
                 html += `
-                    <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800 flex justify-between items-center">
+                    <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
                         <div class="min-w-0">
-                            <p class="font-extrabold text-primary-600 truncate">${link.short}</p>
+                            <p class="font-bold text-primary-600 truncate">${link.short}</p>
                             <p class="text-xs text-slate-400 truncate">${link.long}</p>
                         </div>
                         <div class="flex items-center gap-4">
-                            <p class="font-bold text-sm">${link.clicks} <span class="text-[10px] text-slate-400">CLICKS</span></p>
-                            <button onclick="visitLink('${link.short}')" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl"><i data-lucide="external-link" class="w-4 h-4"></i></button>
+                            <div class="text-center px-4">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase">Clicks</p>
+                                <p class="font-bold">${link.clicks}</p>
+                            </div>
+                            <button onclick="visitLink('${link.short}')" class="p-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-all"><i data-lucide="external-link" class="w-4 h-4"></i></button>
                         </div>
-                    </div>`;
+                    </div>
+                `;
             });
             document.getElementById('dynamic-view').innerHTML = html;
             lucide.createIcons();
@@ -270,14 +305,14 @@
 
         function copyResult() {
             navigator.clipboard.writeText(document.getElementById('short-url-text').innerText);
-            showToast("Copied!", "success");
+            showToast("Copied to clipboard!", "success");
         }
 
         function showToast(m, t) {
             const b = document.getElementById('toast-box');
             const d = document.createElement('div');
-            d.className = `px-6 py-3 rounded-2xl text-white font-bold text-sm shadow-xl animate-bounce ${t==='success'?'bg-slate-900':'bg-red-500'}`;
-            d.innerText = m;
+            d.className = `px-6 py-3 rounded-2xl text-white font-bold text-sm flex items-center gap-2 shadow-xl animate-bounce ${t==='success'?'bg-slate-900':'bg-red-500'}`;
+            d.innerHTML = m;
             b.appendChild(d);
             setTimeout(() => d.remove(), 3000);
         }
