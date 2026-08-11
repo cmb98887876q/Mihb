@@ -3,343 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkSwift | Professional URL Shortener</title>
+    <title>LinkSwift | Analytics & Shortener</title>
     
-    <!-- Firebase SDKs (Compat Version for ease of use in single file) -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --success: #22c55e;
+            --success: #10b981;
             --danger: #ef4444;
-            --radius: 12px;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
+            --bg: #020617;
+            --card: #0f172a;
+            --text: #f8fafc;
             --text-muted: #94a3b8;
-            --border: #334155;
+            --border: #1e293b;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        body { background-color: var(--bg-body); color: var(--text-main); min-height: 100vh; }
+        /* Instant Redirect Overlay */
+        #redirecting {
+            position: fixed; inset: 0; background: #fff; z-index: 10000;
+            display: none; align-items: center; justify-content: center; font-weight: 600;
+        }
+        [data-theme="dark"] #redirecting { background: #020617; }
 
-        /* Redirect Screen */
-        #redirect-screen {
-            position: fixed; inset: 0; background: var(--bg-body);
-            display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 9999;
+        /* Layout */
+        .app-shell { display: none; min-height: 100vh; } /* Hidden by default to prevent glitch */
+        
+        .sidebar {
+            width: 280px; height: 100vh; position: sticky; top: 0;
+            background: var(--card); border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem; display: flex; flex-direction: column;
         }
 
-        .app-container { display: flex; min-height: 100vh; }
+        .main-content { flex: 1; padding: 2.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-        /* Sidebar */
-        aside {
-            width: 260px; background: var(--bg-card); border-right: 1px solid var(--border);
-            padding: 2rem 1.5rem; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh;
+        /* UI Elements */
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 3rem; letter-spacing: -1px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .stat-card { 
+            background: var(--card); padding: 1.5rem; border-radius: var(--radius); 
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; }
+
+        .glass-card {
+            background: var(--card); border-radius: var(--radius); padding: 2rem;
+            border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 2rem;
         }
 
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; }
-
-        /* Main Area */
-        main { flex: 1; padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
-        .stat-card h3 { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .stat-card p { font-size: 1.5rem; font-weight: 700; }
-
-        /* Components */
-        .card { background: var(--bg-card); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; }
-        input { width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); outline: none; }
-        input:focus { border-color: var(--primary); }
-
-        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        /* Form */
+        .input-group { display: flex; gap: 1rem; background: var(--bg); padding: 0.5rem; border-radius: 12px; border: 1px solid var(--border); }
+        .input-group input { 
+            flex: 1; background: transparent; border: none; padding: 0.75rem; 
+            color: var(--text); outline: none; font-size: 0.95rem;
+        }
+        
+        .btn { 
+            padding: 0.75rem 1.5rem; border-radius: 10px; border: none; 
+            font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px;
+        }
         .btn-primary { background: var(--primary); color: white; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-        .btn-danger { background: var(--danger); color: white; }
+        .btn-primary:hover { background: var(--primary-light); }
+        .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
 
         /* Table */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th { text-align: left; padding: 1rem; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: 0.875rem; }
-        td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
-        .short-code-badge { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-weight: 600; font-family: monospace; }
+        .table-wrapper { width: 100%; overflow-x: auto; margin-top: 1.5rem; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th { text-align: left; padding: 1rem; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        td { padding: 1.25rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .badge-code { background: rgba(79, 70, 229, 0.1); color: var(--primary); font-family: monospace; font-size: 0.9rem; }
 
         /* Modal */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
-        .modal-content { background: var(--bg-card); padding: 2rem; border-radius: var(--radius); width: 90%; max-width: 500px; }
+        .modal-overlay { 
+            position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal { background: var(--card); padding: 2.5rem; border-radius: var(--radius); width: 100%; max-width: 500px; border: 1px solid var(--border); }
 
         /* Toast */
-        #toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; }
-        .toast { background: var(--bg-card); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-radius: 4px; margin-top: 0.5rem; animation: slideIn 0.3s; }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        #toast { 
+            position: fixed; bottom: 2rem; right: 2rem; background: var(--text); color: var(--bg);
+            padding: 1rem 2rem; border-radius: 10px; display: none; animation: slideUp 0.3s; z-index: 10000;
+        }
+        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
 
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        @media (max-width: 768px) {
-            .app-container { flex-direction: column; }
-            aside { width: 100%; height: auto; position: relative; }
-            table thead { display: none; }
-            table tr { display: block; border: 1px solid var(--border); margin-bottom: 1rem; padding: 10px; border-radius: 8px; }
-            table td { display: flex; justify-content: space-between; border: none; padding: 5px 0; }
-            table td::before { content: attr(data-label); font-weight: bold; color: var(--text-muted); }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .input-group { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div id="redirect-screen">
-        <div class="spinner"></div>
-        <p style="margin-top: 20px;">Redirecting to destination...</p>
-        <p id="redirect-status" style="color: var(--text-muted); margin-top: 10px;"></p>
-    </div>
+    <div id="redirecting">🚀 Redirecting...</div>
 
-    <div class="app-container" id="app-shell">
-        <aside>
-            <div class="logo">LinkSwift</div>
-            <nav style="flex: 1;">
-                <p style="color: var(--text-muted); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">Menu</p>
-                <div style="color: var(--primary); font-weight: 600;">Dashboard</div>
-            </nav>
-            <button class="btn btn-outline" onclick="toggleTheme()" id="theme-btn">Dark Mode</button>
-        </aside>
-
-        <main>
-            <div class="stats-grid">
-                <div class="stat-card"><h3>Total Links</h3><p id="stat-total">0</p></div>
-                <div class="stat-card"><h3>Total Clicks</h3><p id="stat-clicks">0</p></div>
-                <div class="stat-card"><h3>Active Now</h3><p id="stat-active">0</p></div>
-            </div>
-
-            <div class="card">
-                <h2 style="margin-bottom: 1.5rem;">Create Short Link</h2>
-                <div style="display: grid; grid-template-columns: 1fr 200px auto; gap: 1rem; align-items: end;">
-                    <div class="form-group" style="margin:0">
-                        <label>Original URL</label>
-                        <input type="url" id="input-url" placeholder="https://example.com/long-page">
+    <div class="app-shell" id="app">
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <div class="logo">LinkSwift.</div>
+                <nav style="flex: 1">
+                    <div style="padding: 0.8rem 1rem; background: rgba(79, 70, 229, 0.1); color: var(--primary); border-radius: 10px; font-weight: 600;">
+                        📊 Dashboard
                     </div>
-                    <div class="form-group" style="margin:0">
-                        <label>Custom Code (Opt)</label>
-                        <input type="text" id="input-code" placeholder="promo2024">
-                    </div>
-                    <button class="btn btn-primary" onclick="createLink()">Shorten</button>
-                </div>
-            </div>
+                </nav>
+                <button class="btn btn-ghost" onclick="toggleTheme()" id="themeToggle">🌙 Dark Mode</button>
+            </aside>
 
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h2>Link Management</h2>
-                    <input type="text" id="search-input" placeholder="Search links..." style="width: 250px;" oninput="renderTable()">
+            <main class="main-content">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-label">Total Links</div><div class="stat-value" id="count-links">0</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Clicks</div><div class="stat-value" id="count-clicks">0</div></div>
+                    <div class="stat-card"><div class="stat-label">System Status</div><div class="stat-value" style="color: var(--success); font-size: 1.2rem;">● Active</div></div>
                 </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Short Code</th>
-                                <th>Original URL</th>
-                                <th>Clicks</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="links-table-body"></tbody>
-                    </table>
+
+                <div class="glass-card">
+                    <h2 style="margin-bottom: 1.5rem; letter-spacing: -0.5px;">Shorten a new URL</h2>
+                    <div class="input-group">
+                        <input type="url" id="url-input" placeholder="Paste your long link here...">
+                        <input type="text" id="code-input" placeholder="Custom code (Optional)" style="max-width: 180px; border-left: 1px solid var(--border)">
+                        <button class="btn btn-primary" onclick="createLink()">Create Link</button>
+                    </div>
                 </div>
-            </div>
-        </main>
+
+                <div class="glass-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="letter-spacing: -0.5px;">Recent Links</h2>
+                        <input type="text" id="search" placeholder="Search links..." oninput="renderTable()" 
+                               style="padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
+                    </div>
+                    
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Short Code</th>
+                                    <th>Destination</th>
+                                    <th>Clicks</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="link-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Edit Modal -->
-    <div class="modal" id="edit-modal">
-        <div class="modal-content">
-            <h2>Edit Destination</h2>
-            <p style="margin: 10px 0; color: var(--text-muted);">Short Code: <span id="edit-code-label" class="short-code-badge"></span></p>
-            <div class="form-group">
-                <label>New Original URL</label>
-                <input type="url" id="edit-url-input">
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-primary" id="save-edit-btn">Save Changes</button>
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h2 style="margin-bottom: 0.5rem;">Edit Destination</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Editing for: <span id="display-code" class="badge badge-code"></span>
+            </p>
+            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">NEW ORIGINAL URL</label>
+            <input type="url" id="edit-url" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
+            
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-primary" style="flex: 1" id="save-btn">Save Changes</button>
+                <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
             </div>
         </div>
     </div>
 
-    <div id="toast-container"></div>
+    <div id="toast"></div>
 
     <script>
-        // FIREBASE CONFIGURATION
-        const firebaseConfig = { 
+        const configMain = { 
             apiKey: "AIzaSyDzZf-VbpRE65xIhAqObqKECucp9Pp2EDg", 
             authDomain: "app-stor-f8cd2.firebaseapp.com", 
             databaseURL: "https://app-stor-f8cd2-default-rtdb.firebaseio.com", 
             projectId: "app-stor-f8cd2" 
         };
 
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(configMain);
         const db = firebase.database();
-        let allLinks = [];
 
-        // REDIRECTION LOGIC
-        async function checkRedirect() {
+        /** 1. INSTANT REDIRECT LOGIC **/
+        (async function checkRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('s');
+            
             if (code) {
-                document.getElementById('app-shell').style.display = 'none';
-                document.getElementById('redirect-screen').style.display = 'flex';
+                // Show redirect screen immediately
+                document.getElementById('redirecting').style.display = 'flex';
+                
                 try {
-                    const snap = await db.ref('links/' + code).once('value');
-                    const data = snap.val();
-                    if (data) {
-                        await db.ref('links/' + code).update({ clicks: (data.clicks || 0) + 1 });
+                    const snapshot = await db.ref('links/' + code).once('value');
+                    const data = snapshot.val();
+                    
+                    if (data && data.originalUrl) {
+                        // Background update click count
+                        db.ref('links/' + code).update({ clicks: (data.clicks || 0) + 1 });
+                        // Immediate redirect
                         window.location.href = data.originalUrl;
                     } else {
-                        document.getElementById('redirect-status').innerText = "Link not found.";
+                        alert("Short link not found.");
+                        window.location.href = window.location.pathname; // Go back to dashboard
                     }
-                } catch (e) { document.getElementById('redirect-status').innerText = "Error connecting to database."; }
-                return true;
+                } catch (e) {
+                    console.error(e);
+                }
+            } else {
+                // No redirect code, show the app
+                document.getElementById('app').style.display = 'block';
+                loadData();
             }
-            return false;
-        }
+        })();
 
-        // CREATE
+        /** 2. DASHBOARD LOGIC **/
+        let linksArray = [];
+
         async function createLink() {
-            const url = document.getElementById('input-url').value.trim();
-            let code = document.getElementById('input-code').value.trim();
-            
-            if (!url.startsWith('http')) return showToast("Enter a valid HTTP/HTTPS URL", "danger");
-            if (!code) code = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const url = document.getElementById('url-input').value.trim();
+            let code = document.getElementById('code-input').value.trim();
 
-            const snap = await db.ref('links/' + code).once('value');
-            if (snap.exists()) return showToast("Short code already taken", "danger");
+            if (!url.startsWith('http')) return notify("Please enter a valid URL (with http://)", "danger");
+            if (!code) code = Math.random().toString(36).substring(2, 7).toUpperCase();
+
+            const check = await db.ref('links/' + code).once('value');
+            if (check.exists()) return notify("Code already exists!", "danger");
 
             const newLink = {
                 shortCode: code,
                 originalUrl: url,
                 clicks: 0,
-                createdAt: Date.now(),
                 updatedAt: Date.now()
             };
 
             await db.ref('links/' + code).set(newLink);
-            showToast("Link created!");
-            document.getElementById('input-url').value = '';
-            document.getElementById('input-code').value = '';
+            notify("Link created successfully!");
+            document.getElementById('url-input').value = '';
+            document.getElementById('code-input').value = '';
         }
 
-        // UPDATE (DYNAMIC EDIT)
-        async function saveEdit(code) {
-            const newUrl = document.getElementById('edit-url-input').value.trim();
-            if (!newUrl.startsWith('http')) return showToast("Invalid URL", "danger");
+        async function updateUrl(code) {
+            const newUrl = document.getElementById('edit-url').value.trim();
+            if (!newUrl.startsWith('http')) return notify("Invalid URL", "danger");
 
-            // We update ONLY originalUrl and updatedAt. 
-            // The shortCode (the key) and clicks remain untouched.
             await db.ref('links/' + code).update({
                 originalUrl: newUrl,
                 updatedAt: Date.now()
             });
 
-            showToast("Destination updated successfully!");
+            notify("Updated Successfully!");
             closeModal();
         }
 
-        // UI HELPERS
-        function fetchLinks() {
+        function loadData() {
             db.ref('links').on('value', (snap) => {
                 const data = snap.val();
-                allLinks = data ? Object.values(data) : [];
-                allLinks.sort((a,b) => b.updatedAt - a.updatedAt);
+                linksArray = data ? Object.values(data) : [];
+                linksArray.sort((a,b) => b.updatedAt - a.updatedAt);
                 renderTable();
                 updateStats();
             });
         }
 
         function renderTable() {
-            const tbody = document.getElementById('links-table-body');
-            const search = document.getElementById('search-input').value.toLowerCase();
-            const filtered = allLinks.filter(l => l.shortCode.toLowerCase().includes(search) || l.originalUrl.toLowerCase().includes(search));
+            const table = document.getElementById('link-table');
+            const query = document.getElementById('search').value.toLowerCase();
+            const filtered = linksArray.filter(l => l.shortCode.toLowerCase().includes(query) || l.originalUrl.toLowerCase().includes(query));
 
-            tbody.innerHTML = filtered.map(l => `
+            table.innerHTML = filtered.map(l => `
                 <tr>
-                    <td data-label="Short Code"><span class="short-code-badge">${l.shortCode}</span></td>
-                    <td data-label="Original URL" style="max-width:200px; overflow:hidden; text-overflow:ellipsis;">${l.originalUrl}</td>
-                    <td data-label="Clicks"><strong>${l.clicks}</strong></td>
-                    <td data-label="Date">${new Date(l.updatedAt).toLocaleDateString()}</td>
-                    <td data-label="Actions">
-                        <button class="btn btn-outline" style="padding:5px" onclick="copyLink('${l.shortCode}')">Copy</button>
-                        <button class="btn btn-outline" style="padding:5px" onclick="openEdit('${l.shortCode}', '${l.originalUrl}')">Edit</button>
-                        <button class="btn btn-outline" style="padding:5px; color:red" onclick="deleteLink('${l.shortCode}')">Del</button>
+                    <td><span class="badge badge-code">${l.shortCode}</span></td>
+                    <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <a href="${l.originalUrl}" target="_blank" style="color: var(--primary); text-decoration: none;">${l.originalUrl}</a>
+                    </td>
+                    <td><strong>${l.clicks}</strong></td>
+                    <td>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-ghost" style="padding: 5px 12px;" onclick="copyLink('${l.shortCode}')">Copy</button>
+                            <button class="btn btn-ghost" style="padding: 5px 12px;" onclick="openEdit('${l.shortCode}', '${l.originalUrl}')">Edit</button>
+                            <button class="btn btn-ghost" style="padding: 5px 12px; color: var(--danger);" onclick="deleteLink('${l.shortCode}')">Delete</button>
+                        </div>
                     </td>
                 </tr>
             `).join('');
         }
 
         function updateStats() {
-            document.getElementById('stat-total').innerText = allLinks.length;
-            document.getElementById('stat-clicks').innerText = allLinks.reduce((a, b) => a + (b.clicks || 0), 0);
-            document.getElementById('stat-active').innerText = allLinks.length;
+            document.getElementById('count-links').innerText = linksArray.length;
+            document.getElementById('count-clicks').innerText = linksArray.reduce((acc, curr) => acc + (curr.clicks || 0), 0);
         }
 
         function copyLink(code) {
-            const url = window.location.origin + window.location.pathname + "?s=" + code;
-            navigator.clipboard.writeText(url);
-            showToast("Copied to clipboard!");
+            const full = window.location.origin + window.location.pathname + "?s=" + code;
+            navigator.clipboard.writeText(full);
+            notify("Link copied to clipboard!");
         }
 
         function openEdit(code, url) {
-            document.getElementById('edit-code-label').innerText = code;
-            document.getElementById('edit-url-input').value = url;
-            document.getElementById('edit-modal').style.display = 'flex';
-            document.getElementById('save-edit-btn').onclick = () => saveEdit(code);
+            document.getElementById('display-code').innerText = code;
+            document.getElementById('edit-url').value = url;
+            document.getElementById('editModal').style.display = 'flex';
+            document.getElementById('save-btn').onclick = () => updateUrl(code);
         }
 
-        function closeModal() { document.getElementById('edit-modal').style.display = 'none'; }
+        function closeModal() { document.getElementById('editModal').style.display = 'none'; }
 
         async function deleteLink(code) {
-            if(confirm("Delete link?")) await db.ref('links/' + code).remove();
+            if (confirm("Delete this link permanently?")) {
+                await db.ref('links/' + code).remove();
+                notify("Deleted successfully");
+            }
         }
 
-        function showToast(m, type="success") {
-            const c = document.getElementById('toast-container');
-            const t = document.createElement('div');
-            t.className = 'toast';
-            if(type === "danger") t.style.borderLeftColor = "var(--danger)";
-            t.innerText = m;
-            c.appendChild(t);
-            setTimeout(() => t.remove(), 3000);
+        function notify(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
         }
 
         function toggleTheme() {
-            const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', theme);
-            document.getElementById('theme-btn').innerText = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
-            localStorage.setItem('theme', theme);
-        }
-
-        window.onload = async () => {
-            if (!(await checkRedirect())) {
-                const savedTheme = localStorage.getItem('theme') || 'light';
-                document.body.setAttribute('data-theme', savedTheme);
-                fetchLinks();
-            }
+            const current = document.body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', next);
+            document.getElementById('themeToggle').innerText = next === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
         }
     </script>
 </body>
