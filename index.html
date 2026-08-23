@@ -1,344 +1,249 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>पुराने नगमे</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      height: 100vh;
-      overflow: hidden;
-      background: #111;
-      color: white;
-    }
-
-    /* Background Image */
-    .bg {
-      position: fixed;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1974') center/cover no-repeat;
-      filter: brightness(0.65);
-      z-index: 0;
-    }
-
-    /* Soft vignette */
-    .vignette {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Main Title */
-    .title {
-      position: absolute;
-      top: 18%;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-    }
-
-    .title h1 {
-      font-size: clamp(3rem, 9vw, 6.5rem);
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-      line-height: 1.1;
-    }
-
-    .title p {
-      margin-top: 12px;
-      font-size: 1.1rem;
-      opacity: 0.85;
-      letter-spacing: 1px;
-    }
-
-    /* Player */
-    .player {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(520px, 92%);
-      background: rgba(20, 20, 20, 0.75);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 18px 22px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      z-index: 20;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-
-    .album-art {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      object-fit: cover;
-      background: #333;
-      flex-shrink: 0;
-    }
-
-    .info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .song-name {
-      font-size: 1.05rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .artist {
-      font-size: 0.85rem;
-      opacity: 0.7;
-      margin-top: 3px;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.4rem;
-      cursor: pointer;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background: rgba(255,255,255,0.15);
-    }
-
-    .play-btn {
-      background: white;
-      color: #111;
-      font-size: 1.2rem;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.08);
-      background: #f0f0f0;
-    }
-
-    /* Progress bar */
-    .progress-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 0 0 24px 24px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .progress {
-      height: 100%;
-      width: 0%;
-      background: #ff4d4d;
-      transition: width 0.1s linear;
-    }
-
-    /* Hidden YouTube player */
-    #yt-player {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="bg"></div>
-  <div class="vignette"></div>
-
-  <div class="title">
-    <h1>पुराने नगमे</h1>
-    <p>सदाबहार यादें • Old Hindi Classics</p>
-  </div>
-
-  <!-- Player UI -->
-  <div class="player">
-    <img src="https://i.ytimg.com/vi/8Yb5Y5Q5Z5Q/hqdefault.jpg" class="album-art" id="albumArt" alt="album">
-    
-    <div class="info">
-      <div class="song-name" id="songName">O Mere Dil Ke Chain</div>
-      <div class="artist" id="artist">Kishore Kumar</div>
-    </div>
-
-    <div class="controls">
-      <button class="btn" onclick="prevSong()">⏮</button>
-      <button class="btn play-btn" id="playBtn" onclick="togglePlay()">▶</button>
-      <button class="btn" onclick="nextSong()">⏭</button>
-    </div>
-
-    <div class="progress-container" onclick="seek(event)">
-      <div class="progress" id="progress"></div>
-    </div>
-  </div>
-
-  <!-- Hidden YouTube Player -->
-  <div id="yt-player"></div>
-
-  <script>
-    // ====== PLAYLIST (YouTube Video IDs) ======
-    // Change these IDs with any YouTube songs you want
-    const playlist = [
-      {
-        id: "8Yb5Y5Q5Z5Q", // example - replace with real IDs
-        title: "O Mere Dil Ke Chain",
-        artist: "Kishore Kumar",
-        thumb: "https://i.ytimg.com/vi/8Yb5Y5Q5Z5Q/hqdefault.jpg"
-      },
-      {
-        id: "yJg-Y5byMMw",
-        title: "Tere Bina Zindagi Se",
-        artist: "Kishore Kumar & Lata",
-        thumb: "https://i.ytimg.com/vi/yJg-Y5byMMw/hqdefault.jpg"
-      },
-      {
-        id: "lW1N3nB0x0A",
-        title: "Pal Pal Dil Ke Paas",
-        artist: "Kishore Kumar",
-        thumb: "https://i.ytimg.com/vi/lW1N3nB0x0A/hqdefault.jpg"
-      },
-      {
-        id: "5Eqb_-j3FDA",
-        title: "Chura Liya Hai Tumne",
-        artist: "Asha Bhosle & R.D. Burman",
-        thumb: "https://i.ytimg.com/vi/5Eqb_-j3FDA/hqdefault.jpg"
-      },
-      {
-        id: "K7Z7b8c8b8c", // replace this
-        title: "Ek Ajnabee Haseena Se",
-        artist: "Kishore Kumar",
-        thumb: "https://i.ytimg.com/vi/K7Z7b8c8b8c/hqdefault.jpg"
-      }
-    ];
-
-    let currentIndex = 0;
-    let player;
-    let isPlaying = false;
-
-    // Load YouTube IFrame API
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
-
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('yt-player', {
-        height: '0',
-        width: '0',
-        videoId: playlist[0].id,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1
-        },
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ट्रक वाला | Nostalgic Road Trip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ff4d4d;
+            --glass: rgba(10, 10, 10, 0.85);
         }
-      });
-    }
 
-    function onPlayerReady() {
-      updateUI();
-    }
+        body, html {
+            margin: 0; padding: 0; height: 100%; overflow: hidden;
+            background-color: #000; font-family: 'Poppins', sans-serif;
+        }
 
-    function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.ENDED) {
-        nextSong();
-      }
-      if (event.data === YT.PlayerState.PLAYING) {
-        isPlaying = true;
-        document.getElementById('playBtn').innerHTML = '⏸';
-        updateProgress();
-      }
-      if (event.data === YT.PlayerState.PAUSED) {
-        isPlaying = false;
-        document.getElementById('playBtn').innerHTML = '▶';
-      }
-    }
+        /* Full Screen Background */
+        .bg-illustration {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1590400037130-9753c150046b?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; background-position: center;
+            z-index: -2; transition: transform 20s ease-in-out;
+            filter: contrast(1.1) brightness(0.7);
+        }
 
-    function togglePlay() {
-      if (!player) return;
-      if (isPlaying) {
-        player.pauseVideo();
-      } else {
-        player.playVideo();
-      }
-    }
+        /* Enter Overlay - Needed for browser autoplay policy */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s ease;
+        }
 
-    function nextSong() {
-      currentIndex = (currentIndex + 1) % playlist.length;
-      loadSong();
-    }
+        .enter-btn {
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 15px 40px; color: white; border-radius: 50px;
+            letter-spacing: 4px; text-transform: uppercase; font-size: 14px;
+            cursor: pointer; transition: all 0.3s;
+            background: transparent;
+        }
 
-    function prevSong() {
-      currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-      loadSong();
-    }
+        .enter-btn:hover {
+            background: white; color: black;
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
 
-    function loadSong() {
-      const song = playlist[currentIndex];
-      player.loadVideoById(song.id);
-      updateUI();
-      player.playVideo();
-    }
+        /* Film Grain */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.06; pointer-events: none;
+            background: url('https://media.giphy.com/media/oEI9uWUic9VKM/giphy.gif');
+        }
 
-    function updateUI() {
-      const song = playlist[currentIndex];
-      document.getElementById('songName').textContent = song.title;
-      document.getElementById('artist').textContent = song.artist;
-      document.getElementById('albumArt').src = song.thumb;
-    }
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%);
+            z-index: -1; pointer-events: none;
+        }
 
-    function updateProgress() {
-      if (!player || !isPlaying) return;
-      const current = player.getCurrentTime();
-      const duration = player.getDuration();
-      if (duration > 0) {
-        const percent = (current / duration) * 100;
-        document.getElementById('progress').style.width = percent + '%';
-      }
-      requestAnimationFrame(updateProgress);
-    }
+        .hindi-title {
+            font-family: 'Martel', serif;
+            text-shadow: 0px 5px 30px rgba(0,0,0,1);
+            color: #fefefe;
+        }
 
-    function seek(e) {
-      if (!player) return;
-      const rect = e.currentTarget.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      const duration = player.getDuration();
-      player.seekTo(duration * percent, true);
-    }
-  </script>
+        .player-card {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        .progress-bar {
+            height: 4px; background: rgba(255,255,255,0.1);
+            border-radius: 10px; cursor: pointer; position: relative;
+        }
+
+        .progress-fill {
+            height: 100%; background: var(--accent);
+            width: 0%; border-radius: 10px;
+        }
+
+        .hidden-iframe { position: absolute; top: -9999px; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between py-16 px-6">
+
+    <!-- Entry Screen -->
+    <div id="overlay">
+        <h1 class="hindi-title text-4xl mb-8 opacity-70">ट्रक वाला</h1>
+        <button class="enter-btn" onclick="enterSite()">कदम रखें</button>
+    </div>
+
+    <div class="bg-illustration" id="bg"></div>
+    <div class="noise"></div>
+    <div class="vignette"></div>
+
+    <!-- Title -->
+    <div class="text-center mt-10">
+        <h1 class="hindi-title text-7xl md:text-9xl mb-2 select-none">ट्रक वाला</h1>
+        <p class="text-white/30 text-xs md:text-sm tracking-[0.6em] uppercase font-light">
+            Midnight Highway • Memories
+        </p>
+    </div>
+
+    <!-- YouTube API Hidden Container -->
+    <div id="youtube-player" class="hidden-iframe"></div>
+
+    <!-- Music Player -->
+    <div class="player-card w-full max-w-sm p-8 transition-all hover:scale-[1.02]">
+        <div class="flex items-center space-x-5 mb-8">
+            <img id="album-art" src="" class="w-16 h-16 object-cover rounded-xl shadow-lg border border-white/10">
+            <div class="flex-1 min-w-0">
+                <h2 id="song-title" class="text-white text-base font-bold truncate">Radio Tuning...</h2>
+                <p id="artist-name" class="text-white/40 text-xs truncate mt-1">Arijit Singh & More</p>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="progress-bar" id="progress-container">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <div class="flex items-center justify-evenly">
+                <button onclick="prevSong()" class="text-white/50 hover:text-white transition">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M208,40V216a8,8,0,0,1-12.48,6.64L72,149.33V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0v66.67L195.52,33.36A8,8,0,0,1,208,40Z"></path></svg>
+                </button>
+
+                <button onclick="togglePlay()" id="play-btn" class="bg-white text-black p-4 rounded-full hover:scale-110 shadow-2xl transition">
+                    <svg id="play-icon" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.75a16,16,0,0,1-16.2.3,15.86,15.86,0,0,1-8.12-13.81V40a15.86,15.86,0,0,1,8.12-13.81,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg>
+                </button>
+
+                <button onclick="nextSong()" class="text-white/50 hover:text-white transition">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M200,40V216a8,8,0,0,1-16,0V149.33L60.48,222.64A8,8,0,0,1,48,216V40a8,8,0,0,1,12.48-6.64L184,106.67V40a8,8,0,0,1,16,0Z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        const playlist = [
+            { id: 'zFYg6jz-EWY', title: 'Best of Arijit Singh Mix', artist: 'Highway Drive', thumb: 'https://i.ytimg.com/vi/zFYg6jz-EWY/hqdefault.jpg' },
+            { id: 'v0Gu7ZIs774', title: 'Lag Jaa Gale', artist: 'Lata Mangeshkar', thumb: 'https://i.ytimg.com/vi/v0Gu7ZIs774/hqdefault.jpg' },
+            { id: 'OMp68vO6298', title: 'Humein Tumse Pyar Kitna', artist: 'Kishore Kumar', thumb: 'https://i.ytimg.com/vi/OMp68vO6298/hqdefault.jpg' },
+            { id: 'O6v_H69P688', title: 'Agar Tum Saath Ho', artist: 'Arijit & Alka', thumb: 'https://i.ytimg.com/vi/O6v_H69P688/hqdefault.jpg' },
+            { id: 'mDUM6WfXqSg', title: 'Pal Pal Dil Ke Paas', artist: 'Kishore Kumar', thumb: 'https://i.ytimg.com/vi/mDUM6WfXqSg/hqdefault.jpg' }
+        ];
+
+        let player;
+        let currentIndex = 0;
+        let isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0',
+                videoId: playlist[currentIndex].id,
+                playerVars: { 
+                    'autoplay': 0, 
+                    'controls': 0, 
+                    'showinfo': 0,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
+            });
+        }
+
+        function onPlayerReady() {
+            updateUI();
+            setInterval(updateProgressBar, 1000);
+        }
+
+        function enterSite() {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none';
+                togglePlay(); // Music starts here
+            }, 1000);
+        }
+
+        function updateUI() {
+            const song = playlist[currentIndex];
+            document.getElementById('song-title').innerText = song.title;
+            document.getElementById('artist-name').innerText = song.artist;
+            document.getElementById('album-art').src = song.thumb;
+            document.getElementById('bg').style.transform = `scale(1.1) rotate(${Math.random() * 2 - 1}deg)`;
+        }
+
+        function togglePlay() {
+            const icon = document.getElementById('play-icon');
+            if (isPlaying) {
+                player.pauseVideo();
+                icon.innerHTML = '<path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.75a16,16,0,0,1-16.2.3,15.86,15.86,0,0,1-8.12-13.81V40a15.86,15.86,0,0,1,8.12-13.81,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path>';
+            } else {
+                player.playVideo();
+                icon.innerHTML = '<path d="M208,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h32A16,16,0,0,1,208,48ZM96,32H64A16,16,0,0,0,48,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"></path>';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function nextSong() {
+            currentIndex = (currentIndex + 1) % playlist.length;
+            player.loadVideoById(playlist[currentIndex].id);
+            updateUI();
+            if(!isPlaying) isPlaying = true;
+        }
+
+        function prevSong() {
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            player.loadVideoById(playlist[currentIndex].id);
+            updateUI();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) nextSong();
+        }
+
+        function onPlayerError(e) {
+            console.log("Error loading video, skipping...");
+            nextSong();
+        }
+
+        function updateProgressBar() {
+            if (player && player.getCurrentTime) {
+                const duration = player.getDuration();
+                if (duration > 0) {
+                    const progress = (player.getCurrentTime() / duration) * 100;
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                }
+            }
+        }
+
+        document.getElementById('progress-container').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            player.seekTo(pos * player.getDuration());
+        });
+    </script>
 </body>
 </html>
