@@ -1,356 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkSwift | Analytics & Shortener</title>
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>पुराने नगमे</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --primary-light: #818cf8;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --success: #10b981;
-            --danger: #ef4444;
-            --radius: 16px;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      background: #111;
+      color: white;
+    }
 
-        [data-theme="dark"] {
-            --bg: #020617;
-            --card: #0f172a;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #1e293b;
-        }
+    /* Background Image */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1974') center/cover no-repeat;
+      filter: brightness(0.65);
+      z-index: 0;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+    /* Soft vignette */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
 
-        /* Instant Redirect Overlay */
-        #redirecting {
-            position: fixed; inset: 0; background: #fff; z-index: 10000;
-            display: none; align-items: center; justify-content: center; font-weight: 600;
-        }
-        [data-theme="dark"] #redirecting { background: #020617; }
+    /* Main Title */
+    .title {
+      position: absolute;
+      top: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+    }
 
-        /* Layout */
-        .app-shell { display: none; min-height: 100vh; } /* Hidden by default to prevent glitch */
-        
-        .sidebar {
-            width: 280px; height: 100vh; position: sticky; top: 0;
-            background: var(--card); border-right: 1px solid var(--border);
-            padding: 2rem 1.5rem; display: flex; flex-direction: column;
-        }
+    .title h1 {
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      line-height: 1.1;
+    }
 
-        .main-content { flex: 1; padding: 2.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .title p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      opacity: 0.85;
+      letter-spacing: 1px;
+    }
 
-        /* UI Elements */
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 3rem; letter-spacing: -1px; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
-        .stat-card { 
-            background: var(--card); padding: 1.5rem; border-radius: var(--radius); 
-            border: 1px solid var(--border); box-shadow: var(--shadow);
-            transition: transform 0.2s;
-        }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
-        .stat-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; }
+    /* Player */
+    .player {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(520px, 92%);
+      background: rgba(20, 20, 20, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 20;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
 
-        .glass-card {
-            background: var(--card); border-radius: var(--radius); padding: 2rem;
-            border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 2rem;
-        }
+    .album-art {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #333;
+      flex-shrink: 0;
+    }
 
-        /* Form */
-        .input-group { display: flex; gap: 1rem; background: var(--bg); padding: 0.5rem; border-radius: 12px; border: 1px solid var(--border); }
-        .input-group input { 
-            flex: 1; background: transparent; border: none; padding: 0.75rem; 
-            color: var(--text); outline: none; font-size: 0.95rem;
-        }
-        
-        .btn { 
-            padding: 0.75rem 1.5rem; border-radius: 10px; border: none; 
-            font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px;
-        }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-light); }
-        .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-        .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+    .info {
+      flex: 1;
+      min-width: 0;
+    }
 
-        /* Table */
-        .table-wrapper { width: 100%; overflow-x: auto; margin-top: 1.5rem; }
-        table { width: 100%; border-collapse: collapse; min-width: 800px; }
-        th { text-align: left; padding: 1rem; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-        td { padding: 1.25rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-        
-        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
-        .badge-code { background: rgba(79, 70, 229, 0.1); color: var(--primary); font-family: monospace; font-size: 0.9rem; }
+    .song-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-        /* Modal */
-        .modal-overlay { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
-            display: none; align-items: center; justify-content: center; z-index: 1000;
-        }
-        .modal { background: var(--card); padding: 2.5rem; border-radius: var(--radius); width: 100%; max-width: 500px; border: 1px solid var(--border); }
+    .artist {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 3px;
+    }
 
-        /* Toast */
-        #toast { 
-            position: fixed; bottom: 2rem; right: 2rem; background: var(--text); color: var(--bg);
-            padding: 1rem 2rem; border-radius: 10px; display: none; animation: slideUp 0.3s; z-index: 10000;
-        }
-        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        @media (max-width: 900px) {
-            .sidebar { display: none; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .input-group { flex-direction: column; }
-        }
-    </style>
+    .btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .play-btn {
+      background: white;
+      color: #111;
+      font-size: 1.2rem;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.08);
+      background: #f0f0f0;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 0 0 24px 24px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #ff4d4d;
+      transition: width 0.1s linear;
+    }
+
+    /* Hidden YouTube player */
+    #yt-player {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  </style>
 </head>
 <body>
 
-    <div id="redirecting">🚀 Redirecting...</div>
+  <div class="bg"></div>
+  <div class="vignette"></div>
 
-    <div class="app-shell" id="app">
-        <div style="display: flex;">
-            <aside class="sidebar">
-                <div class="logo">LinkSwift.</div>
-                <nav style="flex: 1">
-                    <div style="padding: 0.8rem 1rem; background: rgba(79, 70, 229, 0.1); color: var(--primary); border-radius: 10px; font-weight: 600;">
-                        📊 Dashboard
-                    </div>
-                </nav>
-                <button class="btn btn-ghost" onclick="toggleTheme()" id="themeToggle">🌙 Dark Mode</button>
-            </aside>
+  <div class="title">
+    <h1>पुराने नगमे</h1>
+    <p>सदाबहार यादें • Old Hindi Classics</p>
+  </div>
 
-            <main class="main-content">
-                <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-label">Total Links</div><div class="stat-value" id="count-links">0</div></div>
-                    <div class="stat-card"><div class="stat-label">Total Clicks</div><div class="stat-value" id="count-clicks">0</div></div>
-                    <div class="stat-card"><div class="stat-label">System Status</div><div class="stat-value" style="color: var(--success); font-size: 1.2rem;">● Active</div></div>
-                </div>
-
-                <div class="glass-card">
-                    <h2 style="margin-bottom: 1.5rem; letter-spacing: -0.5px;">Shorten a new URL</h2>
-                    <div class="input-group">
-                        <input type="url" id="url-input" placeholder="Paste your long link here...">
-                        <input type="text" id="code-input" placeholder="Custom code (Optional)" style="max-width: 180px; border-left: 1px solid var(--border)">
-                        <button class="btn btn-primary" onclick="createLink()">Create Link</button>
-                    </div>
-                </div>
-
-                <div class="glass-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h2 style="letter-spacing: -0.5px;">Recent Links</h2>
-                        <input type="text" id="search" placeholder="Search links..." oninput="renderTable()" 
-                               style="padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
-                    </div>
-                    
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Short Code</th>
-                                    <th>Destination</th>
-                                    <th>Clicks</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="link-table"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </main>
-        </div>
+  <!-- Player UI -->
+  <div class="player">
+    <img src="https://i.ytimg.com/vi/8Yb5Y5Q5Z5Q/hqdefault.jpg" class="album-art" id="albumArt" alt="album">
+    
+    <div class="info">
+      <div class="song-name" id="songName">O Mere Dil Ke Chain</div>
+      <div class="artist" id="artist">Kishore Kumar</div>
     </div>
 
-    <!-- Edit Modal -->
-    <div class="modal-overlay" id="editModal">
-        <div class="modal">
-            <h2 style="margin-bottom: 0.5rem;">Edit Destination</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                Editing for: <span id="display-code" class="badge badge-code"></span>
-            </p>
-            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">NEW ORIGINAL URL</label>
-            <input type="url" id="edit-url" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
-            
-            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button class="btn btn-primary" style="flex: 1" id="save-btn">Save Changes</button>
-                <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
+    <div class="controls">
+      <button class="btn" onclick="prevSong()">⏮</button>
+      <button class="btn play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+      <button class="btn" onclick="nextSong()">⏭</button>
     </div>
 
-    <div id="toast"></div>
+    <div class="progress-container" onclick="seek(event)">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
 
-    <script>
-        const configMain = { 
-            apiKey: "AIzaSyDzZf-VbpRE65xIhAqObqKECucp9Pp2EDg", 
-            authDomain: "app-stor-f8cd2.firebaseapp.com", 
-            databaseURL: "https://app-stor-f8cd2-default-rtdb.firebaseio.com", 
-            projectId: "app-stor-f8cd2" 
-        };
+  <!-- Hidden YouTube Player -->
+  <div id="yt-player"></div>
 
-        firebase.initializeApp(configMain);
-        const db = firebase.database();
+  <script>
+    // ====== PLAYLIST (YouTube Video IDs) ======
+    // Change these IDs with any YouTube songs you want
+    const playlist = [
+      {
+        id: "8Yb5Y5Q5Z5Q", // example - replace with real IDs
+        title: "O Mere Dil Ke Chain",
+        artist: "Kishore Kumar",
+        thumb: "https://i.ytimg.com/vi/8Yb5Y5Q5Z5Q/hqdefault.jpg"
+      },
+      {
+        id: "yJg-Y5byMMw",
+        title: "Tere Bina Zindagi Se",
+        artist: "Kishore Kumar & Lata",
+        thumb: "https://i.ytimg.com/vi/yJg-Y5byMMw/hqdefault.jpg"
+      },
+      {
+        id: "lW1N3nB0x0A",
+        title: "Pal Pal Dil Ke Paas",
+        artist: "Kishore Kumar",
+        thumb: "https://i.ytimg.com/vi/lW1N3nB0x0A/hqdefault.jpg"
+      },
+      {
+        id: "5Eqb_-j3FDA",
+        title: "Chura Liya Hai Tumne",
+        artist: "Asha Bhosle & R.D. Burman",
+        thumb: "https://i.ytimg.com/vi/5Eqb_-j3FDA/hqdefault.jpg"
+      },
+      {
+        id: "K7Z7b8c8b8c", // replace this
+        title: "Ek Ajnabee Haseena Se",
+        artist: "Kishore Kumar",
+        thumb: "https://i.ytimg.com/vi/K7Z7b8c8b8c/hqdefault.jpg"
+      }
+    ];
 
-        /** 1. INSTANT REDIRECT LOGIC **/
-        (async function checkRedirect() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('s');
-            
-            if (code) {
-                // Show redirect screen immediately
-                document.getElementById('redirecting').style.display = 'flex';
-                
-                try {
-                    const snapshot = await db.ref('links/' + code).once('value');
-                    const data = snapshot.val();
-                    
-                    if (data && data.originalUrl) {
-                        // Background update click count
-                        db.ref('links/' + code).update({ clicks: (data.clicks || 0) + 1 });
-                        // Immediate redirect
-                        window.location.href = data.originalUrl;
-                    } else {
-                        alert("Short link not found.");
-                        window.location.href = window.location.pathname; // Go back to dashboard
-                    }
-                } catch (e) {
-                    console.error(e);
-                }
-            } else {
-                // No redirect code, show the app
-                document.getElementById('app').style.display = 'block';
-                loadData();
-            }
-        })();
+    let currentIndex = 0;
+    let player;
+    let isPlaying = false;
 
-        /** 2. DASHBOARD LOGIC **/
-        let linksArray = [];
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
 
-        async function createLink() {
-            const url = document.getElementById('url-input').value.trim();
-            let code = document.getElementById('code-input').value.trim();
-
-            if (!url.startsWith('http')) return notify("Please enter a valid URL (with http://)", "danger");
-            if (!code) code = Math.random().toString(36).substring(2, 7).toUpperCase();
-
-            const check = await db.ref('links/' + code).once('value');
-            if (check.exists()) return notify("Code already exists!", "danger");
-
-            const newLink = {
-                shortCode: code,
-                originalUrl: url,
-                clicks: 0,
-                updatedAt: Date.now()
-            };
-
-            await db.ref('links/' + code).set(newLink);
-            notify("Link created successfully!");
-            document.getElementById('url-input').value = '';
-            document.getElementById('code-input').value = '';
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '0',
+        width: '0',
+        videoId: playlist[0].id,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1
+        },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
         }
+      });
+    }
 
-        async function updateUrl(code) {
-            const newUrl = document.getElementById('edit-url').value.trim();
-            if (!newUrl.startsWith('http')) return notify("Invalid URL", "danger");
+    function onPlayerReady() {
+      updateUI();
+    }
 
-            await db.ref('links/' + code).update({
-                originalUrl: newUrl,
-                updatedAt: Date.now()
-            });
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        nextSong();
+      }
+      if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        document.getElementById('playBtn').innerHTML = '⏸';
+        updateProgress();
+      }
+      if (event.data === YT.PlayerState.PAUSED) {
+        isPlaying = false;
+        document.getElementById('playBtn').innerHTML = '▶';
+      }
+    }
 
-            notify("Updated Successfully!");
-            closeModal();
-        }
+    function togglePlay() {
+      if (!player) return;
+      if (isPlaying) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    }
 
-        function loadData() {
-            db.ref('links').on('value', (snap) => {
-                const data = snap.val();
-                linksArray = data ? Object.values(data) : [];
-                linksArray.sort((a,b) => b.updatedAt - a.updatedAt);
-                renderTable();
-                updateStats();
-            });
-        }
+    function nextSong() {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      loadSong();
+    }
 
-        function renderTable() {
-            const table = document.getElementById('link-table');
-            const query = document.getElementById('search').value.toLowerCase();
-            const filtered = linksArray.filter(l => l.shortCode.toLowerCase().includes(query) || l.originalUrl.toLowerCase().includes(query));
+    function prevSong() {
+      currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+      loadSong();
+    }
 
-            table.innerHTML = filtered.map(l => `
-                <tr>
-                    <td><span class="badge badge-code">${l.shortCode}</span></td>
-                    <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                        <a href="${l.originalUrl}" target="_blank" style="color: var(--primary); text-decoration: none;">${l.originalUrl}</a>
-                    </td>
-                    <td><strong>${l.clicks}</strong></td>
-                    <td>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn btn-ghost" style="padding: 5px 12px;" onclick="copyLink('${l.shortCode}')">Copy</button>
-                            <button class="btn btn-ghost" style="padding: 5px 12px;" onclick="openEdit('${l.shortCode}', '${l.originalUrl}')">Edit</button>
-                            <button class="btn btn-ghost" style="padding: 5px 12px; color: var(--danger);" onclick="deleteLink('${l.shortCode}')">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
+    function loadSong() {
+      const song = playlist[currentIndex];
+      player.loadVideoById(song.id);
+      updateUI();
+      player.playVideo();
+    }
 
-        function updateStats() {
-            document.getElementById('count-links').innerText = linksArray.length;
-            document.getElementById('count-clicks').innerText = linksArray.reduce((acc, curr) => acc + (curr.clicks || 0), 0);
-        }
+    function updateUI() {
+      const song = playlist[currentIndex];
+      document.getElementById('songName').textContent = song.title;
+      document.getElementById('artist').textContent = song.artist;
+      document.getElementById('albumArt').src = song.thumb;
+    }
 
-        function copyLink(code) {
-            const full = window.location.origin + window.location.pathname + "?s=" + code;
-            navigator.clipboard.writeText(full);
-            notify("Link copied to clipboard!");
-        }
+    function updateProgress() {
+      if (!player || !isPlaying) return;
+      const current = player.getCurrentTime();
+      const duration = player.getDuration();
+      if (duration > 0) {
+        const percent = (current / duration) * 100;
+        document.getElementById('progress').style.width = percent + '%';
+      }
+      requestAnimationFrame(updateProgress);
+    }
 
-        function openEdit(code, url) {
-            document.getElementById('display-code').innerText = code;
-            document.getElementById('edit-url').value = url;
-            document.getElementById('editModal').style.display = 'flex';
-            document.getElementById('save-btn').onclick = () => updateUrl(code);
-        }
-
-        function closeModal() { document.getElementById('editModal').style.display = 'none'; }
-
-        async function deleteLink(code) {
-            if (confirm("Delete this link permanently?")) {
-                await db.ref('links/' + code).remove();
-                notify("Deleted successfully");
-            }
-        }
-
-        function notify(msg) {
-            const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.style.display = 'block';
-            setTimeout(() => t.style.display = 'none', 3000);
-        }
-
-        function toggleTheme() {
-            const current = document.body.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', next);
-            document.getElementById('themeToggle').innerText = next === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-        }
-    </script>
+    function seek(e) {
+      if (!player) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      const duration = player.getDuration();
+      player.seekTo(duration * percent, true);
+    }
+  </script>
 </body>
 </html>
