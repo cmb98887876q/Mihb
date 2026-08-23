@@ -7,137 +7,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Martel:wght@900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent: #ff4d4d;
-            --glass: rgba(10, 10, 10, 0.85);
-        }
-
-        body, html {
-            margin: 0; padding: 0; height: 100%; overflow: hidden;
-            background-color: #000; font-family: 'Poppins', sans-serif;
-        }
-
-        /* Full Screen Background */
-        .bg-illustration {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1590400037130-9753c150046b?q=80&w=2070&auto=format&fit=crop'); 
-            background-size: cover; background-position: center;
-            z-index: -2; transition: transform 20s ease-in-out;
-            filter: contrast(1.1) brightness(0.7);
-        }
-
-        /* Enter Overlay - Needed for browser autoplay policy */
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 100; display: flex;
-            flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 1s ease;
-        }
-
-        .enter-btn {
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 15px 40px; color: white; border-radius: 50px;
-            letter-spacing: 4px; text-transform: uppercase; font-size: 14px;
-            cursor: pointer; transition: all 0.3s;
-            background: transparent;
-        }
-
-        .enter-btn:hover {
-            background: white; color: black;
-            box-shadow: 0 0 30px rgba(255,255,255,0.2);
-        }
-
-        /* Film Grain */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.06; pointer-events: none;
-            background: url('https://media.giphy.com/media/oEI9uWUic9VKM/giphy.gif');
-        }
-
-        .vignette {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%);
-            z-index: -1; pointer-events: none;
-        }
-
-        .hindi-title {
-            font-family: 'Martel', serif;
-            text-shadow: 0px 5px 30px rgba(0,0,0,1);
-            color: #fefefe;
-        }
-
-        .player-card {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 32px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-        }
-
-        .progress-bar {
-            height: 4px; background: rgba(255,255,255,0.1);
-            border-radius: 10px; cursor: pointer; position: relative;
-        }
-
-        .progress-fill {
-            height: 100%; background: var(--accent);
-            width: 0%; border-radius: 10px;
-        }
-
+        :root { --accent: #ff4d4d; --glass: rgba(10, 10, 10, 0.85); }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #000; font-family: 'Poppins', sans-serif; }
+        .bg-illustration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1590400037130-9753c150046b?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; z-index: -2; transition: transform 20s ease-in-out; filter: brightness(0.6); }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease; }
+        .enter-btn { border: 1px solid rgba(255,255,255,0.3); padding: 15px 45px; color: white; border-radius: 50px; letter-spacing: 4px; text-transform: uppercase; font-size: 14px; cursor: pointer; background: transparent; }
+        .enter-btn:hover { background: white; color: black; box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+        .hindi-title { font-family: 'Martel', serif; text-shadow: 0px 5px 30px rgba(0,0,0,1); color: #fefefe; }
+        .player-card { background: var(--glass); backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 10px; }
         .hidden-iframe { position: absolute; top: -9999px; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-between py-16 px-6">
 
-    <!-- Entry Screen -->
     <div id="overlay">
         <h1 class="hindi-title text-4xl mb-8 opacity-70">ट्रक वाला</h1>
-        <button class="enter-btn" onclick="enterSite()">कदम रखें</button>
+        <button class="enter-btn" onclick="enterSite()">सफर शुरू करें</button>
+        <p class="text-white/30 text-[10px] mt-6 tracking-widest uppercase">Best experienced on mobile chrome</p>
     </div>
 
     <div class="bg-illustration" id="bg"></div>
-    <div class="noise"></div>
-    <div class="vignette"></div>
 
-    <!-- Title -->
     <div class="text-center mt-10">
         <h1 class="hindi-title text-7xl md:text-9xl mb-2 select-none">ट्रक वाला</h1>
-        <p class="text-white/30 text-xs md:text-sm tracking-[0.6em] uppercase font-light">
-            Midnight Highway • Memories
-        </p>
+        <p class="text-white/30 text-xs md:text-sm tracking-[0.6em] uppercase font-light">Highway Nostalgia</p>
     </div>
 
-    <!-- YouTube API Hidden Container -->
     <div id="youtube-player" class="hidden-iframe"></div>
 
-    <!-- Music Player -->
-    <div class="player-card w-full max-w-sm p-8 transition-all hover:scale-[1.02]">
+    <div class="player-card w-full max-w-sm p-8 transition-all">
         <div class="flex items-center space-x-5 mb-8">
             <img id="album-art" src="" class="w-16 h-16 object-cover rounded-xl shadow-lg border border-white/10">
             <div class="flex-1 min-w-0">
                 <h2 id="song-title" class="text-white text-base font-bold truncate">Radio Tuning...</h2>
-                <p id="artist-name" class="text-white/40 text-xs truncate mt-1">Arijit Singh & More</p>
+                <p id="artist-name" class="text-white/40 text-xs truncate mt-1">Nostalgic Hits</p>
             </div>
         </div>
 
         <div class="space-y-6">
-            <div class="progress-bar" id="progress-container">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-
+            <div class="progress-bar" id="progress-container"><div class="progress-fill" id="progress-fill"></div></div>
             <div class="flex items-center justify-evenly">
-                <button onclick="prevSong()" class="text-white/50 hover:text-white transition">
-                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M208,40V216a8,8,0,0,1-12.48,6.64L72,149.33V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0v66.67L195.52,33.36A8,8,0,0,1,208,40Z"></path></svg>
-                </button>
-
-                <button onclick="togglePlay()" id="play-btn" class="bg-white text-black p-4 rounded-full hover:scale-110 shadow-2xl transition">
-                    <svg id="play-icon" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.75a16,16,0,0,1-16.2.3,15.86,15.86,0,0,1-8.12-13.81V40a15.86,15.86,0,0,1,8.12-13.81,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg>
-                </button>
-
-                <button onclick="nextSong()" class="text-white/50 hover:text-white transition">
-                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M200,40V216a8,8,0,0,1-16,0V149.33L60.48,222.64A8,8,0,0,1,48,216V40a8,8,0,0,1,12.48-6.64L184,106.67V40a8,8,0,0,1,16,0Z"></path></svg>
-                </button>
+                <button onclick="prevSong()" class="text-white/50 hover:text-white transition"><svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M208,40V216a8,8,0,0,1-12.48,6.64L72,149.33V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0v66.67L195.52,33.36A8,8,0,0,1,208,40Z"></path></svg></button>
+                <button onclick="togglePlay()" id="play-btn" class="bg-white text-black p-4 rounded-full hover:scale-110 shadow-2xl transition"><svg id="play-icon" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.75a16,16,0,0,1-16.2.3,15.86,15.86,0,0,1-8.12-13.81V40a15.86,15.86,0,0,1,8.12-13.81,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg></button>
+                <button onclick="nextSong()" class="text-white/50 hover:text-white transition"><svg width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M200,40V216a8,8,0,0,1-16,0V149.33L60.48,222.64A8,8,0,0,1,48,216V40a8,8,0,0,1,12.48-6.64L184,106.67V40a8,8,0,0,1,16,0Z"></path></svg></button>
             </div>
         </div>
     </div>
@@ -147,44 +61,40 @@
         const playlist = [
             { id: 'zFYg6jz-EWY', title: 'Best of Arijit Singh Mix', artist: 'Highway Drive', thumb: 'https://i.ytimg.com/vi/zFYg6jz-EWY/hqdefault.jpg' },
             { id: 'v0Gu7ZIs774', title: 'Lag Jaa Gale', artist: 'Lata Mangeshkar', thumb: 'https://i.ytimg.com/vi/v0Gu7ZIs774/hqdefault.jpg' },
-            { id: 'OMp68vO6298', title: 'Humein Tumse Pyar Kitna', artist: 'Kishore Kumar', thumb: 'https://i.ytimg.com/vi/OMp68vO6298/hqdefault.jpg' },
-            { id: 'O6v_H69P688', title: 'Agar Tum Saath Ho', artist: 'Arijit & Alka', thumb: 'https://i.ytimg.com/vi/O6v_H69P688/hqdefault.jpg' },
-            { id: 'mDUM6WfXqSg', title: 'Pal Pal Dil Ke Paas', artist: 'Kishore Kumar', thumb: 'https://i.ytimg.com/vi/mDUM6WfXqSg/hqdefault.jpg' }
+            { id: 'OMp68vO6298', title: 'Humein Tumse Pyar Kitna', artist: 'Kishore Kumar', thumb: 'https://i.ytimg.com/vi/OMp68vO6298/hqdefault.jpg' }
         ];
 
-        let player;
-        let currentIndex = 0;
-        let isPlaying = false;
+        let player, currentIndex = 0, isPlaying = false;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0', width: '0',
-                videoId: playlist[currentIndex].id,
-                playerVars: { 
-                    'autoplay': 0, 
-                    'controls': 0, 
-                    'showinfo': 0,
-                    'rel': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': onPlayerError
-                }
+                height: '0', width: '0', videoId: playlist[currentIndex].id,
+                playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1 },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
             });
         }
 
-        function onPlayerReady() {
-            updateUI();
-            setInterval(updateProgressBar, 1000);
-        }
+        function onPlayerReady() { updateUI(); setInterval(updateProgressBar, 1000); }
 
         function enterSite() {
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('overlay').style.display = 'none';
-                togglePlay(); // Music starts here
-            }, 1000);
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; togglePlay(); }, 1000);
+        }
+
+        // Media Session API: Makes it play like a native app on lock screen
+        function updateMediaSession() {
+            if ('mediaSession' in navigator) {
+                const song = playlist[currentIndex];
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: song.title,
+                    artist: song.artist,
+                    artwork: [ { src: song.thumb, sizes: '512x512', type: 'image/jpeg' } ]
+                });
+                navigator.mediaSession.setActionHandler('play', togglePlay);
+                navigator.mediaSession.setActionHandler('pause', togglePlay);
+                navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+                navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+            }
         }
 
         function updateUI() {
@@ -193,6 +103,7 @@
             document.getElementById('artist-name').innerText = song.artist;
             document.getElementById('album-art').src = song.thumb;
             document.getElementById('bg').style.transform = `scale(1.1) rotate(${Math.random() * 2 - 1}deg)`;
+            updateMediaSession();
         }
 
         function togglePlay() {
@@ -207,43 +118,10 @@
             isPlaying = !isPlaying;
         }
 
-        function nextSong() {
-            currentIndex = (currentIndex + 1) % playlist.length;
-            player.loadVideoById(playlist[currentIndex].id);
-            updateUI();
-            if(!isPlaying) isPlaying = true;
-        }
-
-        function prevSong() {
-            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-            player.loadVideoById(playlist[currentIndex].id);
-            updateUI();
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.ENDED) nextSong();
-        }
-
-        function onPlayerError(e) {
-            console.log("Error loading video, skipping...");
-            nextSong();
-        }
-
-        function updateProgressBar() {
-            if (player && player.getCurrentTime) {
-                const duration = player.getDuration();
-                if (duration > 0) {
-                    const progress = (player.getCurrentTime() / duration) * 100;
-                    document.getElementById('progress-fill').style.width = progress + '%';
-                }
-            }
-        }
-
-        document.getElementById('progress-container').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            player.seekTo(pos * player.getDuration());
-        });
+        function nextSong() { currentIndex = (currentIndex + 1) % playlist.length; player.loadVideoById(playlist[currentIndex].id); updateUI(); }
+        function prevSong() { currentIndex = (currentIndex - 1 + playlist.length) % playlist.length; player.loadVideoById(playlist[currentIndex].id); updateUI(); }
+        function onPlayerStateChange(event) { if (event.data == YT.PlayerState.ENDED) nextSong(); }
+        function updateProgressBar() { if (player && player.getDuration) { const progress = (player.getCurrentTime() / player.getDuration()) * 100; document.getElementById('progress-fill').style.width = progress + '%'; } }
     </script>
 </body>
 </html>
