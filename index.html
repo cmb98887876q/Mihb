@@ -203,12 +203,13 @@
   }
 
   .anim-number {
-    font-size: 120px;
+    font-size: 140px;
     font-weight: 800;
     color: #fff;
     opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(0.4);
+    transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 5;
   }
 
   .anim-number.show {
@@ -216,15 +217,19 @@
     transform: scale(1);
   }
 
+  /* YouTube-style 16:9 container */
   .anim-image-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: 90%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
     opacity: 0;
-    transform: scale(1.05);
-    transition: all 0.8s ease;
+    transform: scale(1.04);
+    transition: all 0.7s ease;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.7);
   }
 
   .anim-image-container.show {
@@ -233,31 +238,34 @@
   }
 
   .anim-image-container img {
-    max-width: 90%;
-    max-height: 75vh;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
+  /* Name exactly in the CENTER of the image */
   .anim-name {
     position: absolute;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 600;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 800;
     color: #fff;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6);
+    letter-spacing: 3px;
+    text-align: center;
     opacity: 0;
-    transform: translateY(20px);
     transition: all 0.5s ease;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .anim-name.show {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%) scale(1);
   }
 
   .close-btn {
@@ -329,8 +337,8 @@
   <div class="anim-number" id="animNumber"></div>
   <div class="anim-image-container" id="animImageBox">
     <img id="animImage" src="">
+    <div class="anim-name" id="animName"></div>
   </div>
-  <div class="anim-name" id="animName"></div>
 </div>
 
 <script>
@@ -338,14 +346,12 @@
   let isAnimating = false;
   let timeouts = [];
 
-  // Duration slider
   const durationSlider = document.getElementById('duration');
   const durationValue = document.getElementById('durationValue');
   durationSlider.addEventListener('input', () => {
     durationValue.textContent = durationSlider.value + 's';
   });
 
-  // File handling
   function setupUpload(boxId, fileId, previewId, labelId, setImg) {
     const box = document.getElementById(boxId);
     const fileInput = document.getElementById(fileId);
@@ -357,7 +363,6 @@
       if (file) loadImage(file, preview, label, setImg);
     });
 
-    // Drag & Drop
     box.addEventListener('dragover', (e) => {
       e.preventDefault();
       box.classList.add('dragover');
@@ -387,7 +392,6 @@
   setupUpload('box1', 'file1', 'preview1', 'label1', (src) => img1 = src);
   setupUpload('box2', 'file2', 'preview2', 'label2', (src) => img2 = src);
 
-  // Animation
   function startAnimation() {
     if (!img1 || !img2) {
       alert('Please upload both images first!');
@@ -404,53 +408,53 @@
     const nameEl = document.getElementById('animName');
 
     overlay.classList.add('active');
-
-    // Clear previous
     clearTimeouts();
+
+    // Reset
     numberEl.classList.remove('show');
     imageBox.classList.remove('show');
     nameEl.classList.remove('show');
 
-    // Step 1: Show number "1"
+    // 1. Show big number "1"
     numberEl.textContent = '1';
-    setTimeout(() => numberEl.classList.add('show'), 50);
+    setTimeout(() => numberEl.classList.add('show'), 40);
 
-    // After 1.2s hide number, show Image 1
+    // 2. Hide number → show Image 1 + name in center
     timeouts.push(setTimeout(() => {
       numberEl.classList.remove('show');
       setTimeout(() => {
         imageEl.src = img1;
-        nameEl.textContent = document.getElementById('name1').value || 'Image 1';
+        nameEl.textContent = document.getElementById('name1').value || 'IMAGE 1';
         imageBox.classList.add('show');
         nameEl.classList.add('show');
-      }, 400);
-    }, 1200));
+      }, 380);
+    }, 1100));
 
-    // After duration → hide Image 1, show number "2"
+    // 3. Hide Image 1 → show number "2"
     timeouts.push(setTimeout(() => {
       imageBox.classList.remove('show');
       nameEl.classList.remove('show');
       setTimeout(() => {
         numberEl.textContent = '2';
         numberEl.classList.add('show');
-      }, 500);
-    }, 1200 + duration));
+      }, 450);
+    }, 1100 + duration));
 
-    // After another 1.2s → show Image 2
+    // 4. Hide number → show Image 2 + name in center
     timeouts.push(setTimeout(() => {
       numberEl.classList.remove('show');
       setTimeout(() => {
         imageEl.src = img2;
-        nameEl.textContent = document.getElementById('name2').value || 'Image 2';
+        nameEl.textContent = document.getElementById('name2').value || 'IMAGE 2';
         imageBox.classList.add('show');
         nameEl.classList.add('show');
-      }, 400);
-    }, 1200 + duration + 1200));
+      }, 380);
+    }, 1100 + duration + 1100));
 
-    // End after Image 2 duration
+    // End
     timeouts.push(setTimeout(() => {
       stopAnimation();
-    }, 1200 + duration + 1200 + duration + 800));
+    }, 1100 + duration + 1100 + duration + 900));
   }
 
   function stopAnimation() {
