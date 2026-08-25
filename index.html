@@ -5,342 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Sequence - YouTube Ready</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  body { background: #0a0a0a; color: #fff; min-height: 100vh; padding: 30px 16px; }
+  .container { max-width: 560px; margin: 0 auto; }
+  h1 { text-align: center; font-size: 26px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 28px; }
 
-  body {
-    background: #0a0a0a;
-    color: #fff;
-    min-height: 100vh;
-    padding: 30px 15px 60px;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-  }
-
-  .subtitle {
-    text-align: center;
-    color: #aaa;
-    font-size: 14px;
-    margin-bottom: 28px;
-  }
-
-  /* ========== IMAGE CARDS ========== */
-  .image-card {
-    background: #141414;
+  .slot {
+    background: #151515;
+    border: 1px solid #2a2a2a;
     border-radius: 14px;
     padding: 16px;
-    margin-bottom: 18px;
-    border: 1px solid #2a2a2a;
+    margin-bottom: 16px;
+    position: relative;
   }
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .card-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #ddd;
-  }
-
+  .slot-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .slot-title { font-weight: 600; font-size: 15px; color: #ddd; }
   .remove-btn {
-    background: #333;
-    border: none;
-    color: #ff6b6b;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #331111; color: #ff6666; border: none; border-radius: 8px;
+    padding: 5px 12px; font-size: 13px; cursor: pointer;
   }
-
-  .remove-btn:hover {
-    background: #444;
-  }
+  .remove-btn:hover { background: #441111; }
 
   .upload-box {
-    background: #1a1a1a;
-    border: 2px dashed #444;
-    border-radius: 12px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
+    background: #1a1a1a; border: 2px dashed #3a3a3a; border-radius: 12px;
+    height: 140px; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; cursor: pointer; position: relative; overflow: hidden;
+    transition: 0.25s;
   }
+  .upload-box:hover, .upload-box.dragover { border-color: #666; background: #222; }
+  .upload-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; }
+  .upload-label { text-align: center; z-index: 1; pointer-events: none; }
+  .upload-label .title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .upload-label .hint { font-size: 13px; color: #777; }
 
-  .upload-box:hover,
-  .upload-box.dragover {
-    border-color: #777;
-  }
-
-  .upload-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .upload-label {
-    text-align: center;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .upload-label .title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .upload-label .hint {
-    font-size: 13px;
-    color: #888;
-  }
-
+  .name-label { margin: 12px 0 6px 2px; font-size: 13px; color: #aaa; font-weight: 600; }
   .name-input {
-    width: 100%;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 11px 14px;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    margin-top: 12px;
+    width: 100%; background: #1a1a1a; border: 1px solid #333; border-radius: 9px;
+    padding: 11px 14px; color: #fff; font-size: 14px; outline: none;
   }
+  .name-input:focus { border-color: #555; }
 
-  .name-input:focus {
-    border-color: #666;
+  .add-btn {
+    width: 100%; padding: 14px; border: 2px dashed #444; border-radius: 12px;
+    background: transparent; color: #aaa; font-size: 15px; font-weight: 600;
+    cursor: pointer; margin-bottom: 24px; transition: 0.2s;
   }
+  .add-btn:hover { border-color: #666; color: #fff; background: #1a1a1a; }
 
-  /* ========== CONTROLS ========== */
   .controls {
-    background: #141414;
-    border-radius: 14px;
-    padding: 20px;
-    margin-top: 10px;
-    border: 1px solid #2a2a2a;
+    background: #151515; border-radius: 14px; padding: 20px; margin-bottom: 20px;
   }
-
-  .duration-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #ccc;
-  }
-
-  .duration-value {
-    font-weight: 600;
-    color: #fff;
-  }
-
+  .duration-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; color: #bbb; }
+  .duration-value { font-weight: 600; color: #fff; }
   input[type="range"] {
-    width: 100%;
-    height: 6px;
-    -webkit-appearance: none;
-    background: #333;
-    border-radius: 3px;
-    outline: none;
-    margin-bottom: 22px;
+    width: 100%; height: 5px; -webkit-appearance: none; background: #333;
+    border-radius: 3px; outline: none; margin-bottom: 22px;
   }
-
   input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    background: #fff;
-    border-radius: 50%;
-    cursor: pointer;
+    -webkit-appearance: none; width: 18px; height: 18px; background: #fff;
+    border-radius: 50%; cursor: pointer;
   }
 
   .btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 11px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.15s, opacity 0.15s;
-    margin-bottom: 10px;
+    width: 100%; padding: 15px; border: none; border-radius: 11px;
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 10px;
+    transition: 0.15s;
   }
+  .btn:active { transform: scale(0.98); }
+  .btn-start { background: #fff; color: #000; }
+  .btn-record { background: #e63939; color: #fff; }
+  .btn-record:hover { background: #ff4d4d; }
+  .btn-reset { background: #2a2a2a; color: #ddd; }
+  .btn-reset:hover { background: #333; }
 
-  .btn:active {
-    transform: scale(0.98);
+  .status { text-align: center; font-size: 13px; color: #888; margin-top: 8px; min-height: 20px; }
+
+  /* ===== ANIMATION / RECORD OVERLAY ===== */
+  #overlay {
+    position: fixed; inset: 0; background: #000; z-index: 9999;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
   }
+  #overlay.active { display: flex; }
 
-  .btn-add {
-    background: #2a2a2a;
-    color: #fff;
-    border: 1px dashed #555;
-  }
-
-  .btn-add:hover {
-    background: #333;
-  }
-
-  .btn-start {
-    background: #fff;
-    color: #000;
-  }
-
-  .btn-start:hover {
-    opacity: 0.92;
-  }
-
-  .btn-reset {
-    background: #333;
-    color: #fff;
-    margin-bottom: 0;
-  }
-
-  .btn-reset:hover {
-    background: #444;
-  }
-
-  /* ========== ANIMATION OVERLAY (YouTube 16:9) ========== */
-  #animationOverlay {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #animationOverlay.active {
-    display: flex;
-  }
-
-  /* Pure 16:9 YouTube frame */
-  .yt-frame {
+  .player-wrap {
     position: relative;
-    width: 100%;
+    width: 90%;
     max-width: 1280px;
-    aspect-ratio: 16 / 9;
-    background: #000;
+    aspect-ratio: 16/9;
+    background: #111;
+    border-radius: 6px;
     overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  }
+
+  #animCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #000;
   }
 
   .anim-number {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(90px, 18vw, 180px);
-    font-weight: 800;
-    color: #fff;
-    opacity: 0;
-    transform: scale(0.35);
-    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    z-index: 5;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.5);
+    font-size: 160px; font-weight: 800; color: #fff; opacity: 0;
+    transition: all 0.5s cubic-bezier(0.22,1,0.36,1); z-index: 5; pointer-events: none;
   }
-
-  .anim-number.show {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .anim-image-box {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transform: scale(1.03);
-    transition: all 0.65s ease;
-  }
-
-  .anim-image-box.show {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .anim-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Name dead center */
-  .anim-name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.88);
-    font-size: clamp(28px, 5.5vw, 70px);
-    font-weight: 800;
-    color: #fff;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.95), 0 0 50px rgba(0,0,0,0.7);
-    letter-spacing: 2px;
-    text-align: center;
-    opacity: 0;
-    transition: all 0.45s ease;
-    white-space: nowrap;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .anim-name.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  .anim-number.show { opacity: 1; transform: translate(-50%,-50%) scale(1); }
 
   .close-btn {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    z-index: 20;
+    position: absolute; top: 18px; right: 18px;
+    background: rgba(255,255,255,0.15); border: none; color: #fff;
+    width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 20;
   }
+  .close-btn:hover { background: rgba(255,255,255,0.25); }
 
-  .close-btn:hover {
-    background: rgba(0,0,0,0.75);
-  }
-
-  .recording-tip {
-    text-align: center;
-    font-size: 12px;
-    color: #666;
-    margin-top: 14px;
+  .recording-badge {
+    position: absolute; top: 18px; left: 18px;
+    background: #e63939; color: #fff; padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; font-weight: 600; display: none; z-index: 20;
   }
 </style>
 </head>
@@ -348,213 +131,226 @@
 
 <div class="container">
   <h1>IMAGE SEQUENCE</h1>
-  <p class="subtitle">YouTube Ready • Add unlimited images</p>
+  <p class="subtitle">YouTube ready • Multi image • Record video</p>
 
-  <div id="imagesContainer">
-    <!-- Image cards will be added here -->
-  </div>
+  <div id="slots"></div>
+
+  <button class="add-btn" onclick="addSlot()">+ Add Image</button>
 
   <div class="controls">
-    <button class="btn btn-add" onclick="addImageCard()">＋ Add Image</button>
-
     <div class="duration-row">
       <span>Image Duration</span>
-      <span class="duration-value" id="durationValue">4s</span>
+      <span class="duration-value" id="durationValue">3.5s</span>
     </div>
-    <input type="range" id="duration" min="2" max="12" value="4" step="0.5">
+    <input type="range" id="duration" min="1.5" max="8" value="3.5" step="0.5">
 
-    <button class="btn btn-start" onclick="startAnimation()">▶ Start Animation</button>
+    <button class="btn btn-start" onclick="startPreview()">▶ Preview Animation</button>
+    <button class="btn btn-record" onclick="startRecording()">● Record Video (YouTube)</button>
     <button class="btn btn-reset" onclick="resetAll()">Reset All</button>
-
-    <p class="recording-tip">
-      Tip: Animation full screen 16:9 hai → OBS / screen recorder se record karke YouTube pe use karo
-    </p>
+    <div class="status" id="status"></div>
   </div>
 </div>
 
-<!-- ANIMATION OVERLAY -->
-<div id="animationOverlay">
-  <button class="close-btn" onclick="stopAnimation()">✕</button>
-  <div class="yt-frame">
+<!-- Overlay -->
+<div id="overlay">
+  <button class="close-btn" onclick="stopEverything()">✕</button>
+  <div class="recording-badge" id="recBadge">● REC</div>
+  <div class="player-wrap">
+    <canvas id="animCanvas" width="1280" height="720"></canvas>
     <div class="anim-number" id="animNumber"></div>
-    <div class="anim-image-box" id="animImageBox">
-      <img id="animImage" src="">
-      <div class="anim-name" id="animName"></div>
-    </div>
   </div>
 </div>
 
 <script>
-  let imageData = []; // {src, name}
-  let isAnimating = false;
+  // ============ STATE ============
+  let slots = [];          // { id, imgSrc, name }
+  let nextId = 1;
+  let isPlaying = false;
+  let isRecording = false;
+  let mediaRecorder = null;
+  let recordedChunks = [];
   let timeouts = [];
-  let cardCount = 0;
+  let animFrameId = null;
 
-  const durationSlider = document.getElementById('duration');
-  const durationValue = document.getElementById('durationValue');
-  durationSlider.addEventListener('input', () => {
-    durationValue.textContent = durationSlider.value + 's';
-  });
+  const canvas = document.getElementById('animCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 1280, H = 720;
 
-  // Create initial 2 cards
-  addImageCard();
-  addImageCard();
+  // ============ UI SLOTS ============
+  function addSlot(prefill = null) {
+    const id = nextId++;
+    const data = prefill || { id, imgSrc: null, name: '' };
+    slots.push(data);
 
-  function addImageCard() {
-    cardCount++;
-    const id = cardCount;
-    const container = document.getElementById('imagesContainer');
-
-    const card = document.createElement('div');
-    card.className = 'image-card';
-    card.id = `card-${id}`;
-    card.innerHTML = `
-      <div class="card-header">
-        <div class="card-title">IMAGE ${id}</div>
-        <button class="remove-btn" onclick="removeCard(${id})" title="Remove">×</button>
+    const div = document.createElement('div');
+    div.className = 'slot';
+    div.id = `slot-${id}`;
+    div.innerHTML = `
+      <div class="slot-header">
+        <div class="slot-title">IMAGE ${slots.length}</div>
+        <button class="remove-btn" onclick="removeSlot(${id})">Remove</button>
       </div>
-      <div class="upload-box" id="box-\( {id}" onclick="document.getElementById('file- \){id}').click()">
+      <div class="upload-box" id="box-${id}">
         <div class="upload-label" id="label-${id}">
-          <div class="title">IMAGE ${id}</div>
-          <div class="hint">Click or drag & drop</div>
+          <div class="title">Click or Drop</div>
+          <div class="hint">PNG / JPG</div>
         </div>
-        <img id="preview-${id}" style="display:none;">
+        <img id="preview-${id}" style="display:none">
         <input type="file" id="file-${id}" accept="image/*" hidden>
       </div>
-      <input type="text" class="name-input" id="name-${id}" placeholder="Name for Image ${id}">
+      <div class="name-label">NAME</div>
+      <input type="text" class="name-input" id="name-\( {id}" placeholder="Character name..." value=" \){data.name || ''}">
     `;
-    container.appendChild(card);
+    document.getElementById('slots').appendChild(div);
 
-    // Setup upload
-    setupUpload(id);
-  }
-
-  function removeCard(id) {
-    const cards = document.querySelectorAll('.image-card');
-    if (cards.length <= 2) {
-      alert('Minimum 2 images required!');
-      return;
-    }
-    document.getElementById(`card-${id}`).remove();
-  }
-
-  function setupUpload(id) {
+    // events
     const box = document.getElementById(`box-${id}`);
     const fileInput = document.getElementById(`file-${id}`);
     const preview = document.getElementById(`preview-${id}`);
     const label = document.getElementById(`label-${id}`);
 
-    fileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) loadImage(file, preview, label, id);
-    });
+    box.onclick = () => fileInput.click();
+    fileInput.onchange = e => {
+      const f = e.target.files[0];
+      if (f) loadImg(f, id, preview, label);
+    };
+    box.ondragover = e => { e.preventDefault(); box.classList.add('dragover'); };
+    box.ondragleave = () => box.classList.remove('dragover');
+    box.ondrop = e => {
+      e.preventDefault(); box.classList.remove('dragover');
+      const f = e.dataTransfer.files[0];
+      if (f && f.type.startsWith('image/')) loadImg(f, id, preview, label);
+    };
 
-    box.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      box.classList.add('dragover');
-    });
-    box.addEventListener('dragleave', () => box.classList.remove('dragover'));
-    box.addEventListener('drop', (e) => {
-      e.preventDefault();
-      box.classList.remove('dragover');
-      const file = e.dataTransfer.files[0];
-      if (file && file.type.startsWith('image/')) {
-        loadImage(file, preview, label, id);
-      }
-    });
+    // name change
+    document.getElementById(`name-${id}`).oninput = e => {
+      const s = slots.find(x => x.id === id);
+      if (s) s.name = e.target.value;
+    };
+
+    updateSlotTitles();
   }
 
-  function loadImage(file, preview, label, id) {
+  function loadImg(file, id, preview, label) {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = e => {
       preview.src = e.target.result;
       preview.style.display = 'block';
       label.style.display = 'none';
-      // store later when starting
+      const s = slots.find(x => x.id === id);
+      if (s) s.imgSrc = e.target.result;
     };
     reader.readAsDataURL(file);
   }
 
-  function collectImages() {
-    imageData = [];
-    const cards = document.querySelectorAll('.image-card');
-    cards.forEach((card, index) => {
-      const id = card.id.split('-')[1];
-      const preview = document.getElementById(`preview-${id}`);
-      const nameInput = document.getElementById(`name-${id}`);
-      if (preview && preview.src && preview.style.display !== 'none') {
-        imageData.push({
-          src: preview.src,
-          name: nameInput.value.trim() || `IMAGE ${index + 1}`
-        });
-      }
-    });
-    return imageData;
+  function removeSlot(id) {
+    if (slots.length <= 1) { alert('At least 1 image chahiye'); return; }
+    slots = slots.filter(s => s.id !== id);
+    document.getElementById(`slot-${id}`).remove();
+    updateSlotTitles();
   }
 
-  function startAnimation() {
-    const images = collectImages();
-    if (images.length < 2) {
-      alert('Please upload at least 2 images!');
+  function updateSlotTitles() {
+    document.querySelectorAll('.slot').forEach((el, i) => {
+      el.querySelector('.slot-title').textContent = `IMAGE ${i + 1}`;
+    });
+  }
+
+  // start with 2 slots
+  addSlot();
+  addSlot();
+
+  // duration
+  const durationSlider = document.getElementById('duration');
+  const durationValue = document.getElementById('durationValue');
+  durationSlider.oninput = () => durationValue.textContent = durationSlider.value + 's';
+
+  // ============ DRAW HELPERS ============
+  function clearCanvas() {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawNumber(num) {
+    clearCanvas();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 220px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(num), W/2, H/2);
+  }
+
+  function drawImageWithName(imgSrc, name) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        clearCanvas();
+        // cover fit (YouTube style)
+        const scale = Math.max(W / img.width, H / img.height);
+        const sw = img.width * scale;
+        const sh = img.height * scale;
+        const ox = (W - sw) / 2;
+        const oy = (H - sh) / 2;
+        ctx.drawImage(img, ox, oy, sw, sh);
+
+        // name in exact center
+        if (name && name.trim()) {
+          ctx.fillStyle = 'rgba(0,0,0,0.35)';
+          ctx.fillRect(0, H/2 - 60, W, 120);
+
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 72px Arial';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.shadowColor = 'rgba(0,0,0,0.9)';
+          ctx.shadowBlur = 18;
+          ctx.fillText(name.trim().toUpperCase(), W/2, H/2);
+          ctx.shadowBlur = 0;
+        }
+        resolve();
+      };
+      img.src = imgSrc;
+    });
+  }
+
+  // ============ PLAY SEQUENCE ============
+  async function playSequence(recordMode = false) {
+    const valid = slots.filter(s => s.imgSrc);
+    if (valid.length < 1) {
+      alert('Kam se kam 1 image upload karo');
       return;
     }
-    if (isAnimating) return;
 
-    isAnimating = true;
-    const duration = parseFloat(durationSlider.value) * 1000;
-    const overlay = document.getElementById('animationOverlay');
-    const numberEl = document.getElementById('animNumber');
-    const imageBox = document.getElementById('animImageBox');
-    const imageEl = document.getElementById('animImage');
-    const nameEl = document.getElementById('animName');
+    isPlaying = true;
+    document.getElementById('overlay').classList.add('active');
+    document.getElementById('status').textContent = recordMode ? 'Recording...' : 'Playing...';
+    if (recordMode) document.getElementById('recBadge').style.display = 'block';
 
-    overlay.classList.add('active');
+    const dur = parseFloat(durationSlider.value) * 1000;
+    const numberTime = 900;
+
     clearTimeouts();
 
-    // Hide number & image initially
-    numberEl.classList.remove('show');
-    imageBox.classList.remove('show');
-    nameEl.classList.remove('show');
+    for (let i = 0; i < valid.length; i++) {
+      // show number
+      drawNumber(i + 1);
+      await wait(numberTime);
 
-    let currentTime = 0;
+      // show image + name
+      await drawImageWithName(valid[i].imgSrc, valid[i].name || `IMAGE ${i+1}`);
+      await wait(dur);
+    }
 
-    images.forEach((img, index) => {
-      const num = index + 1;
-
-      // Show number
-      timeouts.push(setTimeout(() => {
-        numberEl.textContent = num;
-        numberEl.classList.add('show');
-        imageBox.classList.remove('show');
-        nameEl.classList.remove('show');
-      }, currentTime));
-
-      currentTime += 1000; // number display time
-
-      // Show image + name
-      timeouts.push(setTimeout(() => {
-        numberEl.classList.remove('show');
-        setTimeout(() => {
-          imageEl.src = img.src;
-          nameEl.textContent = img.name;
-          imageBox.classList.add('show');
-          nameEl.classList.add('show');
-        }, 350);
-      }, currentTime));
-
-      currentTime += duration;
-    });
-
-    // End after last image
-    timeouts.push(setTimeout(() => {
-      stopAnimation();
-    }, currentTime + 600));
+    // end
+    await wait(400);
+    stopEverything();
   }
 
-  function stopAnimation() {
-    isAnimating = false;
-    clearTimeouts();
-    document.getElementById('animationOverlay').classList.remove('active');
+  function wait(ms) {
+    return new Promise(r => {
+      const t = setTimeout(r, ms);
+      timeouts.push(t);
+    });
   }
 
   function clearTimeouts() {
@@ -562,14 +358,79 @@
     timeouts = [];
   }
 
+  // ============ PREVIEW ============
+  function startPreview() {
+    if (isPlaying) return;
+    playSequence(false);
+  }
+
+  // ============ RECORD ============
+  async function startRecording() {
+    if (isPlaying || isRecording) return;
+
+    const valid = slots.filter(s => s.imgSrc);
+    if (valid.length < 1) {
+      alert('Kam se kam 1 image upload karo');
+      return;
+    }
+
+    // setup MediaRecorder on canvas stream
+    const stream = canvas.captureStream(30); // 30 fps
+    recordedChunks = [];
+
+    // try best mime
+    const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') 
+      ? 'video/webm;codecs=vp9' 
+      : 'video/webm';
+
+    mediaRecorder = new MediaRecorder(stream, {
+      mimeType: mime,
+      videoBitsPerSecond: 8000000 // 8 Mbps good for YouTube
+    });
+
+    mediaRecorder.ondataavailable = e => {
+      if (e.data.size > 0) recordedChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `image-sequence-${Date.now()}.webm`;
+      a.click();
+      URL.revokeObjectURL(url);
+      document.getElementById('status').textContent = 'Video downloaded! YouTube pe upload karo.';
+      setTimeout(() => document.getElementById('status').textContent = '', 4000);
+    };
+
+    isRecording = true;
+    mediaRecorder.start(100); // collect every 100ms
+    await playSequence(true);
+  }
+
+  function stopEverything() {
+    isPlaying = false;
+    clearTimeouts();
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('recBadge').style.display = 'none';
+    document.getElementById('status').textContent = '';
+
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+    }
+    isRecording = false;
+  }
+
   function resetAll() {
-    stopAnimation();
-    document.getElementById('imagesContainer').innerHTML = '';
-    cardCount = 0;
-    addImageCard();
-    addImageCard();
-    durationSlider.value = 4;
-    durationValue.textContent = '4s';
+    stopEverything();
+    slots = [];
+    document.getElementById('slots').innerHTML = '';
+    nextId = 1;
+    addSlot();
+    addSlot();
+    durationSlider.value = 3.5;
+    durationValue.textContent = '3.5s';
   }
 </script>
 </body>
