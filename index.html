@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickLink | Simple URL Shortener</title>
+    <title>QuickLink | Professional URL Shortener</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Firebase SDKs -->
@@ -31,69 +31,95 @@
 
         .input-wrapper { background: var(--white); padding: 6px; border-radius: 18px; display: flex; box-shadow: var(--shadow-lg); border: 1px solid var(--border); max-width: 600px; margin: 0 auto; }
         .url-input { flex: 1; border: none; outline: none; padding: 10px 18px; font-size: 1rem; background: transparent; min-width: 0; }
-        .btn-shorten { background: var(--primary); color: white; border: none; padding: 10px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        .btn-shorten { background: var(--primary); color: white; border: none; padding: 10px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
 
         .links-section { padding-bottom: 50px; }
         .section-header { border-bottom: 1px solid var(--border); margin-bottom: 20px; padding-bottom: 10px; }
-        .section-header h2 { font-size: 0.85rem; font-weight: 700; color: var(--text-sec); text-transform: uppercase; }
+        .section-header h2 { font-size: 0.85rem; font-weight: 700; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .link-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s; }
+        .link-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s ease; }
         .link-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+
         .link-info { flex: 1; min-width: 0; overflow: hidden; }
         .orig-url { display: block; font-size: 0.78rem; color: var(--text-sec); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
         .short-url-group { display: flex; align-items: center; gap: 10px; }
-        .short-url { color: var(--primary); font-weight: 700; text-decoration: none; font-size: 1.1rem; cursor: pointer; white-space: nowrap; }
-        .stats-badge { background: var(--primary-light); color: var(--primary); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .short-url { color: var(--primary); font-weight: 700; text-decoration: none; font-size: 1rem; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .stats-badge { background: var(--primary-light); color: var(--primary); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
 
         .action-group { display: flex; gap: 8px; flex-shrink: 0; }
-        .icon-btn { background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: 700; transition: 0.2s; }
-        .icon-btn:hover { background: var(--primary); color: white; }
-
+        .icon-btn { background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: 700; color: var(--text-main); }
+        
         .edit-container { width: 100%; display: flex; flex-direction: column; gap: 8px; }
-        .edit-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; outline: none; }
-        .btn-save { background: var(--primary); color: white; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        .edit-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; }
 
-        /* Footer */
         footer { padding: 60px 0 40px; text-align: center; background: var(--white); border-top: 1px solid var(--border); margin-top: 40px; }
         .footer-logo { display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 2.1rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
         .footer-logo svg { width: 32px; height: 32px; color: var(--footer-purple); fill: var(--footer-purple); }
         .purple { color: var(--footer-purple); }
-        .footer-desc { color: var(--text-sec); font-size: 1rem; max-width: 580px; margin: 0 auto 30px; line-height: 1.5; font-weight: 500; }
+        .footer-desc { color: var(--text-sec); font-size: 1rem; max-width: 580px; margin: 0 auto 30px; line-height: 1.5; }
         .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; }
         .social-links a { color: var(--text-sec); text-decoration: none; font-size: 1.2rem; }
         .copyright { font-size: 0.95rem; color: var(--text-sec); font-weight: 500; }
         .heart { color: #ef4444; margin: 0 3px; }
 
-        /* Redirect Loader Overlay */
-        #redirect-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
-
         @media (max-width: 600px) {
-            .input-wrapper { flex-direction: column; padding: 0; border: none; background: transparent; }
+            .hero h1 { font-size: 1.9rem; }
+            .input-wrapper { flex-direction: column; padding: 0; border: none; background: transparent; box-shadow: none; }
             .url-input { background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; padding: 14px; }
-            .btn-shorten { width: 100%; padding: 14px; }
+            .btn-shorten { width: 100%; padding: 14px; border-radius: 12px; }
             .link-card { flex-direction: column; align-items: flex-start; gap: 14px; }
-            .link-info { width: 100%; } .action-group { width: 100%; } .icon-btn { flex: 1; text-align: center; }
+            .link-info { width: 100%; }
+            .action-group { width: 100%; }
+            .icon-btn { flex: 1; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- REDIRECT OVERLAY -->
-    <div id="redirect-loader">
-        <h2 style="margin-bottom:10px; color:var(--primary)">Redirecting...</h2>
-        <p style="color:var(--text-sec)">Please wait while we find your link.</p>
+    <div id="mainContent">
+        <div class="container">
+            <header>
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    QuickLink
+                </a>
+            </header>
+        </div>
+
+        <section class="hero">
+            <div class="container">
+                <h1>Shorten Your Reach</h1>
+                <p>Paste your long URL and get a professional short link in seconds.</p>
+                <div class="input-wrapper">
+                    <input type="url" id="urlInput" class="url-input" placeholder="https://example.com/long-url-here">
+                    <button id="shortenBtn" class="btn-shorten">Shorten</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="links-section">
+            <div class="container">
+                <div class="section-header"><h2>History & Analytics</h2></div>
+                <div id="emptyState" class="empty-state" style="text-align: center; color: var(--text-sec); padding: 40px 0;">Loading...</div>
+                <div id="linksList"></div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <span class="purple">Quick</span> Link
+                </div>
+                <p class="footer-desc">Simple, fast, and secure. The ultimate link management platform.</p>
+                <div class="social-links"><a href="#">TW</a> <a href="#">IG</a> <a href="#">LI</a></div>
+                <p class="copyright">© 2026 QuickLink. Made with <span class="heart">❤️</span></p>
+            </div>
+        </footer>
     </div>
 
-    <div class="container"><header><a href="#" class="logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>QuickLink</a></header></div>
-
-    <section class="hero"><div class="container"><h1>Shorten Your Reach</h1><p>Paste your long URL and get a professional short link in seconds.</p><div class="input-wrapper"><input type="url" id="urlInput" class="url-input" placeholder="https://example.com/long-url-here"><button id="shortenBtn" class="btn-shorten">Shorten</button></div></div></section>
-
-    <section class="links-section"><div class="container"><div class="section-header"><h2>History & Analytics</h2></div><div id="emptyState" style="text-align: center; color: var(--text-sec); padding: 40px 0;">No links found.</div><div id="linksList"></div></div></section>
-
-    <footer><div class="container"><div class="footer-logo"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="purple">Quick</span> Link</div><p class="footer-desc">Simple, fast, and secure. The ultimate link management platform.</p><div class="social-links"><a href="#">TW</a> <a href="#">IG</a> <a href="#">LI</a></div><p class="copyright">© 2026 QuickLink. Made with <span class="heart">❤️</span></p></div></footer>
-
     <script>
-        // --- CONFIG & FIREBASE ---
+        // --- CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyCpVS-SVaIJI6DN8AqnoYslb1vujw8N1ds",
             authDomain: "game-cd989.firebaseapp.com",
@@ -105,44 +131,50 @@
         };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
+
+        // FIX: Auto Detect Domain (Ab aapka apna domain link mein aayega)
+        const APP_DOMAIN = window.location.origin + window.location.pathname + "?id="; 
         
-        // Auto-detect domain
-        const APP_DOMAIN = window.location.origin + "/"; 
         let adSettings = { enabled: true, link: "", clicks_interval: 1 };
 
-        // --- 1. AUTOMATIC REDIRECT LISTENER ---
-        function checkRedirect() {
-            // Check if URL has ?id=XYZ or #XYZ
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id') || window.location.hash.substring(1);
+        // SYNC SETTINGS
+        database.ref('admin_settings').on('value', (s) => { if(s.val()) adSettings = s.val(); });
 
-            if (id) {
-                document.getElementById('redirect-loader').style.display = 'flex';
-                database.ref('links/' + id).once('value', (snap) => {
-                    const data = snap.val();
+        // REDIRECT SYSTEM (Check if this is a short link click)
+        function checkRedirect() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const shortId = urlParams.get('id');
+
+            if (shortId) {
+                // Hide UI while redirecting
+                document.getElementById('mainContent').style.display = 'none';
+                document.body.innerHTML = "<div style='text-align:center; padding-top:100px; font-family:sans-serif;'>Redirecting to your destination...</div>";
+
+                database.ref('links/' + shortId).once('value', (snapshot) => {
+                    const data = snapshot.val();
                     if (data) {
-                        handleLinkClick(id, data.original);
+                        handleLinkClick(shortId, data.original);
                     } else {
-                        alert("Short link not found!");
-                        window.location.href = APP_DOMAIN;
+                        alert("Invalid Link!");
+                        window.location.href = window.location.origin + window.location.pathname;
                     }
                 });
             }
         }
 
-        // --- SYNC SETTINGS ---
-        database.ref('admin_settings').on('value', (s) => { if(s.val()) adSettings = s.val(); });
-
-        // --- LOAD DATA ---
+        // LOAD UI
         function loadHistory() {
             database.ref('links').on('value', (snapshot) => {
-                const list = document.getElementById('linksList');
-                const empty = document.getElementById('emptyState');
-                list.innerHTML = '';
+                const linksList = document.getElementById('linksList');
+                const emptyState = document.getElementById('emptyState');
+                linksList.innerHTML = '';
                 const data = snapshot.val();
                 if (data) {
-                    empty.style.display = 'none';
+                    emptyState.style.display = 'none';
                     Object.keys(data).reverse().forEach(id => renderCard({id, ...data[id]}));
+                } else {
+                    emptyState.style.display = 'block';
+                    emptyState.textContent = 'No links found.';
                 }
             });
         }
@@ -152,64 +184,81 @@
             loadHistory();
         });
 
-        // --- CREATE LINK ---
+        // CREATE LINK
         document.getElementById('shortenBtn').onclick = () => {
             let url = document.getElementById('urlInput').value.trim();
             if (!url) return;
             if (!url.startsWith('http')) url = 'https://' + url;
             const id = Math.random().toString(36).substring(7);
-            
-            // Format for easy access: domain.com/#ID
             database.ref('links/' + id).set({
-                original: url, short: APP_DOMAIN + "#" + id, clicks: 0
-            }).then(() => { document.getElementById('urlInput').value = ''; });
-        };
-
-        function renderCard(data) {
-            // Display always with hash (#) so it works on static sites
-            const displayLink = APP_DOMAIN + "#" + (data.id);
-            const card = document.createElement('div');
-            card.className = 'link-card'; card.id = `card-${data.id}`;
-            card.innerHTML = `<div class="link-info"><span class="orig-url">${data.original}</span><div class="short-url-group"><span class="short-url" onclick="handleLinkClick('${data.id}', '${data.original}')">${displayLink}</span><span class="stats-badge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>${data.clicks || 0}</span></div></div><div class="action-group"><button class="icon-btn" onclick="copyLink('${displayLink}', this)">COPY</button><button class="icon-btn" onclick="showEdit('${data.id}')">EDIT</button><button class="icon-btn" onclick="delLink('${data.id}')" style="color:#ef4444">DEL</button></div>`;
-            document.getElementById('linksList').appendChild(card);
-        }
-
-        // --- REDIRECTION LOGIC ---
-        window.handleLinkClick = (id, destination) => {
-            const linkRef = database.ref('links/' + id + '/clicks');
-            linkRef.transaction(c => (c || 0) + 1, (err, comm, snap) => {
-                const count = snap.val();
-                const interval = parseInt(adSettings.clicks_interval) || 1;
-                
-                if (adSettings.enabled && (count % interval === 0)) {
-                    window.open(adSettings.link, '_blank');
-                    setTimeout(() => window.location.href = destination, 300);
-                } else {
-                    window.location.href = destination;
-                }
+                original: url, short: APP_DOMAIN + id, clicks: 0
+            }).then(() => {
+                document.getElementById('urlInput').value = '';
             });
         };
 
+        function renderCard(data) {
+            const card = document.createElement('div');
+            card.className = 'link-card';
+            card.id = `card-${data.id}`;
+            card.innerHTML = `
+                <div class="link-info">
+                    <span class="orig-url">${data.original}</span>
+                    <div class="short-url-group">
+                        <a href="${data.short}" class="short-url">${data.short}</a>
+                        <span class="stats-badge">Clicks: ${data.clicks || 0}</span>
+                    </div>
+                </div>
+                <div class="action-group">
+                    <button class="icon-btn" onclick="copyLink('${data.short}', this)">COPY</button>
+                    <button class="icon-btn" onclick="showEdit('${data.id}')">EDIT</button>
+                    <button class="icon-btn" onclick="delLink('${data.id}')" style="color:#ef4444">DEL</button>
+                </div>`;
+            document.getElementById('linksList').appendChild(card);
+        }
+
+        function handleLinkClick(id, destination) {
+            const linkRef = database.ref('links/' + id + '/clicks');
+            linkRef.transaction(c => (c || 0) + 1, (err, comm, snap) => {
+                if (comm) {
+                    const count = snap.val();
+                    const interval = parseInt(adSettings.clicks_interval) || 1;
+                    if (adSettings.enabled && (count % interval === 0)) {
+                        window.open(adSettings.link, '_blank');
+                        setTimeout(() => window.location.href = destination, 300);
+                    } else {
+                        window.location.href = destination;
+                    }
+                }
+            });
+        }
+
         window.copyLink = (text, btn) => {
-            const old = btn.textContent;
             navigator.clipboard.writeText(text).then(() => {
-                btn.textContent = 'DONE'; setTimeout(() => btn.textContent = old, 1500);
+                const old = btn.textContent; btn.textContent = 'DONE';
+                setTimeout(() => btn.textContent = old, 1500);
             });
         };
 
         window.showEdit = (id) => {
             database.ref('links/' + id).once('value', (s) => {
-                const l = s.val();
-                document.getElementById(`card-${id}`).innerHTML = `<div class="edit-container"><input type="text" id="e-o-${id}" class="edit-input" value="${l.original}"><button class="btn-save" onclick="saveEdit('${id}')">Save</button></div>`;
+                const l = s.val(); const slug = l.short.split('id=')[1];
+                document.getElementById(`card-${id}`).innerHTML = `
+                <div class="edit-container">
+                    <input type="text" id="e-o-${id}" class="edit-input" value="${l.original}">
+                    <input type="text" id="e-s-${id}" class="edit-input" value="${slug}">
+                    <button class="btn-save" onclick="saveEdit('${id}')">Save Changes</button>
+                </div>`;
             });
         };
 
         window.saveEdit = (id) => {
             const o = document.getElementById(`e-o-${id}`).value;
-            database.ref('links/' + id).update({ original: o }).then(() => location.reload());
+            const s = document.getElementById(`e-s-${id}`).value.replace(/\s+/g, '-');
+            database.ref('links/' + id).update({ original: o, short: APP_DOMAIN + s });
         };
 
-        window.delLink = (id) => { if(confirm("Delete link?")) database.ref('links/' + id).remove(); };
+        window.delLink = (id) => { if(confirm("Delete this link?")) database.ref('links/' + id).remove(); };
     </script>
 </body>
 </html>
