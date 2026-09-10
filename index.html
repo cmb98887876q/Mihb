@@ -161,7 +161,7 @@
 
             if (shortId) {
                 document.getElementById('mainContent').style.display = 'none';
-                document.body.innerHTML = "<div style='text-align:center; padding-top:100px; font-family:sans-serif;'>Redirecting to your destination...</div>";
+                document.body.innerHTML = ""; // blank page, no visible message while redirecting
 
                 database.ref('links/' + shortId).once('value', (snapshot) => {
                     const data = snapshot.val();
