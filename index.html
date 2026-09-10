@@ -166,7 +166,7 @@
                 database.ref('links/' + shortId).once('value', (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
-                        handleLinkClick(shortId, data.original);
+                        handleLinkClick(shortId, data.original, data.clicks || 0);
                     } else {
                         alert("Invalid Link!");
                         window.location.href = window.location.origin + window.location.pathname;
@@ -242,20 +242,19 @@
             document.getElementById('linksList').appendChild(card);
         }
 
-        function handleLinkClick(id, destination) {
-            const linkRef = database.ref('links/' + id + '/clicks');
-            linkRef.transaction(c => (c || 0) + 1, (err, comm, snap) => {
-                if (comm) {
-                    const count = snap.val();
-                    const interval = parseInt(adSettings.clicks_interval) || 1;
-                    if (adSettings.enabled && adSettings.link && (count % interval === 0)) {
-                        window.open(adSettings.link, '_blank');
-                        setTimeout(() => window.location.href = destination, 300);
-                    } else {
-                        window.location.href = destination;
-                    }
-                }
-            });
+        function handleLinkClick(id, destination, currentClicks) {
+            const newCount = (currentClicks || 0) + 1;
+
+            // Fire-and-forget: don't block the redirect waiting for this write to confirm
+            database.ref('links/' + id + '/clicks').set(newCount);
+
+            const interval = parseInt(adSettings.clicks_interval) || 1;
+            if (adSettings.enabled && adSettings.link && (newCount % interval === 0)) {
+                window.open(adSettings.link, '_blank');
+                window.location.href = destination;
+            } else {
+                window.location.href = destination;
+            }
         }
 
         window.copyLink = (text, btn) => {
