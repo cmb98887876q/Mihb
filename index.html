@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickLink | Professional URL Shortener</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -14,7 +14,7 @@
         :root {
             --primary: #2563eb; --primary-light: #eff6ff; --text-main: #0f172a; --text-sec: #64748b;
             --bg: #f8fafc; --white: #ffffff; --border: #e2e8f0; --radius: 14px;
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); --footer-purple: #615eff; 
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); --footer-purple: #615eff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -48,9 +48,12 @@
 
         .action-group { display: flex; gap: 8px; flex-shrink: 0; }
         .icon-btn { background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: 700; color: var(--text-main); }
-        
+
         .edit-container { width: 100%; display: flex; flex-direction: column; gap: 8px; }
         .edit-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        .btn-save { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; align-self: flex-start; }
+        .btn-cancel { background: #f1f5f9; border: 1px solid var(--border); padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; color: var(--text-main); }
+        .edit-actions { display: flex; gap: 8px; }
 
         footer { padding: 60px 0 40px; text-align: center; background: var(--white); border-top: 1px solid var(--border); margin-top: 40px; }
         .footer-logo { display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 2.1rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
@@ -132,21 +135,31 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // FIX: Auto Detect Domain (Ab aapka apna domain link mein aayega)
-        const APP_DOMAIN = window.location.origin + window.location.pathname + "?id="; 
-        
+        // Auto-detect domain
+        const APP_DOMAIN = window.location.origin + window.location.pathname + "?id=";
+
         let adSettings = { enabled: true, link: "", clicks_interval: 1 };
 
         // SYNC SETTINGS
-        database.ref('admin_settings').on('value', (s) => { if(s.val()) adSettings = s.val(); });
+        database.ref('admin_settings').on('value', (s) => { if (s.val()) adSettings = s.val(); });
+
+        // Simple HTML escaper to prevent stored XSS from user-submitted URLs/slugs
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
 
         // REDIRECT SYSTEM (Check if this is a short link click)
+        // Returns true if we're handling a redirect (so callers can skip other UI setup)
         function checkRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const shortId = urlParams.get('id');
 
             if (shortId) {
-                // Hide UI while redirecting
                 document.getElementById('mainContent').style.display = 'none';
                 document.body.innerHTML = "<div style='text-align:center; padding-top:100px; font-family:sans-serif;'>Redirecting to your destination...</div>";
 
@@ -159,7 +172,9 @@
                         window.location.href = window.location.origin + window.location.pathname;
                     }
                 });
+                return true;
             }
+            return false;
         }
 
         // LOAD UI
@@ -167,11 +182,12 @@
             database.ref('links').on('value', (snapshot) => {
                 const linksList = document.getElementById('linksList');
                 const emptyState = document.getElementById('emptyState');
+                if (!linksList || !emptyState) return; // page navigated away (e.g. redirect)
                 linksList.innerHTML = '';
                 const data = snapshot.val();
                 if (data) {
                     emptyState.style.display = 'none';
-                    Object.keys(data).reverse().forEach(id => renderCard({id, ...data[id]}));
+                    Object.keys(data).reverse().forEach(id => renderCard({ id, ...data[id] }));
                 } else {
                     emptyState.style.display = 'block';
                     emptyState.textContent = 'No links found.';
@@ -180,37 +196,46 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            checkRedirect();
-            loadHistory();
+            // Only load the history UI if we're not in the middle of a redirect
+            if (!checkRedirect()) {
+                loadHistory();
+            }
         });
 
         // CREATE LINK
-        document.getElementById('shortenBtn').onclick = () => {
-            let url = document.getElementById('urlInput').value.trim();
+        function createLink() {
+            const input = document.getElementById('urlInput');
+            let url = input.value.trim();
             if (!url) return;
             if (!url.startsWith('http')) url = 'https://' + url;
             const id = Math.random().toString(36).substring(7);
             database.ref('links/' + id).set({
                 original: url, short: APP_DOMAIN + id, clicks: 0
             }).then(() => {
-                document.getElementById('urlInput').value = '';
+                input.value = '';
             });
-        };
+        }
+        document.getElementById('shortenBtn').onclick = createLink;
+        document.getElementById('urlInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') createLink();
+        });
 
         function renderCard(data) {
             const card = document.createElement('div');
             card.className = 'link-card';
             card.id = `card-${data.id}`;
+            const safeOriginal = escapeHtml(data.original);
+            const safeShort = escapeHtml(data.short);
             card.innerHTML = `
                 <div class="link-info">
-                    <span class="orig-url">${data.original}</span>
+                    <span class="orig-url">${safeOriginal}</span>
                     <div class="short-url-group">
-                        <a href="${data.short}" class="short-url">${data.short}</a>
+                        <a href="${safeShort}" class="short-url">${safeShort}</a>
                         <span class="stats-badge">Clicks: ${data.clicks || 0}</span>
                     </div>
                 </div>
                 <div class="action-group">
-                    <button class="icon-btn" onclick="copyLink('${data.short}', this)">COPY</button>
+                    <button class="icon-btn" onclick="copyLink('${data.short.replace(/'/g, "\\'")}', this)">COPY</button>
                     <button class="icon-btn" onclick="showEdit('${data.id}')">EDIT</button>
                     <button class="icon-btn" onclick="delLink('${data.id}')" style="color:#ef4444">DEL</button>
                 </div>`;
@@ -223,7 +248,7 @@
                 if (comm) {
                     const count = snap.val();
                     const interval = parseInt(adSettings.clicks_interval) || 1;
-                    if (adSettings.enabled && (count % interval === 0)) {
+                    if (adSettings.enabled && adSettings.link && (count % interval === 0)) {
                         window.open(adSettings.link, '_blank');
                         setTimeout(() => window.location.href = destination, 300);
                     } else {
@@ -242,23 +267,58 @@
 
         window.showEdit = (id) => {
             database.ref('links/' + id).once('value', (s) => {
-                const l = s.val(); const slug = l.short.split('id=')[1];
-                document.getElementById(`card-${id}`).innerHTML = `
+                const l = s.val();
+                if (!l) return;
+                const slug = l.short.split('id=')[1];
+                const card = document.getElementById(`card-${id}`);
+                card.innerHTML = `
                 <div class="edit-container">
-                    <input type="text" id="e-o-${id}" class="edit-input" value="${l.original}">
-                    <input type="text" id="e-s-${id}" class="edit-input" value="${slug}">
-                    <button class="btn-save" onclick="saveEdit('${id}')">Save Changes</button>
+                    <input type="text" id="e-o-${id}" class="edit-input" value="${escapeHtml(l.original)}">
+                    <input type="text" id="e-s-${id}" class="edit-input" value="${escapeHtml(slug)}">
+                    <div class="edit-actions">
+                        <button class="btn-save" onclick="saveEdit('${id}')">Save Changes</button>
+                        <button class="btn-cancel" onclick="loadHistory()">Cancel</button>
+                    </div>
                 </div>`;
             });
         };
 
+        // FIXED: editing the slug used to only rename the "short" field while leaving the
+        // database key unchanged, so the new short link 404'd (redirect looks up by key).
+        // Now, if the slug changes, we move the record to a new key.
         window.saveEdit = (id) => {
-            const o = document.getElementById(`e-o-${id}`).value;
-            const s = document.getElementById(`e-s-${id}`).value.replace(/\s+/g, '-');
-            database.ref('links/' + id).update({ original: o, short: APP_DOMAIN + s });
+            const oInput = document.getElementById(`e-o-${id}`);
+            const sInput = document.getElementById(`e-s-${id}`);
+            if (!oInput || !sInput) return;
+
+            let o = oInput.value.trim();
+            let s = sInput.value.trim().replace(/\s+/g, '-');
+            if (!o || !s) return;
+            if (!o.startsWith('http')) o = 'https://' + o;
+
+            if (s === id) {
+                // slug unchanged, just update the URL
+                database.ref('links/' + id).update({ original: o, short: APP_DOMAIN + s });
+                return;
+            }
+
+            // slug changed: make sure the new slug isn't already taken, then move the record
+            database.ref('links/' + s).once('value', (existing) => {
+                if (existing.exists()) {
+                    alert('That short link is already taken. Choose a different one.');
+                    return;
+                }
+                database.ref('links/' + id).once('value', (snap) => {
+                    const data = snap.val() || {};
+                    const newData = { ...data, original: o, short: APP_DOMAIN + s };
+                    database.ref('links/' + s).set(newData).then(() => {
+                        database.ref('links/' + id).remove();
+                    });
+                });
+            });
         };
 
-        window.delLink = (id) => { if(confirm("Delete this link?")) database.ref('links/' + id).remove(); };
+        window.delLink = (id) => { if (confirm("Delete this link?")) database.ref('links/' + id).remove(); };
     </script>
 </body>
 </html>
