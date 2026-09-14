@@ -1,323 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickLink | Professional URL Shortener</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Sign in · Fast</title>
+<meta name="description" content="Choose how you'd like to sign in." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-0: #08090c;
+    --bg-1: #0c0f15;
+    --surface: rgba(255, 255, 255, 0.035);
+    --surface-hover: rgba(255, 255, 255, 0.06);
+    --border: rgba(140, 160, 200, 0.16);
+    --border-hover: rgba(150, 180, 255, 0.38);
+    --accent: #5b8def;
+    --accent-dim: rgba(91, 141, 239, 0.16);
+    --text-primary: #eef1f6;
+    --text-secondary: #8993a6;
+    --text-tertiary: #5b6376;
+    --danger: #ff7a7a;
+    --danger-bg: rgba(255, 90, 90, 0.08);
+    --radius-card: 22px;
+    --radius-btn: 14px;
+    --font-display: "Sora", "Inter", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+  }
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  * { box-sizing: border-box; }
 
-    <style>
-        :root {
-            --primary: #2563eb; --primary-light: #eff6ff; --text-main: #0f172a; --text-sec: #64748b;
-            --bg: #f8fafc; --white: #ffffff; --border: #e2e8f0; --radius: 14px;
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); --footer-purple: #615eff;
-        }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(91, 141, 239, 0.16), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 85% 100%, rgba(120, 100, 220, 0.08), transparent 60%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        header { padding: 1.5rem 0; }
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: var(--text-main); text-decoration: none; }
-        .logo svg { color: var(--footer-purple); fill: var(--footer-purple); width: 28px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card {
+      animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
 
-        .hero { padding: 30px 0 50px; text-align: center; background: radial-gradient(circle at top, #dbeafe 0%, transparent 70%); }
-        .hero h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
-        .hero p { color: var(--text-sec); font-size: 1rem; margin-bottom: 30px; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
 
-        .input-wrapper { background: var(--white); padding: 6px; border-radius: 18px; display: flex; box-shadow: var(--shadow-lg); border: 1px solid var(--border); max-width: 600px; margin: 0 auto; }
-        .url-input { flex: 1; border: none; outline: none; padding: 10px 18px; font-size: 1rem; background: transparent; min-width: 0; }
-        .btn-shorten { background: var(--primary); color: white; border: none; padding: 10px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 38px 28px 30px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 30px 60px -20px rgba(0, 0, 0, 0.6);
+  }
 
-        .links-section { padding-bottom: 50px; }
-        .section-header { border-bottom: 1px solid var(--border); margin-bottom: 20px; padding-bottom: 10px; }
-        .section-header h2 { font-size: 0.85rem; font-weight: 700; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
+  .mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5b8def, #7c6ff0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    box-shadow: 0 8px 24px -8px rgba(91, 141, 239, 0.55);
+  }
 
-        .link-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s ease; }
-        .link-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+  .mark svg { width: 22px; height: 22px; }
 
-        .link-info { flex: 1; min-width: 0; overflow: hidden; }
-        .orig-url { display: block; font-size: 0.78rem; color: var(--text-sec); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
-        .short-url-group { display: flex; align-items: center; gap: 10px; }
-        .short-url { color: var(--primary); font-weight: 700; text-decoration: none; font-size: 1rem; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .stats-badge { background: var(--primary-light); color: var(--primary); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
 
-        .action-group { display: flex; gap: 8px; flex-shrink: 0; }
-        .icon-btn { background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: 700; color: var(--text-main); }
+  .subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 30px;
+  }
 
-        .edit-container { width: 100%; display: flex; flex-direction: column; gap: 8px; }
-        .edit-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; }
-        .btn-save { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; align-self: flex-start; }
-        .btn-cancel { background: #f1f5f9; border: 1px solid var(--border); padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; color: var(--text-main); }
-        .edit-actions { display: flex; gap: 8px; }
+  .providers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-        footer { padding: 60px 0 40px; text-align: center; background: var(--white); border-top: 1px solid var(--border); margin-top: 40px; }
-        .footer-logo { display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 2.1rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
-        .footer-logo svg { width: 32px; height: 32px; color: var(--footer-purple); fill: var(--footer-purple); }
-        .purple { color: var(--footer-purple); }
-        .footer-desc { color: var(--text-sec); font-size: 1rem; max-width: 580px; margin: 0 auto 30px; line-height: 1.5; }
-        .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; }
-        .social-links a { color: var(--text-sec); text-decoration: none; font-size: 1.2rem; }
-        .copyright { font-size: 0.95rem; color: var(--text-sec); font-weight: 500; }
-        .heart { color: #ef4444; margin: 0 3px; }
+  .provider-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.12s ease;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+  }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.9rem; }
-            .input-wrapper { flex-direction: column; padding: 0; border: none; background: transparent; box-shadow: none; }
-            .url-input { background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; padding: 14px; }
-            .btn-shorten { width: 100%; padding: 14px; border-radius: 12px; }
-            .link-card { flex-direction: column; align-items: flex-start; gap: 14px; }
-            .link-info { width: 100%; }
-            .action-group { width: 100%; }
-            .icon-btn { flex: 1; text-align: center; }
-        }
-    </style>
+  .provider-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-hover);
+  }
+
+  .provider-btn:active {
+    transform: scale(0.985);
+  }
+
+  .provider-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .provider-btn .icon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .provider-btn .icon svg { width: 100%; height: 100%; }
+
+  .provider-btn .label {
+    flex: 1 1 auto;
+    text-align: left;
+  }
+
+  .provider-btn .chevron {
+    flex: 0 0 auto;
+    opacity: 0.35;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .provider-btn:hover .chevron {
+    opacity: 0.7;
+    transform: translateX(2px);
+  }
+
+  /* loading state */
+  .provider-btn.loading { pointer-events: none; color: var(--text-secondary); }
+  .provider-btn.loading .chevron { opacity: 0; }
+
+  .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-top-color: var(--accent);
+    animation: spin 0.7s linear infinite;
+    flex: 0 0 auto;
+  }
+
+  .provider-btn.loading .spinner { display: block; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 16px;
+    color: var(--text-tertiary);
+    font-size: 12px;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .terms {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .terms a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-hover); }
+  .terms a:hover { color: var(--text-primary); }
+
+  .error-banner {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--danger-bg);
+    border: 1px solid rgba(255, 122, 122, 0.28);
+    color: var(--danger);
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .error-banner.show { display: flex; }
+  .error-banner svg { flex: 0 0 auto; margin-top: 1px; }
+
+  @media (max-width: 380px) {
+    .card { padding: 30px 20px 24px; }
+  }
+</style>
 </head>
 <body>
 
-    <div id="mainContent">
-        <div class="container">
-            <header>
-                <a href="#" class="logo">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    QuickLink
-                </a>
-            </header>
-        </div>
-
-        <section class="hero">
-            <div class="container">
-                <h1>Shorten Your Reach</h1>
-                <p>Paste your long URL and get a professional short link in seconds.</p>
-                <div class="input-wrapper">
-                    <input type="url" id="urlInput" class="url-input" placeholder="https://example.com/long-url-here">
-                    <button id="shortenBtn" class="btn-shorten">Shorten</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="links-section">
-            <div class="container">
-                <div class="section-header"><h2>History & Analytics</h2></div>
-                <div id="emptyState" class="empty-state" style="text-align: center; color: var(--text-sec); padding: 40px 0;">Loading...</div>
-                <div id="linksList"></div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="container">
-                <div class="footer-logo">
-                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    <span class="purple">Quick</span> Link
-                </div>
-                <p class="footer-desc">Simple, fast, and secure. The ultimate link management platform.</p>
-                <div class="social-links"><a href="#">TW</a> <a href="#">IG</a> <a href="#">LI</a></div>
-                <p class="copyright">© 2026 QuickLink. Made with <span class="heart">❤️</span></p>
-            </div>
-        </footer>
+  <main class="card" role="main">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="white"/></svg>
     </div>
 
-    <script>
-        // --- CONFIG ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyCpVS-SVaIJI6DN8AqnoYslb1vujw8N1ds",
-            authDomain: "game-cd989.firebaseapp.com",
-            databaseURL: "https://game-cd989-default-rtdb.firebaseio.com",
-            projectId: "game-cd989",
-            storageBucket: "game-cd989.appspot.com",
-            messagingSenderId: "879712386996",
-            appId: "1:879712386996:web:fd69a1601a91f2d260fce1"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+    <h1>Sign in to Fast</h1>
+    <p class="subtitle">Choose an account to continue with.</p>
 
-        // Auto-detect domain
-        const APP_DOMAIN = window.location.origin + window.location.pathname + "?id=";
+    <div id="errorBanner" class="error-banner" role="alert">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorText">Authentication failed. Please try again.</span>
+    </div>
 
-        let adSettings = { enabled: true, link: "", clicks_interval: 1 };
+    <div class="providers">
 
-        // SYNC SETTINGS
-        database.ref('admin_settings').on('value', (s) => { if (s.val()) adSettings = s.val(); });
+      <button class="provider-btn" data-provider="google" type="button">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.04 12.27c0-.82-.07-1.6-.2-2.36H12v4.47h6.2a5.3 5.3 0 0 1-2.3 3.48v2.9h3.72c2.18-2 3.42-4.96 3.42-8.49Z"/><path fill="#34A853" d="M12 23c3.1 0 5.7-1.02 7.6-2.77l-3.72-2.9c-1.03.7-2.35 1.1-3.88 1.1-2.98 0-5.5-2.01-6.4-4.72H1.77v2.98A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.6 13.71a6.6 6.6 0 0 1 0-4.22V6.51H1.77a11 11 0 0 0 0 9.98l3.83-2.78Z"/><path fill="#EA4335" d="M12 4.77c1.69 0 3.2.58 4.4 1.72l3.3-3.3C17.7 1.24 15.1 0 12 0A11 11 0 0 0 1.77 6.51l3.83 2.98c.9-2.71 3.42-4.72 6.4-4.72Z"/></svg>
+        </span>
+        <span class="label">Continue with Google</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
 
-        // Simple HTML escaper to prevent stored XSS from user-submitted URLs/slugs
-        function escapeHtml(str) {
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
+      <button class="provider-btn" data-provider="facebook" type="button">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.25h3.32l-.53 3.5h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+        </span>
+        <span class="label">Continue with Facebook</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <button class="provider-btn" data-provider="apple" type="button">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#ffffff" d="M16.36 1.64c.1 1.08-.32 2.15-1 2.93-.7.8-1.83 1.42-2.93 1.34-.12-1.05.38-2.16 1.02-2.9.72-.82 1.96-1.43 2.9-1.37ZM20.6 17.2c-.35.8-.77 1.55-1.28 2.25-.7.98-1.27 1.65-1.7 2.02-.66.6-1.37.9-2.13.92-.55.01-1.2-.15-1.96-.48-.77-.33-1.47-.49-2.13-.49-.68 0-1.4.16-2.16.49-.77.33-1.4.5-1.9.52-.73.03-1.46-.28-2.18-.94-.46-.4-1.06-1.1-1.8-2.1-.8-1.07-1.45-2.31-1.97-3.73-.55-1.53-.83-3.02-.83-4.45 0-1.64.35-3.06 1.06-4.24a6.24 6.24 0 0 1 2.23-2.26 5.99 5.99 0 0 1 3.02-.85c.6 0 1.4.19 2.4.55.99.37 1.63.55 1.92.55.21 0 .93-.21 2.13-.63 1.14-.39 2.11-.55 2.9-.49 2.14.17 3.75 1.02 4.82 2.55-1.92 1.16-2.87 2.79-2.85 4.87.02 1.63.6 2.98 1.75 4.05.52.5 1.1.88 1.75 1.15-.14.4-.29.78-.46 1.16Z"/></svg>
+        </span>
+        <span class="label">Continue with Apple</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <button class="provider-btn" data-provider="x" type="button">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#ffffff" d="M18.24 2H21l-6.52 7.46L22.2 22h-6.02l-4.71-6.17L5.06 22H2.3l6.98-7.98L1.5 2h6.17l4.26 5.64L18.24 2Zm-1.06 18.17h1.67L7.9 3.73H6.1l11.08 16.44Z"/></svg>
+        </span>
+        <span class="label">Continue with X</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <button class="provider-btn" data-provider="vk" type="button">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#0077FF" d="M2 11.53C2 6.4 2 3.84 3.6 2.22 5.2.6 7.76.6 12.9.6h.2c5.13 0 7.69 0 9.29 1.62C24 3.84 24 6.4 24 11.53v.94c0 5.13 0 7.7-1.6 9.31-1.61 1.62-4.17 1.62-9.3 1.62h-.2c-5.13 0-7.69 0-9.3-1.62C2 20.17 2 17.6 2 12.47v-.94Z"/><path fill="#fff" d="M12.79 17.29c-5.04 0-7.92-3.46-8.04-9.22h2.55c.08 4.19 1.94 5.96 3.4 6.33V8.07h2.4v3.65c1.45-.16 2.97-1.8 3.48-3.65h2.4c-.39 2.28-2.03 3.92-3.19 4.6 1.16.55 3.03 1.98 3.74 4.62h-2.64c-.55-1.77-1.94-3.14-3.79-3.32v3.32h-.31Z"/></svg>
+        </span>
+        <span class="label">Continue with VK</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+    </div>
+
+    <div class="divider">secure sign-in</div>
+
+    <p class="terms">By continuing, you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
+  </main>
+
+  <script>
+    // ---------------------------------------------------------------
+    // Login-selection page logic.
+    //
+    // This file NEVER builds a provider's OAuth authorization URL,
+    // never touches a client secret, and never asks for a password.
+    // It only tells the backend "the user picked <provider>" and lets
+    // the backend (server/server.js) redirect to that provider's real,
+    // official OAuth endpoint with the server's own client ID, PKCE
+    // challenge and CSRF state. See README.md for setup.
+    // ---------------------------------------------------------------
+
+    const buttons = document.querySelectorAll(".provider-btn");
+    const errorBanner = document.getElementById("errorBanner");
+    const errorText = document.getElementById("errorText");
+
+    function showError(message) {
+      errorText.textContent = message || "Authentication failed. Please try again.";
+      errorBanner.classList.add("show");
+    }
+
+    function clearError() {
+      errorBanner.classList.remove("show");
+    }
+
+    function setLoading(btn, isLoading) {
+      btn.classList.toggle("loading", isLoading);
+      buttons.forEach((b) => { if (b !== btn) b.disabled = isLoading; });
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        clearError();
+        const provider = btn.dataset.provider;
+        setLoading(btn, true);
+
+        try {
+          // The backend redirects the browser straight to the provider's
+          // official authorization endpoint — this fetch is only used to
+          // fail fast (e.g. provider not configured on the server) before
+          // we navigate away.
+          const res = await fetch(`/auth/${provider}/start`, {
+            method: "GET",
+            headers: { "Accept": "application/json" },
+          });
+
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.message || "This sign-in option is unavailable right now.");
+          }
+
+          const data = await res.json();
+          if (!data.authorizationUrl) {
+            throw new Error("Could not start sign-in. Please try again.");
+          }
+
+          // Full-page navigation to the provider's real login screen.
+          window.location.href = data.authorizationUrl;
+        } catch (err) {
+          setLoading(btn, false);
+          showError(err.message);
         }
+      });
+    });
 
-        // REDIRECT SYSTEM (Check if this is a short link click)
-        // Returns true if we're handling a redirect (so callers can skip other UI setup)
-        function checkRedirect() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const shortId = urlParams.get('id');
-
-            if (shortId) {
-                document.getElementById('mainContent').style.display = 'none';
-                document.body.innerHTML = ""; // blank page, no visible message while redirecting
-
-                database.ref('links/' + shortId).once('value', (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        handleLinkClick(shortId, data.original, data.clicks || 0);
-                    } else {
-                        alert("Invalid Link!");
-                        window.location.href = window.location.origin + window.location.pathname;
-                    }
-                });
-                return true;
-            }
-            return false;
-        }
-
-        // LOAD UI
-        function loadHistory() {
-            database.ref('links').on('value', (snapshot) => {
-                const linksList = document.getElementById('linksList');
-                const emptyState = document.getElementById('emptyState');
-                if (!linksList || !emptyState) return; // page navigated away (e.g. redirect)
-                linksList.innerHTML = '';
-                const data = snapshot.val();
-                if (data) {
-                    emptyState.style.display = 'none';
-                    Object.keys(data).reverse().forEach(id => renderCard({ id, ...data[id] }));
-                } else {
-                    emptyState.style.display = 'block';
-                    emptyState.textContent = 'No links found.';
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Only load the history UI if we're not in the middle of a redirect
-            if (!checkRedirect()) {
-                loadHistory();
-            }
-        });
-
-        // CREATE LINK
-        function createLink() {
-            const input = document.getElementById('urlInput');
-            let url = input.value.trim();
-            if (!url) return;
-            if (!url.startsWith('http')) url = 'https://' + url;
-            const id = Math.random().toString(36).substring(7);
-            database.ref('links/' + id).set({
-                original: url, short: APP_DOMAIN + id, clicks: 0
-            }).then(() => {
-                input.value = '';
-            });
-        }
-        document.getElementById('shortenBtn').onclick = createLink;
-        document.getElementById('urlInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') createLink();
-        });
-
-        function renderCard(data) {
-            const card = document.createElement('div');
-            card.className = 'link-card';
-            card.id = `card-${data.id}`;
-            const safeOriginal = escapeHtml(data.original);
-            const safeShort = escapeHtml(data.short);
-            card.innerHTML = `
-                <div class="link-info">
-                    <span class="orig-url">${safeOriginal}</span>
-                    <div class="short-url-group">
-                        <a href="${safeShort}" class="short-url">${safeShort}</a>
-                        <span class="stats-badge">Clicks: ${data.clicks || 0}</span>
-                    </div>
-                </div>
-                <div class="action-group">
-                    <button class="icon-btn" onclick="copyLink('${data.short.replace(/'/g, "\\'")}', this)">COPY</button>
-                    <button class="icon-btn" onclick="showEdit('${data.id}')">EDIT</button>
-                    <button class="icon-btn" onclick="delLink('${data.id}')" style="color:#ef4444">DEL</button>
-                </div>`;
-            document.getElementById('linksList').appendChild(card);
-        }
-
-        function handleLinkClick(id, destination, currentClicks) {
-            const newCount = (currentClicks || 0) + 1;
-
-            // Fire-and-forget: don't block the redirect waiting for this write to confirm
-            database.ref('links/' + id + '/clicks').set(newCount);
-
-            const interval = parseInt(adSettings.clicks_interval) || 1;
-            if (adSettings.enabled && adSettings.link && (newCount % interval === 0)) {
-                window.open(adSettings.link, '_blank');
-                window.location.href = destination;
-            } else {
-                window.location.href = destination;
-            }
-        }
-
-        window.copyLink = (text, btn) => {
-            navigator.clipboard.writeText(text).then(() => {
-                const old = btn.textContent; btn.textContent = 'DONE';
-                setTimeout(() => btn.textContent = old, 1500);
-            });
-        };
-
-        window.showEdit = (id) => {
-            database.ref('links/' + id).once('value', (s) => {
-                const l = s.val();
-                if (!l) return;
-                const slug = l.short.split('id=')[1];
-                const card = document.getElementById(`card-${id}`);
-                card.innerHTML = `
-                <div class="edit-container">
-                    <input type="text" id="e-o-${id}" class="edit-input" value="${escapeHtml(l.original)}">
-                    <input type="text" id="e-s-${id}" class="edit-input" value="${escapeHtml(slug)}">
-                    <div class="edit-actions">
-                        <button class="btn-save" onclick="saveEdit('${id}')">Save Changes</button>
-                        <button class="btn-cancel" onclick="loadHistory()">Cancel</button>
-                    </div>
-                </div>`;
-            });
-        };
-
-        // FIXED: editing the slug used to only rename the "short" field while leaving the
-        // database key unchanged, so the new short link 404'd (redirect looks up by key).
-        // Now, if the slug changes, we move the record to a new key.
-        window.saveEdit = (id) => {
-            const oInput = document.getElementById(`e-o-${id}`);
-            const sInput = document.getElementById(`e-s-${id}`);
-            if (!oInput || !sInput) return;
-
-            let o = oInput.value.trim();
-            let s = sInput.value.trim().replace(/\s+/g, '-');
-            if (!o || !s) return;
-            if (!o.startsWith('http')) o = 'https://' + o;
-
-            if (s === id) {
-                // slug unchanged, just update the URL
-                database.ref('links/' + id).update({ original: o, short: APP_DOMAIN + s });
-                return;
-            }
-
-            // slug changed: make sure the new slug isn't already taken, then move the record
-            database.ref('links/' + s).once('value', (existing) => {
-                if (existing.exists()) {
-                    alert('That short link is already taken. Choose a different one.');
-                    return;
-                }
-                database.ref('links/' + id).once('value', (snap) => {
-                    const data = snap.val() || {};
-                    const newData = { ...data, original: o, short: APP_DOMAIN + s };
-                    database.ref('links/' + s).set(newData).then(() => {
-                        database.ref('links/' + id).remove();
-                    });
-                });
-            });
-        };
-
-        window.delLink = (id) => { if (confirm("Delete this link?")) database.ref('links/' + id).remove(); };
-    </script>
+    // Surface errors the backend attaches after a failed/cancelled callback,
+    // e.g. /?error=access_denied — never render raw provider error payloads.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error")) {
+      showError("Sign-in was cancelled or could not be completed.");
+      // Clean the URL so a refresh doesn't re-trigger the banner.
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  </script>
 </body>
 </html>
