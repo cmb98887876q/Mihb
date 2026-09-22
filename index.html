@@ -22,7 +22,7 @@
   --muted: #94a3b8; 
   --line: rgba(255, 255, 255, 0.08); 
   --accent-red: #ff0015; 
-  --accent-glow: rgba(255, 0, 21, 0.8); 
+  --accent-glow: rgba(255, 0, 21, 0.45); 
   --glass-bg: rgba(10, 10, 14, 0.85); 
   --card-bg: #070710; 
   --purple: #9130ff; 
@@ -453,32 +453,36 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   display: flex; 
   align-items: flex-end; 
   justify-content: center; 
-  padding: 20px; 
+  padding: 20px 12px; 
   z-index: 2; 
 } 
 
-/* GLOWING PILL BUY NOW BUTTON (REF IMAGE STYLE) */ 
+/* BALANCED GLOWING PILL BUY NOW BUTTON (FIXED ALIGNMENT & SOFT GLOW) */ 
 .buy-now-btn { 
   color: #ffffff; 
-  font-size: 14px; 
+  font-size: 12px; 
   font-weight: 800; 
   background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
-  padding: 12px 22px; 
+  padding: 10px 14px; 
   border-radius: 50px; 
-  box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 0 15px var(--accent-glow), inset 0 2px 3px rgba(255, 255, 255, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.4); 
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; 
-  letter-spacing: 0.8px; 
+  letter-spacing: 0.5px; 
   text-transform: uppercase; 
   cursor: pointer; 
-  border: 1px solid rgba(255, 100, 100, 0.5); 
+  border: 1px solid rgba(255, 100, 100, 0.4); 
   display: inline-flex; 
   align-items: center; 
-  gap: 8px; 
+  justify-content: center; 
+  gap: 6px; 
+  width: 100%; 
+  max-width: 160px; 
+  white-space: nowrap; 
 } 
 .buy-now-btn:hover { 
   background: linear-gradient(135deg, #ff333f 0%, #e60012 100%); 
-  transform: scale(1.06); 
-  box-shadow: 0 0 35px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+  transform: scale(1.04); 
+  box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.4); 
 } 
 
 .collections-footer-quote { 
