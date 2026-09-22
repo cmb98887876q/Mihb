@@ -77,64 +77,20 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 -1px 0 0 rgba(255, 255, 255, 0.06); 
 } 
 
-/* BRAND LOGO ENHANCED */ 
+/* BRAND LOGO IMAGE STYLING */ 
 .brand-logo { 
   display: flex; 
   align-items: center; 
-  gap: 14px; 
   text-decoration: none; 
   user-select: none; 
 } 
-.logo-icon-wrapper { 
-  position: relative; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  width: 42px; 
+.brand-logo-img { 
   height: 42px; 
-  border-radius: 12px; 
-  background: linear-gradient(135deg, rgba(229, 9, 20, 0.25) 0%, rgba(20, 20, 20, 0.6) 100%); 
-  border: 1px solid rgba(229, 9, 20, 0.5); 
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3); 
+  width: auto; 
+  object-fit: contain; 
+  display: block; 
 } 
-.logo-icon { 
-  font-size: 22px; 
-  font-weight: 900; 
-  color: var(--accent-red); 
-  line-height: 1; 
-  animation: logoGlow 2.5s ease-in-out infinite alternate; 
-} 
-@keyframes logoGlow { 
-  from { transform: scale(1); filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.6)); } 
-  to { transform: scale(1.12); filter: drop-shadow(0 0 14px rgba(229, 9, 20, 1)); } 
-} 
-.brand-text { 
-  display: flex; 
-  flex-direction: column; 
-  line-height: 1.1; 
-} 
-.brand-top { 
-  font-size: 10px; 
-  font-weight: 800; 
-  letter-spacing: 2.5px; 
-  color: var(--muted); 
-  text-transform: uppercase; 
-} 
-.brand-animated { 
-  font-size: 18px; 
-  font-weight: 900; 
-  letter-spacing: 2px; 
-  text-transform: uppercase; 
-  background: linear-gradient(90deg, #ffffff 0%, #e50914 50%, #ffffff 100%); 
-  background-size: 200% auto; 
-  color: transparent; 
-  -webkit-background-clip: text; 
-  background-clip: text; 
-  animation: shineText 4s linear infinite; 
-} 
-@keyframes shineText { 
-  to { background-position: 200% center; } 
-} 
+
 .header-actions { 
   display: flex; 
   align-items: center; 
@@ -457,7 +413,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   z-index: 2; 
 } 
 
-/* BALANCED GLOWING PILL BUY NOW BUTTON (FIXED ALIGNMENT & SOFT GLOW) */ 
+/* BALANCED GLOWING PILL BUY NOW BUTTON */ 
 .buy-now-btn { 
   color: #ffffff; 
   font-size: 12px; 
@@ -538,14 +494,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   display: flex; 
   flex-direction: column; 
   gap: 16px; 
-} 
-.footer-brand-logo { 
-  color: #ffffff; 
-  font-weight: 900; 
-  font-size: 18px; 
-  letter-spacing: 2px; 
-  text-decoration: none; 
-  display: inline-block; 
 } 
 .footer-socials { 
   display: flex; 
@@ -1057,13 +1005,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   <!-- ENHANCED TOP HEADER --> 
   <header class="top-header"> 
     <a href="/home" class="brand-logo" onclick="navigateTo(event, '/home')"> 
-      <div class="logo-icon-wrapper"> 
-        <span class="logo-icon">▲</span> 
-      </div> 
-      <div class="brand-text"> 
-        <span class="brand-top">DHRUV RATHEE</span> 
-        <span class="brand-animated">ACADEMY</span> 
-      </div> 
+      <img src="logo.png" alt="Logo" class="brand-logo-img"> 
     </a> 
     <div class="header-actions"> 
       <a href="/login" class="login-btn" onclick="navigateTo(event, '/login')">Login</a> 
@@ -1185,9 +1127,11 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     <!-- PROFESSIONAL FOOTER --> 
     <footer class="footer"> 
       <div class="footer-top-row"> 
-        <!-- Col 1: Brand & Socials --> 
+        <!-- Col 1: Brand Logo & Socials --> 
         <div class="footer-col"> 
-          <a href="/home" class="footer-brand-logo">FURRION</a> 
+          <a href="/home" class="brand-logo"> 
+            <img src="logo.png" alt="Logo" class="brand-logo-img"> 
+          </a> 
           <div class="footer-socials"> 
             <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
             <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a> 
@@ -1209,19 +1153,19 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         </div> 
         <!-- Col 3: Company Links --> 
         <div class="footer-col"> 
-          <h4 class="footer-heading">Furrion</h4> 
+          <h4 class="footer-heading">Company</h4> 
           <ul class="footer-links-list"> 
-            <li><a href="#">About Furrion</a></li> 
-            <li><a href="#">Furrion Design</a></li> 
+            <li><a href="#">About Us</a></li> 
+            <li><a href="#">Design</a></li> 
             <li><a href="#">Careers</a></li> 
             <li><a href="#">Newsroom</a></li> 
-            <li><a href="#">Furrion Access</a></li> 
+            <li><a href="#">Access</a></li> 
             <li><a href="#">Affiliates</a></li> 
           </ul> 
         </div> 
         <!-- Col 4: Newsletter Signup --> 
         <div class="footer-col"> 
-          <div class="footer-newsletter-text"><i class="fa-regular fa-envelope" style="margin-right: 8px;"></i> Stay up to date on the latest from Furrion</div> 
+          <div class="footer-newsletter-text"><i class="fa-regular fa-envelope" style="margin-right: 8px;"></i> Stay up to date on the latest from us</div> 
           <div class="footer-newsletter-form"> 
             <input type="email" placeholder="Enter your e-mail address" class="footer-input"> 
             <button class="footer-signup-btn">Sign Up</button> 
@@ -1236,7 +1180,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <a href="#">Privacy Policy</a> 
           <a href="#">Shipping, Returns & Warranty</a> 
           <a href="#">Trademark and Copyright Guidelines</a> 
-          <a href="#">Furrion Patents</a> 
+          <a href="#">Patents</a> 
           <a href="#">Business Partner Code of Conduct</a> 
           <a href="#">Data Plans Terms and Conditions</a> 
         </div> 
