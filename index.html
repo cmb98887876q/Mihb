@@ -405,13 +405,13 @@
 <body>
 
   <!-- ========================================================= -->
-  <!-- PAGE 1: HOME PAGE SECTION                                 -->
+  <!-- PAGE 1: HOME PAGE SECTION (/home)                         -->
   <!-- ========================================================= -->
   <div id="home-page-section" class="page-section active-page">
     
     <!-- ENHANCED TOP HEADER -->
     <header class="top-header">
-      <a href="#home" class="brand-logo">
+      <a href="/home" class="brand-logo" onclick="navigateTo(event, '/home')">
         <div class="logo-icon-wrapper">
           <span class="logo-icon">▲</span>
         </div>
@@ -422,7 +422,7 @@
       </a>
 
       <div class="header-actions">
-        <a href="#login" class="login-btn">Login</a>
+        <a href="/login" class="login-btn" onclick="navigateTo(event, '/login')">Login</a>
         <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()">
           <span></span>
           <span></span>
@@ -434,13 +434,13 @@
     <!-- TOP DROPDOWN PANEL -->
     <div id="topDropdownPanel" class="top-dropdown-panel">
       <nav class="top-nav">
-        <a href="#services" onclick="closeMenu()">Services</a>
-        <a href="#work" onclick="closeMenu()">Work</a>
-        <a href="#creators" onclick="closeMenu()">Creators</a>
-        <a href="#blogs" onclick="closeMenu()">Blogs</a>
-        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="/services" onclick="navigateTo(event, '/services')">Services</a>
+        <a href="/work" onclick="navigateTo(event, '/work')">Work</a>
+        <a href="/creators" onclick="navigateTo(event, '/creators')">Creators</a>
+        <a href="/blogs" onclick="navigateTo(event, '/blogs')">Blogs</a>
+        <a href="/about" onclick="navigateTo(event, '/about')">About</a>
       </nav>
-      <a href="#contact" class="menu-contact-btn" onclick="closeMenu()">
+      <a href="/contact" class="menu-contact-btn" onclick="navigateTo(event, '/contact')">
         Contact Us <span class="arrow">→</span>
       </a>
     </div>
@@ -497,7 +497,7 @@
                       data-title="Custom Graphic T-Shirt" 
                       data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" 
                       data-price="199" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -512,7 +512,7 @@
                       data-title="Urban Oversized Hoodie" 
                       data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" 
                       data-price="299" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -527,7 +527,7 @@
                       data-title="Premium Leather Jacket" 
                       data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" 
                       data-price="499" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -542,7 +542,7 @@
                       data-title="Classic Crew Sweatshirt" 
                       data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" 
                       data-price="249" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -557,7 +557,7 @@
                       data-title="Athletic Fit Tracksuit" 
                       data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" 
                       data-price="399" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -572,7 +572,7 @@
                       data-title="Limited Edition Streetwear" 
                       data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" 
                       data-price="599" 
-                      onclick="openCourseSection(this)">
+                      onclick="openCheckoutSection(this)">
                 Buy Now 🛒
               </button>
             </div>
@@ -584,7 +584,7 @@
           New Attitude Every Week, And We In A Few Items
         </p>
 
-        <a href="#explore" class="explore-btn">Explore More <span>→</span></a>
+        <a href="/explore" class="explore-btn" onclick="navigateTo(event, '/explore')">Explore More <span>→</span></a>
       </section>
 
       <!-- FOOTER -->
@@ -593,11 +593,11 @@
           <div class="footer-grid">
             <section>
               <h2>menu</h2>
-              <a href="#services">Services</a>
-              <a href="#work">Work</a>
-              <a href="#creators">Creators</a>
-              <a href="#blogs">Blogs</a>
-              <a href="#about">About</a>
+              <a href="/services" onclick="navigateTo(event, '/services')">Services</a>
+              <a href="/work" onclick="navigateTo(event, '/work')">Work</a>
+              <a href="/creators" onclick="navigateTo(event, '/creators')">Creators</a>
+              <a href="/blogs" onclick="navigateTo(event, '/blogs')">Blogs</a>
+              <a href="/about" onclick="navigateTo(event, '/about')">About</a>
             </section>
 
             <section>
@@ -619,12 +619,12 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- PAGE 2: COURSES & CHECKOUT SECTION                        -->
+  <!-- PAGE 2: COURSES & CHECKOUT SECTION (/checkout)            -->
   <!-- ========================================================= -->
   <div id="courses-page-section" class="page-section">
     <!-- TOP NAV -->
     <nav class="courses-top-nav">
-      <button class="back-home-btn" onclick="openHomeSection()">
+      <button class="back-home-btn" onclick="navigateTo(event, '/home')">
         <i class="fa-solid fa-arrow-left"></i> Home
       </button>
       <span style="font-size:13px; color:#8e95a5; font-weight:600;">Product Checkout</span>
@@ -736,7 +736,7 @@
           </div>
         </div>
 
-        <button onclick="openHomeSection()" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Home</button>
+        <button onclick="navigateTo(event, '/home')" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Home</button>
       </div>
     </div>
 
@@ -769,21 +769,20 @@
     let selectedPrice = 199;
 
     /* ========================================================= */
-    /* SINGLE PAGE APPLICATION (SPA) ROUTER WITH HISTORY STACK   */
+    /* CLEAN EXTENSIONLESS URLS & SPA ROUTER ENGINE              */
     /* ========================================================= */
     
-    // Page Route Renderer
     function handleRouting() {
-      const hash = window.location.hash || '#home';
+      const path = window.location.pathname;
+      const search = window.location.search;
 
-      if (hash.startsWith('#checkout')) {
-        // Parse Query Params if available
-        const params = new URLSearchParams(hash.split('?')[1] || '');
+      if (path.startsWith('/checkout')) {
+        const params = new URLSearchParams(search);
         const title = params.get('title') || 'Featured Product';
         const imgUrl = params.get('img') || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800';
         basePrice = parseFloat(params.get('price')) || 199;
 
-        // Render Checkout UI
+        // Render Checkout View
         document.getElementById('home-page-section').classList.remove('active-page');
         document.getElementById('courses-page-section').classList.add('active-page');
 
@@ -798,7 +797,7 @@
         unlockScroll();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Default: Render Home Page UI
+        // Render Default Home View
         document.getElementById('courses-page-section').classList.remove('active-page');
         document.getElementById('home-page-section').classList.add('active-page');
         unlockScroll();
@@ -806,37 +805,37 @@
       }
     }
 
-    // Back / Forward Browser Listener
+    // Unified Extensionless Navigation Handler
+    function navigateTo(event, targetPath) {
+      if (event) event.preventDefault();
+      
+      // Push extensionless path using HTML5 History API
+      window.history.pushState({}, '', targetPath);
+      closeMenu();
+      handleRouting();
+    }
+
+    // Handle Browser Back/Forward navigation
     window.addEventListener('popstate', handleRouting);
 
-    // Initial Routing Load & Push State Base Setup
+    // Initial Setup on Page Load
     window.addEventListener('DOMContentLoaded', () => {
       animateCounter(1000, 1800);
       
-      if (!window.location.hash) {
-        history.replaceState({ page: 'home' }, '', '#home');
+      // Default to /home if path is root or empty
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        window.history.replaceState({}, '', '/home');
       }
       handleRouting();
     });
 
-    /* ACTION HANDLERS WITH URL ROUTING */
-    function openCourseSection(btnElement) {
+    function openCheckoutSection(btnElement) {
       const title = btnElement.getAttribute('data-title') || 'Featured Product';
       const imgUrl = btnElement.getAttribute('data-img') || '';
       const price = btnElement.getAttribute('data-price') || '199';
 
-      // Push Checkout Route to Browser History Stack
-      const routeUrl = `#checkout?title=${encodeURIComponent(title)}&img=${encodeURIComponent(imgUrl)}&price=${price}`;
-      window.location.hash = routeUrl;
-    }
-
-    function openHomeSection() {
-      // Trigger Route to Home Page
-      if (window.location.hash.startsWith('#checkout')) {
-        history.back(); // One-by-one back behavior
-      } else {
-        window.location.hash = '#home';
-      }
+      const checkoutUrl = `/checkout?title=${encodeURIComponent(title)}&img=${encodeURIComponent(imgUrl)}&price=${price}`;
+      navigateTo(null, checkoutUrl);
     }
 
     function updatePlanPrices() {
@@ -925,7 +924,7 @@
     /* RAZORPAY PAYMENT FUNCTION */
     function buyNowRazorpay() {
       const options = {
-        "key": "rzp_test_YOUR_KEY_HERE", // Insert your Razorpay Key ID
+        "key": "rzp_test_YOUR_KEY_HERE",
         "amount": selectedPrice * 100,
         "currency": "INR",
         "name": "Academy Store",
