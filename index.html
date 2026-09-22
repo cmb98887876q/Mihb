@@ -21,8 +21,8 @@
   --text: #ffffff; 
   --muted: #94a3b8; 
   --line: rgba(255, 255, 255, 0.08); 
-  --accent-red: #e50914; 
-  --accent-glow: rgba(229, 9, 20, 0.4); 
+  --accent-red: #ff0015; 
+  --accent-glow: rgba(255, 0, 21, 0.8); 
   --glass-bg: rgba(10, 10, 14, 0.85); 
   --card-bg: #070710; 
   --purple: #9130ff; 
@@ -456,21 +456,31 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   padding: 20px; 
   z-index: 2; 
 } 
+
+/* GLOWING PILL BUY NOW BUTTON (REF IMAGE STYLE) */ 
 .buy-now-btn { 
-  color: #fff; 
-  font-size: 13px; 
+  color: #ffffff; 
+  font-size: 14px; 
   font-weight: 800; 
-  background: var(--accent-red); 
-  padding: 8px 18px; 
-  border-radius: 30px; 
-  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5); 
-  transition: transform 0.2s ease, background 0.2s ease; 
-  letter-spacing: 0.5px; 
+  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
+  padding: 12px 22px; 
+  border-radius: 50px; 
+  box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; 
+  letter-spacing: 0.8px; 
   text-transform: uppercase; 
   cursor: pointer; 
-  border: none; 
+  border: 1px solid rgba(255, 100, 100, 0.5); 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
 } 
-.buy-now-btn:hover { background: #ff1e27; transform: scale(1.05); } 
+.buy-now-btn:hover { 
+  background: linear-gradient(135deg, #ff333f 0%, #e60012 100%); 
+  transform: scale(1.06); 
+  box-shadow: 0 0 35px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+} 
+
 .collections-footer-quote { 
   max-width: 800px; 
   margin: 40px auto 25px; 
@@ -502,9 +512,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-3px); 
 } 
 
-/* ========================================================= */ 
-/* PROFESSIONAL FOOTER[span_1](start_span)[span_1](end_span) */ 
-/* ========================================================= */ 
+/* PROFESSIONAL FOOTER */ 
 .footer { 
   background: #09090c; 
   color: #94a3b8; 
@@ -931,21 +939,29 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 .price { font-size: 36px; font-weight: 900; color: #fff; } 
 .old-price { font-size: 18px; color: #555968; text-decoration: line-through; font-weight: 600; } 
 .discount-tag { background: #7b1fa2; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; } 
+
+/* MATCHING GLOWING PILL FOR FINAL BUY BUTTON */ 
 .final-buy-btn { 
-  border: 0; 
+  border: 1px solid rgba(255, 100, 100, 0.5); 
   color: white; 
-  font-weight: 700; 
-  font-size: 18px; 
-  padding: 14px 36px; 
-  border-radius: 30px; 
+  font-weight: 800; 
+  font-size: 16px; 
+  padding: 14px 34px; 
+  border-radius: 50px; 
   cursor: pointer; 
-  background: linear-gradient(90deg, #9d26ff, #20a4ff); 
-  box-shadow: 0 4px 20px rgba(157, 38, 255, 0.4); 
+  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
+  box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
   display: flex; 
   align-items: center; 
   gap: 10px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.8px; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 } 
-.final-buy-btn:hover { transform: scale(1.03); box-shadow: 0 6px 25px rgba(157, 38, 255, 0.6); } 
+.final-buy-btn:hover { 
+  transform: scale(1.05); 
+  box-shadow: 0 0 35px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+} 
 
 /* SUCCESS SCREEN */ 
 .success-screen { 
@@ -1112,7 +1128,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">T-Shirts</span> 
           <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Custom Graphic T-Shirt" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Custom Graphic T-Shirt" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 2 --> 
@@ -1120,7 +1136,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">Hoodies</span> 
           <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Urban Oversized Hoodie" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Urban Oversized Hoodie" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 3 --> 
@@ -1128,7 +1144,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">Jackets</span> 
           <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Premium Leather Jacket" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" data-price="499" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Premium Leather Jacket" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" data-price="499" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 4 --> 
@@ -1136,7 +1152,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">Sweatshirts</span> 
           <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Classic Crew Sweatshirt" data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" data-price="249" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Classic Crew Sweatshirt" data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" data-price="249" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 5 --> 
@@ -1144,7 +1160,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">Tracksuits</span> 
           <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Athletic Fit Tracksuit" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" data-price="399" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Athletic Fit Tracksuit" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" data-price="399" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 6 --> 
@@ -1152,7 +1168,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <span class="collection-badge">More</span> 
           <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Limited Edition Streetwear" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" data-price="599" onclick="openCheckoutSection(this)"> Buy Now 🛒 </button> 
+            <button class="buy-now-btn" data-title="Limited Edition Streetwear" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" data-price="599" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
       </div> 
@@ -1162,7 +1178,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <a href="/explore" class="explore-btn" onclick="navigateTo(event, '/explore')">Explore More <span>→</span></a> 
     </section> 
 
-    <!-- PROFESSIONAL FOOTER[span_2](start_span)[span_2](end_span) --> 
+    <!-- PROFESSIONAL FOOTER --> 
     <footer class="footer"> 
       <div class="footer-top-row"> 
         <!-- Col 1: Brand & Socials --> 
