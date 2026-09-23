@@ -1017,6 +1017,1201 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 <body> 
 
 <!-- ========================================================= --> 
+<!-- PAGE 1: HOME PAGE SECTION (#home) --> 
+<!-- ========================================================= --> 
+<div id="home-page-section" class="page-section active-page"> 
+
+  <!-- ENHANCED TOP HEADER --> 
+  <header class="top-header"> 
+    <a href="#home" class="brand-logo" onclick="navigateTo(event, '#home')"> 
+      <img src="logo.png" alt="Logo" /> 
+    </a> 
+    <div class="header-actions"> 
+      <a href="#login" class="login-btn" onclick="navigateTo(event, '#login')">Login</a> 
+      <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()"> 
+        <span></span> 
+        <span></span> 
+        <span></span> 
+      </div> 
+    </div> 
+  </header> 
+
+  <!-- TOP DROPDOWN PANEL --> 
+  <div id="topDropdownPanel" class="top-dropdown-panel"> 
+    <nav class="top-nav"> 
+      <a href="#services" onclick="navigateTo(event, '#services')">Services</a> 
+      <a href="#work" onclick="navigateTo(event, '#work')">Work</a> 
+      <a href="#creators" onclick="navigateTo(event, '#creators')">Creators</a> 
+      <a href="#blogs" onclick="navigateTo(event, '#blogs')">Blogs</a> 
+      <a href="#about" onclick="navigateTo(event, '#about')">About</a> 
+    </nav> 
+    <a href="#contact" class="menu-contact-btn" onclick="navigateTo(event, '#contact')"> 
+      Contact Us <span class="arrow">→</span> 
+    </a> 
+  </div> 
+  <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div> 
+
+  <!-- SITE CONTENT --> 
+  <div id="siteContent" class="site-content"> 
+
+    <!-- BACKGROUND VIDEO SECTION --> 
+    <section class="video-section"> 
+      <video id="bgVideo" autoplay muted loop playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" preload="auto"> 
+        <source src="background.mp4" type="video/mp4" /> 
+      </video> 
+      <div class="video-overlay"> 
+        <h1 class="hero-headline"> 
+          DOMINATE THE <br /> 
+          <span class="highlight-text">BATTLEFIELD</span> 
+        </h1> 
+        <div class="customers-counter-container"> 
+          <div class="counter-icon"> 
+            <svg viewBox="0 0 24 24"> 
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> 
+              <circle cx="9" cy="7" r="4"></circle> 
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> 
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> 
+            </svg> 
+          </div> 
+          <span class="counter-number" id="customerCount">0</span> 
+          <span class="counter-label">Happy Customers</span> 
+        </div> 
+      </div> 
+    </section> 
+
+    <!-- COLLECTIONS SECTION --> 
+    <section class="collections-section"> 
+      <div class="speech-badge badge-left">Be Your Own Style</div> 
+      <div class="speech-badge badge-right">Style Speaks Louder</div> 
+      <div class="collections-header"> 
+        <h3>The Ultimate</h3> 
+        <h2>COLLECTIONS</h2> 
+      </div> 
+      <div class="collections-fan-container"> 
+        <!-- Card 1 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">T-Shirts</span> 
+          <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Custom Graphic T-Shirt" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+        <!-- Card 2 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">Hoodies</span> 
+          <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Urban Oversized Hoodie" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+        <!-- Card 3 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">Jackets</span> 
+          <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Premium Leather Jacket" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" data-price="499" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+        <!-- Card 4 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">Sweatshirts</span> 
+          <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Classic Crew Sweatshirt" data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" data-price="249" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+        <!-- Card 5 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">Tracksuits</span> 
+          <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Athletic Fit Tracksuit" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" data-price="399" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+        <!-- Card 6 --> 
+        <div class="collection-card"> 
+          <span class="collection-badge">More</span> 
+          <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
+          <div class="collection-card-overlay"> 
+            <button class="buy-now-btn" data-title="Limited Edition Streetwear" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" data-price="599" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+          </div> 
+        </div> 
+      </div> 
+      <p class="collections-footer-quote"> 
+        We Do Not Create Our Collections To Showcase We Create<br /> New Attitude Every Week, And We In A Few Items 
+      </p> 
+      <a href="#explore" class="explore-btn" onclick="navigateTo(event, '#explore')">Explore More <span>→</span></a> 
+    </section> 
+
+    <!-- PROFESSIONAL FOOTER --> 
+    <footer class="footer"> 
+      <div class="footer-top-row"> 
+        <!-- Col 1: Brand Logo & Socials --> 
+        <div class="footer-col"> 
+          <a href="#home" class="footer-brand-logo">
+            <img src="logo.png" alt="Logo" />
+          </a> 
+          <div class="footer-socials"> 
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a> 
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a> 
+            <a href="#" class="footer-social-link"><i class="fa-brands fa-youtube"></i></a> 
+          </div> 
+        </div> 
+        <!-- Col 2: Support Links --> 
+        <div class="footer-col"> 
+          <h4 class="footer-heading">Support</h4> 
+          <ul class="footer-links-list"> 
+            <li><a href="#">Contact Us</a></li> 
+            <li><a href="#">FAQ</a></li> 
+            <li><a href="#">Downloads</a></li> 
+            <li><a href="#">Locate A Dealer</a></li> 
+            <li><a href="#">Product Registration</a></li> 
+            <li><a href="#">Spare Parts</a></li> 
+          </ul> 
+        </div> 
+        <!-- Col 3: Company Links --> 
+        <div class="footer-col"> 
+          <h4 class="footer-heading">Company</h4> 
+          <ul class="footer-links-list"> 
+            <li><a href="#">About Us</a></li> 
+            <li><a href="#">Our Design</a></li> 
+            <li><a href="#">Careers</a></li> 
+            <li><a href="#">Newsroom</a></li> 
+            <li><a href="#">Access</a></li> 
+            <li><a href="#">Affiliates</a></li> 
+          </ul> 
+        </div> 
+        <!-- Col 4: Newsletter Signup --> 
+        <div class="footer-col"> 
+          <div class="footer-newsletter-text"><i class="fa-regular fa-envelope" style="margin-right: 8px;"></i> Stay up to date on the latest updates</div> 
+          <div class="footer-newsletter-form"> 
+            <input type="email" placeholder="Enter your e-mail address" class="footer-input"> 
+            <button class="footer-signup-btn">Sign Up</button> 
+          </div> 
+        </div> 
+      </div> 
+
+      <!-- Footer Bottom Legal Strip --> 
+      <div class="footer-bottom-row"> 
+        <div class="footer-legal-links"> 
+          <a href="#">Terms and Conditions</a> 
+          <a href="#">Privacy Policy</a> 
+          <a href="#">Shipping, Returns & Warranty</a> 
+          <a href="#">Trademark and Copyright Guidelines</a> 
+          <a href="#">Patents</a> 
+          <a href="#">Business Partner Code of Conduct</a> 
+          <a href="#">Data Plans Terms and Conditions</a> 
+        </div> 
+        <div class="footer-copyright"> 
+          © 2026 Copyright 
+        </div> 
+      </div> 
+    </footer> 
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button> 
+  </div> 
+</div> 
+
+<!-- ========================================================= --> 
+<!-- PAGE 2: COURSES & CHECKOUT SECTION (#checkout) --> 
+<!-- ========================================================= --> 
+<div id="courses-page-section" class="page-section"> 
+  <!-- TOP NAV --> 
+  <nav class="courses-top-nav"> 
+    <button class="back-home-btn" onclick="navigateTo(event, '#home')"> 
+      <i class="fa-solid fa-arrow-left"></i> Home 
+    </button> 
+    <!-- Logo displayed in the center --> 
+    <a href="#home" class="brand-logo" onclick="navigateTo(event, '#home')" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
+      <img src="logo.png" alt="Logo" style="height: 32px;" /> 
+    </a> 
+    <div></div> <!-- Empty placeholder for flex alignment --> 
+  </nav> 
+  <main class="courses-container" id="courses-main-content"> 
+    <div class="logo-wrapper"> 
+      <div class="courses-logo"> 
+        <i class="fa-solid fa-aperture courses-logo-icon"></i> 
+      </div> 
+    </div> 
+    <!-- DYNAMIC PRODUCT TITLE --> 
+    <h1 class="product-title" id="product-title-display">Product Name</h1> 
+    <div class="by-studio">By Official Store</div> 
+    <!-- DYNAMIC PRODUCT IMAGE --> 
+    <section class="hero-product-image-box"> 
+      <div class="product-card-inner"> 
+        <img id="product-main-img" src="" alt="Selected Product Image"> 
+      </div> 
+    </section> 
+    <!-- Access Validity Selection --> 
+    <section class="duration-selection"> 
+      <div class="duration-header"> 
+        <div class="duration-title"> 
+          <i class="fa-solid fa-shield-halved"></i> Choose Access Duration 
+        </div> 
+        <div style="font-size: 11px; color: #8e95a5;">Instant Activation After Purchase</div> 
+      </div> 
+      <div class="duration-options"> 
+        <label class="duration-card" onclick="selectAccess('7 Days', 0.75, this)"> 
+          <input type="radio" name="access_plan" value="7 Days"> 
+          <div class="duration-days">7 Days</div> 
+          <div class="duration-price"><span class="val" id="plan-price-1">₹0</span><span class="old-val" id="plan-old-price-1">₹0</span></div> 
+          <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+        </label> 
+        <label class="duration-card active" onclick="selectAccess('15 Days', 1, this)"> 
+          <span class="duration-badge">POPULAR</span> 
+          <input type="radio" name="access_plan" value="15 Days" checked> 
+          <div class="duration-days">15 Days</div> 
+          <div class="duration-price"><span class="val" id="plan-price-2">₹0</span><span class="old-val" id="plan-old-price-2">₹0</span></div> 
+          <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+        </label> 
+        <label class="duration-card" onclick="selectAccess('30 Days', 1.5, this)"> 
+          <span class="duration-badge" style="background: linear-gradient(90deg, #ff2a2a, #ff7a2a);">BEST VALLE</span> 
+          <input type="radio" name="access_plan" value="30 Days"> 
+          <div class="duration-days">30 Days</div> 
+          <div class="duration-price"><span class="val" id="plan-price-3">₹0</span><span class="old-val" id="plan-old-price-3">₹0</span></div> 
+          <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+        </label> 
+      </div> 
+    </section> 
+    <!-- Stats Grid --> 
+    <section class="stats-grid"> 
+      <div class="stat-item"> 
+        <i class="fa-solid fa-truck-fast"></i> 
+        <b>Fast Delivery</b> 
+        <span>Shipping</span> 
+      </div> 
+      <div class="stat-item"> 
+        <i class="fa-solid fa-shield-check"></i> 
+        <b>100% Original</b> 
+        <span>Quality</span> 
+      </div> 
+      <div class="stat-item"> 
+        <i class="fa-solid fa-rotate-left"></i> 
+        <b>7 Days</b> 
+        <span>Return Policy</span> 
+      </div> 
+      <div class="stat-item"> 
+        <i class="fa-solid fa-key"></i> 
+        <b id="stat-access-text">15 Days Access</b> 
+        <span>Validity</span> 
+      </div> 
+    </section> 
+    <h3><i class="fa-solid fa-star" style="color:#ff2d2d;"></i> Key Features:</h3> 
+    <div class="checks-grid" style="margin-top: 15px;"> 
+      <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Premium Quality Fabric & Print</div> 
+      <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Comfortable All-Day Fit</div> 
+      <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> High Durability & Easy Wash</div> 
+      <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Exclusive Limited Edition Design</div> 
+    </div> 
+  </main> 
+  <!-- SUCCESS SCREEN --> 
+  <div class="courses-container"> 
+    <div class="success-screen" id="success-screen"> 
+      <div class="success-icon"><i class="fa-solid fa-check"></i></div> 
+      <h2 style="font-size:28px; color:#fff; margin-bottom:8px;">Payment Successful!</h2> 
+      <p style="color:#8e95a5; margin-bottom:30px;">Thank you for your purchase. Your order has been placed successfully.</p> 
+      <div class="download-box"> 
+        <h3 style="justify-content:center; margin-top:0; color:#fff;"><i class="fa-solid fa-receipt"></i> Order Summary</h3> 
+        <a href="#" class="download-btn" id="download-link"><i class="fa-solid fa-file-pdf"></i> Download Receipt</a> 
+      </div> 
+      <div class="key-box"> 
+        <div style="font-size: 13px; color: #ff2d2d; font-weight: 700;" id="key-plan-label">TRACKING CODE</div> 
+        <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:10px;"> 
+          <span style="font-family:monospace; font-size:20px; color:#ff334b; font-weight:700;" id="generated-key">TRK-8829-XKEY</span> 
+          <button onclick="copyKey()" style="background:#ff2d2d; color:#fff; border:none; padding:6px 14px; border-radius:8px; font-weight:700; cursor:pointer;">Copy</button> 
+        </div> 
+      </div> 
+      <button onclick="navigateTo(event, '#home')" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Home</button> 
+    </div> 
+  </div> 
+  <!-- Sticky Bottom Buy Bar --> 
+  <div class="buybar" id="buybar"> 
+    <div class="price-container"> 
+      <span class="price" id="display-price">₹199</span> 
+      <span class="old-price" id="display-old-price">₹498</span> 
+      <span class="discount-tag">SPECIAL OFFER</span> 
+    </div> 
+    <button class="final-buy-btn" onclick="buyNowRazorpay()"> 
+      <i class="fa-solid fa-cart-shopping"></i> BUY NOW 
+    </button> 
+  </div> 
+</div> 
+
+<!-- SCRIPT --> 
+<script> 
+function unlockScroll() { 
+  document.body.style.overflow = 'auto'; 
+  document.body.style.overflowY = 'auto'; 
+  document.documentElement.style.overflow = 'auto'; 
+  document.documentElement.style.overflowY = 'auto'; 
+} 
+
+let basePrice = 199; 
+let selectedPlan = '15 Days'; 
+let selectedPrice = 199; 
+
+function handleRouting() { 
+  const hash = window.location.hash || '#home'; 
+  
+  if (hash.startsWith('#checkout')) { 
+    // Parse query parameters from hash string (e.g., #checkout?title=...&price=...)
+    const queryString = hash.includes('?') ? hash.split('?')[1] : ''; 
+    const params = new URLSearchParams(queryString); 
+    
+    const title = params.get('title') || 'Featured Product'; 
+    const imgUrl = params.get('img') || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800'; 
+    basePrice = parseFloat(params.get('price')) || 199; 
+    
+    document.getElementById('home-page-section').classList.remove('active-page'); 
+    document.getElementById('courses-page-section').classList.add('active-page'); 
+    document.getElementById('courses-main-content').style.display = 'block'; 
+    document.getElementById('buybar').style.display = 'flex'; 
+    document.getElementById('success-screen').style.display = 'none'; 
+    document.getElementById('product-title-display').innerText = title; 
+    document.getElementById('product-main-img').src = imgUrl; 
+    
+    updatePlanPrices(); 
+    unlockScroll(); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  } else { 
+    document.getElementById('courses-page-section').classList.remove('active-page'); 
+    document.getElementById('home-page-section').classList.add('active-page'); 
+    unlockScroll(); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  } 
+} 
+
+function navigateTo(event, targetHash) { 
+  if (event) event.preventDefault(); 
+  window.location.hash = targetHash; 
+  closeMenu(); 
+} 
+
+window.addEventListener('hashchange', handleRouting); 
+
+window.addEventListener('DOMContentLoaded', () => { 
+  animateCounter(1000, 1800); 
+  if (!window.location.hash) { 
+    window.location.hash = '#home'; 
+  } else { 
+    handleRouting(); 
+  } 
+}); 
+
+function openCheckoutSection(btnElement) { 
+  const title = btnElement.getAttribute('data-title') || 'Featured Product'; 
+  const imgUrl = btnElement.getAttribute('data-img') || ''; 
+  const price = btnElement.getAttribute('data-price') || '199'; 
+  const checkoutHash = `#checkout?title=${encodeURIComponent(title)}&img=${encodeURIComponent(imgUrl)}&price=${price}`; 
+  navigateTo(null, checkoutHash); 
+} 
+
+function updatePlanPrices() { 
+  const p1 = Math.round(basePrice * 0.75); 
+  const p2 = Math.round(basePrice); 
+  const p3 = Math.round(basePrice * 1.5); 
+  document.getElementById('plan-price-1').innerText = '₹' + p1; 
+  document.getElementById('plan-old-price-1').innerText = '₹' + Math.round(p1 * 2.5); 
+  document.getElementById('plan-price-2').innerText = '₹' + p2; 
+  document.getElementById('plan-old-price-2').innerText = '₹' + Math.round(p2 * 2.5); 
+  document.getElementById('plan-price-3').innerText = '₹' + p3; 
+  document.getElementById('plan-old-price-3').innerText = '₹' + Math.round(p3 * 2.5); 
+  selectedPrice = p2; 
+  document.getElementById('display-price').innerText = '₹' + p2; 
+  document.getElementById('display-old-price').innerText = '₹' + Math.round(p2 * 2.5); 
+} 
+
+const menuToggle = document.getElementById("menuToggle"); 
+const topDropdownPanel = document.getElementById("topDropdownPanel"); 
+const menuOverlay = document.getElementById("menuOverlay"); 
+let counterAnimated = false; 
+
+function animateCounter(targetNumber, duration) { 
+  if (counterAnimated) return; 
+  counterAnimated = true; 
+  const counterElement = document.getElementById("customerCount"); 
+  const startTime = performance.now(); 
+  function updateNumber(currentTime) { 
+    const elapsedTime = currentTime - startTime; 
+    const progress = Math.min(elapsedTime / duration, 1); 
+    const easeProgress = 1 - Math.pow(1 - progress, 3); 
+    const currentCount = Math.floor(easeProgress * targetNumber); 
+    counterElement.textContent = currentCount.toLocaleString() + "+"; 
+    if (progress < 1) { 
+      requestAnimationFrame(updateNumber); 
+    } else { 
+      counterElement.textContent = targetNumber.toLocaleString() + "+"; 
+    } 
+  } 
+  requestAnimationFrame(updateNumber); 
+} 
+
+function hideBrokenCard(videoElem) { 
+  const card = videoElem.closest('.collection-card'); 
+  if (card) card.classList.add('is-hidden'); 
+} 
+
+function toggleMenu() { 
+  menuToggle.classList.toggle("active"); 
+  topDropdownPanel.classList.toggle("open"); 
+  menuOverlay.classList.toggle("active"); 
+} 
+
+function closeMenu() { 
+  menuToggle.classList.remove("active"); 
+  topDropdownPanel.classList.remove("open"); 
+  menuOverlay.classList.remove("active"); 
+  unlockScroll(); 
+} 
+
+function scrollToTop() { 
+  window.scrollTo({ top: 0, behavior: "smooth" }); 
+} 
+
+function selectAccess(plan, priceMultiplier, element) { 
+  selectedPlan = plan; 
+  selectedPrice = Math.round(basePrice * priceMultiplier); 
+  const oldPrice = Math.round(selectedPrice * 2.5); 
+  document.getElementById('display-price').innerText = '₹' + selectedPrice; 
+  document.getElementById('display-old-price').innerText = '₹' + oldPrice; 
+  document.getElementById('stat-access-text').innerText = plan + ' Access'; 
+  document.querySelectorAll('.duration-card').forEach(card => card.classList.remove('active')); 
+  element.classList.add('active'); 
+} 
+
+function buyNowRazorpay() { 
+  const options = { 
+    "key": "rzp_test_YOUR_KEY_HERE", 
+    "amount": selectedPrice * 100, 
+    "currency": "INR", 
+    "name": "Academy Store", 
+    "description": selectedPlan + " Access Subscription", 
+    "handler": function (response) { 
+      document.getElementById('courses-main-content').style.display = 'none'; 
+      document.getElementById('buybar').style.display = 'none'; 
+      const randomKey = "TRK-" + Math.floor(1000 + Math.random() * 9000) + "-XKEY"; 
+      document.getElementById('generated-key').innerText = randomKey; 
+      document.getElementById('key-plan-label').innerText = "TRACKING / ACTIVATION ID"; 
+      document.getElementById('success-screen').style.display = 'block'; 
+      unlockScroll(); 
+    }, 
+    "modal": { 
+      "ondismiss": function() { 
+        unlockScroll(); 
+      } 
+    }, 
+    "theme": { 
+      "color": "#ff2d2d" 
+    } 
+  }; 
+  try { 
+    const rzp = new Razorpay(options); 
+    rzp.on('payment.failed', function (response) { 
+      alert("Payment Failed! Please try again."); 
+      unlockScroll(); 
+    }); 
+    rzp.open(); 
+  } catch (err) { 
+    console.error("Razorpay Error:", err); 
+    unlockScroll(); 
+  } 
+} 
+
+function copyKey() { 
+  const keyText = document.getElementById('generated-key').innerText; 
+  navigator.clipboard.writeText(keyText); 
+  alert("Tracking ID Copied: " + keyText); 
+} 
+</script> 
+</body> 
+</html>
+  position: relative; 
+  margin-bottom: 50px; 
+  z-index: 5; 
+} 
+.collections-header h3 { 
+  font-size: 32px; 
+  font-weight: 400; 
+  color: #ffffff; 
+  margin-bottom: -10px; 
+  letter-spacing: -0.5px; 
+} 
+.collections-header h2 { 
+  font-size: clamp(48px, 8vw, 100px); 
+  font-weight: 900; 
+  text-transform: uppercase; 
+  letter-spacing: -2px; 
+  color: #ffffff; 
+  line-height: 0.95; 
+} 
+.collections-fan-container { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  max-width: 1350px; 
+  margin: 20px auto 50px; 
+  position: relative; 
+  padding: 30px 0; 
+  perspective: 1000px; 
+} 
+.collection-card { 
+  position: relative; 
+  width: 210px; 
+  height: 390px; 
+  border-radius: 20px; 
+  overflow: hidden; 
+  background: #111; 
+  margin: 0 -12px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+  cursor: pointer; 
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease; 
+} 
+.collection-card.is-hidden { display: none !important; } 
+.collection-card:nth-child(1) { transform: rotate(-8deg) translateY(10px); z-index: 1; } 
+.collection-card:nth-child(2) { transform: rotate(-4deg) translateY(-5px); z-index: 2; } 
+.collection-card:nth-child(3) { transform: rotate(-1deg) translateY(-15px); z-index: 3; } 
+.collection-card:nth-child(4) { transform: rotate(2deg) translateY(-10px); z-index: 4; } 
+.collection-card:nth-child(5) { transform: rotate(5deg) translateY(0px); z-index: 5; } 
+.collection-card:nth-child(6) { transform: rotate(9deg) translateY(15px); z-index: 6; } 
+.collection-card:hover { 
+  transform: rotate(0deg) scale(1.08) translateY(-15px) !important; 
+  z-index: 50 !important; 
+  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.4), 0 0 15px rgba(255,255,255,0.2); 
+} 
+.collection-card video { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  pointer-events: none; 
+} 
+.collection-badge { 
+  position: absolute; 
+  top: 15px; 
+  right: 15px; 
+  background: #ffffff; 
+  color: #000000; 
+  padding: 6px 16px; 
+  border-radius: 20px; 
+  font-size: 12px; 
+  font-weight: 800; 
+  z-index: 3; 
+} 
+.collection-card-overlay { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: center; 
+  padding: 20px 12px; 
+  z-index: 2; 
+} 
+
+/* BALANCED GLOWING PILL BUY NOW BUTTON */ 
+.buy-now-btn { 
+  color: #ffffff; 
+  font-size: 12px; 
+  font-weight: 800; 
+  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
+  padding: 10px 14px; 
+  border-radius: 50px; 
+  box-shadow: 0 0 15px var(--accent-glow), inset 0 2px 3px rgba(255, 255, 255, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.4); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; 
+  letter-spacing: 0.5px; 
+  text-transform: uppercase; 
+  cursor: pointer; 
+  border: 1px solid rgba(255, 100, 100, 0.4); 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 6px; 
+  width: 100%; 
+  max-width: 160px; 
+  white-space: nowrap; 
+} 
+.buy-now-btn:hover { 
+  background: linear-gradient(135deg, #ff333f 0%, #e60012 100%); 
+  transform: scale(1.04); 
+  box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.4); 
+} 
+
+.collections-footer-quote { 
+  max-width: 800px; 
+  margin: 40px auto 25px; 
+  font-size: 18px; 
+  font-weight: 600; 
+  line-height: 1.5; 
+  color: #ffffff; 
+} 
+.explore-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 10px; 
+  background: transparent; 
+  color: #ffffff; 
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  padding: 12px 32px; 
+  border-radius: 30px; 
+  font-size: 15px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  text-decoration: none; 
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+} 
+.explore-btn:hover { 
+  background: #ffffff; 
+  color: #000000; 
+  border-color: #ffffff; 
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); 
+  transform: translateY(-3px); 
+} 
+
+/* PROFESSIONAL FOOTER */ 
+.footer { 
+  background: #09090c; 
+  color: #94a3b8; 
+  padding: 60px 40px 30px; 
+  width: 100%; 
+  border-top: 1px solid rgba(255, 255, 255, 0.06); 
+  font-size: 13px; 
+} 
+.footer-top-row { 
+  max-width: 1400px; 
+  margin: 0 auto; 
+  display: grid; 
+  grid-template-columns: 1.5fr 1fr 1fr 2fr; 
+  gap: 40px; 
+  padding-bottom: 50px; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+} 
+.footer-col { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+} 
+.footer-brand-logo { 
+  text-decoration: none; 
+  display: inline-block; 
+} 
+.footer-brand-logo img { 
+  height: 32px; 
+  width: auto; 
+  object-fit: contain; 
+  display: block; 
+} 
+.footer-socials { 
+  display: flex; 
+  gap: 12px; 
+  margin-top: 4px; 
+} 
+.footer-social-link { 
+  color: #fff; 
+  background: rgba(255, 255, 255, 0.05); 
+  width: 32px; 
+  height: 32px; 
+  border-radius: 6px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-decoration: none; 
+  font-size: 13px; 
+  transition: background 0.2s ease, transform 0.2s ease; 
+} 
+.footer-social-link:hover { 
+  background: var(--accent-red); 
+  transform: translateY(-2px); 
+} 
+.footer-heading { 
+  color: #ffffff; 
+  font-weight: 600; 
+  font-size: 14px; 
+  margin-bottom: 4px; 
+} 
+.footer-links-list { 
+  list-style: none; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+} 
+.footer-links-list a { 
+  color: #94a3b8; 
+  text-decoration: none; 
+  transition: color 0.2s ease; 
+  font-size: 13px; 
+} 
+.footer-links-list a:hover { 
+  color: #ffffff; 
+} 
+.footer-newsletter-text { 
+  color: #94a3b8; 
+  font-size: 13px; 
+  margin-bottom: 2px; 
+} 
+.footer-newsletter-form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+} 
+.footer-input { 
+  background: transparent; 
+  border: none; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+  padding: 8px 0; 
+  color: #fff; 
+  font-size: 14px; 
+  outline: none; 
+  transition: border-color 0.2s ease; 
+} 
+.footer-input:focus { 
+  border-color: var(--accent-red); 
+} 
+.footer-signup-btn { 
+  background: var(--accent-red); 
+  color: #ffffff; 
+  border: none; 
+  padding: 12px 24px; 
+  border-radius: 4px; 
+  font-weight: 700; 
+  font-size: 13px; 
+  cursor: pointer; 
+  text-transform: uppercase; 
+  letter-spacing: 0.5px; 
+  width: fit-content; 
+  transition: background 0.2s ease, transform 0.2s ease; 
+} 
+.footer-signup-btn:hover { 
+  background: #ff1e27; 
+  transform: translateY(-1px); 
+} 
+
+/* FOOTER BOTTOM LEGAL STRIP */ 
+.footer-bottom-row { 
+  max-width: 1400px; 
+  margin: 0 auto; 
+  padding-top: 25px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  flex-wrap: wrap; 
+  gap: 15px; 
+  font-size: 11px; 
+  color: #64748b; 
+} 
+.footer-legal-links { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 20px; 
+} 
+.footer-legal-links a { 
+  color: #64748b; 
+  text-decoration: none; 
+  transition: color 0.2s ease; 
+} 
+.footer-legal-links a:hover { 
+  color: #ffffff; 
+} 
+
+.back-to-top { 
+  position: fixed; 
+  right: 20px; 
+  bottom: 20px; 
+  width: 48px; 
+  height: 48px; 
+  border: none; 
+  border-radius: 50%; 
+  background: #fff; 
+  color: #000; 
+  font-size: 24px; 
+  cursor: pointer; 
+  z-index: 20; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); 
+} 
+
+/* ========================================================= */ 
+/* COURSES / PRODUCT SECTION STYLES (MATCHING IMAGE THEME) */ 
+/* ========================================================= */ 
+.courses-top-nav { 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+  background: rgba(5, 5, 8, 0.85); 
+  backdrop-filter: blur(12px); 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+  padding: 12px 24px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+} 
+.back-home-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+  color: #fff; 
+  text-decoration: none; 
+  font-size: 14px; 
+  font-weight: 700; 
+  background: #11111a; 
+  border: 1px solid rgba(255, 255, 255, 0.12); 
+  padding: 8px 16px; 
+  border-radius: 30px; 
+  cursor: pointer; 
+} 
+.courses-container { 
+  max-width: 850px; 
+  margin: auto; 
+  padding: 30px 24px 140px; 
+} 
+.logo-wrapper { 
+  display: flex; 
+  justify-content: center; 
+  margin-bottom: 20px; 
+} 
+.courses-logo { 
+  width: 84px; 
+  height: 84px; 
+  border-radius: 24px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: linear-gradient(135deg, #120909 0%, #360808 100%); 
+  border: 2px solid #ff2d2d; 
+  box-shadow: 0 0 30px rgba(255, 45, 45, 0.35); 
+} 
+.courses-logo-icon { 
+  font-size: 42px; 
+  background: linear-gradient(135deg, #ff2d2d, #ff8a2d); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+} 
+.product-title { 
+  text-align: center; 
+  font-size: clamp(30px, 5.5vw, 50px); 
+  line-height: 1.1; 
+  margin: 0; 
+  font-weight: 900; 
+  letter-spacing: -1px; 
+  text-transform: uppercase; 
+  color: #fff; 
+} 
+.by-studio { 
+  text-align: center; 
+  color: #7e859b; 
+  font-size: 18px; 
+  margin: 12px 0 30px; 
+  font-weight: 500; 
+} 
+.hero-product-image-box { 
+  border-radius: 24px; 
+  padding: 24px; 
+  background: #080505; 
+  border: 1px solid rgba(255, 45, 45, 0.2); 
+  box-shadow: 0 0 50px rgba(255, 45, 45, 0.12); 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+} 
+.product-card-inner { 
+  width: 100%; 
+  max-width: 450px; 
+  border-radius: 20px; 
+  overflow: hidden; 
+  border: 1px solid rgba(255,255,255,0.12); 
+  background: #0d0909; 
+} 
+.product-card-inner img { 
+  width: 100%; 
+  max-height: 400px; 
+  display: block; 
+  object-fit: cover; 
+} 
+
+/* ENHANCED & COMPACT DURATION SELECTION (RED THEME) */ 
+.duration-selection { 
+  margin: 24px 0; 
+  background: linear-gradient(180deg, #12090b 0%, #070506 100%); 
+  border: 1px solid rgba(255, 45, 45, 0.3); 
+  border-radius: 18px; 
+  padding: 16px 20px; 
+} 
+.duration-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 14px; 
+  flex-wrap: wrap; 
+  gap: 8px; 
+} 
+.duration-title { 
+  font-size: 15px; 
+  font-weight: 700; 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  color: #fff; 
+} 
+.duration-title i { 
+  color: #ff2d2d; 
+  background: rgba(255, 45, 45, 0.12); 
+  padding: 6px; 
+  border-radius: 8px; 
+  font-size: 13px; 
+} 
+.duration-options { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px; 
+} 
+.duration-card { 
+  background: #110b0d; 
+  border: 1.5px solid #2b181c; 
+  border-radius: 14px; 
+  padding: 12px 10px; 
+  text-align: center; 
+  cursor: pointer; 
+  position: relative; 
+  overflow: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  align-items: center; 
+  transition: all 0.2s ease; 
+} 
+.duration-card input[type="radio"] { 
+  display: none; 
+} 
+.duration-card.active { 
+  border-color: #ff2d2d; 
+  background: linear-gradient(160deg, #380e14 0%, #1a0a0d 100%); 
+  box-shadow: 0 8px 20px rgba(255, 45, 45, 0.25); 
+} 
+.duration-badge { 
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  background: linear-gradient(90deg, #ff2a2a, #ff7a2a); 
+  color: #fff; 
+  font-size: 8px; 
+  font-weight: 800; 
+  padding: 2px 8px; 
+  border-bottom-left-radius: 10px; 
+  letter-spacing: 0.5px; 
+} 
+.duration-days { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #fff; 
+  margin-bottom: 2px; 
+} 
+.duration-price { 
+  display: flex; 
+  align-items: baseline; 
+  gap: 4px; 
+} 
+.duration-price .val { 
+  font-size: 16px; 
+  font-weight: 900; 
+  color: #ff334b; 
+} 
+.duration-price .old-val { 
+  font-size: 11px; 
+  color: #735e61; 
+  text-decoration: line-through; 
+} 
+.duration-check { 
+  width: 18px; 
+  height: 18px; 
+  border-radius: 50%; 
+  border: 1.5px solid #3d2226; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-top: 6px; 
+  font-size: 9px; 
+  color: transparent; 
+  transition: all 0.2s ease; 
+} 
+.duration-card.active .duration-check { 
+  background: #ff2d2d; 
+  border-color: #ff2d2d; 
+  color: #fff; 
+} 
+
+.stats-grid { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1px; 
+  margin: 36px 0; 
+  background: #140a0c; 
+  border-radius: 16px; 
+  padding: 10px 0; 
+  border: 1px solid #2b181c; 
+} 
+.stat-item { 
+  text-align: center; 
+  padding: 12px; 
+  border-right: 1px solid #221215; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+} 
+.stat-item:last-child { border-right: none; } 
+.stat-item i { font-size: 20px; color: #fff; margin-bottom: 6px; } 
+.stat-item b { display: block; font-size: 16px; color: #fff; font-weight: 700; } 
+.stat-item span { color: #7e859b; font-size: 13px; margin-top: 2px; } 
+.checks-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 16px; 
+  color: #e0e0e0; 
+} 
+.check-item { 
+  font-size: 15px; 
+  display: flex; 
+  align-items: center; 
+} 
+.check-icon-box { 
+  width: 22px; 
+  height: 22px; 
+  background: #ff2d2d; 
+  color: #fff; 
+  border-radius: 50%; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-right: 12px; 
+  font-size: 12px; 
+  flex-shrink: 0; 
+} 
+.buybar { 
+  position: fixed; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  background: rgba(8, 5, 6, 0.9); 
+  backdrop-filter: blur(16px); 
+  border-top: 1px solid #2b181c; 
+  padding: 16px max(24px, calc((100% - 850px)/2 + 24px)); 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  z-index: 100; 
+} 
+.price-container { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+} 
+.price { font-size: 36px; font-weight: 900; color: #fff; } 
+.old-price { font-size: 18px; color: #665255; text-decoration: line-through; font-weight: 600; } 
+.discount-tag { background: #a21f1f; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; } 
+
+/* MATCHING GLOWING PILL FOR FINAL BUY BUTTON */ 
+.final-buy-btn { 
+  border: 1px solid rgba(255, 100, 100, 0.5); 
+  color: white; 
+  font-weight: 800; 
+  font-size: 16px; 
+  padding: 14px 34px; 
+  border-radius: 50px; 
+  cursor: pointer; 
+  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
+  box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.8px; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+} 
+.final-buy-btn:hover { 
+  transform: scale(1.05); 
+  box-shadow: 0 0 35px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+} 
+
+/* SUCCESS SCREEN */ 
+.success-screen { 
+  display: none; 
+  background: #140809; 
+  border: 1px solid #381e22; 
+  border-radius: 24px; 
+  padding: 40px 24px; 
+  text-align: center; 
+  margin-top: 20px; 
+  box-shadow: 0 0 50px rgba(255, 45, 45, 0.15); 
+} 
+.success-icon { 
+  width: 70px; 
+  height: 70px; 
+  background: rgba(255, 45, 45, 0.15); 
+  color: #ff2d2d; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 32px; 
+  margin: 0 auto 20px; 
+  border: 2px solid #ff2d2d; 
+} 
+.download-box { 
+  background: #1a0c0f; 
+  border: 1px solid #3d2025; 
+  border-radius: 18px; 
+  padding: 24px; 
+  margin-bottom: 24px; 
+} 
+.download-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 12px; 
+  width: 100%; 
+  max-width: 320px; 
+  padding: 16px 28px; 
+  background: linear-gradient(90deg, #ff2d2d, #cc0010); 
+  color: #fff; 
+  font-weight: 800; 
+  font-size: 18px; 
+  border-radius: 30px; 
+  text-decoration: none; 
+} 
+.key-box { 
+  background: #1f0d11; 
+  border: 1px dashed #592931; 
+  border-radius: 18px; 
+  padding: 20px; 
+  margin-bottom: 24px; 
+} 
+
+/* RESPONSIVE MEDIA QUERIES */ 
+@media (max-width: 900px) { 
+  .top-header { padding: 0 20px; } 
+  .collections-fan-container { flex-wrap: wrap; gap: 20px; padding: 0; perspective: none; } 
+  .collection-card { margin: 0; transform: none !important; width: 45%; height: 320px; } 
+  .speech-badge { display: none; } 
+  .footer-top-row { grid-template-columns: 1fr 1fr; gap: 30px; } 
+} 
+
+@media (max-width: 600px) { 
+  .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
+  .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
+} 
+
+@media (max-width: 520px) { 
+  .video-section { height: 52vh; min-height: 360px; } 
+  .collection-card { width: 100%; height: 360px; } 
+  .collections-header h2 { font-size: 42px; } 
+  .collections-footer-quote { font-size: 15px; } 
+  .hero-headline { font-size: 28px; } 
+  .counter-number { font-size: 18px; } 
+  .duration-options { grid-template-columns: 1fr; } 
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px 0; } 
+} 
+</style> 
+</head> 
+<body> 
+
+<!-- ========================================================= --> 
 <!-- PAGE 1: HOME PAGE SECTION (/home) --> 
 <!-- ========================================================= --> 
 <div id="home-page-section" class="page-section active-page"> 
