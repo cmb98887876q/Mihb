@@ -898,42 +898,47 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   background: rgba(8, 5, 6, 0.9); 
   backdrop-filter: blur(16px); 
   border-top: 1px solid #2b181c; 
-  padding: 16px max(24px, calc((100% - 850px)/2 + 24px)); 
+  padding: 14px max(20px, calc((100% - 850px)/2 + 20px)); 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
   z-index: 100; 
+  gap: 16px; 
 } 
 .price-container { 
   display: flex; 
   align-items: center; 
-  gap: 12px; 
+  gap: 10px; 
+  flex-wrap: wrap; 
 } 
-.price { font-size: 36px; font-weight: 900; color: #fff; } 
-.old-price { font-size: 18px; color: #665255; text-decoration: line-through; font-weight: 600; } 
-.discount-tag { background: #a21f1f; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; } 
+.price { font-size: 28px; font-weight: 900; color: #fff; } 
+.old-price { font-size: 15px; color: #665255; text-decoration: line-through; font-weight: 600; } 
+.discount-tag { background: #a21f1f; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; } 
 
-/* MATCHING GLOWING PILL FOR FINAL BUY BUTTON */ 
+/* PROFESSIONAL & BALANCED FINAL BUY BUTTON SIZING */ 
 .final-buy-btn { 
   border: 1px solid rgba(255, 100, 100, 0.5); 
   color: white; 
   font-weight: 800; 
-  font-size: 16px; 
-  padding: 14px 34px; 
+  font-size: 14px; 
+  padding: 12px 24px; 
   border-radius: 50px; 
   cursor: pointer; 
   background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
-  box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
   display: flex; 
   align-items: center; 
-  gap: 10px; 
+  justify-content: center; 
+  gap: 8px; 
   text-transform: uppercase; 
   letter-spacing: 0.8px; 
+  white-space: nowrap; 
+  flex-shrink: 0; 
   transition: transform 0.2s ease, box-shadow 0.2s ease; 
 } 
 .final-buy-btn:hover { 
-  transform: scale(1.05); 
-  box-shadow: 0 0 35px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+  transform: scale(1.03); 
+  box-shadow: 0 0 28px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
 } 
 
 /* SUCCESS SCREEN */ 
@@ -1013,6 +1018,9 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   .counter-number { font-size: 18px; } 
   .duration-options { grid-template-columns: 1fr; } 
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px 0; } 
+  .buybar { padding: 12px 16px; } 
+  .price { font-size: 24px; } 
+  .final-buy-btn { padding: 10px 18px; font-size: 13px; } 
 } 
 </style> 
 </head> 
