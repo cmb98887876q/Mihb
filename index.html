@@ -394,13 +394,15 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   position: absolute; 
   top: 15px; 
   right: 15px; 
-  background: #ffffff; 
-  color: #000000; 
-  padding: 6px 16px; 
+  background: #ff2d2d; 
+  color: #ffffff; 
+  padding: 5px 12px; 
   border-radius: 20px; 
-  font-size: 12px; 
+  font-size: 11px; 
   font-weight: 800; 
   z-index: 3; 
+  letter-spacing: 0.5px; 
+  box-shadow: 0 4px 10px rgba(255, 45, 45, 0.4); 
 } 
 .collection-card-overlay { 
   position: absolute; 
@@ -1090,23 +1092,23 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <div class="collections-fan-container"> 
         <!-- Card 1 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">T-Shirts</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Custom Graphic T-Shirt" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+            <button class="buy-now-btn" data-title="Custom Graphic Design" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 2 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">Hoodies</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Urban Oversized Hoodie" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
+            <button class="buy-now-btn" data-title="Urban Oversized Asset" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
           </div> 
         </div> 
         <!-- Card 3 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">Jackets</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
             <button class="buy-now-btn" data-title="Premium Leather Jacket" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" data-price="499" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
@@ -1114,7 +1116,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         </div> 
         <!-- Card 4 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">Sweatshirts</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
             <button class="buy-now-btn" data-title="Classic Crew Sweatshirt" data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" data-price="249" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
@@ -1122,7 +1124,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         </div> 
         <!-- Card 5 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">Tracksuits</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
             <button class="buy-now-btn" data-title="Athletic Fit Tracksuit" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" data-price="399" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
@@ -1130,7 +1132,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         </div> 
         <!-- Card 6 --> 
         <div class="collection-card"> 
-          <span class="collection-badge">More</span> 
+          <span class="collection-badge">PAID</span> 
           <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
           <div class="collection-card-overlay"> 
             <button class="buy-now-btn" data-title="Limited Edition Streetwear" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" data-price="599" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
@@ -1266,7 +1268,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
         </label> 
         <label class="duration-card" onclick="selectAccess('30 Days', 1.5, this)"> 
-          <span class="duration-badge" style="background: linear-gradient(90deg, #ff2a2a, #ff7a2a);">BEST VALLE</span> 
+          <span class="duration-badge" style="background: linear-gradient(90deg, #ff2a2a, #ff7a2a);">BEST VALUE</span> 
           <input type="radio" name="access_plan" value="30 Days"> 
           <div class="duration-days">30 Days</div> 
           <div class="duration-price"><span class="val" id="plan-price-3">₹0</span><span class="old-val" id="plan-old-price-3">₹0</span></div> 
@@ -1355,7 +1357,6 @@ function handleRouting() {
   const hash = window.location.hash || '#home'; 
   
   if (hash.startsWith('#checkout')) { 
-    // Parse query parameters from hash string (e.g., #checkout?title=...&price=...)
     const queryString = hash.includes('?') ? hash.split('?')[1] : ''; 
     const params = new URLSearchParams(queryString); 
     
