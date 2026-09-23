@@ -1361,6 +1361,16 @@ let basePrice = 199;
 let selectedPlan = '15 Days'; 
 let selectedPrice = 199; 
 
+// Simple catalog of pre-configured products for fallback / id mapping from products.html
+const productCatalog = {
+  'prod-1': { title: 'Custom Graphic Design', img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800', price: 199 },
+  'prod-2': { title: 'Urban Oversized Asset', img: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800', price: 299 },
+  'prod-3': { title: 'Premium Leather Jacket', img: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800', price: 499 },
+  'prod-4': { title: 'Classic Crew Sweatshirt', img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800', price: 249 },
+  'prod-5': { title: 'Athletic Fit Tracksuit', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800', price: 399 },
+  'prod-6': { title: 'Limited Edition Streetwear', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800', price: 599 }
+};
+
 function handleRouting() { 
   const hash = window.location.hash || '#home'; 
   
@@ -1368,9 +1378,21 @@ function handleRouting() {
     const queryString = hash.includes('?') ? hash.split('?')[1] : ''; 
     const params = new URLSearchParams(queryString); 
     
-    const title = params.get('title') || 'Featured Product'; 
-    const imgUrl = params.get('img') || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800'; 
-    basePrice = parseFloat(params.get('price')) || 199; 
+    let title = params.get('title'); 
+    let imgUrl = params.get('img'); 
+    let priceParam = params.get('price');
+    const prodId = params.get('id') || params.get('product'); // Compatible with products.html IDs
+    
+    // Check if ID matches catalog items or handle generic fallback safely
+    if (prodId && productCatalog[prodId]) {
+      title = productCatalog[prodId].title;
+      imgUrl = productCatalog[prodId].img;
+      basePrice = productCatalog[prodId].price;
+    } else {
+      title = title || 'Featured Product'; 
+      imgUrl = imgUrl || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800'; 
+      basePrice = parseFloat(priceParam) || 199; 
+    }
     
     document.getElementById('home-page-section').classList.remove('active-page'); 
     document.getElementById('courses-page-section').classList.add('active-page'); 
