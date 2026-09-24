@@ -3,12 +3,11 @@
 <head> 
 <meta charset="UTF-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
-<title>Product Checkout Website</title> 
+<title>Product Checkout</title> 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> 
 <!-- Razorpay Checkout SDK Script --> 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script> 
 <style> 
-/* GLITCH, SCROLL & OVERFLOW FIXES */ 
 *, *::before, *::after { 
   margin: 0; 
   padding: 0; 
@@ -23,11 +22,6 @@
   --line: rgba(255, 255, 255, 0.08); 
   --accent-red: #ff0015; 
   --accent-glow: rgba(255, 0, 21, 0.45); 
-  --glass-bg: rgba(10, 10, 14, 0.85); 
-  --card-bg: #070710; 
-  --purple: #9130ff; 
-  --blue: #20a4ff; 
-  --pink: #ff2aac; 
 } 
 html, body { 
   width: 100%; 
@@ -39,42 +33,6 @@ html, body {
   overflow-y: auto !important; 
   position: relative; 
   -webkit-tap-highlight-color: transparent; 
-} 
-
-/* SECTION VISIBILITY CONTROL */ 
-.page-section { 
-  display: none; 
-  width: 100%; 
-  contain: layout style; 
-} 
-.page-section.active-page { 
-  display: block; 
-} 
-
-/* Hide media controls completely */ 
-video::-webkit-media-controls, video::-webkit-media-controls-start-playback-button, video::-webkit-media-controls-play-button, video::-webkit-media-controls-panel { 
-  display: none !important; 
-  -webkit-appearance: none !important; 
-  opacity: 0 !important; 
-} 
-
-/* ENHANCED TOP HEADER */ 
-.top-header { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 80px; 
-  background: var(--glass-bg); 
-  backdrop-filter: blur(20px) saturate(180%); 
-  -webkit-backdrop-filter: blur(20px) saturate(180%); 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
-  padding: 0 40px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  z-index: 10003; 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 -1px 0 0 rgba(255, 255, 255, 0.06); 
 } 
 
 /* BRAND LOGO IMAGE REPLACEMENT */ 
@@ -91,553 +49,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   display: block; 
 } 
 
-.header-actions { 
-  display: flex; 
-  align-items: center; 
-  gap: 20px; 
-} 
-.login-btn { 
-  position: relative; 
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%); 
-  color: #fff; 
-  border: 1px solid rgba(255, 255, 255, 0.2); 
-  padding: 10px 26px; 
-  border-radius: 40px; 
-  font-size: 13px; 
-  font-weight: 700; 
-  letter-spacing: 1px; 
-  text-transform: uppercase; 
-  cursor: pointer; 
-  text-decoration: none; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-  backdrop-filter: blur(8px); 
-} 
-.login-btn:hover { 
-  background: var(--accent-red); 
-  color: #ffffff; 
-  border-color: var(--accent-red); 
-  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8); 
-  transform: translateY(-2px); 
-} 
-
-/* HAMBURGER MENU ICON */ 
-.menu-icon { 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  gap: 5px; 
-  cursor: pointer; 
-  padding: 6px; 
-  width: 44px; 
-  height: 44px; 
-  position: relative; 
-  z-index: 10004; 
-  border-radius: 50%; 
-  background: rgba(255, 255, 255, 0.05); 
-  border: 1px solid rgba(255, 255, 255, 0.12); 
-} 
-.menu-icon span { 
-  display: block; 
-  width: 20px; 
-  height: 2px; 
-  margin: 0 auto; 
-  background: #fff; 
-  border-radius: 2px; 
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
-} 
-.menu-icon.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); } 
-.menu-icon.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); } 
-.menu-icon.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); } 
-
-/* DROPDOWN MENU PANEL */ 
-.top-dropdown-panel { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100vw; 
-  background: rgba(8, 8, 12, 0.98); 
-  backdrop-filter: blur(25px); 
-  border-bottom: 1px solid var(--line); 
-  z-index: 10002; 
-  transform: translateY(-100%); 
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  padding: 95px 24px 35px; 
-} 
-.top-dropdown-panel.open { transform: translateY(0); } 
-.top-nav { 
-  display: flex; 
-  flex-direction: column; 
-  width: 100%; 
-  max-width: 480px; 
-} 
-.top-nav a { 
-  color: #ffffff; 
-  text-decoration: none; 
-  font-size: 21px; 
-  font-weight: 500; 
-  padding: 18px 0; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
-  transition: color 0.3s ease, padding-left 0.3s ease; 
-} 
-.top-nav a:hover { color: var(--muted); padding-left: 6px; } 
-.menu-contact-btn { 
-  width: 100%; 
-  max-width: 480px; 
-  margin-top: 28px; 
-  background: #ffffff; 
-  color: #000000; 
-  text-decoration: none; 
-  font-size: 18px; 
-  font-weight: 600; 
-  padding: 16px; 
-  border-radius: 8px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 10px; 
-} 
-.menu-overlay { 
-  position: fixed; 
-  inset: 0; 
-  background: rgba(0, 0, 0, 0.75); 
-  z-index: 10001; 
-  opacity: 0; 
-  visibility: hidden; 
-  transition: opacity 0.3s ease, visibility 0.3s ease; 
-} 
-.menu-overlay.active { opacity: 1; visibility: visible; } 
-
-/* SITE CONTENT */ 
-.site-content { 
-  position: relative; 
-  z-index: 1; 
-  width: 100%; 
-} 
-
-/* HERO / VIDEO BACKGROUND SECTION */ 
-.video-section { 
-  position: relative; 
-  width: 100%; 
-  height: 62vh; 
-  min-height: 420px; 
-  max-height: 550px; 
-  overflow: hidden; 
-  background: #000; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding-top: 80px; 
-} 
-.video-section video { 
-  position: absolute; 
-  inset: 0; 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  filter: brightness(0.6); 
-} 
-.video-overlay { 
-  position: relative; 
-  z-index: 3; 
-  text-align: center; 
-  padding: 0 20px; 
-  max-width: 1050px; 
-  margin: 0 auto; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 16px; 
-} 
-.hero-headline { 
-  font-size: clamp(32px, 5.5vw, 68px); 
-  font-weight: 900; 
-  line-height: 1.05; 
-  letter-spacing: -1px; 
-  text-transform: uppercase; 
-  color: #ffffff; 
-  text-shadow: 0 10px 30px rgba(0,0,0,0.9); 
-} 
-.hero-headline .highlight-text { 
-  background: linear-gradient(135deg, #ffffff 10%, #e50914 100%); 
-  -webkit-background-clip: text; 
-  background-clip: text; 
-  color: transparent; 
-  display: inline-block; 
-} 
-
-/* COUNTER CONTAINER */ 
-.customers-counter-container { 
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 10px; 
-  padding: 6px 12px; 
-} 
-.counter-icon { 
-  color: var(--accent-red); 
-  display: flex; 
-  align-items: center; 
-} 
-.counter-icon svg { 
-  width: 22px; 
-  height: 22px; 
-  fill: none; 
-  stroke: currentColor; 
-  stroke-width: 2.2; 
-  stroke-linecap: round; 
-  stroke-linejoin: round; 
-} 
-.counter-number { 
-  font-size: 20px; 
-  font-weight: 900; 
-  color: #ffffff; 
-  letter-spacing: 0.5px; 
-} 
-.counter-label { 
-  font-size: 12px; 
-  font-weight: 700; 
-  color: #cbd5e1; 
-  text-transform: uppercase; 
-  letter-spacing: 1.2px; 
-} 
-
-/* COLLECTIONS SECTION */ 
-.collections-section { 
-  padding: 80px 20px 100px; 
-  background: #000000; 
-  text-align: center; 
-  position: relative; 
-  overflow: hidden; 
-} 
-.speech-badge { 
-  position: absolute; 
-  padding: 10px 22px; 
-  border-radius: 25px; 
-  font-size: 14px; 
-  font-weight: 800; 
-  color: #fff; 
-  z-index: 10; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5); 
-  animation: badgeFloat 3.5s ease-in-out infinite alternate; 
-  pointer-events: none; 
-} 
-.badge-left { background: #0088ff; top: 135px; left: 10%; transform: rotate(-12deg); } 
-.badge-right { background: #ff8800; top: 140px; right: 10%; transform: rotate(12deg); } 
-@keyframes badgeFloat { 
-  0% { transform: translateY(0px) rotate(-10deg); } 
-  100% { transform: translateY(-12px) rotate(-6deg); } 
-} 
-.collections-header { 
-  position: relative; 
-  margin-bottom: 50px; 
-  z-index: 5; 
-} 
-.collections-header h3 { 
-  font-size: 32px; 
-  font-weight: 400; 
-  color: #ffffff; 
-  margin-bottom: -10px; 
-  letter-spacing: -0.5px; 
-} 
-.collections-header h2 { 
-  font-size: clamp(48px, 8vw, 100px); 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  letter-spacing: -2px; 
-  color: #ffffff; 
-  line-height: 0.95; 
-} 
-.collections-fan-container { 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  max-width: 1350px; 
-  margin: 20px auto 50px; 
-  position: relative; 
-  padding: 30px 0; 
-  perspective: 1000px; 
-} 
-.collection-card { 
-  position: relative; 
-  width: 210px; 
-  height: 390px; 
-  border-radius: 20px; 
-  overflow: hidden; 
-  background: #111; 
-  margin: 0 -12px; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
-  cursor: pointer; 
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease; 
-} 
-.collection-card.is-hidden { display: none !important; } 
-.collection-card:nth-child(1) { transform: rotate(-8deg) translateY(10px); z-index: 1; } 
-.collection-card:nth-child(2) { transform: rotate(-4deg) translateY(-5px); z-index: 2; } 
-.collection-card:nth-child(3) { transform: rotate(-1deg) translateY(-15px); z-index: 3; } 
-.collection-card:nth-child(4) { transform: rotate(2deg) translateY(-10px); z-index: 4; } 
-.collection-card:nth-child(5) { transform: rotate(5deg) translateY(0px); z-index: 5; } 
-.collection-card:nth-child(6) { transform: rotate(9deg) translateY(15px); z-index: 6; } 
-.collection-card:hover { 
-  transform: rotate(0deg) scale(1.08) translateY(-15px) !important; 
-  z-index: 50 !important; 
-  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.4), 0 0 15px rgba(255,255,255,0.2); 
-} 
-.collection-card video { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  pointer-events: none; 
-} 
-.collection-badge { 
-  position: absolute; 
-  top: 15px; 
-  right: 15px; 
-  background: #ff2d2d; 
-  color: #ffffff; 
-  padding: 5px 12px; 
-  border-radius: 20px; 
-  font-size: 11px; 
-  font-weight: 800; 
-  z-index: 3; 
-  letter-spacing: 0.5px; 
-  box-shadow: 0 4px 10px rgba(255, 45, 45, 0.4); 
-} 
-.collection-card-overlay { 
-  position: absolute; 
-  inset: 0; 
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); 
-  display: flex; 
-  align-items: flex-end; 
-  justify-content: center; 
-  padding: 20px 12px; 
-  z-index: 2; 
-} 
-
-/* BALANCED GLOWING PILL BUY NOW BUTTON */ 
-.buy-now-btn { 
-  color: #ffffff; 
-  font-size: 12px; 
-  font-weight: 800; 
-  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
-  padding: 10px 14px; 
-  border-radius: 50px; 
-  box-shadow: 0 0 15px var(--accent-glow), inset 0 2px 3px rgba(255, 255, 255, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.4); 
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; 
-  letter-spacing: 0.5px; 
-  text-transform: uppercase; 
-  cursor: pointer; 
-  border: 1px solid rgba(255, 100, 100, 0.4); 
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 6px; 
-  width: 100%; 
-  max-width: 160px; 
-  white-space: nowrap; 
-} 
-.buy-now-btn:hover { 
-  background: linear-gradient(135deg, #ff333f 0%, #e60012 100%); 
-  transform: scale(1.04); 
-  box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.4); 
-} 
-
-.collections-footer-quote { 
-  max-width: 800px; 
-  margin: 40px auto 25px; 
-  font-size: 18px; 
-  font-weight: 600; 
-  line-height: 1.5; 
-  color: #ffffff; 
-} 
-.explore-btn { 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 10px; 
-  background: transparent; 
-  color: #ffffff; 
-  border: 1px solid rgba(255, 255, 255, 0.6); 
-  padding: 12px 32px; 
-  border-radius: 30px; 
-  font-size: 15px; 
-  font-weight: 700; 
-  cursor: pointer; 
-  text-decoration: none; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-} 
-.explore-btn:hover { 
-  background: #ffffff; 
-  color: #000000; 
-  border-color: #ffffff; 
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); 
-  transform: translateY(-3px); 
-} 
-
-/* PROFESSIONAL FOOTER */ 
-.footer { 
-  background: #09090c; 
-  color: #94a3b8; 
-  padding: 60px 40px 30px; 
-  width: 100%; 
-  border-top: 1px solid rgba(255, 255, 255, 0.06); 
-  font-size: 13px; 
-} 
-.footer-top-row { 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  display: grid; 
-  grid-template-columns: 1.5fr 1fr 1fr 2fr; 
-  gap: 40px; 
-  padding-bottom: 50px; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
-} 
-.footer-col { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 16px; 
-} 
-.footer-brand-logo { 
-  text-decoration: none; 
-  display: inline-block; 
-} 
-.footer-brand-logo img { 
-  height: 32px; 
-  width: auto; 
-  object-fit: contain; 
-  display: block; 
-} 
-.footer-socials { 
-  display: flex; 
-  gap: 12px; 
-  margin-top: 4px; 
-} 
-.footer-social-link { 
-  color: #fff; 
-  background: rgba(255, 255, 255, 0.05); 
-  width: 32px; 
-  height: 32px; 
-  border-radius: 6px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  text-decoration: none; 
-  font-size: 13px; 
-  transition: background 0.2s ease, transform 0.2s ease; 
-} 
-.footer-social-link:hover { 
-  background: var(--accent-red); 
-  transform: translateY(-2px); 
-} 
-.footer-heading { 
-  color: #ffffff; 
-  font-weight: 600; 
-  font-size: 14px; 
-  margin-bottom: 4px; 
-} 
-.footer-links-list { 
-  list-style: none; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px; 
-} 
-.footer-links-list a { 
-  color: #94a3b8; 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-  font-size: 13px; 
-} 
-.footer-links-list a:hover { 
-  color: #ffffff; 
-} 
-.footer-newsletter-text { 
-  color: #94a3b8; 
-  font-size: 13px; 
-  margin-bottom: 2px; 
-} 
-.footer-newsletter-form { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 14px; 
-} 
-.footer-input { 
-  background: transparent; 
-  border: none; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-  padding: 8px 0; 
-  color: #fff; 
-  font-size: 14px; 
-  outline: none; 
-  transition: border-color 0.2s ease; 
-} 
-.footer-input:focus { 
-  border-color: var(--accent-red); 
-} 
-.footer-signup-btn { 
-  background: var(--accent-red); 
-  color: #ffffff; 
-  border: none; 
-  padding: 12px 24px; 
-  border-radius: 4px; 
-  font-weight: 700; 
-  font-size: 13px; 
-  cursor: pointer; 
-  text-transform: uppercase; 
-  letter-spacing: 0.5px; 
-  width: fit-content; 
-  transition: background 0.2s ease, transform 0.2s ease; 
-} 
-.footer-signup-btn:hover { 
-  background: #ff1e27; 
-  transform: translateY(-1px); 
-} 
-
-/* FOOTER BOTTOM LEGAL STRIP */ 
-.footer-bottom-row { 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  padding-top: 25px; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  flex-wrap: wrap; 
-  gap: 15px; 
-  font-size: 11px; 
-  color: #64748b; 
-} 
-.footer-legal-links { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 20px; 
-} 
-.footer-legal-links a { 
-  color: #64748b; 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-} 
-.footer-legal-links a:hover { 
-  color: #ffffff; 
-} 
-
-.back-to-top { 
-  position: fixed; 
-  right: 20px; 
-  bottom: 20px; 
-  width: 48px; 
-  height: 48px; 
-  border: none; 
-  border-radius: 50%; 
-  background: #fff; 
-  color: #000; 
-  font-size: 24px; 
-  cursor: pointer; 
-  z-index: 20; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); 
-} 
-
-/* ========================================================= */ 
-/* COURSES / PRODUCT SECTION STYLES (MATCHING IMAGE THEME) */ 
-/* ========================================================= */ 
+/* COURSES / PRODUCT SECTION STYLES */ 
 .courses-top-nav { 
   position: sticky; 
   top: 0; 
@@ -684,7 +96,14 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   background: linear-gradient(135deg, #120909 0%, #360808 100%); 
   border: 2px solid #ff2d2d; 
   box-shadow: 0 0 30px rgba(255, 45, 45, 0.35); 
+  overflow: hidden; 
 } 
+.courses-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .courses-logo-icon { 
   font-size: 42px; 
   background: linear-gradient(135deg, #ff2d2d, #ff8a2d); 
@@ -701,11 +120,19 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   text-transform: uppercase; 
   color: #fff; 
 } 
+.product-description { 
+  text-align: center; 
+  color: #94a3b8; 
+  font-size: 14px; 
+  line-height: 1.6; 
+  max-width: 600px; 
+  margin: 12px auto 6px; 
+} 
 .by-studio { 
   text-align: center; 
   color: #7e859b; 
-  font-size: 18px; 
-  margin: 12px 0 30px; 
+  font-size: 16px; 
+  margin: 8px 0 30px; 
   font-weight: 500; 
 } 
 .hero-product-image-box { 
@@ -733,7 +160,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   object-fit: cover; 
 } 
 
-/* ENHANCED & COMPACT DURATION SELECTION (RED THEME) */ 
+/* DURATION SELECTION */ 
 .duration-selection { 
   margin: 24px 0; 
   background: linear-gradient(180deg, #12090b 0%, #070506 100%); 
@@ -915,7 +342,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 .old-price { font-size: 15px; color: #665255; text-decoration: line-through; font-weight: 600; } 
 .discount-tag { background: #a21f1f; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; } 
 
-/* PROFESSIONAL & BALANCED FINAL BUY BUTTON SIZING */ 
 .final-buy-btn { 
   border: 1px solid rgba(255, 100, 100, 0.5); 
   color: white; 
@@ -994,28 +420,23 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   padding: 20px; 
   margin-bottom: 24px; 
 } 
-
-/* RESPONSIVE MEDIA QUERIES */ 
-@media (max-width: 900px) { 
-  .top-header { padding: 0 20px; } 
-  .collections-fan-container { flex-wrap: wrap; gap: 20px; padding: 0; perspective: none; } 
-  .collection-card { margin: 0; transform: none !important; width: 45%; height: 320px; } 
-  .speech-badge { display: none; } 
-  .footer-top-row { grid-template-columns: 1fr 1fr; gap: 30px; } 
-} 
-
-@media (max-width: 600px) { 
-  .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
-  .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
+.explore-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 10px; 
+  background: transparent; 
+  color: #ffffff; 
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  padding: 12px 32px; 
+  border-radius: 30px; 
+  font-size: 15px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  text-decoration: none; 
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
 } 
 
 @media (max-width: 520px) { 
-  .video-section { height: 52vh; min-height: 360px; } 
-  .collection-card { width: 100%; height: 360px; } 
-  .collections-header h2 { font-size: 42px; } 
-  .collections-footer-quote { font-size: 15px; } 
-  .hero-headline { font-size: 28px; } 
-  .counter-number { font-size: 18px; } 
   .duration-options { grid-template-columns: 1fr; } 
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px 0; } 
   .buybar { padding: 12px 16px; } 
@@ -1026,234 +447,36 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 </head> 
 <body> 
 
-<!-- ========================================================= --> 
-<!-- PAGE 1: HOME PAGE SECTION (#home) --> 
-<!-- ========================================================= --> 
-<div id="home-page-section" class="page-section active-page"> 
-
-  <!-- ENHANCED TOP HEADER --> 
-  <header class="top-header"> 
-    <a href="#home" class="brand-logo" onclick="navigateTo(event, '#home')"> 
-      <img src="logo.png" alt="Logo" /> 
-    </a> 
-    <div class="header-actions"> 
-      <a href="#login" class="login-btn" onclick="navigateTo(event, '#login')">Login</a> 
-      <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()"> 
-        <span></span> 
-        <span></span> 
-        <span></span> 
-      </div> 
-    </div> 
-  </header> 
-
-  <!-- TOP DROPDOWN PANEL --> 
-  <div id="topDropdownPanel" class="top-dropdown-panel"> 
-    <nav class="top-nav"> 
-      <a href="#services" onclick="navigateTo(event, '#services')">Services</a> 
-      <a href="products.html">Products</a> 
-      <a href="#creators" onclick="navigateTo(event, '#creators')">Creators</a> 
-      <a href="#blogs" onclick="navigateTo(event, '#blogs')">Blogs</a> 
-      <a href="#about" onclick="navigateTo(event, '#about')">About</a> 
-    </nav> 
-    <a href="#contact" class="menu-contact-btn" onclick="navigateTo(event, '#contact')"> 
-      Contact Us <span class="arrow">→</span> 
-    </a> 
-  </div> 
-  <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div> 
-
-  <!-- SITE CONTENT --> 
-  <div id="siteContent" class="site-content"> 
-
-    <!-- BACKGROUND VIDEO SECTION --> 
-    <section class="video-section"> 
-      <video id="bgVideo" autoplay muted loop playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" preload="auto"> 
-        <source src="background.mp4" type="video/mp4" /> 
-      </video> 
-      <div class="video-overlay"> 
-        <h1 class="hero-headline"> 
-          DOMINATE THE <br /> 
-          <span class="highlight-text">BATTLEFIELD</span> 
-        </h1> 
-        <div class="customers-counter-container"> 
-          <div class="counter-icon"> 
-            <svg viewBox="0 0 24 24"> 
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> 
-              <circle cx="9" cy="7" r="4"></circle> 
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> 
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> 
-            </svg> 
-          </div> 
-          <span class="counter-number" id="customerCount">0</span> 
-          <span class="counter-label">Happy Customers</span> 
-        </div> 
-      </div> 
-    </section> 
-
-    <!-- COLLECTIONS SECTION --> 
-    <section class="collections-section"> 
-      <div class="speech-badge badge-left">Be Your Own Style</div> 
-      <div class="speech-badge badge-right">Style Speaks Louder</div> 
-      <div class="collections-header"> 
-        <h3>The Ultimate</h3> 
-        <h2>COLLECTIONS</h2> 
-      </div> 
-      <div class="collections-fan-container"> 
-        <!-- Card 1 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Custom Graphic Design" data-img="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" data-price="199" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-        <!-- Card 2 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Urban Oversized Asset" data-img="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800" data-price="299" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-        <!-- Card 3 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Premium Leather Jacket" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800" data-price="499" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-        <!-- Card 4 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Classic Crew Sweatshirt" data-img="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800" data-price="249" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-        <!-- Card 5 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Athletic Fit Tracksuit" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" data-price="399" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-        <!-- Card 6 --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <button class="buy-now-btn" data-title="Limited Edition Streetwear" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800" data-price="599" onclick="openCheckoutSection(this)"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button> 
-          </div> 
-        </div> 
-      </div> 
-      <p class="collections-footer-quote"> 
-        We Do Not Create Our Collections To Showcase We Create<br /> New Attitude Every Week, And We In A Few Items 
-      </p> 
-      <a href="#explore" class="explore-btn" onclick="navigateTo(event, '#explore')">Explore More <span>→</span></a> 
-    </section> 
-
-    <!-- PROFESSIONAL FOOTER --> 
-    <footer class="footer"> 
-      <div class="footer-top-row"> 
-        <!-- Col 1: Brand Logo & Socials --> 
-        <div class="footer-col"> 
-          <a href="#home" class="footer-brand-logo">
-            <img src="logo.png" alt="Logo" />
-          </a> 
-          <div class="footer-socials"> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-youtube"></i></a> 
-          </div> 
-        </div> 
-        <!-- Col 2: Support Links --> 
-        <div class="footer-col"> 
-          <h4 class="footer-heading">Support</h4> 
-          <ul class="footer-links-list"> 
-            <li><a href="#">Contact Us</a></li> 
-            <li><a href="#">FAQ</a></li> 
-            <li><a href="#">Downloads</a></li> 
-            <li><a href="#">Locate A Dealer</a></li> 
-            <li><a href="#">Product Registration</a></li> 
-            <li><a href="#">Spare Parts</a></li> 
-          </ul> 
-        </div> 
-        <!-- Col 3: Company Links --> 
-        <div class="footer-col"> 
-          <h4 class="footer-heading">Company</h4> 
-          <ul class="footer-links-list"> 
-            <li><a href="#">About Us</a></li> 
-            <li><a href="#">Our Design</a></li> 
-            <li><a href="#">Careers</a></li> 
-            <li><a href="#">Newsroom</a></li> 
-            <li><a href="#">Access</a></li> 
-            <li><a href="#">Affiliates</a></li> 
-          </ul> 
-        </div> 
-        <!-- Col 4: Newsletter Signup --> 
-        <div class="footer-col"> 
-          <div class="footer-newsletter-text"><i class="fa-regular fa-envelope" style="margin-right: 8px;"></i> Stay up to date on the latest updates</div> 
-          <div class="footer-newsletter-form"> 
-            <input type="email" placeholder="Enter your e-mail address" class="footer-input"> 
-            <button class="footer-signup-btn">Sign Up</button> 
-          </div> 
-        </div> 
-      </div> 
-
-      <!-- Footer Bottom Legal Strip --> 
-      <div class="footer-bottom-row"> 
-        <div class="footer-legal-links"> 
-          <a href="#">Terms and Conditions</a> 
-          <a href="#">Privacy Policy</a> 
-          <a href="#">Shipping, Returns & Warranty</a> 
-          <a href="#">Trademark and Copyright Guidelines</a> 
-          <a href="#">Patents</a> 
-          <a href="#">Business Partner Code of Conduct</a> 
-          <a href="#">Data Plans Terms and Conditions</a> 
-        </div> 
-        <div class="footer-copyright"> 
-          © 2026 Copyright 
-        </div> 
-      </div> 
-    </footer> 
-
-    <button class="back-to-top" onclick="scrollToTop()">↑</button> 
-  </div> 
-</div> 
-
-<!-- ========================================================= --> 
-<!-- PAGE 2: COURSES & CHECKOUT SECTION (#checkout) --> 
-<!-- ========================================================= --> 
+<!-- COURSES & CHECKOUT SECTION --> 
 <div id="courses-page-section" class="page-section"> 
   <!-- TOP NAV --> 
   <nav class="courses-top-nav"> 
-    <button class="back-home-btn" onclick="navigateTo(event, '#home')"> 
+    <a href="index.html" class="back-home-btn"> 
       <i class="fa-solid fa-arrow-left"></i> Home 
-    </button> 
-    <!-- Logo displayed in the center --> 
-    <a href="#home" class="brand-logo" onclick="navigateTo(event, '#home')" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
+    </a> 
+    <a href="index.html" class="brand-logo" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
       <img src="logo.png" alt="Logo" style="height: 32px;" /> 
     </a> 
-    <div></div> <!-- Empty placeholder for flex alignment --> 
+    <div></div> 
   </nav> 
+  
   <main class="courses-container" id="courses-main-content"> 
     <div class="logo-wrapper"> 
       <div class="courses-logo"> 
-        <i class="fa-solid fa-aperture courses-logo-icon"></i> 
+        <img id="top-app-icon" src="Apk-defolt.png" alt="App Icon" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+        <i class="fa-solid fa-aperture courses-logo-icon" style="display: none;"></i> 
       </div> 
     </div> 
-    <!-- DYNAMIC PRODUCT TITLE --> 
     <h1 class="product-title" id="product-title-display">Product Name</h1> 
+    <p class="product-description" id="product-description-display">Product description goes here...</p>
     <div class="by-studio">By Official Store</div> 
-    <!-- DYNAMIC PRODUCT IMAGE --> 
+    
     <section class="hero-product-image-box"> 
       <div class="product-card-inner"> 
-        <img id="product-main-img" src="" alt="Selected Product Image"> 
+        <img id="product-main-img" src="" alt="Selected Product Image" onerror="this.src='defolt.png'"> 
       </div> 
     </section> 
-    <!-- Access Validity Selection --> 
+
     <section class="duration-selection"> 
       <div class="duration-header"> 
         <div class="duration-title"> 
@@ -1284,7 +507,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         </label> 
       </div> 
     </section> 
-    <!-- Stats Grid --> 
+
     <section class="stats-grid"> 
       <div class="stat-item"> 
         <i class="fa-solid fa-truck-fast"></i> 
@@ -1307,6 +530,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         <span>Validity</span> 
       </div> 
     </section> 
+    
     <h3><i class="fa-solid fa-star" style="color:#ff2d2d;"></i> Key Features:</h3> 
     <div class="checks-grid" style="margin-top: 15px;"> 
       <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Premium Quality Fabric & Print</div> 
@@ -1315,6 +539,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Exclusive Limited Edition Design</div> 
     </div> 
   </main> 
+
   <!-- SUCCESS SCREEN --> 
   <div class="courses-container"> 
     <div class="success-screen" id="success-screen"> 
@@ -1332,9 +557,11 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <button onclick="copyKey()" style="background:#ff2d2d; color:#fff; border:none; padding:6px 14px; border-radius:8px; font-weight:700; cursor:pointer;">Copy</button> 
         </div> 
       </div> 
-      <button onclick="navigateTo(event, '#home')" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Home</button> 
+      <!-- Explore More Button updated to products.html -->
+      <a href="products.html" class="explore-btn"><i class="fa-solid fa-compass"></i> Explore More</a> 
     </div> 
   </div> 
+
   <!-- Sticky Bottom Buy Bar --> 
   <div class="buybar" id="buybar"> 
     <div class="price-container"> 
@@ -1348,7 +575,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   </div> 
 </div> 
 
-<!-- SCRIPT --> 
 <script> 
 function unlockScroll() { 
   document.body.style.overflow = 'auto'; 
@@ -1357,86 +583,84 @@ function unlockScroll() {
   document.documentElement.style.overflowY = 'auto'; 
 } 
 
+// Product Database mapping Product IDs to their details
+const productsDatabase = {
+  "app-001": {
+    name: "Custom Graphic Design",
+    price: 199,
+    img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800",
+    description: "Professional custom graphic design asset tailored for modern streetwear and digital branding. High resolution, fully scalable, and instantly accessible."
+  },
+  "app-002": {
+    name: "Urban Oversized Asset",
+    price: 299,
+    img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800",
+    description: "Heavyweight urban oversized streetwear asset featuring distressed detailing and premium cut. Designed for maximum comfort and style."
+  },
+  "app-003": {
+    name: "Premium Leather Jacket",
+    price: 499,
+    img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+    description: "Genuine full-grain leather jacket crafted with exceptional durability, sleek hardware, and classic timeless biker aesthetics."
+  },
+  "app-004": {
+    name: "Classic Crew Sweatshirt",
+    price: 249,
+    img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800",
+    description: "Ultra-soft cotton blend classic crew sweatshirt with brushed fleece interior. Perfect for everyday casual wear and layering."
+  },
+  "app-005": {
+    name: "Athletic Fit Tracksuit",
+    price: 399,
+    img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800",
+    description: "High-performance athletic fit tracksuit engineered with moisture-wicking stretch fabric for ultimate mobility and athletic training."
+  },
+  "app-006": {
+    name: "Limited Edition Streetwear",
+    price: 599,
+    img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800",
+    description: "Exclusive limited run streetwear piece featuring custom typography, numbered authenticity tags, and premium heavyweight fabrication."
+  }
+};
+
 let basePrice = 199; 
 let selectedPlan = '15 Days'; 
 let selectedPrice = 199; 
 
-// Simple catalog of pre-configured products for fallback / id mapping from products.html
-const productCatalog = {
-  'prod-1': { title: 'Custom Graphic Design', img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800', price: 199 },
-  'prod-2': { title: 'Urban Oversized Asset', img: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800', price: 299 },
-  'prod-3': { title: 'Premium Leather Jacket', img: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800', price: 499 },
-  'prod-4': { title: 'Classic Crew Sweatshirt', img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800', price: 249 },
-  'prod-5': { title: 'Athletic Fit Tracksuit', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800', price: 399 },
-  'prod-6': { title: 'Limited Edition Streetwear', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800', price: 599 }
-};
-
-function handleRouting() { 
-  const hash = window.location.hash || '#home'; 
-  
-  if (hash.startsWith('#checkout')) { 
-    const queryString = hash.includes('?') ? hash.split('?')[1] : ''; 
-    const params = new URLSearchParams(queryString); 
-    
-    let title = params.get('title'); 
-    let imgUrl = params.get('img'); 
-    let priceParam = params.get('price');
-    const prodId = params.get('id') || params.get('product'); // Compatible with products.html IDs
-    
-    // Check if ID matches catalog items or handle generic fallback safely
-    if (prodId && productCatalog[prodId]) {
-      title = productCatalog[prodId].title;
-      imgUrl = productCatalog[prodId].img;
-      basePrice = productCatalog[prodId].price;
-    } else {
-      title = title || 'Featured Product'; 
-      imgUrl = imgUrl || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800'; 
-      basePrice = parseFloat(priceParam) || 199; 
-    }
-    
-    document.getElementById('home-page-section').classList.remove('active-page'); 
-    document.getElementById('courses-page-section').classList.add('active-page'); 
-    document.getElementById('courses-main-content').style.display = 'block'; 
-    document.getElementById('buybar').style.display = 'flex'; 
-    document.getElementById('success-screen').style.display = 'none'; 
-    document.getElementById('product-title-display').innerText = title; 
-    document.getElementById('product-main-img').src = imgUrl; 
-    
-    updatePlanPrices(); 
-    unlockScroll(); 
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-  } else { 
-    document.getElementById('courses-page-section').classList.remove('active-page'); 
-    document.getElementById('home-page-section').classList.add('active-page'); 
-    unlockScroll(); 
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-  } 
-} 
-
-function navigateTo(event, targetHash) { 
-  if (event) event.preventDefault(); 
-  window.location.hash = targetHash; 
-  closeMenu(); 
-} 
-
-window.addEventListener('hashchange', handleRouting); 
-
 window.addEventListener('DOMContentLoaded', () => { 
-  animateCounter(1000, 1800); 
-  if (!window.location.hash) { 
-    window.location.hash = '#home'; 
-  } else { 
-    handleRouting(); 
-  } 
-}); 
+  const params = new URLSearchParams(window.location.search); 
+  const productId = params.get('product'); 
+  
+  let title = 'Featured Product'; 
+  let imgUrl = ''; 
+  let description = 'Premium quality product designed with exquisite craftsmanship and attention to detail.'; 
 
-function openCheckoutSection(btnElement) { 
-  const title = btnElement.getAttribute('data-title') || 'Featured Product'; 
-  const imgUrl = btnElement.getAttribute('data-img') || ''; 
-  const price = btnElement.getAttribute('data-price') || '199'; 
-  const checkoutHash = `#checkout?title=${encodeURIComponent(title)}&img=${encodeURIComponent(imgUrl)}&price=${price}`; 
-  navigateTo(null, checkoutHash); 
-} 
+  if (productId && productsDatabase[productId]) {
+    const product = productsDatabase[productId];
+    title = product.name;
+    imgUrl = product.img || '';
+    basePrice = product.price;
+    description = product.description;
+  } else {
+    title = params.get('title') || title; 
+    imgUrl = params.get('img') || ''; 
+    basePrice = parseFloat(params.get('price')) || basePrice; 
+    description = params.get('desc') || description;
+  }
+
+  document.getElementById('product-title-display').innerText = title; 
+  document.getElementById('product-description-display').innerText = description;
+  
+  const imgElement = document.getElementById('product-main-img');
+  if (!imgUrl || imgUrl.trim() === '') {
+    imgElement.src = 'defolt.png';
+  } else {
+    imgElement.src = imgUrl;
+  }
+
+  updatePlanPrices(); 
+  unlockScroll(); 
+}); 
 
 function updatePlanPrices() { 
   const p1 = Math.round(basePrice * 0.75); 
@@ -1451,53 +675,6 @@ function updatePlanPrices() {
   selectedPrice = p2; 
   document.getElementById('display-price').innerText = '₹' + p2; 
   document.getElementById('display-old-price').innerText = '₹' + Math.round(p2 * 2.5); 
-} 
-
-const menuToggle = document.getElementById("menuToggle"); 
-const topDropdownPanel = document.getElementById("topDropdownPanel"); 
-const menuOverlay = document.getElementById("menuOverlay"); 
-let counterAnimated = false; 
-
-function animateCounter(targetNumber, duration) { 
-  if (counterAnimated) return; 
-  counterAnimated = true; 
-  const counterElement = document.getElementById("customerCount"); 
-  const startTime = performance.now(); 
-  function updateNumber(currentTime) { 
-    const elapsedTime = currentTime - startTime; 
-    const progress = Math.min(elapsedTime / duration, 1); 
-    const easeProgress = 1 - Math.pow(1 - progress, 3); 
-    const currentCount = Math.floor(easeProgress * targetNumber); 
-    counterElement.textContent = currentCount.toLocaleString() + "+"; 
-    if (progress < 1) { 
-      requestAnimationFrame(updateNumber); 
-    } else { 
-      counterElement.textContent = targetNumber.toLocaleString() + "+"; 
-    } 
-  } 
-  requestAnimationFrame(updateNumber); 
-} 
-
-function hideBrokenCard(videoElem) { 
-  const card = videoElem.closest('.collection-card'); 
-  if (card) card.classList.add('is-hidden'); 
-} 
-
-function toggleMenu() { 
-  menuToggle.classList.toggle("active"); 
-  topDropdownPanel.classList.toggle("open"); 
-  menuOverlay.classList.toggle("active"); 
-} 
-
-function closeMenu() { 
-  menuToggle.classList.remove("active"); 
-  topDropdownPanel.classList.remove("open"); 
-  menuOverlay.classList.remove("active"); 
-  unlockScroll(); 
-} 
-
-function scrollToTop() { 
-  window.scrollTo({ top: 0, behavior: "smooth" }); 
 } 
 
 function selectAccess(plan, priceMultiplier, element) { 
