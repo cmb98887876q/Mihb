@@ -24,6 +24,41 @@
     max-width:480px;
     margin:0 auto;
     padding-bottom:24px;
+    transition: max-width 0.3s ease;
+  }
+
+  /* Desktop Enhancements */
+  @media (min-width: 768px) {
+    body {
+      max-width: 800px;
+      padding: 20px 24px 40px;
+    }
+    .topbar {
+      padding: 20px 0;
+      margin-bottom: 16px;
+    }
+    .grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 20px !important;
+      padding: 0 !important;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    .footer-section {
+      margin-top: 60px !important;
+      border-radius: 16px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      max-width: 1050px;
+    }
+    .grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
   }
 
   /* Top bar */
@@ -76,13 +111,13 @@
   .card{
     background:var(--card-bg);
     border:1px solid var(--border);
-    border-radius:10px;
+    border-radius:12px;
     overflow:hidden;
     display:flex;
     flex-direction:column;
     text-decoration:none;
     color:inherit;
-    transition:transform 0.2s, border-color 0.2s;
+    transition:transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .card:hover{
     border-color:#444;
@@ -117,29 +152,12 @@
     object-fit:contain;
     display:block;
   }
-  .rating-pill{
-    position:absolute;
-    bottom:8px;
-    left:8px;
-    background:rgba(0,0,0,0.75);
-    color:#fff;
-    font-size:12px;
-    font-weight:700;
-    padding:3px 8px;
-    border-radius:5px;
-    display:flex;
-    align-items:center;
-    gap:4px;
-    z-index:2;
-  }
-  .rating-pill .star{color:#4caf50; font-size:12px;}
-  .rating-pill .count{color:#d0d0d0; font-weight:400; margin-left:2px;}
 
   .card-info{
-    padding:10px 10px 12px;
+    padding:12px 12px 14px;
     display:flex;
     flex-direction:column;
-    gap:3px;
+    gap:4px;
   }
   .brand-row{
     display:flex;
@@ -273,91 +291,9 @@
     </div>
   </div>
 
-  <div class="grid">
-
-    <!-- Card 1 (Product ID: app-001) -->
-    <a href="index.html?product=app-001" class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&auto=format&fit=crop&q=60" alt="Bruten IDP Sneakers">
-        <div class="rating-pill"><span class="star">&#9733;</span> 4 <span class="count">| 1.9K+</span></div>
-      </div>
-      <div class="card-info">
-        <div class="brand-row">
-          <img src="logo.png" alt="Logo">
-        </div>
-        <div class="product-title">Bruten IDP Sneakers For Men Gre...</div>
-        <div class="price-row">
-          <span class="discount">&#8595;70%</span>
-          <span class="mrp">&#8377;3,999</span>
-          <span class="final-price">&#8377;1,215</span>
-        </div>
-        <div class="stock-line">Only 4 left</div>
-      </div>
-    </a>
-
-    <!-- Card 2 (Product ID: app-002) -->
-    <a href="index.html?product=app-002" class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=60" alt="Bold Extreme IDP Sneakers">
-        <div class="rating-pill"><span class="star">&#9733;</span> 3.9 <span class="count">| 1.1K+</span></div>
-      </div>
-      <div class="card-info">
-        <div class="brand-row">
-          <img src="logo.png" alt="Logo">
-        </div>
-        <div class="product-title">Bold Extreme IDP Sneakers For M...</div>
-        <div class="price-row">
-          <span class="discount">&#8595;68%</span>
-          <span class="mrp">&#8377;3,999</span>
-          <span class="final-price">&#8377;1,279</span>
-        </div>
-        <div class="stock-line">Only 5 left</div>
-      </div>
-    </a>
-
-    <!-- Card 3 (Product ID: app-003) -->
-    <a href="index.html?product=app-003" class="card">
-      <div class="card-img">
-        <div class="card-logo-badge">
-          <img src="logo.png" alt="Logo">
-        </div>
-        <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=600&auto=format&fit=crop&q=60" alt="Tychonic Walking Shoes">
-        <div class="rating-pill"><span class="star">&#9733;</span> 4.1 <span class="count">| 8K+</span></div>
-      </div>
-      <div class="card-info">
-        <div class="brand-row">
-          <img src="logo.png" alt="Logo">
-        </div>
-        <div class="product-title">Tychonic Walking Shoes For Men ...</div>
-        <div class="price-row">
-          <span class="discount">&#8595;70%</span>
-          <span class="mrp">&#8377;3,999</span>
-          <span class="final-price">&#8377;1,215</span>
-        </div>
-        <div class="stock-line">Only few left</div>
-      </div>
-    </a>
-
-    <!-- Card 4 (Product ID: app-004) -->
-    <a href="index.html?product=app-004" class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=60" alt="Willow IDP Sneakers">
-        <div class="rating-pill"><span class="star">&#9733;</span> 4 <span class="count">| 1.7K+</span></div>
-      </div>
-      <div class="card-info">
-        <div class="brand-row">
-          <img src="logo.png" alt="Logo">
-        </div>
-        <div class="product-title">Willow IDP Sneakers For Men Mult...</div>
-        <div class="price-row">
-          <span class="discount">&#8595;70%</span>
-          <span class="mrp">&#8377;3,999</span>
-          <span class="final-price">&#8377;1,215</span>
-        </div>
-        <div class="stock-line">Only few left</div>
-      </div>
-    </a>
-
+  <!-- Product Grid Container with id="productGrid" -->
+  <div class="grid" id="productGrid">
+    <!-- Products will be dynamically populated here -->
   </div>
 
   <!-- Enhanced Footer Section -->
@@ -392,5 +328,40 @@
     </div>
   </footer>
 
+  <script src="products-data.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('productGrid');
+      if (!grid) return;
+
+      // Combine default products and any custom ones added via admin
+      const customProducts = JSON.parse(localStorage.getItem('admin_added_products')) || [];
+      const allProducts = [...(typeof defaultProducts !== 'undefined' ? defaultProducts : []), ...customProducts];
+
+      grid.innerHTML = ''; // Clear existing cards
+
+      allProducts.forEach(p => {
+        const card = document.createElement('a');
+        card.href = `checkout.html?product=${p.id}`;
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-img">
+            <img src="${p.image}" alt="${p.title}">
+          </div>
+          <div class="card-info">
+            <div class="brand-row"><img src="logo.png" alt="Logo"></div>
+            <div class="product-title">${p.title}</div>
+            <div class="price-row">
+              <span class="discount">&#8595;${p.discount}%</span>
+              <span class="mrp">&#8377;${p.mrp}</span>
+              <span class="final-price">&#8377;${p.price}</span>
+            </div>
+            <div class="stock-line">${p.stock}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
 </body>
 </html>
