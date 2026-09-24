@@ -53,7 +53,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   left: 0; 
   width: 100%; 
   height: 80px; 
-  background: transparent; /* Desktop par header bar transparent/hidden */ 
+  background: transparent; 
   backdrop-filter: none; 
   -webkit-backdrop-filter: none; 
   border-bottom: none; 
@@ -109,7 +109,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 
 /* HAMBURGER MENU ICON (Hidden on Desktop) */ 
 .menu-icon { 
-  display: none; /* Desktop par hide rahega */ 
+  display: none; 
   flex-direction: column; 
   justify-content: center; 
   gap: 5px; 
@@ -154,19 +154,28 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 .desktop-nav a:hover { 
   color: var(--accent-red); 
 } 
+
+/* UPDATED DESKTOP CONTACT BUTTON (No White Background) */ 
 .desktop-contact-btn { 
-  background: #ffffff; 
-  color: #000000; 
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%); 
+  color: #ffffff; 
   text-decoration: none; 
-  font-size: 14px; 
-  font-weight: 600; 
-  padding: 8px 20px; 
-  border-radius: 6px; 
-  transition: background 0.3s ease, color 0.3s ease; 
+  font-size: 13px; 
+  font-weight: 700; 
+  padding: 10px 22px; 
+  border-radius: 40px; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  letter-spacing: 1px; 
+  text-transform: uppercase; 
+  backdrop-filter: blur(8px); 
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
 } 
 .desktop-contact-btn:hover { 
   background: var(--accent-red); 
   color: #ffffff; 
+  border-color: var(--accent-red); 
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8); 
+  transform: translateY(-2px); 
 } 
 
 /* DROPDOWN MENU PANEL (For Mobile View Only) */ 
@@ -183,7 +192,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-100%); 
   will-change: transform; 
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-  display: none; /* Desktop par panel ki zaroorat nahi */ 
+  display: none; 
   flex-direction: column; 
   align-items: center; 
   padding: 95px 24px 35px; 
@@ -666,9 +675,9 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 /* RESPONSIVE MEDIA QUERIES */ 
 @media (max-width: 900px) { 
   .top-header { padding: 0 20px; background: var(--glass-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(255, 255, 255, 0.08); } 
-  .desktop-nav-container { display: none; } /* Mobile par desktop nav hide */ 
-  .menu-icon { display: flex; } /* Mobile par hamburger icon show */ 
-  .top-dropdown-panel { display: flex; } /* Mobile par dropdown panel active */ 
+  .desktop-nav-container { display: none; } 
+  .menu-icon { display: flex; } 
+  .top-dropdown-panel { display: flex; } 
   .collections-fan-container { flex-wrap: wrap; gap: 20px; padding: 0; perspective: none; } 
   .collection-card { margin: 0; transform: none !important; width: 45%; height: 320px; } 
   .speech-badge { display: none; } 
@@ -699,7 +708,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <img src="logo.png" alt="Logo" /> 
     </a> 
     
-    <!-- DESKTOP DIRECT OPTIONS (No Header Bar Background & No Hamburger Icon) --> 
+    <!-- DESKTOP DIRECT OPTIONS --> 
     <div class="desktop-nav-container"> 
       <nav class="desktop-nav"> 
         <a href="#services">Services</a> 
@@ -713,8 +722,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     </div> 
 
     <div class="header-actions"> 
-      <!-- Mobile Login Button & Hamburger Icon --> 
-      <a href="#login" class="login-btn" style="display:none;">Login</a> <!-- Handled inside dropdown/desktop if needed --> 
       <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()"> 
         <span></span> 
         <span></span> 
