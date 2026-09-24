@@ -46,7 +46,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   opacity: 0 !important; 
 } 
 
-/* MINIMAL HEADER - LOGO ON LEFT, ACTIONS ON RIGHT */ 
+/* ENHANCED TOP HEADER */ 
 .top-header { 
   position: fixed; 
   top: 0; 
@@ -84,49 +84,10 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   align-items: center; 
   gap: 20px; 
 } 
-.login-btn { 
-  position: relative; 
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%); 
-  color: #fff; 
-  border: 1px solid rgba(255, 255, 255, 0.2); 
-  padding: 10px 26px; 
-  border-radius: 40px; 
-  font-size: 13px; 
-  font-weight: 700; 
-  letter-spacing: 1px; 
-  text-transform: uppercase; 
-  cursor: pointer; 
-  text-decoration: none; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-  backdrop-filter: blur(8px); 
-} 
-.login-btn:hover { 
-  background: var(--accent-red); 
-  color: #ffffff; 
-  border-color: var(--accent-red); 
-  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8); 
-  transform: translateY(-2px); 
-} 
 
-/* USER ACCOUNT PROFILE (Shown when logged in) */ 
-.user-profile-icon { 
-  display: none; /* JavaScript toggle karega jab user logged in ho */ 
-  align-items: center; 
-  gap: 8px; 
-  color: #fff; 
-  background: rgba(255,255,255,0.08); 
-  border: 1px solid rgba(255,255,255,0.2); 
-  padding: 8px 16px; 
-  border-radius: 40px; 
-  text-decoration: none; 
-  font-size: 13px; 
-  font-weight: 600; 
-} 
-.user-profile-icon img { 
-  width: 24px; 
-  height: 24px; 
-  border-radius: 50%; 
-  object-fit: cover; 
+/* Desktop par Login button ko hide karne ke liye (sirf Logo aur Menu dikhega) */ 
+.login-btn { 
+  display: none; /* Desktop/All view par hide kar diya hai, agar sirf logo aur menu rakhna hai */ 
 } 
 
 /* HAMBURGER MENU ICON */ 
@@ -158,7 +119,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 .menu-icon.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); } 
 .menu-icon.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); } 
 
-/* DROPDOWN MENU PANEL - Hardware Accelerated */ 
+/* DROPDOWN MENU PANEL - Hardware Accelerated to prevent glitching */ 
 .top-dropdown-panel { 
   position: fixed; 
   top: 0; 
@@ -189,7 +150,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   text-decoration: none; 
   font-size: 21px; 
   font-weight: 500; 
-  padding: 16px 0; 
+  padding: 18px 0; 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
   transition: color 0.3s ease, padding-left 0.3s ease; 
 } 
@@ -197,7 +158,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 .menu-contact-btn { 
   width: 100%; 
   max-width: 480px; 
-  margin-top: 24px; 
+  margin-top: 28px; 
   background: #ffffff; 
   color: #000000; 
   text-decoration: none; 
@@ -678,21 +639,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 <!-- HOME PAGE SECTION --> 
 <div id="home-page-section" class="page-section active-page"> 
 
-  <!-- MINIMAL TOP HEADER --> 
+  <!-- ENHANCED TOP HEADER --> 
   <header class="top-header"> 
     <a href="index.html" class="brand-logo"> 
       <img src="logo.png" alt="Logo" /> 
     </a> 
     <div class="header-actions"> 
-      <!-- Agar user logged in nahi hai toh Login button dikhega --> 
-      <a href="#login" id="loginBtn" class="login-btn">Login</a> 
-      
-      <!-- Agar user logged in hai toh Profile option dikhega (Dynamic visibility ke liye) --> 
-      <a href="#profile" id="userProfile" class="user-profile-icon"> 
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Profile"> 
-        <span>Account</span> 
-      </a> 
-
       <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()"> 
         <span></span> 
         <span></span> 
@@ -701,19 +653,16 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     </div> 
   </header> 
 
-  <!-- TOP DROPDOWN PANEL (All Navigation Options) --> 
+  <!-- TOP DROPDOWN PANEL --> 
   <div id="topDropdownPanel" class="top-dropdown-panel"> 
     <nav class="top-nav"> 
-      <a href="index.html" onclick="closeMenu()">Home</a> 
-      <a href="products.html" onclick="closeMenu()">Collections</a> 
-      <a href="products.html" onclick="closeMenu()">Gallery</a> 
-      <a href="#pricing" onclick="closeMenu()">Pricing</a> 
-      <a href="#services" onclick="closeMenu()">Services</a> 
-      <a href="#creators" onclick="closeMenu()">Creators</a> 
-      <a href="#blogs" onclick="closeMenu()">Blogs</a> 
-      <a href="#about" onclick="closeMenu()">About</a> 
+      <a href="#services">Services</a> 
+      <a href="products.html">Products</a> 
+      <a href="#creators">Creators</a> 
+      <a href="#blogs">Blogs</a> 
+      <a href="#about">About</a> 
     </nav> 
-    <a href="#contact" class="menu-contact-btn" onclick="closeMenu()"> 
+    <a href="#contact" class="menu-contact-btn"> 
       Contact Us <span class="arrow">→</span> 
     </a> 
   </div> 
@@ -886,23 +835,7 @@ function unlockScroll() {
 window.addEventListener('DOMContentLoaded', () => { 
   animateCounter(1000, 1800); 
   unlockScroll();
-  checkUserLoginState(); // Check karega ki user logged in hai ya nahi
 }); 
-
-// Function to handle login vs profile display (Aap ise apne authentication logic ke mutabiq modify kar sakte hain)
-function checkUserLoginState() {
-  const isLoggedIn = false; // Ise true karke check kar sakte hain jab user logged in ho
-  const loginBtn = document.getElementById("loginBtn");
-  const userProfile = document.getElementById("userProfile");
-
-  if (isLoggedIn) {
-    if (loginBtn) loginBtn.style.display = "none";
-    if (userProfile) userProfile.style.display = "flex";
-  } else {
-    if (loginBtn) loginBtn.style.display = "inline-block";
-    if (userProfile) userProfile.style.display = "none";
-  }
-}
 
 const menuToggle = document.getElementById("menuToggle"); 
 const topDropdownPanel = document.getElementById("topDropdownPanel"); 
