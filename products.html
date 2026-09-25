@@ -108,7 +108,6 @@
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s, background 0.2s;
-    cursor: pointer;
   }
   .back-arrow:hover{
     opacity: 0.8;
@@ -746,8 +745,8 @@
   <!-- PAGE 1: PRODUCT LISTING / HOME -->
   <div id="home-page" class="page-section active">
     <div class="topbar">
-      <!-- Back Arrow Button / Logo redirect -->
-      <a href="index.html" class="back-arrow" title="Home" onclick="navigateToHome(event);">
+      <!-- Back Arrow Button pointing to index.html -->
+      <a href="index.html" class="back-arrow" title="Back to Index">
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <div class="search-box">
@@ -797,10 +796,10 @@
   <div id="checkout-page" class="page-section">
     <!-- TOP NAV --> 
     <nav class="courses-top-nav"> 
-      <a href="index.html" class="back-home-btn" onclick="navigateToHome(event);"> 
+      <a href="index.html" class="back-home-btn"> 
         <i class="fa-solid fa-arrow-left"></i> Products 
       </a> 
-      <a href="index.html" class="brand-logo-nav" onclick="navigateToHome(event);" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
+      <a href="index.html" class="brand-logo-nav" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
         <img src="logo.png" alt="Logo" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100';" /> 
       </a> 
       <div></div> 
@@ -904,7 +903,7 @@
             <button onclick="copyKey()" style="background:#ff2d2d; color:#fff; border:none; padding:6px 14px; border-radius:8px; font-weight:700; cursor:pointer;">Copy</button> 
           </div> 
         </div> 
-        <a href="index.html" class="explore-btn" onclick="navigateToHome(event);"><i class="fa-solid fa-house"></i> Back to Products</a> 
+        <a href="index.html" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Products</a> 
       </div> 
     </div> 
 
@@ -1050,13 +1049,7 @@
     }
 
     function navigateToCheckout(productId) {
-      history.pushState({ page: 'checkout', product: productId }, '', `index.html?page=checkout&product=${productId}`);
-      handleRouting();
-    }
-
-    function navigateToHome(event) {
-      if (event) event.preventDefault();
-      history.pushState({ page: 'home' }, '', 'index.html');
+      history.pushState({ page: 'checkout', product: productId }, '', `?page=checkout&product=${productId}`);
       handleRouting();
     }
 
