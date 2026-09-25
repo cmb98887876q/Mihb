@@ -108,6 +108,7 @@
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s, background 0.2s;
+    cursor: pointer;
   }
   .back-arrow:hover{
     opacity: 0.8;
@@ -745,8 +746,8 @@
   <!-- PAGE 1: PRODUCT LISTING / HOME -->
   <div id="home-page" class="page-section active">
     <div class="topbar">
-      <!-- Back Arrow Button to open products page -->
-      <a href="?page=products" class="back-arrow" title="View Products" onclick="showProductsPage(event);">
+      <!-- Back Arrow Button / Logo redirect -->
+      <a href="index.html" class="back-arrow" title="Home" onclick="navigateToHome(event);">
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <div class="search-box">
@@ -796,10 +797,10 @@
   <div id="checkout-page" class="page-section">
     <!-- TOP NAV --> 
     <nav class="courses-top-nav"> 
-      <a href="?page=products" class="back-home-btn" onclick="showProductsPage(event);"> 
+      <a href="index.html" class="back-home-btn" onclick="navigateToHome(event);"> 
         <i class="fa-solid fa-arrow-left"></i> Products 
       </a> 
-      <a href="?page=products" class="brand-logo-nav" onclick="showProductsPage(event);" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
+      <a href="index.html" class="brand-logo-nav" onclick="navigateToHome(event);" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
         <img src="logo.png" alt="Logo" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100';" /> 
       </a> 
       <div></div> 
@@ -903,7 +904,7 @@
             <button onclick="copyKey()" style="background:#ff2d2d; color:#fff; border:none; padding:6px 14px; border-radius:8px; font-weight:700; cursor:pointer;">Copy</button> 
           </div> 
         </div> 
-        <a href="?page=products" class="explore-btn" onclick="showProductsPage(event);"><i class="fa-solid fa-house"></i> Back to Products</a> 
+        <a href="index.html" class="explore-btn" onclick="navigateToHome(event);"><i class="fa-solid fa-house"></i> Back to Products</a> 
       </div> 
     </div> 
 
@@ -1049,13 +1050,13 @@
     }
 
     function navigateToCheckout(productId) {
-      history.pushState({ page: 'checkout', product: productId }, '', `?page=checkout&product=${productId}`);
+      history.pushState({ page: 'checkout', product: productId }, '', `index.html?page=checkout&product=${productId}`);
       handleRouting();
     }
 
-    function showProductsPage(event) {
+    function navigateToHome(event) {
       if (event) event.preventDefault();
-      history.pushState({ page: 'products' }, '', '?page=products');
+      history.pushState({ page: 'home' }, '', 'index.html');
       handleRouting();
     }
 
@@ -1067,13 +1068,11 @@
       const homePage = document.getElementById('home-page');
       const checkoutPage = document.getElementById('checkout-page');
 
-      // If page is explicitly 'checkout' or a product parameter exists, show checkout/buying section
       if (page === 'checkout' || productId) {
         homePage.classList.remove('active');
         checkoutPage.classList.add('active');
         loadCheckoutProduct(productId || 'app-001', params);
       } else {
-        // Default to products view
         checkoutPage.classList.remove('active');
         homePage.classList.add('active');
       }
