@@ -19,14 +19,14 @@
     --bg:#000000;
     --card-bg:#0b0b0b;
     --text:#ffffff;
-    --muted:#94a3b8;
+    --muted:#8e95a5;
     --green:#2ecc71;
     --red:#ff4d4f;
     --gold:#f2c94c;
-    --strike:#7a7a7a;
+    --strike:#6b585b;
     --border:#1f1f1f;
-    --accent-red: #ff0015;
-    --accent-glow: rgba(255, 0, 21, 0.45);
+    --accent-red: #ff2d2d;
+    --accent-glow: rgba(255, 45, 45, 0.35);
   }
   html, body{
     width: 100%;
@@ -345,7 +345,7 @@
   .courses-container { 
     max-width: 850px; 
     margin: auto; 
-    padding: 30px 16px 140px; 
+    padding: 20px 16px 90px; 
   } 
   .logo-wrapper { 
     display: flex; 
@@ -403,14 +403,15 @@
   } 
   .hero-product-image-box { 
     border-radius: 24px; 
-    padding: 24px; 
-    background: #080505; 
+    padding: 20px; 
+    background: #0d0708; 
     border: 1px solid rgba(255, 45, 45, 0.2); 
-    box-shadow: 0 0 50px rgba(255, 45, 45, 0.12); 
+    box-shadow: 0 0 40px rgba(255, 45, 45, 0.1); 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     position: relative;
+    margin-bottom: 24px;
   } 
   .share-btn-absolute {
     position: absolute;
@@ -447,19 +448,19 @@
     object-fit: cover; 
   } 
 
-  /* DURATION SELECTION */ 
+  /* DURATION SELECTION - MATCHING REFERENCE IMAGE */ 
   .duration-selection { 
     margin: 24px 0; 
-    background: linear-gradient(180deg, #12090b 0%, #070506 100%); 
-    border: 1px solid rgba(255, 45, 45, 0.3); 
-    border-radius: 18px; 
-    padding: 16px 20px; 
+    background: #0d0708; 
+    border: 1px solid #231215; 
+    border-radius: 20px; 
+    padding: 20px 18px; 
   } 
   .duration-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    margin-bottom: 14px; 
+    margin-bottom: 18px; 
     flex-wrap: wrap; 
     gap: 8px; 
   } 
@@ -474,27 +475,26 @@
   .duration-title i { 
     color: #ff2d2d; 
     background: rgba(255, 45, 45, 0.12); 
-    padding: 6px; 
+    padding: 6px 8px; 
     border-radius: 8px; 
-    font-size: 13px; 
+    font-size: 14px; 
   } 
   .duration-options { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
   } 
   .duration-card { 
-    background: #110b0d; 
-    border: 1.5px solid #2b181c; 
+    background: #11090a; 
+    border: 1px solid #251417; 
     border-radius: 14px; 
-    padding: 12px 10px; 
+    padding: 18px 16px; 
     text-align: center; 
     cursor: pointer; 
     position: relative; 
-    overflow: hidden; 
     display: flex; 
     flex-direction: column; 
-    justify-content: space-between; 
+    justify-content: center; 
     align-items: center; 
     transition: all 0.2s ease; 
   } 
@@ -503,53 +503,56 @@
   } 
   .duration-card.active { 
     border-color: #ff2d2d; 
-    background: linear-gradient(160deg, #380e14 0%, #1a0a0d 100%); 
-    box-shadow: 0 8px 20px rgba(255, 45, 45, 0.25); 
+    background: linear-gradient(180deg, #240c10 0%, #11090a 100%); 
+    box-shadow: 0 0 20px rgba(255, 45, 45, 0.15); 
   } 
   .duration-badge { 
     position: absolute; 
     top: 0; 
-    right: 0; 
-    background: linear-gradient(90deg, #ff2a2a, #ff7a2a); 
+    right: 14px; 
+    background: linear-gradient(90deg, #ff3b30, #ff9500); 
     color: #fff; 
-    font-size: 8px; 
+    font-size: 9px; 
     font-weight: 800; 
-    padding: 2px 8px; 
-    border-bottom-left-radius: 10px; 
+    padding: 3px 10px; 
+    border-bottom-left-radius: 8px; 
+    border-bottom-right-radius: 8px;
     letter-spacing: 0.5px; 
+    text-transform: uppercase;
   } 
   .duration-days { 
-    font-size: 15px; 
+    font-size: 16px; 
     font-weight: 800; 
     color: #fff; 
-    margin-bottom: 2px; 
+    margin-bottom: 4px; 
   } 
   .duration-price { 
     display: flex; 
     align-items: baseline; 
-    gap: 4px; 
+    gap: 6px; 
+    margin-bottom: 8px;
   } 
   .duration-price .val { 
-    font-size: 16px; 
+    font-size: 18px; 
     font-weight: 900; 
     color: #ff334b; 
   } 
   .duration-price .old-val { 
-    font-size: 11px; 
-    color: #735e61; 
+    font-size: 12px; 
+    color: #6b585b; 
     text-decoration: line-through; 
   } 
   .duration-check { 
-    width: 18px; 
-    height: 18px; 
+    width: 20px; 
+    height: 20px; 
     border-radius: 50%; 
     border: 1.5px solid #3d2226; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    margin-top: 6px; 
-    font-size: 9px; 
+    font-size: 10px; 
     color: transparent; 
+    background: #1a0d0f;
     transition: all 0.2s ease; 
   } 
   .duration-card.active .duration-check { 
@@ -558,28 +561,45 @@
     color: #fff; 
   } 
 
+  /* STATS GRID - MATCHING REFERENCE IMAGE 2x2 */
   .stats-grid { 
     display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 1px; 
-    margin: 36px 0; 
-    background: #140a0c; 
-    border-radius: 16px; 
-    padding: 10px 0; 
-    border: 1px solid #2b181c; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0; 
+    margin: 28px 0; 
+    background: #0d0708; 
+    border-radius: 20px; 
+    border: 1px solid #231215; 
+    overflow: hidden;
   } 
   .stat-item { 
     text-align: center; 
-    padding: 12px; 
-    border-right: 1px solid #221215; 
+    padding: 20px 14px; 
+    border-right: 1px solid #1a0e10; 
+    border-bottom: 1px solid #1a0e10;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
+    justify-content: center;
   } 
-  .stat-item:last-child { border-right: none; } 
-  .stat-item i { font-size: 20px; color: #fff; margin-bottom: 6px; } 
-  .stat-item b { display: block; font-size: 15px; color: #fff; font-weight: 700; } 
-  .stat-item span { color: #7e859b; font-size: 12px; margin-top: 2px; } 
+  .stat-item:nth-child(2n) { border-right: none; } 
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  
+  .stat-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 45, 45, 0.12);
+    color: #ff334b;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .stat-item b { display: block; font-size: 14px; color: #fff; font-weight: 700; } 
+  .stat-item span { color: #7e859b; font-size: 11px; margin-top: 3px; display: block; } 
+  
   .checks-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
@@ -604,6 +624,8 @@
     font-size: 12px; 
     flex-shrink: 0; 
   } 
+
+  /* BUYBAR - MATCHING REFERENCE IMAGE */
   .buybar { 
     position: fixed; 
     left: 50%;
@@ -611,15 +633,15 @@
     width: 100%;
     max-width: 480px;
     bottom: 0; 
-    background: rgba(8, 5, 6, 0.95); 
+    background: rgba(9, 5, 6, 0.98); 
     backdrop-filter: blur(16px); 
-    border-top: 1px solid #2b181c; 
+    border-top: 1px solid #231215; 
     padding: 14px 20px; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     z-index: 100; 
-    gap: 16px; 
+    gap: 12px; 
   } 
   @media (min-width: 768px) {
     .buybar {
@@ -634,23 +656,31 @@
   .price-container { 
     display: flex; 
     align-items: center; 
-    gap: 10px; 
-    flex-wrap: wrap; 
+    gap: 8px; 
+    flex-wrap: nowrap; 
   } 
-  .price { font-size: 26px; font-weight: 900; color: #fff; } 
-  .old-price { font-size: 14px; color: #665255; text-decoration: line-through; font-weight: 600; } 
-  .discount-tag { background: #a21f1f; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; } 
+  .price { font-size: 24px; font-weight: 900; color: #fff; } 
+  .old-price { font-size: 13px; color: #6b585b; text-decoration: line-through; font-weight: 600; } 
+  .discount-tag { 
+    background: #ff2d2d; 
+    color: #fff; 
+    font-size: 10px; 
+    font-weight: 800; 
+    padding: 3px 8px; 
+    border-radius: 12px; 
+    text-transform: uppercase;
+  } 
 
   .final-buy-btn { 
-    border: 1px solid rgba(255, 100, 100, 0.5); 
+    border: none; 
     color: white; 
     font-weight: 800; 
     font-size: 14px; 
-    padding: 12px 24px; 
+    padding: 12px 26px; 
     border-radius: 50px; 
     cursor: pointer; 
-    background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
-    box-shadow: 0 0 20px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(0, 0, 0, 0.4); 
+    background: linear-gradient(135deg, #ff1a26 0%, #d60011 100%); 
+    box-shadow: 0 0 20px var(--accent-glow); 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -663,7 +693,7 @@
   } 
   .final-buy-btn:hover { 
     transform: scale(1.03); 
-    box-shadow: 0 0 28px var(--accent-glow), inset 0 2px 5px rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 0 28px var(--accent-glow); 
   } 
 
   /* SUCCESS SCREEN */ 
@@ -738,10 +768,8 @@
   } 
 
   @media (max-width: 520px) { 
-    .duration-options { grid-template-columns: 1fr; } 
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px 0; } 
     .buybar { padding: 12px 16px; } 
-    .price { font-size: 22px; } 
+    .price { font-size: 20px; } 
     .final-buy-btn { padding: 10px 18px; font-size: 13px; } 
     .checks-grid { grid-template-columns: 1fr; }
   } 
@@ -810,89 +838,91 @@
       <div></div> 
     </nav> 
     
-    <main class="courses-container" id="courses-main-content"> 
-      <div class="logo-wrapper"> 
-        <div class="courses-logo"> 
-          <img id="top-app-icon" src="logo.png" alt="App Icon" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"> 
-          <i class="fa-solid fa-shoe-prints courses-logo-icon" style="display: none;"></i> 
-        </div> 
-      </div> 
-      <h1 class="product-title-main" id="product-title-display">Product Name</h1> 
-      <p class="product-description" id="product-description-display">Product description goes here...</p>
-      <div class="by-studio">By Official Store</div> 
-      
-      <section class="hero-product-image-box"> 
-        <button class="share-btn-absolute" onclick="shareProduct()" title="Share Product"><i class="fa-solid fa-share-nodes"></i></button>
-        <div class="product-card-inner"> 
-          <img id="product-main-img" src="" alt="Selected Product Image" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'"> 
-        </div> 
-      </section> 
-
-      <section class="duration-selection"> 
-        <div class="duration-header"> 
-          <div class="duration-title"> 
-            <i class="fa-solid fa-shield-halved"></i> Choose Access Duration 
+    <main class="courses-container"> 
+      <div id="courses-main-content">
+        <div class="logo-wrapper"> 
+          <div class="courses-logo"> 
+            <img id="top-app-icon" src="logo.png" alt="App Icon" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+            <i class="fa-solid fa-shoe-prints courses-logo-icon" style="display: none;"></i> 
           </div> 
-          <div style="font-size: 11px; color: #8e95a5;">Instant Activation After Purchase</div> 
         </div> 
-        <div class="duration-options"> 
-          <label class="duration-card" onclick="selectAccess('7 Days', 0.75, this)"> 
-            <input type="radio" name="access_plan" value="7 Days"> 
-            <div class="duration-days">7 Days</div> 
-            <div class="duration-price"><span class="val" id="plan-price-1">₹0</span><span class="old-val" id="plan-old-price-1">₹0</span></div> 
-            <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
-          </label> 
-          <label class="duration-card active" onclick="selectAccess('15 Days', 1, this)"> 
-            <span class="duration-badge">POPULAR</span> 
-            <input type="radio" name="access_plan" value="15 Days" checked> 
-            <div class="duration-days">15 Days</div> 
-            <div class="duration-price"><span class="val" id="plan-price-2">₹0</span><span class="old-val" id="plan-old-price-2">₹0</span></div> 
-            <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
-          </label> 
-          <label class="duration-card" onclick="selectAccess('30 Days', 1.5, this)"> 
-            <span class="duration-badge" style="background: linear-gradient(90deg, #ff2a2a, #ff7a2a);">BEST VALUE</span> 
-            <input type="radio" name="access_plan" value="30 Days"> 
-            <div class="duration-days">30 Days</div> 
-            <div class="duration-price"><span class="val" id="plan-price-3">₹0</span><span class="old-val" id="plan-old-price-3">₹0</span></div> 
-            <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
-          </label> 
-        </div> 
-      </section> 
+        <h1 class="product-title-main" id="product-title-display">Product Name</h1> 
+        <p class="product-description" id="product-description-display">Product description goes here...</p>
+        <div class="by-studio">By Official Store</div> 
+        
+        <section class="hero-product-image-box"> 
+          <button class="share-btn-absolute" onclick="shareProduct()" title="Share Product"><i class="fa-solid fa-share-nodes"></i></button>
+          <div class="product-card-inner"> 
+            <img id="product-main-img" src="" alt="Selected Product Image" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'"> 
+          </div> 
+        </section> 
 
-      <section class="stats-grid"> 
-        <div class="stat-item"> 
-          <i class="fa-solid fa-truck-fast"></i> 
-          <b>Fast Delivery</b> 
-          <span>Shipping</span> 
-        </div> 
-        <div class="stat-item"> 
-          <i class="fa-solid fa-shield-check"></i> 
-          <b>100% Original</b> 
-          <span>Quality</span> 
-        </div> 
-        <div class="stat-item"> 
-          <i class="fa-solid fa-rotate-left"></i> 
-          <b>7 Days</b> 
-          <span>Return Policy</span> 
-        </div> 
-        <div class="stat-item"> 
-          <i class="fa-solid fa-key"></i> 
-          <b id="stat-access-text">15 Days Access</b> 
-          <span>Validity</span> 
-        </div> 
-      </section> 
-      
-      <h3 style="color:#fff;"><i class="fa-solid fa-star" style="color:#ff2d2d;"></i> Key Features:</h3> 
-      <div class="checks-grid" style="margin-top: 15px;"> 
-        <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Premium Quality Fabric & Print</div> 
-        <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Comfortable All-Day Fit</div> 
-        <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> High Durability & Easy Wash</div> 
-        <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Exclusive Limited Edition Design</div> 
-      </div> 
-    </main> 
+        <!-- REDESIGNED DURATION SELECTION SECTION MATCHING REFERENCE IMAGE -->
+        <section class="duration-selection"> 
+          <div class="duration-header"> 
+            <div class="duration-title"> 
+              <i class="fa-solid fa-shield-halved"></i> Choose Access Duration 
+            </div> 
+            <div style="font-size: 11px; color: #7e859b;">Instant Activation After Purchase</div> 
+          </div> 
+          <div class="duration-options"> 
+            <label class="duration-card" onclick="selectAccess('7 Days', 0.75, this)"> 
+              <input type="radio" name="access_plan" value="7 Days"> 
+              <div class="duration-days">7 Days</div> 
+              <div class="duration-price"><span class="val" id="plan-price-1">₹0</span><span class="old-val" id="plan-old-price-1">₹0</span></div> 
+              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+            </label> 
+            <label class="duration-card active" onclick="selectAccess('15 Days', 1, this)"> 
+              <span class="duration-badge">POPULAR</span> 
+              <input type="radio" name="access_plan" value="15 Days" checked> 
+              <div class="duration-days">15 Days</div> 
+              <div class="duration-price"><span class="val" id="plan-price-2">₹0</span><span class="old-val" id="plan-old-price-2">₹0</span></div> 
+              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+            </label> 
+            <label class="duration-card" onclick="selectAccess('30 Days', 1.5, this)"> 
+              <span class="duration-badge">BEST VALUE</span> 
+              <input type="radio" name="access_plan" value="30 Days"> 
+              <div class="duration-days">30 Days</div> 
+              <div class="duration-price"><span class="val" id="plan-price-3">₹0</span><span class="old-val" id="plan-old-price-3">₹0</span></div> 
+              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+            </label> 
+          </div> 
+        </section> 
 
-    <!-- SUCCESS SCREEN --> 
-    <div class="courses-container"> 
+        <!-- REDESIGNED 2x2 STATS GRID MATCHING REFERENCE IMAGE -->
+        <section class="stats-grid"> 
+          <div class="stat-item"> 
+            <div class="stat-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+            <b>Fast Delivery</b> 
+            <span>Instant Access</span> 
+          </div> 
+          <div class="stat-item"> 
+            <div class="stat-icon-wrapper"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <b>Device Friendly</b> 
+            <span>Works on All Devices</span> 
+          </div> 
+          <div class="stat-item"> 
+            <div class="stat-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+            <b>100% Safe</b> 
+            <span>Secure & Reliable</span> 
+          </div> 
+          <div class="stat-item"> 
+            <div class="stat-icon-wrapper"><i class="fa-solid fa-headset"></i></div>
+            <b>24/7 Support</b> 
+            <span id="stat-access-text">Always Here</span> 
+          </div> 
+        </section> 
+        
+        <h3 style="color:#fff; font-size: 16px; margin-bottom: 12px;"><i class="fa-solid fa-star" style="color:#ff2d2d;"></i> Key Features:</h3> 
+        <div class="checks-grid"> 
+          <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Premium Quality Fabric & Print</div> 
+          <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Comfortable All-Day Fit</div> 
+          <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> High Durability & Easy Wash</div> 
+          <div class="check-item"><span class="check-icon-box"><i class="fa-solid fa-check"></i></span> Exclusive Limited Edition Design</div> 
+        </div>
+      </div>
+
+      <!-- SUCCESS SCREEN --> 
       <div class="success-screen" id="success-screen"> 
         <div class="success-icon"><i class="fa-solid fa-check"></i></div> 
         <h2 style="font-size:28px; color:#fff; margin-bottom:8px;">Payment Successful!</h2> 
@@ -910,14 +940,14 @@
         </div> 
         <button onclick="navigateToHome()" class="explore-btn"><i class="fa-solid fa-house"></i> Back to Products</button> 
       </div> 
-    </div> 
+    </main> 
 
     <!-- Sticky Bottom Buy Bar --> 
     <div class="buybar" id="buybar"> 
       <div class="price-container"> 
         <span class="price" id="display-price">₹199</span> 
         <span class="old-price" id="display-old-price">₹498</span> 
-        <span class="discount-tag">SPECIAL OFFER</span> 
+        <span class="discount-tag" id="display-badge">POPULAR</span> 
       </div> 
       <button class="final-buy-btn" onclick="buyNowRazorpay()"> 
         <i class="fa-solid fa-cart-shopping"></i> BUY NOW 
@@ -1002,6 +1032,7 @@
     let basePrice = 1999; 
     let selectedPlan = '15 Days'; 
     let selectedPrice = 1999; 
+    let selectedBadge = 'POPULAR';
 
     window.addEventListener('DOMContentLoaded', () => {
       renderProductGrid();
@@ -1128,29 +1159,65 @@
       document.getElementById('plan-old-price-2').innerText = '₹' + Math.round(p2 * 1.6); 
       document.getElementById('plan-price-3').innerText = '₹' + p3; 
       document.getElementById('plan-old-price-3').innerText = '₹' + Math.round(p3 * 1.6); 
+      
+      selectedPlan = '15 Days';
       selectedPrice = p2; 
+      selectedBadge = 'POPULAR';
+
       document.getElementById('display-price').innerText = '₹' + p2; 
       document.getElementById('display-old-price').innerText = '₹' + Math.round(p2 * 1.6); 
+      
+      const badgeEl = document.getElementById('display-badge');
+      if (badgeEl) {
+        badgeEl.style.display = 'inline-block';
+        badgeEl.innerText = 'POPULAR';
+        badgeEl.style.background = '#ff2d2d';
+      }
     } 
 
     function selectAccess(plan, priceMultiplier, element) { 
       selectedPlan = plan; 
       selectedPrice = Math.round(basePrice * priceMultiplier); 
       const oldPrice = Math.round(selectedPrice * 1.6); 
+      
       document.getElementById('display-price').innerText = '₹' + selectedPrice; 
       document.getElementById('display-old-price').innerText = '₹' + oldPrice; 
       document.getElementById('stat-access-text').innerText = plan + ' Access'; 
+
+      const badgeEl = document.getElementById('display-badge');
+      if (plan === '7 Days') {
+        badgeEl.style.display = 'none';
+        selectedBadge = '';
+      } else if (plan === '15 Days') {
+        badgeEl.style.display = 'inline-block';
+        badgeEl.innerText = 'POPULAR';
+        badgeEl.style.background = '#ff2d2d';
+        selectedBadge = 'POPULAR';
+      } else if (plan === '30 Days') {
+        badgeEl.style.display = 'inline-block';
+        badgeEl.innerText = 'BEST VALUE';
+        badgeEl.style.background = 'linear-gradient(90deg, #ff3b30, #ff9500)';
+        selectedBadge = 'BEST VALUE';
+      }
+
       document.querySelectorAll('.duration-card').forEach(card => card.classList.remove('active')); 
       element.classList.add('active'); 
     } 
 
     function buyNowRazorpay() { 
+      const originalPrice = Math.round(selectedPrice * 1.6);
       const options = { 
         "key": "rzp_test_YOUR_KEY_HERE", 
         "amount": selectedPrice * 100, 
         "currency": "INR", 
         "name": "Men's Casual Store", 
-        "description": selectedPlan + " Access Subscription", 
+        "description": selectedPlan + " Access Subscription" + (selectedBadge ? " (" + selectedBadge + ")" : ""), 
+        "notes": {
+          "selected_duration": selectedPlan,
+          "current_price": selectedPrice,
+          "original_price": originalPrice,
+          "badge_label": selectedBadge
+        },
         "handler": function (response) { 
           document.getElementById('courses-main-content').style.display = 'none'; 
           document.getElementById('buybar').style.display = 'none'; 
