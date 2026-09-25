@@ -107,11 +107,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-2px); 
 } 
 
-/* HAMBURGER MENU ICON (Hidden on Desktop) */ 
+/* HAMBURGER MENU ICON & CROSS (X) ANIMATION */ 
 .menu-icon { 
   display: none; 
   flex-direction: column; 
   justify-content: center; 
+  align-items: center; 
   gap: 5px; 
   cursor: pointer; 
   padding: 6px; 
@@ -122,18 +123,29 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   border-radius: 50%; 
   background: rgba(255, 255, 255, 0.05); 
   border: 1px solid rgba(255, 255, 255, 0.12); 
+  transition: all 0.3s ease; 
 } 
 .menu-icon span { 
   display: block; 
   width: 20px; 
   height: 2px; 
-  margin: 0 auto; 
   background: #fff; 
   border-radius: 2px; 
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
 } 
 
-/* DESKTOP INLINE NAVIGATION (Direct options display) */ 
+/* HAMBURGER TO CROSS (X) ANIMATION STYLES */ 
+.menu-icon.active span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+} 
+.menu-icon.active span:nth-child(2) { 
+  opacity: 0; 
+} 
+.menu-icon.active span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+} 
+
+/* DESKTOP INLINE NAVIGATION */ 
 .desktop-nav-container { 
   display: flex; 
   align-items: center; 
@@ -155,7 +167,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   color: var(--accent-red); 
 } 
 
-/* CONTACT US LINK STYLING (Ab baaki options ki tarah simple text jaisa dikhega) */ 
 .desktop-contact-link { 
   color: #ffffff; 
   text-decoration: none; 
@@ -444,7 +455,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   z-index: 2; 
 } 
 
-/* BALANCED GLOWING PILL BUY NOW BUTTON */ 
 .buy-now-btn { 
   color: #ffffff; 
   font-size: 12px; 
