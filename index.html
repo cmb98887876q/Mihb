@@ -342,7 +342,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 
 /* COLLECTIONS SECTION */ 
 .collections-section { 
-  padding: 80px 20px 100px; 
+  padding: 80px 20px 40px; 
   background: #000000; 
   text-align: center; 
   position: relative; 
@@ -514,6 +514,102 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-3px); 
 } 
 
+/* WHAT IS PANEL & LATEST NEWS SECTIONS STYLES */ 
+.content-banner-section { 
+  max-width: 1200px; 
+  margin: 50px auto 0; 
+  padding: 0 20px; 
+  text-align: left; 
+} 
+.section-title { 
+  font-size: 32px; 
+  font-weight: 900; 
+  color: #ffffff; 
+  text-transform: uppercase; 
+  line-height: 1; 
+  margin-bottom: 25px; 
+  position: relative; 
+  display: inline-block; 
+  letter-spacing: -0.5px; 
+} 
+.section-title::after { 
+  content: "/////"; 
+  display: block; 
+  color: #ff0015; 
+  font-size: 16px; 
+  letter-spacing: 2px; 
+  margin-top: 4px; 
+} 
+.banner-card { 
+  position: relative; 
+  width: 100%; 
+  min-height: 420px; 
+  border-radius: 12px; 
+  overflow: hidden; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  display: flex; 
+  align-items: flex-end; 
+  padding: 40px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+} 
+.banner-card::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.3) 60%, transparent 100%); 
+  z-index: 1; 
+} 
+.banner-content { 
+  position: relative; 
+  z-index: 2; 
+  max-width: 650px; 
+} 
+.game-logo { 
+  font-size: 28px; 
+  font-weight: 900; 
+  font-style: italic; 
+  color: #ffffff; 
+  letter-spacing: 1px; 
+  margin-bottom: 12px; 
+  text-transform: uppercase; 
+} 
+.banner-desc { 
+  font-size: 13px; 
+  color: #d1d5db; 
+  line-height: 1.6; 
+  margin-bottom: 20px; 
+  text-transform: uppercase; 
+  font-weight: 500; 
+} 
+.banner-subtitle { 
+  font-size: 18px; 
+  font-weight: 900; 
+  color: #ffffff; 
+  text-transform: uppercase; 
+  letter-spacing: 0.5px; 
+  margin-bottom: 15px; 
+} 
+.view-all-link { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  color: #ffffff; 
+  font-size: 14px; 
+  font-weight: 800; 
+  text-decoration: none; 
+  text-transform: uppercase; 
+  transition: color 0.2s ease; 
+} 
+.view-all-link span { 
+  color: #ff0015; 
+} 
+.view-all-link:hover { 
+  color: #ff0015; 
+} 
+
 /* PROFESSIONAL FOOTER */ 
 .footer { 
   background: #09090c; 
@@ -522,6 +618,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   width: 100%; 
   border-top: 1px solid rgba(255, 255, 255, 0.06); 
   font-size: 13px; 
+  margin-top: 60px; 
 } 
 .footer-top-row { 
   max-width: 1400px; 
@@ -689,6 +786,8 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 @media (max-width: 600px) { 
   .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
   .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
+  .banner-card { padding: 20px; min-height: 350px; }
+  .section-title { font-size: 26px; }
 } 
 @media (max-width: 520px) { 
   .video-section { height: 52vh; min-height: 360px; } 
@@ -838,6 +937,29 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         We Do Not Create Our Collections To Showcase We Create<br /> New Attitude Every Week, And We In A Few Items 
       </p> 
       <a href="products.html" class="explore-btn">Explore More <span>→</span></a> 
+    </section> 
+
+    <!-- WHAT IS PANEL SECTION --> 
+    <section class="content-banner-section"> 
+      <h2 class="section-title">WHAT IS<br>PANEL</h2> 
+      <div class="banner-card" style="background-image: url('background-image1.png');"> 
+        <div class="banner-content"> 
+          <div class="game-logo">FREE FIRE</div> 
+          <p class="banner-desc"> 
+            BATTLE IN STYLE with Free Fire, a free-to-play survival shooter accessible to almost all smartphones across the globe. Take on foes in Battle Royale, Clash Squad, and other exciting modes. In each 10-minute match, BOOYAH your way out for adrenaline, style, and fun! 
+          </p> 
+          <div class="banner-subtitle">PROCESS & UPDATE TIMELINE FOR OB47</div> 
+          <a href="#" class="view-all-link">VIEW ALL <span>&gt;&gt;</span></a> 
+        </div> 
+      </div> 
+    </section> 
+
+    <!-- LATEST NEWS SECTION --> 
+    <section class="content-banner-section"> 
+      <h2 class="section-title">LATEST<br>NEWS</h2> 
+      <div class="banner-card" style="background-image: url('background-image2.png');"> 
+        <!-- Optional content inside Latest News card --> 
+      </div> 
     </section> 
 
     <!-- PROFESSIONAL FOOTER --> 
