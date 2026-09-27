@@ -448,120 +448,165 @@
     object-fit: cover; 
   } 
 
-  /* DURATION SELECTION - MATCHING REFERENCE IMAGE */ 
+  /* ENHANCED DURATION SELECTION SECTION */ 
   .duration-selection { 
-    margin: 24px 0; 
-    background: #0d0708; 
-    border: 1px solid #231215; 
-    border-radius: 20px; 
-    padding: 20px 18px; 
+    margin: 28px 0; 
+    background: linear-gradient(145deg, #12090b 0%, #080405 100%); 
+    border: 1px solid #2a1518; 
+    border-radius: 24px; 
+    padding: 22px 20px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   } 
   .duration-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    margin-bottom: 18px; 
+    margin-bottom: 20px; 
     flex-wrap: wrap; 
     gap: 8px; 
   } 
   .duration-title { 
-    font-size: 15px; 
-    font-weight: 700; 
+    font-size: 16px; 
+    font-weight: 800; 
     display: flex; 
     align-items: center; 
-    gap: 8px; 
+    gap: 10px; 
     color: #fff; 
+    letter-spacing: -0.2px;
   } 
   .duration-title i { 
     color: #ff2d2d; 
-    background: rgba(255, 45, 45, 0.12); 
-    padding: 6px 8px; 
-    border-radius: 8px; 
-    font-size: 14px; 
+    background: rgba(255, 45, 45, 0.15); 
+    padding: 8px 10px; 
+    border-radius: 10px; 
+    font-size: 15px; 
+    border: 1px solid rgba(255, 45, 45, 0.2);
   } 
+  .duration-subtitle {
+    font-size: 12px;
+    color: #2ecc71;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
   .duration-options { 
     display: flex; 
     flex-direction: column; 
-    gap: 12px; 
+    gap: 14px; 
   } 
   .duration-card { 
-    background: #11090a; 
-    border: 1px solid #251417; 
-    border-radius: 14px; 
-    padding: 18px 16px; 
-    text-align: center; 
+    background: #150b0d; 
+    border: 1.5px solid #2d171b; 
+    border-radius: 16px; 
+    padding: 16px 18px; 
     cursor: pointer; 
     position: relative; 
     display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
     align-items: center; 
-    transition: all 0.2s ease; 
+    justify-content: space-between;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); 
   } 
   .duration-card input[type="radio"] { 
     display: none; 
   } 
+  .duration-card:hover {
+    border-color: #52242b;
+    background: #1a0d10;
+  }
   .duration-card.active { 
     border-color: #ff2d2d; 
-    background: linear-gradient(180deg, #240c10 0%, #11090a 100%); 
-    box-shadow: 0 0 20px rgba(255, 45, 45, 0.15); 
+    background: linear-gradient(135deg, #2a0e12 0%, #170a0c 100%); 
+    box-shadow: 0 0 25px rgba(255, 45, 45, 0.2); 
+    transform: scale(1.01);
   } 
   .duration-badge { 
     position: absolute; 
-    top: 0; 
-    right: 14px; 
+    top: -10px; 
+    right: 18px; 
     background: linear-gradient(90deg, #ff3b30, #ff9500); 
     color: #fff; 
-    font-size: 9px; 
-    font-weight: 800; 
-    padding: 3px 10px; 
-    border-bottom-left-radius: 8px; 
-    border-bottom-right-radius: 8px;
-    letter-spacing: 0.5px; 
+    font-size: 10px; 
+    font-weight: 900; 
+    padding: 3px 12px; 
+    border-radius: 20px;
+    letter-spacing: 0.6px; 
     text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(255, 59, 48, 0.3);
   } 
+  .duration-info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
   .duration-days { 
-    font-size: 16px; 
+    font-size: 17px; 
     font-weight: 800; 
     color: #fff; 
-    margin-bottom: 4px; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
   } 
+  .duration-per-day {
+    font-size: 12px;
+    color: #a0a5b5;
+    font-weight: 500;
+  }
+  .duration-price-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
   .duration-price { 
     display: flex; 
     align-items: baseline; 
-    gap: 6px; 
-    margin-bottom: 8px;
+    gap: 8px; 
   } 
   .duration-price .val { 
-    font-size: 18px; 
+    font-size: 20px; 
     font-weight: 900; 
     color: #ff334b; 
   } 
   .duration-price .old-val { 
-    font-size: 12px; 
-    color: #6b585b; 
+    font-size: 13px; 
+    color: var(--strike); 
     text-decoration: line-through; 
+    font-weight: 600;
   } 
+  .duration-savings-tag {
+    font-size: 10px;
+    font-weight: 800;
+    color: #2ecc71;
+    background: rgba(46, 204, 113, 0.12);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+  }
   .duration-check { 
-    width: 20px; 
-    height: 20px; 
+    width: 24px; 
+    height: 24px; 
     border-radius: 50%; 
-    border: 1.5px solid #3d2226; 
+    border: 1.5px solid #4a262c; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    font-size: 10px; 
+    font-size: 11px; 
     color: transparent; 
     background: #1a0d0f;
     transition: all 0.2s ease; 
+    margin-left: 12px;
+    flex-shrink: 0;
   } 
   .duration-card.active .duration-check { 
     background: #ff2d2d; 
     border-color: #ff2d2d; 
     color: #fff; 
+    box-shadow: 0 0 10px rgba(255, 45, 45, 0.5);
   } 
 
-  /* STATS GRID - MATCHING REFERENCE IMAGE 2x2 */
+  /* STATS GRID - 2x2 */
   .stats-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
@@ -625,7 +670,7 @@
     flex-shrink: 0; 
   } 
 
-  /* BUYBAR - MATCHING REFERENCE IMAGE */
+  /* BUYBAR */
   .buybar { 
     position: fixed; 
     left: 50%;
@@ -781,7 +826,7 @@
   <div id="home-page" class="page-section active">
     <div class="topbar">
       <!-- Back Arrow Button pointing to Products Section -->
-      <a href="index.htm1" class="back-arrow" title="Back to Products">
+      <a href="index.html" class="back-arrow" title="Back to Products">
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <div class="search-box">
@@ -829,7 +874,7 @@
     <!-- TOP NAV --> 
     <nav class="courses-top-nav"> 
       <!-- Products Button calling navigateToHome() -->
-      <a href="index.htm1" class="back-home-btn"> 
+      <a onclick="navigateToHome()" class="back-home-btn"> 
         <i class="fa-solid fa-arrow-left"></i> Products 
       </a> 
       <a onclick="navigateToHome()" class="brand-logo-nav" style="position: absolute; left: 50%; transform: translateX(-50%);"> 
@@ -857,39 +902,79 @@
           </div> 
         </section> 
 
-        <!-- REDESIGNED DURATION SELECTION SECTION MATCHING REFERENCE IMAGE -->
+        <!-- ENHANCED DURATION SELECTION SECTION -->
         <section class="duration-selection"> 
           <div class="duration-header"> 
             <div class="duration-title"> 
               <i class="fa-solid fa-shield-halved"></i> Choose Access Duration 
             </div> 
-            <div style="font-size: 11px; color: #7e859b;">Instant Activation After Purchase</div> 
+            <div class="duration-subtitle">
+              <i class="fa-solid fa-bolt"></i> Instant Activation
+            </div> 
           </div> 
           <div class="duration-options"> 
+            <!-- 7 Days Plan -->
             <label class="duration-card" onclick="selectAccess('7 Days', 0.75, this)"> 
               <input type="radio" name="access_plan" value="7 Days"> 
-              <div class="duration-days">7 Days</div> 
-              <div class="duration-price"><span class="val" id="plan-price-1">₹0</span><span class="old-val" id="plan-old-price-1">₹0</span></div> 
-              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              <div class="duration-info-left">
+                <div class="duration-days">7 Days Access</div> 
+                <div class="duration-per-day" id="per-day-1">₹0 / day</div>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <div class="duration-price-right">
+                  <div class="duration-price">
+                    <span class="val" id="plan-price-1">₹0</span>
+                    <span class="old-val" id="plan-old-price-1">₹0</span>
+                  </div> 
+                  <span class="duration-savings-tag" id="plan-savings-1">Standard Pass</span>
+                </div>
+                <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              </div>
             </label> 
+
+            <!-- 15 Days Plan (Popular) -->
             <label class="duration-card active" onclick="selectAccess('15 Days', 1, this)"> 
-              <span class="duration-badge">POPULAR</span> 
+              <span class="duration-badge">MOST POPULAR</span> 
               <input type="radio" name="access_plan" value="15 Days" checked> 
-              <div class="duration-days">15 Days</div> 
-              <div class="duration-price"><span class="val" id="plan-price-2">₹0</span><span class="old-val" id="plan-old-price-2">₹0</span></div> 
-              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              <div class="duration-info-left">
+                <div class="duration-days">15 Days Access</div> 
+                <div class="duration-per-day" id="per-day-2">₹0 / day</div>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <div class="duration-price-right">
+                  <div class="duration-price">
+                    <span class="val" id="plan-price-2">₹0</span>
+                    <span class="old-val" id="plan-old-price-2">₹0</span>
+                  </div> 
+                  <span class="duration-savings-tag" id="plan-savings-2">Save 38%</span>
+                </div>
+                <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              </div>
             </label> 
+
+            <!-- 30 Days Plan (Best Value) -->
             <label class="duration-card" onclick="selectAccess('30 Days', 1.5, this)"> 
               <span class="duration-badge">BEST VALUE</span> 
               <input type="radio" name="access_plan" value="30 Days"> 
-              <div class="duration-days">30 Days</div> 
-              <div class="duration-price"><span class="val" id="plan-price-3">₹0</span><span class="old-val" id="plan-old-price-3">₹0</span></div> 
-              <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              <div class="duration-info-left">
+                <div class="duration-days">30 Days Access</div> 
+                <div class="duration-per-day" id="per-day-3">₹0 / day</div>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <div class="duration-price-right">
+                  <div class="duration-price">
+                    <span class="val" id="plan-price-3">₹0</span>
+                    <span class="old-val" id="plan-old-price-3">₹0</span>
+                  </div> 
+                  <span class="duration-savings-tag" id="plan-savings-3">Save 55%</span>
+                </div>
+                <div class="duration-check"><i class="fa-solid fa-check"></i></div> 
+              </div>
             </label> 
           </div> 
         </section> 
 
-        <!-- REDESIGNED 2x2 STATS GRID MATCHING REFERENCE IMAGE -->
+        <!-- STATS GRID - 2x2 -->
         <section class="stats-grid"> 
           <div class="stat-item"> 
             <div class="stat-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
@@ -909,7 +994,7 @@
           <div class="stat-item"> 
             <div class="stat-icon-wrapper"><i class="fa-solid fa-headset"></i></div>
             <b>24/7 Support</b> 
-            <span id="stat-access-text">Always Here</span> 
+            <span id="stat-access-text">15 Days Access</span> 
           </div> 
         </section> 
         
@@ -1153,6 +1238,8 @@
       const p1 = Math.round(basePrice * 0.75); 
       const p2 = Math.round(basePrice); 
       const p3 = Math.round(basePrice * 1.5); 
+
+      // Update Plan Prices
       document.getElementById('plan-price-1').innerText = '₹' + p1; 
       document.getElementById('plan-old-price-1').innerText = '₹' + Math.round(p1 * 1.6); 
       document.getElementById('plan-price-2').innerText = '₹' + p2; 
@@ -1160,6 +1247,11 @@
       document.getElementById('plan-price-3').innerText = '₹' + p3; 
       document.getElementById('plan-old-price-3').innerText = '₹' + Math.round(p3 * 1.6); 
       
+      // Update Daily Price Breakdown
+      document.getElementById('per-day-1').innerText = '₹' + Math.round(p1 / 7) + ' / day';
+      document.getElementById('per-day-2').innerText = '₹' + Math.round(p2 / 15) + ' / day';
+      document.getElementById('per-day-3').innerText = '₹' + Math.round(p3 / 30) + ' / day';
+
       selectedPlan = '15 Days';
       selectedPrice = p2; 
       selectedBadge = 'POPULAR';
@@ -1202,6 +1294,8 @@
 
       document.querySelectorAll('.duration-card').forEach(card => card.classList.remove('active')); 
       element.classList.add('active'); 
+      const radio = element.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
     } 
 
     function buyNowRazorpay() { 
