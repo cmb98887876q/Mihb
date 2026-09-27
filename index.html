@@ -46,7 +46,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   opacity: 0 !important; 
 } 
 
-/* ENHANCED TOP HEADER */ 
+/* ENHANCED TOP HEADER (Desktop: Header background hidden, contents inline) */ 
 .top-header { 
   position: fixed; 
   top: 0; 
@@ -133,9 +133,17 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   border-radius: 2px; 
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
 } 
-.menu-icon.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); } 
-.menu-icon.active span:nth-child(2) { opacity: 0; } 
-.menu-icon.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); } 
+
+/* HAMBURGER TO CROSS (X) ANIMATION STYLES */ 
+.menu-icon.active span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+} 
+.menu-icon.active span:nth-child(2) { 
+  opacity: 0; 
+} 
+.menu-icon.active span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+} 
 
 /* DESKTOP INLINE NAVIGATION */ 
 .desktop-nav-container { 
@@ -155,7 +163,9 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   font-weight: 500; 
   transition: color 0.3s ease; 
 } 
-.desktop-nav a:hover { color: var(--accent-red); } 
+.desktop-nav a:hover { 
+  color: var(--accent-red); 
+} 
 
 .desktop-contact-link { 
   color: #ffffff; 
@@ -167,9 +177,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   border-radius: 0; 
   transition: color 0.3s ease; 
 } 
-.desktop-contact-link:hover { color: var(--accent-red); background: transparent; } 
+.desktop-contact-link:hover { 
+  color: var(--accent-red); 
+  background: transparent; 
+} 
 
-/* DROPDOWN MENU PANEL */ 
+/* DROPDOWN MENU PANEL (For Mobile View Only) */ 
 .top-dropdown-panel { 
   position: fixed; 
   top: 0; 
@@ -501,13 +514,23 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-3px); 
 } 
 
-/* ENHANCED & ANIMATED "WHAT IS PANEL" & "LATEST NEWS" SECTIONS */ 
+/* ENHANCED WHAT IS PANEL & LATEST NEWS WITH SCROLL ANIMATIONS */ 
 .content-banner-section { 
   max-width: 1200px; 
   margin: 60px auto 0; 
   padding: 0 20px; 
   text-align: left; 
+  opacity: 0; 
+  transform: translateY(50px); 
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
 } 
+
+/* SCROLL REVEAL ACTIVE STATE */ 
+.content-banner-section.reveal-active { 
+  opacity: 1; 
+  transform: translateY(0); 
+} 
+
 .section-title { 
   font-size: 32px; 
   font-weight: 900; 
@@ -524,48 +547,38 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   display: block; 
   color: #ff0015; 
   font-size: 16px; 
-  letter-spacing: 3px; 
+  letter-spacing: 2px; 
   margin-top: 4px; 
-  text-shadow: 0 0 10px rgba(255, 0, 21, 0.8); 
-  animation: neonGlow 2s ease-in-out infinite alternate; 
+  transform: scaleX(0); 
+  transform-origin: left; 
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s; 
 } 
-@keyframes neonGlow { 
-  0% { opacity: 0.7; text-shadow: 0 0 5px rgba(255,0,21,0.5); } 
-  100% { opacity: 1; text-shadow: 0 0 18px rgba(255,0,21,1), 0 0 30px rgba(255,0,21,0.8); } 
+
+.content-banner-section.reveal-active .section-title::after { 
+  transform: scaleX(1); 
 } 
 
 .banner-card { 
   position: relative; 
   width: 100%; 
-  min-height: 440px; 
+  min-height: 420px; 
   border-radius: 16px; 
   overflow: hidden; 
-  display: flex; 
-  align-items: flex-end; 
-  padding: 40px; 
-  box-shadow: 0 15px 35px rgba(0,0,0,0.9); 
-  border: 1px solid rgba(255, 255, 255, 0.12); 
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; 
-  background-color: #08080a; 
-} 
-.banner-card:hover { 
-  border-color: rgba(255, 0, 21, 0.6); 
-  box-shadow: 0 20px 45px rgba(255, 0, 21, 0.25); 
-  transform: translateY(-4px); 
-} 
-
-/* Animated Background Image */ 
-.banner-card-bg { 
-  position: absolute; 
-  inset: 0; 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-  z-index: 0; 
+  display: flex; 
+  align-items: flex-end; 
+  padding: 45px; 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.8); 
+  border: 1px solid rgba(255, 255, 255, 0.12); 
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; 
 } 
-.banner-card:hover .banner-card-bg { 
-  transform: scale(1.05); 
+
+.banner-card:hover { 
+  transform: translateY(-6px); 
+  border-color: rgba(255, 0, 21, 0.6); 
+  box-shadow: 0 20px 45px rgba(255, 0, 21, 0.25), 0 0 20px rgba(0, 0, 0, 0.9); 
 } 
 
 .banner-card::before { 
@@ -574,67 +587,45 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   inset: 0; 
   background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.4) 65%, transparent 100%); 
   z-index: 1; 
+  transition: opacity 0.4s ease; 
+} 
+
+.banner-card:hover::before { 
+  background: linear-gradient(to top, rgba(0,0,0,0.98) 20%, rgba(0,0,0,0.3) 70%, transparent 100%); 
 } 
 
 .banner-content { 
   position: relative; 
   z-index: 2; 
-  max-width: 680px; 
-  transform: translateY(0); 
-  transition: transform 0.4s ease; 
+  max-width: 650px; 
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s; 
 } 
 
-.game-logo-wrapper { 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-  margin-bottom: 12px; 
+.content-banner-section.reveal-active .banner-content { 
+  opacity: 1; 
+  transform: translateY(0); 
 } 
+
 .game-logo { 
-  font-size: 32px; 
+  font-size: 30px; 
   font-weight: 900; 
   font-style: italic; 
   color: #ffffff; 
-  letter-spacing: 1.5px; 
-  text-transform: uppercase; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
-} 
-.live-badge { 
-  background: #ff0015; 
-  color: #fff; 
-  font-size: 10px; 
-  font-weight: 800; 
-  padding: 3px 8px; 
-  border-radius: 4px; 
   letter-spacing: 1px; 
+  margin-bottom: 12px; 
   text-transform: uppercase; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 5px; 
-  box-shadow: 0 0 10px rgba(255, 0, 21, 0.6); 
-} 
-.live-badge::before { 
-  content: ""; 
-  width: 6px; 
-  height: 6px; 
-  background: #fff; 
-  border-radius: 50%; 
-  animation: pulseDot 1.2s infinite; 
-} 
-@keyframes pulseDot { 
-  0% { opacity: 0.2; } 
-  50% { opacity: 1; } 
-  100% { opacity: 0.2; } 
+  text-shadow: 0 0 12px rgba(255, 0, 21, 0.5); 
 } 
 
 .banner-desc { 
-  font-size: 13px; 
-  color: #d1d5db; 
+  font-size: 13.5px; 
+  color: #e2e8f0; 
   line-height: 1.6; 
-  margin-bottom: 20px; 
+  margin-bottom: 22px; 
   text-transform: uppercase; 
   font-weight: 500; 
-  letter-spacing: 0.3px; 
 } 
 
 .banner-subtitle { 
@@ -643,7 +634,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   color: #ffffff; 
   text-transform: uppercase; 
   letter-spacing: 0.5px; 
-  margin-bottom: 15px; 
+  margin-bottom: 16px; 
 } 
 
 .view-all-link { 
@@ -655,64 +646,21 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   font-weight: 800; 
   text-decoration: none; 
   text-transform: uppercase; 
-  transition: all 0.3s ease; 
-  position: relative; 
-} 
-.view-all-link .arrows { 
-  color: #ff0015; 
-  transition: transform 0.3s ease; 
-  display: inline-block; 
-} 
-.view-all-link:hover { 
-  color: #ff0015; 
-} 
-.view-all-link:hover .arrows { 
-  transform: translateX(6px); 
+  transition: transform 0.3s ease, color 0.3s ease; 
 } 
 
-/* LATEST NEWS SPECIFIC GRID ENHANCEMENTS */ 
-.news-cards-container { 
-  display: grid; 
-  grid-template-columns: 2fr 1fr; 
-  gap: 20px; 
-} 
-.news-card-side { 
-  background: rgba(15, 15, 22, 0.9); 
-  border: 1px solid rgba(255, 255, 255, 0.08); 
-  border-radius: 16px; 
-  padding: 25px; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-} 
-.news-item { 
-  padding-bottom: 15px; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
-  margin-bottom: 15px; 
-} 
-.news-item:last-child { 
-  border-bottom: none; 
-  margin-bottom: 0; 
-  padding-bottom: 0; 
-} 
-.news-date { 
-  font-size: 11px; 
+.view-all-link span { 
   color: #ff0015; 
-  font-weight: 800; 
-  letter-spacing: 1px; 
-  margin-bottom: 4px; 
+  transition: transform 0.3s ease; 
 } 
-.news-title-text { 
-  font-size: 14px; 
-  font-weight: 700; 
-  color: #fff; 
-  line-height: 1.4; 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-  display: block; 
-} 
-.news-title-text:hover { 
+
+.view-all-link:hover { 
   color: #ff0015; 
+  transform: translateX(4px); 
+} 
+
+.view-all-link:hover span { 
+  transform: translateX(4px); 
 } 
 
 /* PROFESSIONAL FOOTER */ 
@@ -723,7 +671,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   width: 100%; 
   border-top: 1px solid rgba(255, 255, 255, 0.06); 
   font-size: 13px; 
-  margin-top: 60px; 
+  margin-top: 70px; 
 } 
 .footer-top-row { 
   max-width: 1400px; 
@@ -840,7 +788,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   margin: 0 auto; 
   padding-top: 25px; 
   display: flex; 
-  justify-content: space-between; 
+  justify-space-between; 
   align-items: center; 
   flex-wrap: wrap; 
   gap: 15px; 
@@ -886,16 +834,13 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   .collections-fan-container { flex-wrap: wrap; gap: 20px; padding: 0; perspective: none; } 
   .collection-card { margin: 0; transform: none !important; width: 45%; height: 320px; } 
   .speech-badge { display: none; } 
-  .news-cards-container { grid-template-columns: 1fr; }
   .footer-top-row { grid-template-columns: 1fr 1fr; gap: 30px; } 
 } 
 @media (max-width: 600px) { 
   .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
   .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
-  .banner-card { padding: 25px 20px; min-height: 380px; } 
-  .section-title { font-size: 26px; } 
-  .game-logo { font-size: 24px; } 
-  .banner-subtitle { font-size: 15px; } 
+  .banner-card { padding: 22px; min-height: 350px; }
+  .section-title { font-size: 26px; }
 } 
 @media (max-width: 520px) { 
   .video-section { height: 52vh; min-height: 360px; } 
@@ -1047,54 +992,32 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <a href="products.html" class="explore-btn">Explore More <span>→</span></a> 
     </section> 
 
-    <!-- ANIMATED WHAT IS PANEL SECTION --> 
+    <!-- WHAT IS PANEL SECTION --> 
     <section class="content-banner-section"> 
       <h2 class="section-title">WHAT IS<br>PANEL</h2> 
-      <div class="banner-card"> 
-        <div class="banner-card-bg" style="background-image: url('background-image1.png');"></div> 
+      <div class="banner-card" style="background-image: url('background-image1.png');"> 
         <div class="banner-content"> 
-          <div class="game-logo-wrapper"> 
-            <div class="game-logo">FREE FIRE</div> 
-            <div class="live-badge">OB47 Live</div> 
-          </div> 
+          <div class="game-logo">FREE FIRE</div> 
           <p class="banner-desc"> 
             BATTLE IN STYLE with Free Fire, a free-to-play survival shooter accessible to almost all smartphones across the globe. Take on foes in Battle Royale, Clash Squad, and other exciting modes. In each 10-minute match, BOOYAH your way out for adrenaline, style, and fun! 
           </p> 
           <div class="banner-subtitle">PROCESS & UPDATE TIMELINE FOR OB47</div> 
-          <a href="#" class="view-all-link">VIEW ALL <span class="arrows">&gt;&gt;</span></a> 
+          <a href="#" class="view-all-link">VIEW ALL <span>&gt;&gt;</span></a> 
         </div> 
       </div> 
     </section> 
 
-    <!-- ANIMATED LATEST NEWS SECTION --> 
+    <!-- LATEST NEWS SECTION --> 
     <section class="content-banner-section"> 
       <h2 class="section-title">LATEST<br>NEWS</h2> 
-      <div class="news-cards-container"> 
-        <div class="banner-card"> 
-          <div class="banner-card-bg" style="background-image: url('background-image2.png');"></div> 
-          <div class="banner-content"> 
-            <div class="game-logo-wrapper"> 
-              <div class="game-logo">DRIP CLIENT</div> 
-              <div class="live-badge">New Release</div> 
-            </div> 
-            <div class="banner-subtitle">SEASON PASS & EXCLUSIVE DRIP BUNDLES ARE HERE</div> 
-            <a href="#" class="view-all-link">READ FULL NEWS <span class="arrows">&gt;&gt;</span></a> 
-          </div> 
-        </div> 
-
-        <div class="news-card-side"> 
-          <div class="news-item"> 
-            <div class="news-date">SEP 28, 2026</div> 
-            <a href="#" class="news-title-text">OB47 Patch Notes: Anti-Cheat System & Panel Optimizations</a> 
-          </div> 
-          <div class="news-item"> 
-            <div class="news-date">SEP 22, 2026</div> 
-            <a href="#" class="news-title-text">New Esports Tournament Announced - $50,000 Prize Pool</a> 
-          </div> 
-          <div class="news-item"> 
-            <div class="news-date">SEP 15, 2026</div> 
-            <a href="#" class="news-title-text">Weekly Drip Bundle Drops & Exclusive Skin Unlocks</a> 
-          </div> 
+      <div class="banner-card" style="background-image: url('background-image2.png');"> 
+        <div class="banner-content"> 
+          <div class="game-logo">DRIP CLIENT</div> 
+          <p class="banner-desc"> 
+            Experience next-level performance and exclusive features with our latest updates. Unleash custom enhancements and optimized gear designed to elevate your gameplay. 
+          </p> 
+          <div class="banner-subtitle">NEW SEASON REWARDS & CLIENT UPDATES</div> 
+          <a href="#" class="view-all-link">READ MORE <span>&gt;&gt;</span></a> 
         </div> 
       </div> 
     </section> 
@@ -1103,8 +1026,8 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     <footer class="footer"> 
       <div class="footer-top-row"> 
         <div class="footer-col"> 
-          <a href="index.html" class="footer-brand-logo"> 
-            <img src="logo.png" alt="Logo" /> 
+          <a href="index.html" class="footer-brand-logo">
+            <img src="logo.png" alt="Logo" />
           </a> 
           <div class="footer-socials"> 
             <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
@@ -1173,8 +1096,23 @@ function unlockScroll() {
 
 window.addEventListener('DOMContentLoaded', () => { 
   animateCounter(1000, 1800); 
-  unlockScroll(); 
+  unlockScroll();
+  initScrollAnimations();
 }); 
+
+/* SCROLL REVEAL ANIMATION SCRIPT */ 
+function initScrollAnimations() { 
+  const sections = document.querySelectorAll('.content-banner-section'); 
+  const observer = new IntersectionObserver((entries) => { 
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('reveal-active'); 
+      } 
+    }); 
+  }, { threshold: 0.2 }); 
+
+  sections.forEach(section => observer.observe(section)); 
+} 
 
 const menuToggle = document.getElementById("menuToggle"); 
 const topDropdownPanel = document.getElementById("topDropdownPanel"); 
