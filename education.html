@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Panel vs Normal Panel & PC Panels Explained</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+            transition: max-width 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Top bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            padding: 12px 0 20px;
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background: #1c1c1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+        }
+
+        .back-btn:hover {
+            background: #2c2c2e;
+            transform: translateX(-3px);
+            color: #0a84ff;
+        }
+
+        .site-logo {
+            height: 32px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Three Line Hamburger Menu Button */
+        .menu-btn {
+            width: 36px;
+            height: 36px;
+            background: #1c1c1e;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+        }
+
+        .menu-btn:hover {
+            background: #2c2c2e;
+        }
+
+        .menu-btn span {
+            width: 16px;
+            height: 2px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Nav Drawer & Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background: #161618;
+            border-left: 1px solid #28282b;
+            z-index: 100;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+        }
+
+        .nav-drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #222;
+        }
+
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .close-btn {
+            background: #1c1c1e;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #2c2c2e;
+            color: #ff3b30;
+        }
+
+        .menu-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-links li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #d0d0d0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .menu-links li a:hover {
+            background: #242428;
+            color: #0a84ff;
+            transform: translateX(4px);
+        }
+
+        /* Category */
+        .category {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* Main Headline */
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 28px;
+            letter-spacing: -0.3px;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 4px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .featured-image::after {
+            content: "Representational";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            color: #ccc;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Synopsis section */
+        .synopsis-label {
+            color: #ff3b30;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .synopsis-text {
+            font-size: 16px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 28px;
+        }
+
+        /* Author */
+        .author {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 35px;
+        }
+
+        .author span {
+            color: #fff;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Content sections */
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 32px 0 14px;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 16.5px;
+            color: #d0d0d0;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin: 10px 0 22px 22px;
+        }
+
+        ul li {
+            font-size: 16px;
+            color: #d0d0d0;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        code {
+            background: #1c1c1e;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ff9f0a;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: #1c1c1e;
+            border-left: 4px solid #0a84ff;
+            padding: 16px 18px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 15.5px;
+            color: #e0e0e0;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .warning-box {
+            background: #1c1c1e;
+            border-left: 4px solid #ff3b30;
+            padding: 16px 18px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 15.5px;
+            color: #e0e0e0;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .final-box {
+            background: #1c1c1e;
+            border-left: 4px solid #30d158;
+            padding: 18px 20px;
+            margin: 30px 0 10px;
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .final-box h2 {
+            margin-top: 0;
+            color: #30d158;
+            font-size: 20px;
+        }
+
+        .final-box ul li {
+            color: #d0d0d0;
+        }
+
+        /* Normal Panels Breadcrumb Component - Fixed Sizing & Glitch Free */
+        .path-container {
+            width: 100%;
+            padding: 28px 18px 45px;
+            margin: 24px 0;
+            background: #161618;
+            border: 1px solid #28282b;
+            border-radius: 8px;
+            box-sizing: border-box;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #ff3b30, #ff9f0a, #30d158);
+            border-radius: 2px;
+            animation: fillLine 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .tick {
+            width: 3px;
+            height: 18px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            opacity: 0;
+            animation: nodePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .label {
+            position: absolute;
+            top: 16px;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #e0e0e0;
+            white-space: nowrap;
+            letter-spacing: -0.2px;
+            opacity: 0;
+            animation: labelFade 0.4s ease forwards;
+        }
+
+        .node:first-child .label { left: 0; transform: none; }
+        .node:last-child .label { right: 0; transform: none; }
+        .node:not(:first-child):not(:last-child) .label { left: 50%; transform: translateX(-50%); }
+
+        .node:nth-child(1) .tick, .node:nth-child(1) .label { animation-delay: 0.1s; }
+        .node:nth-child(2) .tick, .node:nth-child(2) .label { animation-delay: 0.5s; }
+        .node:nth-child(3) .tick, .node:nth-child(3) .label { animation-delay: 0.9s; }
+        .node:nth-child(4) .tick, .node:nth-child(4) .label { animation-delay: 1.3s; }
+
+        @keyframes fillLine {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes nodePop {
+            0% { opacity: 0; transform: scaleY(0); }
+            100% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes labelFade {
+            0% { opacity: 0; margin-top: 6px; }
+            100% { opacity: 1; margin-top: 0; }
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Desktop Enhancements */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 820px;
+                padding: 40px 40px 80px;
+            }
+
+            .top-bar {
+                padding: 16px 0 28px;
+            }
+
+            .back-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .site-logo {
+                height: 40px;
+                max-width: 220px;
+            }
+
+            .menu-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-btn span {
+                width: 18px;
+            }
+
+            h1 {
+                font-size: 42px;
+                line-height: 1.2;
+                margin-bottom: 32px;
+            }
+
+            h2 {
+                font-size: 26px;
+                margin: 40px 0 16px;
+            }
+
+            .category {
+                font-size: 14px;
+                letter-spacing: 1.5px;
+            }
+
+            .featured-image {
+                height: 360px;
+                border-radius: 8px;
+                margin-bottom: 36px;
+            }
+
+            .featured-image:hover {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .synopsis-text {
+                font-size: 18px;
+                line-height: 1.7;
+                padding-bottom: 32px;
+                margin-bottom: 36px;
+            }
+
+            p, ul li {
+                font-size: 17.5px;
+                line-height: 1.75;
+            }
+
+            .highlight-box, .warning-box, .final-box {
+                padding: 20px 24px;
+                margin: 28px 0;
+            }
+
+            .highlight-box:hover, .warning-box:hover, .final-box:hover {
+                transform: translateX(4px);
+                background: #242428;
+            }
+
+            .path-container {
+                padding: 36px 30px 50px;
+                margin: 32px 0;
+            }
+
+            .path-container:hover {
+                border-color: #38383c;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            }
+
+            .label {
+                font-size: 14px;
+                top: 20px;
+            }
+
+            .tick {
+                height: 22px;
+                width: 4px;
+            }
+
+            footer {
+                margin-top: 70px;
+                padding-top: 28px;
+                font-size: 14px;
+            }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            .container {
+                padding: 16px 16px 50px;
+            }
+
+            .path-container {
+                padding: 22px 12px 42px;
+            }
+
+            .tick {
+                height: 15px;
+            }
+
+            .label {
+                font-size: 11px;
+                top: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <a href="index.htm1" class="back-btn">←</a>
+            <img src="logo.png" alt="Logo" class="site-logo">
+            <button class="menu-btn" id="menuBtn" aria-label="Open Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Menu Overlay and Navigation Drawer -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="nav-drawer" id="navDrawer">
+            <div class="drawer-header">
+                <span class="drawer-title">Menu</span>
+                <button class="close-btn" id="closeBtn" aria-label="Close Menu">&times;</button>
+            </div>
+            <ul class="menu-links">
+                <li><a href="index.htm1">Home</a></li>
+                <li><a href="#root-panel">Root Panel</a></li>
+                <li><a href="#normal-panel">Normal Panel</a></li>
+                <li><a href="#pc-panel">PC Panels</a></li>
+            </ul>
+        </div>
+
+        <!-- ARTICLE 1 -->
+        <!-- Category -->
+        <div class="category">EDUCATION</div>
+
+        <!-- Headline -->
+        <h1>Root Panel vs Normal Panel – The Truth Explained</h1>
+
+        <!-- Featured Image Placeholder -->
+        <div class="featured-image">
+            Educational Content
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-label">Synopsis</div>
+        <p class="synopsis-text">
+            Root panels are often sold as “safer” or “anti-ban” versions of normal panels. In reality, both work by modifying the same game files. The only difference is the path they take. No panel is truly anti-ban, and many paid sellers use this claim to charge higher prices.
+        </p>
+
+        <!-- Author -->
+        <div class="author">
+            By <span>Educational Desk</span>
+        </div>
+
+        <!-- Main Content -->
+        <h2 id="root-panel">What is a Root Panel?</h2>
+        <p>A Root Panel is a type of third-party cheat tool that requires your phone to be <strong>rooted</strong>. Sellers often market these panels as “safer” or “anti-ban” compared to normal panels. But is that true?</p>
+
+        <h2 id="normal-panel">How Normal Panels Work</h2>
+        <p>Normal panels work by modifying game files, mainly:</p>
+        <ul>
+            <li>Character-related meta files</li>
+            <li>Other data files that control visuals (like wallhacks or transparent walls in older versions)</li>
+        </ul>
+
+        <p><strong>Process:</strong></p>
+        <ul>
+            <li>The panel provides modified files.</li>
+            <li>These modified files are replaced in the game’s data folder (usually found in <code>Android/data/com.dts.freefiremax</code> or similar).</li>
+            <li>Once replaced, the panel features get activated.</li>
+        </ul>
+
+        <!-- Normal Panels Breadcrumb Navigation -->
+        <div class="path-container">
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="node">
+                    <div class="tick"></div>
+                    <div class="label">Storage</div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="node">
+                    <div class="tick"></div>
+                    <div class="label">Android</div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="node">
+                    <div class="tick"></div>
+                    <div class="label">Data</div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="node">
+                    <div class="tick"></div>
+                    <div class="label">Game Data</div>
+                </div>
+            </div>
+        </div>
+
+        <p>On Android 12, this folder is easy to access. On Android 13 and 14, extra tools are needed to reach the data folder.</p>
+
+        <h2>How Root Panels Work</h2>
+        <p>Root panels follow a longer path but end up doing the <strong>same thing</strong>.</p>
+
+        <p><strong>Process:</strong></p>
+        <ul>
+            <li>Unlock the bootloader (this already weakens device security).</li>
+            <li>Root the phone using Magisk.</li>
+            <li>Install the panel as a Magisk module.</li>
+            <li>The module then places the same modified files into the game’s data folder.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>In simple words:</strong><br>
+            Root panels also modify the same game data files. The only difference is the route they take to reach those files.
+        </div>
+
+        <h2>The Main Truth</h2>
+        <p>There is <strong>almost no real difference</strong> between Root Panels and Normal Panels when it comes to how they work inside the game.</p>
+
+        <ul>
+            <li>Both modify the same type of files.</li>
+            <li>Both can be detected by the game’s anti-cheat.</li>
+            <li>No panel is truly “anti-ban”.</li>
+        </ul>
+
+        <div class="warning-box">
+            Root panels may stay undetected for a short time, but they are not permanent or safe solutions. Many paid sellers use the “Root + Anti-Ban” claim just to charge more money.
+        </div>
+
+        <div class="final-box">
+            <h2>Final Advice</h2>
+            <ul>
+                <li>Do not fall for claims that any panel (root or normal) is 100% safe or anti-ban.</li>
+                <li>Rooting your phone also reduces your device’s overall security.</li>
+                <li>Using any kind of panel violates the game’s rules and can lead to a permanent ban.</li>
+            </ul>
+            <p style="margin-top: 14px; margin-bottom: 0;">This is the complete reality of Root Panels in simple terms.</p>
+        </div>
+
+        <!-- ARTICLE SEPARATOR -->
+        <hr style="border: 0; border-top: 1px solid #222; margin: 60px 0;">
+
+        <!-- ARTICLE 2 -->
+        <!-- Category -->
+        <div class="category">EDUCATION</div>
+
+        <!-- Headline -->
+        <h1 id="pc-panel">PC Panels in Battle Royale Games – Types Explained</h1>
+
+        <!-- Featured Image Placeholder -->
+        <div class="featured-image">
+            Educational Content
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis-label">Synopsis</div>
+        <p class="synopsis-text">
+            Many players search for ways to gain unfair advantages in Battle Royale games. One of the most discussed methods is the use of PC Panels. This article explains the main types of PC panels based on how they work and how difficult they are to detect.
+        </p>
+
+        <!-- Author -->
+        <div class="author">
+            By <span>Educational Desk</span>
+        </div>
+
+        <!-- Content sections -->
+        <h2>1. Free Panels</h2>
+        <p>These are the most basic and easily available panels. You can find them by simply searching on YouTube.</p>
+
+        <p><strong>Key points:</strong></p>
+        <ul>
+            <li>Completely free</li>
+            <li>Easy to find and use</li>
+            <li>Extremely high chance of getting banned after game updates</li>
+            <li>Not recommended even by people who use panels</li>
+        </ul>
+
+        <div class="warning-box">
+            Free panels are the riskiest and least sophisticated option.
+        </div>
+
+        <h2>2. KeyAuth / Paid Login Panels</h2>
+        <p>These are mid-level panels that require a username and password to log in.</p>
+
+        <p><strong>Key points:</strong></p>
+        <ul>
+            <li>Usually cost between ₹500 to ₹2000</li>
+            <li>You get login credentials after payment</li>
+            <li>Commonly used by players who use auto-aim or sniper features</li>
+            <li>Still carries a high risk of ban or blacklist, especially after reports or new updates</li>
+            <li>Around 80% of regular panel users rely on this type</li>
+        </ul>
+
+        <div class="highlight-box">
+            These panels are more stable than free ones but are still relatively easy to detect with the right methods.
+        </div>
+
+        <h2>3. High-End / Streamer Panels</h2>
+        <p>This is the most advanced and hardest-to-detect type of panel. Many streamers and content creators are suspected of using this method.</p>
+
+        <p><strong>How it works:</strong></p>
+        <ul>
+            <li>The panel does not run directly on the PC.</li>
+            <li>It is controlled through a mobile phone and a web browser (usually Chrome).</li>
+            <li>The user opens a specific website, enters an IP address, and connects the panel.</li>
+            <li>Nothing suspicious appears in Task Manager or running processes on the PC.</li>
+            <li>The panel can be turned on or off in one second.</li>
+        </ul>
+
+        <h2>Special Feature – Aimbot Legit</h2>
+        <p>This is one of the most dangerous features found in streamer panels.</p>
+        <ul>
+            <li>The player assigns the aimbot to the right mouse button.</li>
+            <li>When they shoot with the left mouse button, the gameplay looks completely normal (with recoil and normal aiming).</li>
+            <li>When they press the right mouse button, the aimbot activates and delivers perfect headshots.</li>
+        </ul>
+
+        <p>This makes the gameplay look natural most of the time, which is why it is very hard to detect by just watching.</p>
+
+        <h2>Why Streamer Panels Are Dangerous</h2>
+        <p>Players using this method often play normally for most of the match. Then, in the final moments (especially in 1v3, 1v4, or 1v6 situations), they activate the aimbot and get perfect headshots with almost no recoil.</p>
+        <p>These moments are then clipped and posted as “clutch” or “pro” gameplay.</p>
+
+        <div class="final-box">
+            <h2>Final Note</h2>
+            <p>No panel is 100% safe. Even advanced streamer panels can lead to permanent bans if detected. Using any third-party panel violates the game’s rules and puts your account at serious risk.</p>
+        </div>
+
+        <footer>
+            Educational content only • Not affiliated with any game company
+        </footer>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const navDrawer = document.getElementById('navDrawer');
+        const menuLinks = document.querySelectorAll('.menu-links a');
+
+        function openMenu() {
+            navDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            navDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</body>
+</html>
