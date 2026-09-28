@@ -535,7 +535,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   margin-top: 4px; 
 } 
 
-/* News Card Layout (Flex row to keep side-by-side on mobile) */
+/* News Card Layout */
 .news-article-card {
   display: flex;
   flex-direction: row;
@@ -543,6 +543,22 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+}
+
+/* Clickable Link wrapper for whole section */
+.panel-clickable-wrapper {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 10px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.panel-clickable-wrapper:hover {
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-2px);
 }
 
 .news-article-content {
@@ -946,26 +962,29 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <a href="products.html" class="explore-btn">Explore More <span>→</span></a> 
     </section> 
 
-    <!-- WHAT IS PANEL SECTION --> 
+    <!-- WHAT IS PANEL SECTION (Click to open Education File) --> 
     <section class="content-banner-section"> 
       <h2 class="section-title">
         WHAT IS<br>PANEL
         <span class="slashes">/////</span>
       </h2> 
       
-      <div class="news-article-card"> 
-        <div class="news-article-content"> 
-          <h3 class="news-article-title">What is a Panel in Battle Royale Games?</h3> 
-          <p class="news-article-desc"> 
-            A Panel (also called Mod Menu, Hack Menu, or Cheat Panel) is a third-party tool that overlays a floating menu on top of a Battle Royale game. These tools are not made by the official game developers. 
-          </p> 
-          <a href="#" class="news-view-all">VIEW ALL <span>&gt;&gt;</span></a> 
+      <!-- EDUCATION FILE LINK (Target _blank se file naye tab me khulegi, download attribute se seedhe download hogi) -->
+      <a href="your-education-file.pdf" target="_blank" class="panel-clickable-wrapper">
+        <div class="news-article-card"> 
+          <div class="news-article-content"> 
+            <h3 class="news-article-title">What is a Panel in Battle Royale Games?</h3> 
+            <p class="news-article-desc"> 
+              A Panel (also called Mod Menu, Hack Menu, or Cheat Panel) is a third-party tool that overlays a floating menu on top of a Battle Royale game. These tools are not made by the official game developers. 
+            </p> 
+            <span class="news-view-all">OPEN FILE <span>&gt;&gt;</span></span> 
+          </div> 
+          
+          <div class="news-article-image-wrapper"> 
+            <img src="background-image1.png" alt="What Is Panel" /> 
+          </div> 
         </div> 
-        
-        <div class="news-article-image-wrapper"> 
-          <img src="background-image1.png" alt="What Is Panel" /> 
-        </div> 
-      </div> 
+      </a>
     </section> 
 
     <hr class="content-divider" />
