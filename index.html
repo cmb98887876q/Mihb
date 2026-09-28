@@ -20,7 +20,7 @@
   --muted: #94a3b8; 
   --line: rgba(255, 255, 255, 0.08); 
   --accent-red: #ff0015; 
-  --accent-glow: rgba(255, 0, 21, 0.45); 
+  --accent-glow: rgba(255, 0, 21, 0.55); 
   --glass-bg: rgba(10, 10, 14, 0.85); 
   --card-bg: #070710; 
   --purple: #9130ff; 
@@ -46,7 +46,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   opacity: 0 !important; 
 } 
 
-/* ENHANCED TOP HEADER (Desktop: Header background hidden, contents inline) */ 
+/* TOP HEADER */ 
 .top-header { 
   position: fixed; 
   top: 0; 
@@ -64,7 +64,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   z-index: 10003; 
 } 
 
-/* BRAND LOGO IMAGE REPLACEMENT */ 
 .brand-logo { 
   display: flex; 
   align-items: center; 
@@ -107,7 +106,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-2px); 
 } 
 
-/* HAMBURGER MENU ICON & CROSS (X) ANIMATION */ 
 .menu-icon { 
   display: none; 
   flex-direction: column; 
@@ -134,18 +132,10 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
 } 
 
-/* HAMBURGER TO CROSS (X) ANIMATION STYLES */ 
-.menu-icon.active span:nth-child(1) { 
-  transform: translateY(7px) rotate(45deg); 
-} 
-.menu-icon.active span:nth-child(2) { 
-  opacity: 0; 
-} 
-.menu-icon.active span:nth-child(3) { 
-  transform: translateY(-7px) rotate(-45deg); 
-} 
+.menu-icon.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); } 
+.menu-icon.active span:nth-child(2) { opacity: 0; } 
+.menu-icon.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); } 
 
-/* DESKTOP INLINE NAVIGATION */ 
 .desktop-nav-container { 
   display: flex; 
   align-items: center; 
@@ -163,9 +153,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   font-weight: 500; 
   transition: color 0.3s ease; 
 } 
-.desktop-nav a:hover { 
-  color: var(--accent-red); 
-} 
+.desktop-nav a:hover { color: var(--accent-red); } 
 
 .desktop-contact-link { 
   color: #ffffff; 
@@ -177,12 +165,8 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   border-radius: 0; 
   transition: color 0.3s ease; 
 } 
-.desktop-contact-link:hover { 
-  color: var(--accent-red); 
-  background: transparent; 
-} 
+.desktop-contact-link:hover { color: var(--accent-red); background: transparent; } 
 
-/* DROPDOWN MENU PANEL (For Mobile View Only) */ 
 .top-dropdown-panel { 
   position: fixed; 
   top: 0; 
@@ -253,7 +237,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   width: 100%; 
 } 
 
-/* HERO / VIDEO BACKGROUND SECTION */ 
+/* HERO SECTION */ 
 .video-section { 
   position: relative; 
   width: 100%; 
@@ -304,7 +288,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   display: inline-block; 
 } 
 
-/* COUNTER CONTAINER */ 
 .customers-counter-container { 
   display: inline-flex; 
   align-items: center; 
@@ -514,156 +497,133 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-3px); 
 } 
 
-/* ENHANCED WHAT IS PANEL & LATEST NEWS WITH SCROLL ANIMATIONS */ 
+/* =========================================================
+   WHAT IS PANEL & LATEST NEWS SECTION
+   ========================================================= */
+
 .content-banner-section { 
-  max-width: 1200px; 
-  margin: 60px auto 0; 
+  max-width: 1100px; 
+  margin: 40px auto; 
   padding: 0 20px; 
   text-align: left; 
   opacity: 0; 
-  transform: translateY(50px); 
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+  transform: translateY(30px); 
+  transition: opacity 0.8s ease, transform 0.8s ease; 
 } 
 
-/* SCROLL REVEAL ACTIVE STATE */ 
 .content-banner-section.reveal-active { 
   opacity: 1; 
   transform: translateY(0); 
 } 
 
+/* Section Title with Red Slanted Slash Accent */
 .section-title { 
-  font-size: 32px; 
+  font-size: clamp(24px, 3.5vw, 36px); 
   font-weight: 900; 
   color: #ffffff; 
   text-transform: uppercase; 
-  line-height: 1; 
-  margin-bottom: 25px; 
-  position: relative; 
-  display: inline-block; 
+  line-height: 1.1; 
+  margin-bottom: 20px; 
   letter-spacing: -0.5px; 
 } 
-.section-title::after { 
-  content: "/////"; 
+.section-title .slashes { 
   display: block; 
-  color: #ff0015; 
-  font-size: 16px; 
+  color: var(--accent-red); 
+  font-size: 15px; 
+  font-weight: 900; 
   letter-spacing: 2px; 
   margin-top: 4px; 
-  transform: scaleX(0); 
-  transform-origin: left; 
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s; 
 } 
 
-.content-banner-section.reveal-active .section-title::after { 
-  transform: scaleX(1); 
-} 
+/* News Card Layout (Flex row to keep side-by-side on mobile) */
+.news-article-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
 
-.banner-card { 
-  position: relative; 
-  width: 100%; 
-  min-height: 420px; 
-  border-radius: 16px; 
-  overflow: hidden; 
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  display: flex; 
-  align-items: flex-end; 
-  padding: 45px; 
-  box-shadow: 0 15px 35px rgba(0,0,0,0.8); 
-  border: 1px solid rgba(255, 255, 255, 0.12); 
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; 
-} 
+.news-article-content {
+  flex: 1 1 55%;
+  min-width: 0;
+}
 
-.banner-card:hover { 
-  transform: translateY(-6px); 
-  border-color: rgba(255, 0, 21, 0.6); 
-  box-shadow: 0 20px 45px rgba(255, 0, 21, 0.25), 0 0 20px rgba(0, 0, 0, 0.9); 
-} 
+.news-article-title {
+  font-size: clamp(15px, 2.2vw, 28px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
 
-.banner-card::before { 
-  content: ""; 
-  position: absolute; 
-  inset: 0; 
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.4) 65%, transparent 100%); 
-  z-index: 1; 
-  transition: opacity 0.4s ease; 
-} 
+.news-article-desc {
+  font-size: clamp(12px, 1.4vw, 15px);
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
 
-.banner-card:hover::before { 
-  background: linear-gradient(to top, rgba(0,0,0,0.98) 20%, rgba(0,0,0,0.3) 70%, transparent 100%); 
-} 
+.news-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
 
-.banner-content { 
-  position: relative; 
-  z-index: 2; 
-  max-width: 650px; 
-  opacity: 0; 
-  transform: translateY(20px); 
-  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s; 
-} 
+.news-view-all span {
+  color: var(--accent-red);
+  font-weight: 900;
+  transition: transform 0.3s ease;
+}
 
-.content-banner-section.reveal-active .banner-content { 
-  opacity: 1; 
-  transform: translateY(0); 
-} 
+.news-view-all:hover {
+  color: var(--accent-red);
+}
 
-.game-logo { 
-  font-size: 30px; 
-  font-weight: 900; 
-  font-style: italic; 
-  color: #ffffff; 
-  letter-spacing: 1px; 
-  margin-bottom: 12px; 
-  text-transform: uppercase; 
-  text-shadow: 0 0 12px rgba(255, 0, 21, 0.5); 
-} 
+.news-view-all:hover span {
+  transform: translateX(4px);
+}
 
-.banner-desc { 
-  font-size: 13.5px; 
-  color: #e2e8f0; 
-  line-height: 1.6; 
-  margin-bottom: 22px; 
-  text-transform: uppercase; 
-  font-weight: 500; 
-} 
+/* Image Wrapper */
+.news-article-image-wrapper {
+  flex: 0 0 42%;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
 
-.banner-subtitle { 
-  font-size: 18px; 
-  font-weight: 900; 
-  color: #ffffff; 
-  text-transform: uppercase; 
-  letter-spacing: 0.5px; 
-  margin-bottom: 16px; 
-} 
+.news-article-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
 
-.view-all-link { 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 8px; 
-  color: #ffffff; 
-  font-size: 14px; 
-  font-weight: 800; 
-  text-decoration: none; 
-  text-transform: uppercase; 
-  transition: transform 0.3s ease, color 0.3s ease; 
-} 
+.news-article-card:hover .news-article-image-wrapper img {
+  transform: scale(1.05);
+}
 
-.view-all-link span { 
-  color: #ff0015; 
-  transition: transform 0.3s ease; 
-} 
+/* Divider Line between sections */
+.content-divider {
+  max-width: 1100px;
+  margin: 30px auto 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-.view-all-link:hover { 
-  color: #ff0015; 
-  transform: translateX(4px); 
-} 
-
-.view-all-link:hover span { 
-  transform: translateX(4px); 
-} 
-
-/* PROFESSIONAL FOOTER */ 
+/* FOOTER */ 
 .footer { 
   background: #09090c; 
   color: #94a3b8; 
@@ -671,7 +631,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   width: 100%; 
   border-top: 1px solid rgba(255, 255, 255, 0.06); 
   font-size: 13px; 
-  margin-top: 70px; 
+  margin-top: 90px; 
 } 
 .footer-top-row { 
   max-width: 1400px; 
@@ -737,9 +697,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transition: color 0.2s ease; 
   font-size: 13px; 
 } 
-.footer-links-list a:hover { 
-  color: #ffffff; 
-} 
+.footer-links-list a:hover { color: #ffffff; } 
 .footer-newsletter-text { 
   color: #94a3b8; 
   font-size: 13px; 
@@ -760,9 +718,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   outline: none; 
   transition: border-color 0.2s ease; 
 } 
-.footer-input:focus { 
-  border-color: var(--accent-red); 
-} 
+.footer-input:focus { border-color: var(--accent-red); } 
 .footer-signup-btn { 
   background: var(--accent-red); 
   color: #ffffff; 
@@ -782,13 +738,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-1px); 
 } 
 
-/* FOOTER BOTTOM LEGAL STRIP */ 
 .footer-bottom-row { 
   max-width: 1400px; 
   margin: 0 auto; 
   padding-top: 25px; 
   display: flex; 
-  justify-space-between; 
+  justify-content: space-between; 
   align-items: center; 
   flex-wrap: wrap; 
   gap: 15px; 
@@ -805,9 +760,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   text-decoration: none; 
   transition: color 0.2s ease; 
 } 
-.footer-legal-links a:hover { 
-  color: #ffffff; 
-} 
+.footer-legal-links a:hover { color: #ffffff; } 
 
 .back-to-top { 
   position: fixed; 
@@ -826,6 +779,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 } 
 
 /* RESPONSIVE MEDIA QUERIES */ 
+@media (min-width: 769px) {
+  .news-article-image-wrapper {
+    height: 240px;
+  }
+}
+
 @media (max-width: 900px) { 
   .top-header { padding: 0 20px; background: var(--glass-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(255, 255, 255, 0.08); } 
   .desktop-nav-container { display: none; } 
@@ -836,12 +795,12 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   .speech-badge { display: none; } 
   .footer-top-row { grid-template-columns: 1fr 1fr; gap: 30px; } 
 } 
+
 @media (max-width: 600px) { 
   .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
   .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
-  .banner-card { padding: 22px; min-height: 350px; }
-  .section-title { font-size: 26px; }
 } 
+
 @media (max-width: 520px) { 
   .video-section { height: 52vh; min-height: 360px; } 
   .collection-card { width: 100%; height: 360px; } 
@@ -849,6 +808,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   .collections-footer-quote { font-size: 15px; } 
   .hero-headline { font-size: 28px; } 
   .counter-number { font-size: 18px; } 
+  .news-article-image-wrapper { height: 110px; }
 } 
 </style> 
 </head> 
@@ -863,7 +823,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <img src="logo.png" alt="Logo" /> 
     </a> 
     
-    <!-- DESKTOP DIRECT OPTIONS --> 
     <div class="desktop-nav-container"> 
       <nav class="desktop-nav"> 
         <a href="#services">Services</a> 
@@ -937,7 +896,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         <h2>COLLECTIONS</h2> 
       </div> 
       <div class="collections-fan-container"> 
-        <!-- Card 1 --> 
+        <!-- Cards --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -945,7 +904,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <a href="checkout.html?title=Custom%20Graphic%20Design&img=https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&price=199" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
           </div> 
         </div> 
-        <!-- Card 2 --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -953,7 +911,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <a href="checkout.html?title=Urban%20Oversized%20Asset&img=https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&price=299" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
           </div> 
         </div> 
-        <!-- Card 3 --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -961,7 +918,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <a href="checkout.html?title=Premium%20Leather%20Jacket&img=https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&price=499" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
           </div> 
         </div> 
-        <!-- Card 4 --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -969,7 +925,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <a href="checkout.html?title=Classic%20Crew%20Sweatshirt&img=https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&price=249" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
           </div> 
         </div> 
-        <!-- Card 5 --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -977,7 +932,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <a href="checkout.html?title=Athletic%20Fit%20Tracksuit&img=https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&price=399" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
           </div> 
         </div> 
-        <!-- Card 6 --> 
         <div class="collection-card"> 
           <span class="collection-badge">PAID</span> 
           <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
@@ -994,35 +948,51 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 
     <!-- WHAT IS PANEL SECTION --> 
     <section class="content-banner-section"> 
-      <h2 class="section-title">WHAT IS<br>PANEL</h2> 
-      <div class="banner-card" style="background-image: url('background-image1.png');"> 
-        <div class="banner-content"> 
-          <div class="game-logo">FREE FIRE</div> 
-          <p class="banner-desc"> 
-            BATTLE IN STYLE with Free Fire, a free-to-play survival shooter accessible to almost all smartphones across the globe. Take on foes in Battle Royale, Clash Squad, and other exciting modes. In each 10-minute match, BOOYAH your way out for adrenaline, style, and fun! 
+      <h2 class="section-title">
+        WHAT IS<br>PANEL
+        <span class="slashes">/////</span>
+      </h2> 
+      
+      <div class="news-article-card"> 
+        <div class="news-article-content"> 
+          <h3 class="news-article-title">What is a Panel in Battle Royale Games?</h3> 
+          <p class="news-article-desc"> 
+            A Panel (also called Mod Menu, Hack Menu, or Cheat Panel) is a third-party tool that overlays a floating menu on top of a Battle Royale game. These tools are not made by the official game developers. 
           </p> 
-          <div class="banner-subtitle">PROCESS & UPDATE TIMELINE FOR OB47</div> 
-          <a href="#" class="view-all-link">VIEW ALL <span>&gt;&gt;</span></a> 
+          <a href="#" class="news-view-all">VIEW ALL <span>&gt;&gt;</span></a> 
+        </div> 
+        
+        <div class="news-article-image-wrapper"> 
+          <img src="background-image1.png" alt="What Is Panel" /> 
         </div> 
       </div> 
     </section> 
+
+    <hr class="content-divider" />
 
     <!-- LATEST NEWS SECTION --> 
     <section class="content-banner-section"> 
-      <h2 class="section-title">LATEST<br>NEWS</h2> 
-      <div class="banner-card" style="background-image: url('background-image2.png');"> 
-        <div class="banner-content"> 
-          <div class="game-logo">DRIP CLIENT</div> 
-          <p class="banner-desc"> 
-            Experience next-level performance and exclusive features with our latest updates. Unleash custom enhancements and optimized gear designed to elevate your gameplay. 
+      <h2 class="section-title">
+        LATEST<br>NEWS
+        <span class="slashes">/////</span>
+      </h2> 
+      
+      <div class="news-article-card"> 
+        <div class="news-article-content"> 
+          <h3 class="news-article-title">Inside iconic horror game Silent Hill's Scottish makeover</h3> 
+          <p class="news-article-desc"> 
+            One of gaming's biggest horror franchises has come to the UK. Can it live up to the original? 
           </p> 
-          <div class="banner-subtitle">NEW SEASON REWARDS & CLIENT UPDATES</div> 
-          <a href="#" class="view-all-link">READ MORE <span>&gt;&gt;</span></a> 
+          <a href="#" class="news-view-all">VIEW ALL <span>&gt;&gt;</span></a> 
+        </div> 
+        
+        <div class="news-article-image-wrapper"> 
+          <img src="background-image2.png" alt="Latest News" /> 
         </div> 
       </div> 
     </section> 
 
-    <!-- PROFESSIONAL FOOTER --> 
+    <!-- FOOTER --> 
     <footer class="footer"> 
       <div class="footer-top-row"> 
         <div class="footer-col"> 
@@ -1100,7 +1070,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
 }); 
 
-/* SCROLL REVEAL ANIMATION SCRIPT */ 
 function initScrollAnimations() { 
   const sections = document.querySelectorAll('.content-banner-section'); 
   const observer = new IntersectionObserver((entries) => { 
@@ -1109,7 +1078,7 @@ function initScrollAnimations() {
         entry.target.classList.add('reveal-active'); 
       } 
     }); 
-  }, { threshold: 0.2 }); 
+  }, { threshold: 0.15 }); 
 
   sections.forEach(section => observer.observe(section)); 
 } 
