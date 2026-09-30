@@ -5,7 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMCA & Game Rules Violation Policy</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-body: #08080a;
+            --surface-card: #121215;
+            --surface-card-hover: #17171c;
+            --surface-card-secondary: #1a1a1e;
+            --border-subtle: #222228;
+            --border-hover: #383842;
+            --primary-red: #ff3b30;
+            --primary-red-hover: #e0352b;
+            --primary-red-glow: rgba(255, 59, 48, 0.18);
+            --text-heading: #ffffff;
+            --text-body: #d1d1d8;
+            --text-muted: #8e8e9a;
+            --text-subtle: #5f5f6b;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
         * {
             margin: 0;
@@ -18,11 +38,16 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            line-height: 1.65;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 59, 48, 0.06) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(20, 20, 25, 0.5) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-body);
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Custom Scrollbar */
@@ -30,329 +55,240 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: #08080a;
         }
         ::-webkit-scrollbar-thumb {
-            background: #222226;
+            background: #22222a;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #ff3b30;
+            background: var(--primary-red);
         }
 
-        /* Layout Container */
         .container {
-            max-width: 1200px;
+            max-width: 840px;
             margin: 0 auto;
-            padding: 20px 24px 60px;
+            padding: 32px 24px 80px;
         }
 
-        /* Header Bar */
+        /* Header */
         .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 0 24px;
-            border-bottom: 1px solid #1c1c1e;
-            margin-bottom: 28px;
-        }
-
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+            padding: 16px 0 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 40px;
         }
 
         .back-btn {
-            width: 38px;
-            height: 38px;
-            background: #1c1c1e;
+            width: 42px;
+            height: 42px;
+            background: var(--surface-card-secondary);
+            border: 1px solid var(--border-subtle);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 18px;
+            color: var(--text-heading);
+            font-size: 19px;
             text-decoration: none;
-            transition: all 0.2s ease;
-            border: 1px solid #2c2c2e;
+            transition: var(--transition-smooth);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .back-btn:hover {
-            background: #2c2c2e;
-            transform: translateX(-2px);
-            color: #ff3b30;
-            border-color: #ff3b30;
+            background: #25252b;
+            border-color: var(--border-hover);
+            transform: translateX(-3px);
+            color: var(--primary-red);
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.15);
+        }
+
+        .top-bar-spacer {
+            width: 42px;
         }
 
         .logo-img {
-            max-height: 34px;
+            max-height: 38px;
             width: auto;
             object-fit: contain;
             display: block;
-            transition: transform 0.2s ease;
+            transition: var(--transition-smooth);
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
         }
 
         .logo-img:hover {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
-        /* Top Header Nav (Desktop) */
-        .header-nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .header-nav-link {
-            color: #a0a0a0;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            padding: 6px 12px;
-            border-radius: 6px;
-        }
-
-        .header-nav-link:hover, .header-nav-link.active {
-            color: #ffffff;
-            background: #1c1c1e;
-        }
-
-        .header-nav-link.active {
-            color: #ff3b30;
-            font-weight: 600;
-        }
-
-        /* Breadcrumb Navigation */
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #777777;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        .breadcrumb a {
-            color: #a0a0a0;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .breadcrumb a:hover {
-            color: #ff3b30;
-        }
-
-        .breadcrumb span.sep {
-            color: #444444;
-        }
-
-        .breadcrumb span.current {
-            color: #ff3b30;
-            font-weight: 600;
-        }
-
-        /* Two Column Layout Wrapper */
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        /* Left Sidebar Nav */
-        .sidebar-nav {
-            background: #111113;
-            border: 1px solid #222226;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .sidebar-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #ff3b30;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            padding-left: 10px;
-        }
-
-        .sidebar-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            color: #b0b0b0;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-item:hover {
-            background: #1c1c1e;
-            color: #ffffff;
-        }
-
-        .sidebar-item.active {
-            background: #1c1c1e;
-            color: #ffffff;
-            font-weight: 600;
-            border-left-color: #ff3b30;
-        }
-
-        .sidebar-item.active .badge {
-            background: #ff3b30;
-            color: #ffffff;
-        }
-
-        .badge {
-            font-size: 11px;
-            background: #222226;
-            color: #888888;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        /* Right Content Area */
-        .content-area {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* Category Header */
+        /* Category */
         .category {
-            color: #ff3b30;
+            color: var(--primary-red);
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            display: inline-block;
+            background: rgba(255, 59, 48, 0.08);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 59, 48, 0.15);
         }
 
-        /* Headlines & Typography */
+        /* Main Headline */
         h1 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 32px;
+            font-size: 38px;
             font-weight: 800;
-            line-height: 1.25;
-            color: #ffffff;
-            margin-bottom: 16px;
-            letter-spacing: -0.3px;
+            line-height: 1.22;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .page-desc {
-            font-size: 16.5px;
-            color: #b0b0b0;
-            margin-bottom: 12px;
-            line-height: 1.6;
+            font-size: 17.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.65;
+            font-weight: 400;
+            max-width: 760px;
         }
 
         .last-updated {
-            font-size: 13px;
-            color: #777;
-            margin-bottom: 32px;
+            font-size: 13.5px;
+            color: var(--text-subtle);
+            margin-bottom: 40px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* Notice Card */
         .notice-card {
-            background: #1c1c1e;
-            border-left: 4px solid #ff3b30;
-            padding: 20px 24px;
-            margin-bottom: 32px;
-            border-radius: 0 12px 12px 0;
-            transition: transform 0.2s ease, background 0.2s ease;
+            background: linear-gradient(135deg, rgba(28, 28, 30, 0.95) 0%, rgba(20, 20, 24, 0.95) 100%);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--primary-red);
+            padding: 24px 28px;
+            margin-bottom: 40px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .notice-card:hover {
+            transform: translateX(4px);
+            border-color: var(--border-hover);
+            border-left-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), -4px 0 15px var(--primary-red-glow);
         }
 
         .notice-label {
-            color: #ff3b30;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            color: var(--primary-red);
+            font-size: 12.5px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .notice-card p {
-            font-size: 15px;
-            color: #d0d0d0;
+            font-size: 15.5px;
+            color: var(--text-body);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         /* Section Cards */
         .section-card {
-            background: #111111;
-            border: 1px solid #222226;
-            border-radius: 14px;
-            padding: 26px 24px;
-            margin-bottom: 24px;
-            transition: all 0.25s ease;
+            background: linear-gradient(180deg, var(--surface-card) 0%, #0e0e11 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 30px 28px;
+            margin-bottom: 28px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .section-card:hover {
+            border-color: var(--border-hover);
+            background: linear-gradient(180deg, var(--surface-card-hover) 0%, #111115 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
         }
 
         .section-number {
-            color: #ff3b30;
+            color: var(--primary-red);
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: inline-block;
+            opacity: 0.9;
         }
 
         h2 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 14px;
+            color: var(--text-heading);
+            margin-bottom: 16px;
             line-height: 1.3;
+            letter-spacing: -0.2px;
         }
 
         h3 {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #ffffff;
-            margin: 20px 0 10px;
+            color: var(--text-heading);
+            margin: 24px 0 12px;
         }
 
         p {
             font-size: 16px;
-            color: #c8c8c8;
-            margin-bottom: 14px;
-            line-height: 1.7;
+            color: var(--text-body);
+            margin-bottom: 16px;
+            line-height: 1.75;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
         }
 
         ul {
-            margin: 12px 0 8px 20px;
+            margin: 16px 0 12px 22px;
         }
 
         ul li {
             font-size: 15.5px;
-            color: #c8c8c8;
-            margin-bottom: 9px;
-            line-height: 1.55;
+            color: var(--text-body);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            padding-left: 4px;
+        }
+
+        ul li::marker {
+            color: var(--primary-red);
         }
 
         /* Enhanced Contact Card */
         .contact-card {
-            background: linear-gradient(145deg, #1c1c1e 0%, #121214 100%);
-            border: 1px solid #2c2c2e;
-            border-radius: 16px;
-            padding: 36px 28px;
-            margin-top: 40px;
+            background: linear-gradient(145deg, #1c1c20 0%, #111114 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 44px 36px;
+            margin-top: 48px;
             text-align: center;
             position: relative;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            transition: all 0.25s ease;
+            transition: var(--transition-smooth);
         }
 
         .contact-card::before {
@@ -361,53 +297,66 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 120px;
             height: 3px;
-            background: #ff3b30;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
             border-radius: 0 0 4px 4px;
         }
 
+        .contact-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 16px 44px rgba(0, 0, 0, 0.65), 0 0 30px rgba(255, 59, 48, 0.08);
+        }
+
         .contact-card h2 {
-            font-size: 24px;
-            margin-bottom: 12px;
+            font-size: 26px;
+            margin-bottom: 14px;
         }
 
         .contact-card p {
-            font-size: 15px;
-            color: #b0b0b0;
-            margin-bottom: 24px;
-            max-width: 520px;
+            font-size: 15.5px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            max-width: 560px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .contact-email-box {
-            background: #111113;
-            border: 1px solid #2a2a2c;
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin: 0 auto 24px auto;
+            background: rgba(15, 15, 18, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 20px 32px;
+            margin: 0 auto 28px auto;
             display: inline-block;
             width: 100%;
-            max-width: 440px;
-            transition: all 0.2s ease;
+            max-width: 460px;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-email-box:hover {
+            border-color: rgba(255, 59, 48, 0.4);
+            background: rgba(20, 20, 25, 0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .contact-email-box .label {
             font-size: 12px;
             font-weight: 700;
-            color: #ff3b30;
-            letter-spacing: 1px;
+            color: var(--primary-red);
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: block;
         }
 
         .contact-email-box .email-address {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--text-heading);
             word-break: break-all;
+            letter-spacing: 0.2px;
         }
 
         .contact-btn {
@@ -415,21 +364,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: #ff3b30;
+            background: var(--primary-red);
             color: #fff;
             font-size: 15px;
             font-weight: 600;
-            padding: 13px 32px;
-            border-radius: 10px;
+            padding: 14px 36px;
+            border-radius: 12px;
             text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3);
+            transition: var(--transition-smooth);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.35);
         }
 
         .contact-btn:hover {
-            background: #e0352b;
+            background: var(--primary-red-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.45);
+            box-shadow: 0 8px 28px rgba(255, 59, 48, 0.5);
         }
 
         .back-home-btn {
@@ -437,151 +386,105 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: #1c1c1e;
-            color: #ffffff;
-            border: 1px solid #333;
+            background: var(--surface-card-secondary);
+            color: var(--text-heading);
+            border: 1px solid var(--border-subtle);
             font-size: 15px;
             font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 10px;
+            padding: 13px 30px;
+            border-radius: 12px;
             text-decoration: none;
-            margin-top: 14px;
-            transition: all 0.2s ease;
+            margin-top: 18px;
+            transition: var(--transition-smooth);
         }
 
         .back-home-btn:hover {
-            background: #2c2c2e;
-            color: #ffffff;
-            border-color: #444;
-            transform: translateY(-1px);
+            background: #25252c;
+            color: var(--text-heading);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
         }
 
         footer {
             margin-top: 60px;
             padding-top: 28px;
-            border-top: 1px solid #222226;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            font-size: 13px;
-            color: #666;
+            font-size: 13.5px;
+            color: var(--text-subtle);
         }
 
         .footer-nav {
-            margin-top: 14px;
+            margin-top: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px 18px;
+            gap: 14px 22px;
         }
 
         .footer-link {
-            color: #ff3b30;
+            color: var(--primary-red);
             text-decoration: none;
             font-weight: 500;
-            font-size: 13.5px;
-            transition: all 0.2s ease;
+            font-size: 14px;
+            transition: var(--transition-smooth);
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
         .footer-link:hover {
-            text-decoration: underline;
-            color: #e0352b;
+            text-decoration: none;
+            color: #ff6057;
+            background: rgba(255, 59, 48, 0.08);
         }
 
-        /* DESKTOP UI SPECIFIC ENHANCEMENTS */
-        @media (min-width: 992px) {
+        /* Responsive Layout Adjustments */
+        @media (max-width: 767px) {
             .container {
-                padding: 32px 36px 80px;
+                padding: 20px 16px 50px;
             }
 
             .top-bar {
-                padding: 20px 0 28px;
+                padding: 12px 0 20px;
+                margin-bottom: 24px;
             }
 
-            .main-wrapper {
-                display: grid;
-                grid-template-columns: 280px 1fr;
-                gap: 40px;
-                align-items: start;
+            .back-btn, .top-bar-spacer {
+                width: 36px;
+                height: 36px;
+                font-size: 17px;
             }
 
-            .sidebar-nav {
-                position: sticky;
-                top: 32px;
-                padding: 24px 18px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            .logo-img {
+                max-height: 30px;
             }
 
             h1 {
-                font-size: 38px;
-                letter-spacing: -0.5px;
-                margin-bottom: 20px;
+                font-size: 28px;
             }
 
             .page-desc {
-                font-size: 18px;
-                margin-bottom: 18px;
+                font-size: 15.5px;
+            }
+
+            .section-card {
+                padding: 22px 18px;
+                border-radius: 12px;
             }
 
             .notice-card {
-                padding: 24px 28px;
-            }
-
-            .notice-card:hover {
-                transform: translateX(4px);
-                background: #222226;
-            }
-
-            .section-card {
-                padding: 32px 30px;
-            }
-
-            .section-card:hover {
-                border-color: #333336;
-                background: #141416;
-                transform: translateY(-2px);
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+                padding: 18px 20px;
             }
 
             .contact-card {
-                padding: 44px 36px;
-            }
-
-            .contact-card:hover {
-                border-color: #3a3a3d;
-                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+                padding: 28px 20px;
+                border-radius: 14px;
             }
 
             .contact-email-box {
-                padding: 18px 28px;
-            }
-
-            .contact-email-box:hover {
-                border-color: #ff3b30;
-                background: #151518;
-            }
-        }
-
-        @media (max-width: 991px) {
-            .header-nav {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 26px;
-            }
-
-            .container {
-                padding: 16px 16px 50px;
-            }
-
-            .section-card {
-                padding: 20px 16px;
-            }
-
-            .contact-card {
-                padding: 24px 16px;
+                padding: 16px 20px;
             }
         }
     </style>
@@ -591,475 +494,401 @@
 
         <!-- Header -->
         <div class="top-bar">
-            <div class="header-brand">
-                <a href="index.html" class="back-btn" id="top-back-btn" title="Back to Home">←</a>
-                <img src="logo.png" alt="Logo" class="logo-img">
+            <a href="index.html" class="back-btn" id="top-back-btn">←</a>
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <div class="top-bar-spacer"></div>
+        </div>
+
+        <!-- HOME VIEW CONTENT -->
+        <div id="home-view">
+            <!-- Hero -->
+            <div class="category">LEGAL & COMPLIANCE</div>
+            <h1>DMCA & Game Rules Violation Policy</h1>
+            <p class="page-desc">
+                Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
+            </p>
+            <div class="last-updated">Last Updated: September 29, 2026</div>
+
+            <!-- Notice -->
+            <div class="notice-card">
+                <div class="notice-label">NOTICE</div>
+                <p>
+                    This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
+                </p>
             </div>
 
-            <!-- Header Desktop Navigation -->
-            <nav class="header-nav">
-                <a href="index.html" class="header-nav-link">Home</a>
-                <a href="index.html" class="header-nav-link active" id="nav-dmca">DMCA Policy</a>
-                <a href="#about" class="header-nav-link" id="nav-about">About Us</a>
-                <a href="#privacy" class="header-nav-link" id="nav-privacy">Privacy Policy</a>
-                <a href="#contact" class="header-nav-link" id="nav-contact">Contact Us</a>
-            </nav>
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Copyright / DMCA Requests</h2>
+                <p>
+                    If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information Required</h2>
+                <p>To process a DMCA request, please include the following:</p>
+                <ul>
+                    <li>Full name and company/organization name where applicable</li>
+                    <li>Valid contact email address</li>
+                    <li>Exact URL(s) on this website being reported</li>
+                    <li>Identification of the copyrighted work claimed to be infringed</li>
+                    <li>Evidence of ownership or authorization to act on behalf of the owner</li>
+                    <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
+                    <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
+                </ul>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>Game Rules / Terms of Service Violations</h2>
+                <p>
+                    If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
+                </p>
+                <p>Examples of such tools may include:</p>
+                <ul>
+                    <li>Cheats</li>
+                    <li>Unauthorized game modifications</li>
+                    <li>Aimbots</li>
+                    <li>Wallhacks</li>
+                    <li>Other unauthorized gameplay tools</li>
+                </ul>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Information Required for Game Rule Reports</h2>
+                <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
+                <ul>
+                    <li>Your name and contact email</li>
+                    <li>The exact URL on this website where the link or content appears</li>
+                    <li>A clear description of why the linked material may violate the game’s rules</li>
+                    <li>Any supporting information that helps us review the report</li>
+                </ul>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Review & Removal Process</h2>
+                <p>
+                    After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
+                </p>
+                <p>
+                    Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>Third-Party Content & External Links</h2>
+                <p>
+                    This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
+                </p>
+                <p>
+                    If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Good-Faith Reporting</h2>
+                <p>
+                    All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Contact</h2>
+                <p>
+                    For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
+                </p>
+            </div>
+
+            <!-- Enhanced Contact Card -->
+            <div class="contact-card">
+                <h2>Report an Issue</h2>
+                <p>
+                    For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">DMCA & Compliance Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Send Email Report
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- Breadcrumb Bar -->
-        <div class="breadcrumb">
-            <a href="index.html">Home</a>
-            <span class="sep">/</span>
-            <span class="current" id="breadcrumb-current">DMCA Policy</span>
+        <!-- PRIVACY POLICY VIEW CONTENT -->
+        <div id="privacy-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">LEGAL & PRIVACY</div>
+            <h1>Privacy Policy</h1>
+            <p class="page-desc">
+                This Privacy Policy explains how this website handles visitor information. We keep this page simple so every visitor can understand what happens while browsing.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Introduction</h2>
+                <p>
+                    Welcome to our Privacy Policy page. Respecting visitor privacy is a priority for us. This document outlines the types of information that may be collected when you access or browse this website, how that data is used, and the measures taken to safeguard your browsing experience.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information We Collect</h2>
+                <p>
+                    We may receive basic log information such as browser type, device type, pages visited, approximate time, referring page, and IP address through normal server logs. This is used for security, troubleshooting, analytics, and improving page performance.
+                </p>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>How We Use Information</h2>
+                <p>
+                    The log data collected is strictly utilized to maintain website functionality, ensure network security, analyze performance metrics, and troubleshoot potential server errors.
+                </p>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Cookies and Similar Technologies</h2>
+                <p>
+                    Our pages may use basic cookies, or third-party services may set cookies when you open external links, ads, analytics, or other embedded content. You can disable cookies in your browser settings at any time.
+                </p>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Third-Party Services and Links</h2>
+                <p>
+                    This website may contain educational information and links to external websites. We do not control the privacy practices of third-party websites. Please read their privacy policies before submitting any personal information on those sites.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>No File Hosting</h2>
+                <p>
+                    We do not host panel files, APKs, cheat tools, or any third-party software on our own servers. Some pages may reference or link to external sources for informational purposes. If a link violates rights, game rules, or our policy, you may report it and we will review it promptly.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Data Security & Data Retention</h2>
+                <p>
+                    We implement standard technical measures to protect server log details against unauthorized access. Server log information is retained only as long as required for maintenance, security monitoring, and diagnostic purposes.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Children’s Privacy</h2>
+                <p>
+                    This website is intended for a general audience. If you believe a child has shared personal data with us, please contact us and we will remove it where applicable.
+                </p>
+            </div>
+
+            <!-- 09 -->
+            <div class="section-card">
+                <div class="section-number">09</div>
+                <h2>Your Privacy Rights & Changes to This Policy</h2>
+                <p>
+                    You have the right to request clarification, correction, or removal regarding any information submitted to us via direct email contact.
+                </p>
+                <p>
+                    We reserve the right to update this Privacy Policy as needed to reflect operational changes. Updates will be published on this page with a revised date.
+                </p>
+            </div>
+
+            <!-- Privacy Contact Card -->
+            <div class="contact-card">
+                <h2>Contact Us</h2>
+                <p>
+                    For privacy requests, corrections, or removal questions, please email us at the contact address provided on this website.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">Privacy Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email Privacy Team
+                    </a>
+                </div>
+                <div>
+                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                </div>
+            </div>
         </div>
 
-        <!-- Main Grid Wrapper -->
-        <div class="main-wrapper">
+        <!-- CONTACT US VIEW CONTENT -->
+        <div id="contact-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">GET IN TOUCH</div>
+            <h1>Contact Us</h1>
+            <p class="page-desc">
+                Use the correct email so your request reaches the right place. Please include the page URL and a short description of the issue.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
 
-            <!-- Left Sidebar Navigation -->
-            <aside class="sidebar-nav">
-                <div class="sidebar-title">DOCUMENTATION</div>
-                <a href="index.html" class="sidebar-item active" id="side-dmca">
-                    <span>DMCA Policy</span>
-                    <span class="badge">Legal</span>
-                </a>
-                <a href="#about" class="sidebar-item" id="side-about">
-                    <span>About Us</span>
-                    <span class="badge">Info</span>
-                </a>
-                <a href="#privacy" class="sidebar-item" id="side-privacy">
-                    <span>Privacy Policy</span>
-                    <span class="badge">Privacy</span>
-                </a>
-                <a href="#contact" class="sidebar-item" id="side-contact">
-                    <span>Contact Us</span>
-                    <span class="badge">Support</span>
-                </a>
-            </aside>
+            <!-- Notice -->
+            <div class="notice-card">
+                <div class="notice-label">IMPORTANT</div>
+                <p>
+                    This website does not host panel files, APKs, or any third-party tools. We only respond about website pages, educational information, and listed links.
+                </p>
+            </div>
 
-            <!-- Right Main Content Area -->
-            <main class="content-area">
-
-                <!-- HOME VIEW CONTENT -->
-                <div id="home-view">
-                    <!-- Hero -->
-                    <div class="category">LEGAL & COMPLIANCE</div>
-                    <h1>DMCA & Game Rules Violation Policy</h1>
-                    <p class="page-desc">
-                        Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
-                    </p>
-                    <div class="last-updated">Last Updated: September 29, 2026</div>
-
-                    <!-- Notice -->
-                    <div class="notice-card">
-                        <div class="notice-label">NOTICE</div>
-                        <p>
-                            This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
-                        </p>
-                    </div>
-
-                    <!-- 01 -->
-                    <div class="section-card">
-                        <div class="section-number">01</div>
-                        <h2>Copyright / DMCA Requests</h2>
-                        <p>
-                            If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
-                        </p>
-                    </div>
-
-                    <!-- 02 -->
-                    <div class="section-card">
-                        <div class="section-number">02</div>
-                        <h2>Information Required</h2>
-                        <p>To process a DMCA request, please include the following:</p>
-                        <ul>
-                            <li>Full name and company/organization name where applicable</li>
-                            <li>Valid contact email address</li>
-                            <li>Exact URL(s) on this website being reported</li>
-                            <li>Identification of the copyrighted work claimed to be infringed</li>
-                            <li>Evidence of ownership or authorization to act on behalf of the owner</li>
-                            <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
-                            <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
-                        </ul>
-                    </div>
-
-                    <!-- 03 -->
-                    <div class="section-card">
-                        <div class="section-number">03</div>
-                        <h2>Game Rules / Terms of Service Violations</h2>
-                        <p>
-                            If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
-                        </p>
-                        <p>Examples of such tools may include:</p>
-                        <ul>
-                            <li>Cheats</li>
-                            <li>Unauthorized game modifications</li>
-                            <li>Aimbots</li>
-                            <li>Wallhacks</li>
-                            <li>Other unauthorized gameplay tools</li>
-                        </ul>
-                    </div>
-
-                    <!-- 04 -->
-                    <div class="section-card">
-                        <div class="section-number">04</div>
-                        <h2>Information Required for Game Rule Reports</h2>
-                        <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
-                        <ul>
-                            <li>Your name and contact email</li>
-                            <li>The exact URL on this website where the link or content appears</li>
-                            <li>A clear description of why the linked material may violate the game’s rules</li>
-                            <li>Any supporting information that helps us review the report</li>
-                        </ul>
-                    </div>
-
-                    <!-- 05 -->
-                    <div class="section-card">
-                        <div class="section-number">05</div>
-                        <h2>Review & Removal Process</h2>
-                        <p>
-                            After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
-                        </p>
-                        <p>
-                            Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
-                        </p>
-                    </div>
-
-                    <!-- 06 -->
-                    <div class="section-card">
-                        <div class="section-number">06</div>
-                        <h2>Third-Party Content & External Links</h2>
-                        <p>
-                            This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
-                        </p>
-                        <p>
-                            If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
-                        </p>
-                    </div>
-
-                    <!-- 07 -->
-                    <div class="section-card">
-                        <div class="section-number">07</div>
-                        <h2>Good-Faith Reporting</h2>
-                        <p>
-                            All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
-                        </p>
-                    </div>
-
-                    <!-- 08 -->
-                    <div class="section-card">
-                        <div class="section-number">08</div>
-                        <h2>Contact</h2>
-                        <p>
-                            For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
-                        </p>
-                    </div>
-
-                    <!-- Enhanced Contact Card -->
-                    <div class="contact-card">
-                        <h2>Report an Issue</h2>
-                        <p>
-                            For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
-                        </p>
-                        <div class="contact-email-box">
-                            <span class="label">DMCA & Compliance Contact</span>
-                            <span class="email-address">spaicy.net@gmail.com</span>
-                        </div>
-                        <div>
-                            <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                Send Email Report
-                            </a>
-                        </div>
-                    </div>
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>General Support</h2>
+                <p>
+                    For general questions, inquiry assistance, or website feedback, please send an email to our support team:
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">General Support Email</span>
+                    <span class="email-address">support@yourdomain.com</span>
                 </div>
+            </div>
 
-                <!-- PRIVACY POLICY VIEW CONTENT -->
-                <div id="privacy-view" style="display: none;">
-                    <!-- Hero -->
-                    <div class="category">LEGAL & PRIVACY</div>
-                    <h1>Privacy Policy</h1>
-                    <p class="page-desc">
-                        This Privacy Policy explains how this website handles visitor information. We keep this page simple so every visitor can understand what happens while browsing.
-                    </p>
-                    <div class="last-updated">Last Updated: September 30, 2026</div>
-
-                    <!-- 01 -->
-                    <div class="section-card">
-                        <div class="section-number">01</div>
-                        <h2>Introduction</h2>
-                        <p>
-                            Welcome to our Privacy Policy page. Respecting visitor privacy is a priority for us. This document outlines the types of information that may be collected when you access or browse this website, how that data is used, and the measures taken to safeguard your browsing experience.
-                        </p>
-                    </div>
-
-                    <!-- 02 -->
-                    <div class="section-card">
-                        <div class="section-number">02</div>
-                        <h2>Information We Collect</h2>
-                        <p>
-                            We may receive basic log information such as browser type, device type, pages visited, approximate time, referring page, and IP address through normal server logs. This is used for security, troubleshooting, analytics, and improving page performance.
-                        </p>
-                    </div>
-
-                    <!-- 03 -->
-                    <div class="section-card">
-                        <div class="section-number">03</div>
-                        <h2>How We Use Information</h2>
-                        <p>
-                            The log data collected is strictly utilized to maintain website functionality, ensure network security, analyze performance metrics, and troubleshoot potential server errors.
-                        </p>
-                    </div>
-
-                    <!-- 04 -->
-                    <div class="section-card">
-                        <div class="section-number">04</div>
-                        <h2>Cookies and Similar Technologies</h2>
-                        <p>
-                            Our pages may use basic cookies, or third-party services may set cookies when you open external links, ads, analytics, or other embedded content. You can disable cookies in your browser settings at any time.
-                        </p>
-                    </div>
-
-                    <!-- 05 -->
-                    <div class="section-card">
-                        <div class="section-number">05</div>
-                        <h2>Third-Party Services and Links</h2>
-                        <p>
-                            This website may contain educational information and links to external websites. We do not control the privacy practices of third-party websites. Please read their privacy policies before submitting any personal information on those sites.
-                        </p>
-                    </div>
-
-                    <!-- 06 -->
-                    <div class="section-card">
-                        <div class="section-number">06</div>
-                        <h2>No File Hosting</h2>
-                        <p>
-                            We do not host panel files, APKs, cheat tools, or any third-party software on our own servers. Some pages may reference or link to external sources for informational purposes. If a link violates rights, game rules, or our policy, you may report it and we will review it promptly.
-                        </p>
-                    </div>
-
-                    <!-- 07 -->
-                    <div class="section-card">
-                        <div class="section-number">07</div>
-                        <h2>Data Security & Data Retention</h2>
-                        <p>
-                            We implement standard technical measures to protect server log details against unauthorized access. Server log information is retained only as long as required for maintenance, security monitoring, and diagnostic purposes.
-                        </p>
-                    </div>
-
-                    <!-- 08 -->
-                    <div class="section-card">
-                        <div class="section-number">08</div>
-                        <h2>Children’s Privacy</h2>
-                        <p>
-                            This website is intended for a general audience. If you believe a child has shared personal data with us, please contact us and we will remove it where applicable.
-                        </p>
-                    </div>
-
-                    <!-- 09 -->
-                    <div class="section-card">
-                        <div class="section-number">09</div>
-                        <h2>Your Privacy Rights & Changes to This Policy</h2>
-                        <p>
-                            You have the right to request clarification, correction, or removal regarding any information submitted to us via direct email contact.
-                        </p>
-                        <p>
-                            We reserve the right to update this Privacy Policy as needed to reflect operational changes. Updates will be published on this page with a revised date.
-                        </p>
-                    </div>
-
-                    <!-- Privacy Contact Card -->
-                    <div class="contact-card">
-                        <h2>Contact Us</h2>
-                        <p>
-                            For privacy requests, corrections, or removal questions, please email us at the contact address provided on this website.
-                        </p>
-                        <div class="contact-email-box">
-                            <span class="label">Privacy Contact</span>
-                            <span class="email-address">spaicy.net@gmail.com</span>
-                        </div>
-                        <div>
-                            <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                Email Privacy Team
-                            </a>
-                        </div>
-                        <div>
-                            <a href="index.html" class="back-home-btn">← Back to Home</a>
-                        </div>
-                    </div>
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>DMCA / Copyright</h2>
+                <p>
+                    For legal concerns, official takedown notices, or copyright inquiries, please email our dedicated DMCA compliance address:
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">DMCA / Copyright Email</span>
+                    <span class="email-address">dmca@yourdomain.com</span>
                 </div>
+            </div>
 
-                <!-- CONTACT US VIEW CONTENT -->
-                <div id="contact-view" style="display: none;">
-                    <!-- Hero -->
-                    <div class="category">GET IN TOUCH</div>
-                    <h1>Contact Us</h1>
-                    <p class="page-desc">
-                        Use the correct email so your request reaches the right place. Please include the page URL and a short description of the issue.
-                    </p>
-                    <div class="last-updated">Last Updated: September 30, 2026</div>
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>Game Rules / Panel Related Reports</h2>
+                <p>
+                    Include the exact page URL and a clear description of the issue. We review valid reports regularly.
+                </p>
+            </div>
 
-                    <!-- Notice -->
-                    <div class="notice-card">
-                        <div class="notice-label">IMPORTANT</div>
-                        <p>
-                            This website does not host panel files, APKs, or any third-party tools. We only respond about website pages, educational information, and listed links.
-                        </p>
-                    </div>
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Broken Link</h2>
+                <p>
+                    Share the exact page URL and the name of the link or button that is not working.
+                </p>
+            </div>
 
-                    <!-- 01 -->
-                    <div class="section-card">
-                        <div class="section-number">01</div>
-                        <h2>General Support</h2>
-                        <p>
-                            For general questions, inquiry assistance, or website feedback, please send an email to our support team:
-                        </p>
-                        <div class="contact-email-box">
-                            <span class="label">General Support Email</span>
-                            <span class="email-address">support@yourdomain.com</span>
-                        </div>
-                    </div>
-
-                    <!-- 02 -->
-                    <div class="section-card">
-                        <div class="section-number">02</div>
-                        <h2>DMCA / Copyright</h2>
-                        <p>
-                            For legal concerns, official takedown notices, or copyright inquiries, please email our dedicated DMCA compliance address:
-                        </p>
-                        <div class="contact-email-box">
-                            <span class="label">DMCA / Copyright Email</span>
-                            <span class="email-address">dmca@yourdomain.com</span>
-                        </div>
-                    </div>
-
-                    <!-- 03 -->
-                    <div class="section-card">
-                        <div class="section-number">03</div>
-                        <h2>Game Rules / Panel Related Reports</h2>
-                        <p>
-                            Include the exact page URL and a clear description of the issue. We review valid reports regularly.
-                        </p>
-                    </div>
-
-                    <!-- 04 -->
-                    <div class="section-card">
-                        <div class="section-number">04</div>
-                        <h2>Broken Link</h2>
-                        <p>
-                            Share the exact page URL and the name of the link or button that is not working.
-                        </p>
-                    </div>
-
-                    <!-- Back to Home Action -->
-                    <div class="contact-card">
-                        <h2>Need Anything Else?</h2>
-                        <p>
-                            Return to the home page or browse other sections of our site.
-                        </p>
-                        <div>
-                            <a href="index.html" class="back-home-btn">← Back to Home</a>
-                        </div>
-                    </div>
+            <!-- Back to Home Action -->
+            <div class="contact-card">
+                <h2>Need Anything Else?</h2>
+                <p>
+                    Return to the home page or browse other sections of our site.
+                </p>
+                <div>
+                    <a href="index.html" class="back-home-btn">← Back to Home</a>
                 </div>
+            </div>
+        </div>
 
-                <!-- ABOUT US VIEW CONTENT -->
-                <div id="about-view" style="display: none;">
-                    <!-- Hero -->
-                    <div class="category">ABOUT OUR PLATFORM</div>
-                    <h1>About Us</h1>
-                    <p class="page-desc">
-                        This website is built as a simple, fast, and mobile-friendly educational platform focused on Free Fire and Battle Royale game awareness.
-                    </p>
-                    <div class="last-updated">Last Updated: September 30, 2026</div>
+        <!-- ABOUT US VIEW CONTENT -->
+        <div id="about-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">ABOUT OUR PLATFORM</div>
+            <h1>About Us</h1>
+            <p class="page-desc">
+                This website is built as a simple, fast, and mobile-friendly educational platform focused on Free Fire and Battle Royale game awareness.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
 
-                    <!-- 01 -->
-                    <div class="section-card">
-                        <div class="section-number">01</div>
-                        <h2>Educational Awareness</h2>
-                        <p>
-                            Our goal is to help users understand topics such as panels, anti-cheat systems, privacy risks, and fair play through clear and easy-to-read articles. We keep the layout lightweight so it works well on slow networks and small devices.
-                        </p>
-                    </div>
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Educational Awareness</h2>
+                <p>
+                    Our goal is to help users understand topics such as panels, anti-cheat systems, privacy risks, and fair play through clear and easy-to-read articles. We keep the layout lightweight so it works well on slow networks and small devices.
+                </p>
+            </div>
 
-                    <!-- 02 -->
-                    <div class="section-card">
-                        <div class="section-number">02</div>
-                        <h2>Lightweight & Responsible Design</h2>
-                        <p>
-                            We focus on clean navigation, straightforward explanations, and helpful educational content. We do not host panel files, APKs, or any third-party tools on our server.
-                        </p>
-                    </div>
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Lightweight & Responsible Design</h2>
+                <p>
+                    We focus on clean navigation, straightforward explanations, and helpful educational content. We do not host panel files, APKs, or any third-party tools on our server.
+                </p>
+            </div>
 
-                    <!-- Notice / Report Card -->
-                    <div class="notice-card">
-                        <div class="notice-label">CORRECTIONS & REPORTS</div>
-                        <p>
-                            If you find incorrect information, broken links, or content that should be removed, please use the <a href="#contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
-                        </p>
-                    </div>
+            <!-- Notice / Report Card -->
+            <div class="notice-card">
+                <div class="notice-label">CORRECTIONS & REPORTS</div>
+                <p>
+                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="#contact" style="color: var(--primary-red); text-decoration: underline;">contact page</a>.
+                </p>
+            </div>
 
-                    <!-- About Action Card -->
-                    <div class="contact-card">
-                        <h2>Get In Touch</h2>
-                        <p>
-                            Have feedback, questions, or need to report an issue? Visit our Contact Us section.
-                        </p>
-                        <div>
-                            <a href="#contact" class="contact-btn">Go to Contact Page</a>
-                        </div>
-                        <div>
-                            <a href="index.html" class="back-home-btn">← Back to Home</a>
-                        </div>
-                    </div>
+            <!-- About Action Card -->
+            <div class="contact-card">
+                <h2>Get In Touch</h2>
+                <p>
+                    Have feedback, questions, or need to report an issue? Visit our Contact Us section.
+                </p>
+                <div>
+                    <a href="#contact" class="contact-btn">Go to Contact Page</a>
                 </div>
-
-            </main>
+                <div>
+                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                </div>
+            </div>
         </div>
 
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
                 <a href="index.html" class="footer-link">Home</a>
-                <span style="color: #444;">•</span>
+                <span style="color: var(--border-subtle);">•</span>
                 <a href="#about" class="footer-link">About Us</a>
-                <span style="color: #444;">•</span>
+                <span style="color: var(--border-subtle);">•</span>
                 <a href="#privacy" class="footer-link">Privacy Policy</a>
-                <span style="color: #444;">•</span>
+                <span style="color: var(--border-subtle);">•</span>
                 <a href="#contact" class="footer-link">Contact Us</a>
             </div>
         </footer>
     </div>
 
     <script>
-        function updateActiveState(activeId) {
-            var sideItems = ['side-dmca', 'side-about', 'side-privacy', 'side-contact'];
-            var navItems = ['nav-dmca', 'nav-about', 'nav-privacy', 'nav-contact'];
-
-            sideItems.forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) {
-                    if (id === 'side-' + activeId) {
-                        el.classList.add('active');
-                    } else {
-                        el.classList.remove('active');
-                    }
-                }
-            });
-
-            navItems.forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) {
-                    if (id === 'nav-' + activeId) {
-                        el.classList.add('active');
-                    } else {
-                        el.classList.remove('active');
-                    }
-                }
-            });
-        }
-
         function handleNavigation() {
             var hash = window.location.hash;
             var homeView = document.getElementById('home-view');
@@ -1067,7 +896,6 @@
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
-            var breadcrumbCurrent = document.getElementById('breadcrumb-current');
 
             if (hash === '#privacy') {
                 homeView.style.display = 'none';
@@ -1075,32 +903,24 @@
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
-                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Privacy Policy';
-                updateActiveState('privacy');
             } else if (hash === '#contact') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'block';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
-                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Contact Us';
-                updateActiveState('contact');
             } else if (hash === '#about') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'block';
                 topBackBtn.setAttribute('href', 'index.html');
-                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'About Us';
-                updateActiveState('about');
             } else {
                 homeView.style.display = 'block';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
-                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'DMCA Policy';
-                updateActiveState('dmca');
             }
             window.scrollTo(0, 0);
         }
