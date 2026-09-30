@@ -1,3 +1,18 @@
+<!-- 
+  SERVER CONFIGURATION FOR CLEAN URLs (Apache .htaccess):
+  Create a file named .htaccess in your root directory with the following content:
+
+  RewriteEngine On
+  # Redirect external requests for page.html to page (clean URL)
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # Internally resolve clean URLs to .html files
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*)$ $1.html [NC,L]
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -494,7 +509,7 @@
 
         <!-- Header -->
         <div class="top-bar">
-            <a href="index.html" class="back-btn" id="top-back-btn">←</a>
+            <a href="index" class="back-btn" id="top-back-btn">←</a>
             <img src="logo.png" alt="Logo" class="logo-img">
             <div class="top-bar-spacer"></div>
         </div>
@@ -744,7 +759,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                    <a href="index" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -818,7 +833,7 @@
                     Return to the home page or browse other sections of our site.
                 </p>
                 <div>
-                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                    <a href="index" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -869,7 +884,7 @@
                     <a href="#contact" class="contact-btn">Go to Contact Page</a>
                 </div>
                 <div>
-                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                    <a href="index" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -877,7 +892,7 @@
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
-                <a href="index.html" class="footer-link">Home</a>
+                <a href="index" class="footer-link">Home</a>
                 <span style="color: #444;">•</span>
                 <a href="#about" class="footer-link">About Us</a>
                 <span style="color: #444;">•</span>
@@ -902,25 +917,25 @@
                 privacyView.style.display = 'block';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', 'index.html');
+                topBackBtn.setAttribute('href', 'index');
             } else if (hash === '#contact') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'block';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', 'index.html');
+                topBackBtn.setAttribute('href', 'index');
             } else if (hash === '#about') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'block';
-                topBackBtn.setAttribute('href', 'index.html');
+                topBackBtn.setAttribute('href', 'index');
             } else {
                 homeView.style.display = 'block';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', 'index.html');
+                topBackBtn.setAttribute('href', 'index');
             }
             window.scrollTo(0, 0);
         }
