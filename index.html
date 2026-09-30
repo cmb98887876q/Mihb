@@ -497,10 +497,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(-3px); 
 } 
 
-/* =========================================================
-   WHAT IS PANEL & LATEST NEWS SECTION
-   ========================================================= */
-
+/* WHAT IS PANEL & LATEST NEWS SECTION */ 
 .content-banner-section { 
   max-width: 1100px; 
   margin: 40px auto; 
@@ -516,7 +513,6 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   transform: translateY(0); 
 } 
 
-/* Section Title with Red Slanted Slash Accent */
 .section-title { 
   font-size: clamp(24px, 3.5vw, 36px); 
   font-weight: 900; 
@@ -535,102 +531,98 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   margin-top: 4px; 
 } 
 
-/* Clickable Banner Link Style */
-.banner-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
+.banner-link { 
+  text-decoration: none; 
+  color: inherit; 
+  display: block; 
+} 
 
-/* News Card Layout (Flex row to keep side-by-side on mobile) */
-.news-article-card {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-}
+.news-article-card { 
+  display: flex; 
+  flex-direction: row; 
+  align-items: flex-start; 
+  justify-content: space-between; 
+  gap: 16px; 
+  width: 100%; 
+} 
 
-.news-article-content {
-  flex: 1 1 55%;
-  min-width: 0;
-}
+.news-article-content { 
+  flex: 1 1 55%; 
+  min-width: 0; 
+} 
 
-.news-article-title {
-  font-size: clamp(15px, 2.2vw, 28px);
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 1.25;
-  margin-bottom: 8px;
-}
+.news-article-title { 
+  font-size: clamp(15px, 2.2vw, 28px); 
+  font-weight: 800; 
+  color: #ffffff; 
+  line-height: 1.25; 
+  margin-bottom: 8px; 
+} 
 
-.news-article-desc {
-  font-size: clamp(12px, 1.4vw, 15px);
-  color: #94a3b8;
-  line-height: 1.4;
-  margin-bottom: 14px;
-  font-weight: 400;
-}
+.news-article-desc { 
+  font-size: clamp(12px, 1.4vw, 15px); 
+  color: #94a3b8; 
+  line-height: 1.4; 
+  margin-bottom: 14px; 
+  font-weight: 400; 
+} 
 
-.news-view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 900;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
-}
+.news-view-all { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  color: #ffffff; 
+  font-size: 11px; 
+  font-weight: 900; 
+  text-decoration: none; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  transition: color 0.3s ease; 
+} 
 
-.news-view-all span {
-  color: var(--accent-red);
-  font-weight: 900;
-  transition: transform 0.3s ease;
-}
+.news-view-all span { 
+  color: var(--accent-red); 
+  font-weight: 900; 
+  transition: transform 0.3s ease; 
+} 
 
-.news-article-card:hover .news-view-all,
-.news-view-all:hover {
-  color: var(--accent-red);
-}
+.news-article-card:hover .news-view-all, 
+.news-view-all:hover { 
+  color: var(--accent-red); 
+} 
 
-.news-article-card:hover .news-view-all span,
-.news-view-all:hover span {
-  transform: translateX(4px);
-}
+.news-article-card:hover .news-view-all span, 
+.news-view-all:hover span { 
+  transform: translateX(4px); 
+} 
 
-/* Image Wrapper */
-.news-article-image-wrapper {
-  flex: 0 0 42%;
-  height: 140px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #111;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
+.news-article-image-wrapper { 
+  flex: 0 0 42%; 
+  height: 140px; 
+  border-radius: 8px; 
+  overflow: hidden; 
+  background: #111; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+} 
 
-.news-article-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
+.news-article-image-wrapper img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  transition: transform 0.5s ease; 
+} 
 
-.news-article-card:hover .news-article-image-wrapper img {
-  transform: scale(1.05);
-}
+.news-article-card:hover .news-article-image-wrapper img { 
+  transform: scale(1.05); 
+} 
 
-/* Divider Line between sections */
-.content-divider {
-  max-width: 1100px;
-  margin: 30px auto 0;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+.content-divider { 
+  max-width: 1100px; 
+  margin: 30px auto 0; 
+  border: none; 
+  border-top: 1px solid rgba(255, 255, 255, 0.1); 
+} 
 
 /* FOOTER */ 
 .footer { 
@@ -957,10 +949,10 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
 
     <!-- WHAT IS PANEL SECTION (Clickable -> education.html) --> 
     <section class="content-banner-section"> 
-      <a href="education.html" class="banner-link">
-        <h2 class="section-title">
-          WHAT IS<br>PANEL
-          <span class="slashes">/////</span>
+      <a href="education.html" class="banner-link"> 
+        <h2 class="section-title"> 
+          WHAT IS<br>PANEL 
+          <span class="slashes">/////</span> 
         </h2> 
         
         <div class="news-article-card"> 
@@ -976,16 +968,16 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
             <img src="background-image1.png" alt="What Is Panel" /> 
           </div> 
         </div> 
-      </a>
+      </a> 
     </section> 
 
-    <hr class="content-divider" />
+    <hr class="content-divider" /> 
 
     <!-- LATEST NEWS SECTION --> 
     <section class="content-banner-section"> 
-      <h2 class="section-title">
-        LATEST<br>NEWS
-        <span class="slashes">/////</span>
+      <h2 class="section-title"> 
+        LATEST<br>NEWS 
+        <span class="slashes">/////</span> 
       </h2> 
       
       <div class="news-article-card"> 
@@ -1007,8 +999,8 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     <footer class="footer"> 
       <div class="footer-top-row"> 
         <div class="footer-col"> 
-          <a href="index.html" class="footer-brand-logo">
-            <img src="logo.png" alt="Logo" />
+          <a href="index.html" class="footer-brand-logo"> 
+            <img src="logo.png" alt="Logo" /> 
           </a> 
           <div class="footer-socials"> 
             <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
@@ -1021,7 +1013,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
           <h4 class="footer-heading">Support</h4> 
           <ul class="footer-links-list"> 
             <li><a href="#">Contact Us</a></li> 
-            <li><a href="#">FAQ</a></li> 
+            <li><a href="site-dmca.html">DMCA</a></li> 
             <li><a href="#">Downloads</a></li> 
             <li><a href="#">Locate A Dealer</a></li> 
             <li><a href="#">Product Registration</a></li> 
@@ -1077,8 +1069,8 @@ function unlockScroll() {
 
 window.addEventListener('DOMContentLoaded', () => { 
   animateCounter(1000, 1800); 
-  unlockScroll();
-  initScrollAnimations();
+  unlockScroll(); 
+  initScrollAnimations(); 
 }); 
 
 function initScrollAnimations() { 
