@@ -46,6 +46,202 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   opacity: 0 !important; 
 } 
 
+/* PAGE SWITCHING MODAL & TAB SYSTEM */
+.page-section {
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background: #0d0d14;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 21, 0.15);
+  overflow: hidden;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-title i {
+  color: var(--accent-red);
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 30px;
+  overflow-y: auto;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.modal-tab-content {
+  display: none;
+}
+
+.modal-tab-content.active {
+  display: block;
+}
+
+/* FORM STYLES FOR CONTACT */
+.contact-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 15px rgba(255, 0, 21, 0.25);
+}
+
+.form-textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%);
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 40px;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px var(--accent-glow);
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* DMCA TEXT CONTENT STYLES */
+.policy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.policy-section h4 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.policy-section p {
+  color: #94a3b8;
+}
+
+.policy-section ul {
+  padding-left: 20px;
+  color: #94a3b8;
+}
+
+.policy-section li {
+  margin-bottom: 8px;
+}
+
 /* TOP HEADER */ 
 .top-header { 
   position: fixed; 
@@ -164,6 +360,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   padding: 0; 
   border-radius: 0; 
   transition: color 0.3s ease; 
+  cursor: pointer;
 } 
 .desktop-contact-link:hover { color: var(--accent-red); background: transparent; } 
 
@@ -217,6 +414,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   align-items: center; 
   justify-content: center; 
   gap: 10px; 
+  cursor: pointer;
 } 
 .menu-overlay { 
   position: fixed; 
@@ -697,6 +895,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   text-decoration: none; 
   transition: color 0.2s ease; 
   font-size: 13px; 
+  cursor: pointer;
 } 
 .footer-links-list a:hover { color: #ffffff; } 
 .footer-newsletter-text { 
@@ -760,6 +959,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
   color: #64748b; 
   text-decoration: none; 
   transition: color 0.2s ease; 
+  cursor: pointer;
 } 
 .footer-legal-links a:hover { color: #ffffff; } 
 
@@ -831,7 +1031,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         <a href="#creators">Creators</a> 
         <a href="#blogs">Blogs</a> 
         <a href="#about">About</a> 
-        <a href="site.html#contact" class="desktop-contact-link">Contact Us</a> 
+        <a onclick="openModal('contact')" class="desktop-contact-link">Contact Us</a> 
       </nav> 
       <a href="#login" class="login-btn">Login</a> 
     </div> 
@@ -854,7 +1054,7 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       <a href="#blogs" onclick="closeMenu()">Blogs</a> 
       <a href="#about" onclick="closeMenu()">About</a> 
     </nav> 
-    <a href="site.html#contact" class="menu-contact-btn" onclick="closeMenu()"> 
+    <a onclick="openModal('contact'); closeMenu();" class="menu-contact-btn"> 
       Contact Us <span class="arrow">→</span> 
     </a> 
   </div> 
@@ -1012,8 +1212,8 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
         <div class="footer-col"> 
           <h4 class="footer-heading">Support</h4> 
           <ul class="footer-links-list"> 
-            <li><a href="site.html#contact">Contact Us</a></li> 
-            <li><a href="site.html#dmca">DMCA</a></li> 
+            <li><a onclick="openModal('contact')">Contact Us</a></li> 
+            <li><a onclick="openModal('dmca')">DMCA</a></li> 
             <li><a href="#">Downloads</a></li> 
             <li><a href="#">Locate A Dealer</a></li> 
             <li><a href="#">Product Registration</a></li> 
@@ -1041,11 +1241,11 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
       </div> 
       <div class="footer-bottom-row"> 
         <div class="footer-legal-links"> 
-          <a href="site.html#terms">Terms and Conditions</a> 
-          <a href="site.html#privacy">Privacy Policy</a> 
-          <a href="site.html#disclaimer">Disclaimer</a> 
-          <a href="site.html#dmca">DMCA Policy</a> 
-          <a href="site.html#contact">Contact</a> 
+          <a href="#">Terms and Conditions</a> 
+          <a href="#">Privacy Policy</a> 
+          <a href="#">Disclaimer</a> 
+          <a onclick="openModal('dmca')">DMCA Policy</a> 
+          <a onclick="openModal('contact')">Contact</a> 
         </div> 
         <div class="footer-copyright"> 
           © 2026 Copyright 
@@ -1056,6 +1256,66 @@ video::-webkit-media-controls, video::-webkit-media-controls-start-playback-butt
     <button class="back-to-top" onclick="scrollToTop()">↑</button> 
   </div> 
 </div> 
+
+<!-- INTERACTIVE MODAL OVERLAY -->
+<div id="siteModal" class="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </div>
+      <button class="modal-close-btn" onclick="closeModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <!-- CONTACT TAB -->
+      <div id="contactTab" class="modal-tab-content">
+        <form class="contact-form-wrapper" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" class="form-input" placeholder="Enter your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" class="form-input" placeholder="Enter your email address" required />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" class="form-input" placeholder="How can we help you?" required />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-textarea" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+
+      <!-- DMCA TAB -->
+      <div id="dmcaTab" class="modal-tab-content">
+        <div class="policy-section">
+          <h4>Digital Millennium Copyright Act (DMCA) Notice</h4>
+          <p>We respect the intellectual property rights of others and expect our users to do the same. In accordance with the Digital Millennium Copyright Act of 1998, we will respond expeditiously to claims of copyright infringement committed using our services.</p>
+          
+          <h4>Filing a Take-Down Notice</h4>
+          <p>If you are a copyright owner or authorized agent, please provide our designated copyright agent with the following detailed information:</p>
+          <ul>
+            <li>A physical or electronic signature of the copyright owner or authorized representative.</li>
+            <li>Identification of the copyrighted work claimed to have been infringed.</li>
+            <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity.</li>
+            <li>Your contact information, including address, telephone number, and email.</li>
+            <li>A statement that you have a good faith belief that use of the material is not authorized.</li>
+          </ul>
+          
+          <h4>Contact for DMCA Requests</h4>
+          <p>Please submit all DMCA notices using our Contact form or send a formal request to copyright@domain.com.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script> 
 function unlockScroll() { 
@@ -1069,7 +1329,63 @@ window.addEventListener('DOMContentLoaded', () => {
   animateCounter(1000, 1800); 
   unlockScroll(); 
   initScrollAnimations(); 
+  checkHashOnLoad();
 }); 
+
+window.addEventListener('hashchange', checkHashOnLoad);
+
+function checkHashOnLoad() {
+  const hash = window.location.hash;
+  if (hash === '#contact' || hash === '#site-contact') {
+    openModal('contact');
+  } else if (hash === '#dmca' || hash === '#site-dmca') {
+    openModal('dmca');
+  }
+}
+
+function openModal(type) {
+  const modal = document.getElementById('siteModal');
+  const title = document.getElementById('modalTitle');
+  const contactTab = document.getElementById('contactTab');
+  const dmcaTab = document.getElementById('dmcaTab');
+
+  contactTab.classList.remove('active');
+  dmcaTab.classList.remove('active');
+
+  if (type === 'contact') {
+    title.innerHTML = '<i class="fa-solid fa-envelope"></i> Contact Us';
+    contactTab.classList.add('active');
+    history.pushState(null, null, '#site-contact');
+  } else if (type === 'dmca') {
+    title.innerHTML = '<i class="fa-solid fa-shield-halved"></i> DMCA Policy';
+    dmcaTab.classList.add('active');
+    history.pushState(null, null, '#site-dmca');
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('siteModal');
+  modal.classList.remove('active');
+  unlockScroll();
+  if (window.location.hash === '#site-contact' || window.location.hash === '#site-dmca' || window.location.hash === '#contact' || window.location.hash === '#dmca') {
+    history.pushState(null, null, ' ');
+  }
+}
+
+function handleOverlayClick(event) {
+  if (event.target.id === 'siteModal') {
+    closeModal();
+  }
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  alert('Thank you for reaching out! Your message has been sent successfully.');
+  closeModal();
+}
 
 function initScrollAnimations() { 
   const sections = document.querySelectorAll('.content-banner-section'); 
