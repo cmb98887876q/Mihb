@@ -494,7 +494,7 @@
 
         <!-- Header -->
         <div class="top-bar">
-            <a href="/" class="back-btn" id="top-back-btn">←</a>
+            <a href="site" class="back-btn" id="top-back-btn">←</a>
             <img src="logo.png" alt="Logo" class="logo-img">
             <div class="top-bar-spacer"></div>
         </div>
@@ -744,7 +744,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="/" class="back-home-btn">← Back to Home</a>
+                    <a href="site" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -818,7 +818,7 @@
                     Return to the home page or browse other sections of our site.
                 </p>
                 <div>
-                    <a href="/" class="back-home-btn">← Back to Home</a>
+                    <a href="site" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -855,7 +855,7 @@
             <div class="notice-card">
                 <div class="notice-label">CORRECTIONS & REPORTS</div>
                 <p>
-                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="#contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
+                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="site-contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
                 </p>
             </div>
 
@@ -866,10 +866,10 @@
                     Have feedback, questions, or need to report an issue? Visit our Contact Us section.
                 </p>
                 <div>
-                    <a href="#contact" class="contact-btn">Go to Contact Page</a>
+                    <a href="site-contact" class="contact-btn">Go to Contact Page</a>
                 </div>
                 <div>
-                    <a href="/" class="back-home-btn">← Back to Home</a>
+                    <a href="site" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -877,55 +877,73 @@
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
-                <a href="/" class="footer-link">Home</a>
+                <a href="site" class="footer-link">Home</a>
                 <span style="color: #444;">•</span>
-                <a href="#about" class="footer-link">About Us</a>
+                <a href="site-about" class="footer-link">About Us</a>
                 <span style="color: #444;">•</span>
-                <a href="#privacy" class="footer-link">Privacy Policy</a>
+                <a href="site-privacy" class="footer-link">Privacy Policy</a>
                 <span style="color: #444;">•</span>
-                <a href="#contact" class="footer-link">Contact Us</a>
+                <a href="site-contact" class="footer-link">Contact Us</a>
             </div>
         </footer>
     </div>
 
     <script>
         function handleNavigation() {
-            var hash = window.location.hash;
+            var path = window.location.pathname;
             var homeView = document.getElementById('home-view');
             var privacyView = document.getElementById('privacy-view');
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
 
-            if (hash === '#privacy') {
+            if (path.endsWith('site-privacy')) {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'block';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', '/');
-            } else if (hash === '#contact') {
+                topBackBtn.setAttribute('href', 'site');
+            } else if (path.endsWith('site-contact')) {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'block';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', '/');
-            } else if (hash === '#about') {
+                topBackBtn.setAttribute('href', 'site');
+            } else if (path.endsWith('site-about')) {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'block';
-                topBackBtn.setAttribute('href', '/');
+                topBackBtn.setAttribute('href', 'site');
+            } else if (path.endsWith('site-dmca')) {
+                homeView.style.display = 'block';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', 'site');
             } else {
                 homeView.style.display = 'block';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
-                topBackBtn.setAttribute('href', '/');
+                topBackBtn.setAttribute('href', 'site');
             }
             window.scrollTo(0, 0);
         }
 
-        window.addEventListener('hashchange', handleNavigation);
+        document.addEventListener('click', function(e) {
+            var target = e.target.closest('a');
+            if (target) {
+                var href = target.getAttribute('href');
+                if (href === 'site' || href === 'site-about' || href === 'site-privacy' || href === 'site-contact' || href === 'site-dmca') {
+                    e.preventDefault();
+                    history.pushState(null, '', href);
+                    handleNavigation();
+                }
+            }
+        });
+
+        window.addEventListener('popstate', handleNavigation);
         window.addEventListener('DOMContentLoaded', handleNavigation);
     </script>
 </body>
