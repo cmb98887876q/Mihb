@@ -46,6 +46,11 @@
             color: #fff;
             font-size: 18px;
             text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #2c2c2e;
         }
 
         .top-bar-spacer {
@@ -258,6 +263,29 @@
             box-shadow: 0 6px 18px rgba(255, 59, 48, 0.45);
         }
 
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #1c1c1e;
+            color: #ffffff;
+            border: 1px solid #333;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .back-home-btn:hover {
+            background: #2c2c2e;
+            color: #ffffff;
+            border-color: #444;
+        }
+
         footer {
             margin-top: 50px;
             padding-top: 20px;
@@ -265,6 +293,27 @@
             text-align: center;
             font-size: 13px;
             color: #666;
+        }
+
+        .footer-nav {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .footer-link {
+            color: #ff3b30;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+            color: #e0352b;
         }
 
         @media (max-width: 480px) {
@@ -291,145 +340,292 @@
 
         <!-- Header -->
         <div class="top-bar">
-            <a href="index.htm1" class="back-btn">←</a>
+            <a href="index.htm1" class="back-btn" id="top-back-btn">←</a>
             <img src="logo.png" alt="Logo" class="logo-img">
             <div class="top-bar-spacer"></div>
         </div>
 
-        <!-- Hero -->
-        <div class="category">LEGAL & COMPLIANCE</div>
-        <h1>DMCA & Game Rules Violation Policy</h1>
-        <p class="page-desc">
-            Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
-        </p>
-        <div class="last-updated">Last Updated: September 29, 2026</div>
-
-        <!-- Notice -->
-        <div class="notice-card">
-            <div class="notice-label">NOTICE</div>
-            <p>
-                This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
+        <!-- HOME VIEW CONTENT -->
+        <div id="home-view">
+            <!-- Hero -->
+            <div class="category">LEGAL & COMPLIANCE</div>
+            <h1>DMCA & Game Rules Violation Policy</h1>
+            <p class="page-desc">
+                Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
             </p>
-        </div>
+            <div class="last-updated">Last Updated: September 29, 2026</div>
 
-        <!-- 01 -->
-        <div class="section-card">
-            <div class="section-number">01</div>
-            <h2>Copyright / DMCA Requests</h2>
-            <p>
-                If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
-            </p>
-        </div>
-
-        <!-- 02 -->
-        <div class="section-card">
-            <div class="section-number">02</div>
-            <h2>Information Required</h2>
-            <p>To process a DMCA request, please include the following:</p>
-            <ul>
-                <li>Full name and company/organization name where applicable</li>
-                <li>Valid contact email address</li>
-                <li>Exact URL(s) on this website being reported</li>
-                <li>Identification of the copyrighted work claimed to be infringed</li>
-                <li>Evidence of ownership or authorization to act on behalf of the owner</li>
-                <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
-                <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
-            </ul>
-        </div>
-
-        <!-- 03 -->
-        <div class="section-card">
-            <div class="section-number">03</div>
-            <h2>Game Rules / Terms of Service Violations</h2>
-            <p>
-                If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
-            </p>
-            <p>Examples of such tools may include:</p>
-            <ul>
-                <li>Cheats</li>
-                <li>Unauthorized game modifications</li>
-                <li>Aimbots</li>
-                <li>Wallhacks</li>
-                <li>Other unauthorized gameplay tools</li>
-            </ul>
-        </div>
-
-        <!-- 04 -->
-        <div class="section-card">
-            <div class="section-number">04</div>
-            <h2>Information Required for Game Rule Reports</h2>
-            <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
-            <ul>
-                <li>Your name and contact email</li>
-                <li>The exact URL on this website where the link or content appears</li>
-                <li>A clear description of why the linked material may violate the game’s rules</li>
-                <li>Any supporting information that helps us review the report</li>
-            </ul>
-        </div>
-
-        <!-- 05 -->
-        <div class="section-card">
-            <div class="section-number">05</div>
-            <h2>Review & Removal Process</h2>
-            <p>
-                After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
-            </p>
-            <p>
-                Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
-            </p>
-        </div>
-
-        <!-- 06 -->
-        <div class="section-card">
-            <div class="section-number">06</div>
-            <h2>Third-Party Content & External Links</h2>
-            <p>
-                This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
-            </p>
-            <p>
-                If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
-            </p>
-        </div>
-
-        <!-- 07 -->
-        <div class="section-card">
-            <div class="section-number">07</div>
-            <h2>Good-Faith Reporting</h2>
-            <p>
-                All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
-            </p>
-        </div>
-
-        <!-- 08 -->
-        <div class="section-card">
-            <div class="section-number">08</div>
-            <h2>Contact</h2>
-            <p>
-                For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
-            </p>
-        </div>
-
-        <!-- Enhanced Contact Card -->
-        <div class="contact-card">
-            <h2>Report an Issue</h2>
-            <p>
-                For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
-            </p>
-            <div class="contact-email-box">
-                <span class="label">DMCA & Compliance Contact</span>
-                <span class="email-address">spaicy.net@gmail.com</span>
+            <!-- Notice -->
+            <div class="notice-card">
+                <div class="notice-label">NOTICE</div>
+                <p>
+                    This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
+                </p>
             </div>
-            <div>
-                <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    Send Email Report
-                </a>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Copyright / DMCA Requests</h2>
+                <p>
+                    If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information Required</h2>
+                <p>To process a DMCA request, please include the following:</p>
+                <ul>
+                    <li>Full name and company/organization name where applicable</li>
+                    <li>Valid contact email address</li>
+                    <li>Exact URL(s) on this website being reported</li>
+                    <li>Identification of the copyrighted work claimed to be infringed</li>
+                    <li>Evidence of ownership or authorization to act on behalf of the owner</li>
+                    <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
+                    <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
+                </ul>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>Game Rules / Terms of Service Violations</h2>
+                <p>
+                    If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
+                </p>
+                <p>Examples of such tools may include:</p>
+                <ul>
+                    <li>Cheats</li>
+                    <li>Unauthorized game modifications</li>
+                    <li>Aimbots</li>
+                    <li>Wallhacks</li>
+                    <li>Other unauthorized gameplay tools</li>
+                </ul>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Information Required for Game Rule Reports</h2>
+                <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
+                <ul>
+                    <li>Your name and contact email</li>
+                    <li>The exact URL on this website where the link or content appears</li>
+                    <li>A clear description of why the linked material may violate the game’s rules</li>
+                    <li>Any supporting information that helps us review the report</li>
+                </ul>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Review & Removal Process</h2>
+                <p>
+                    After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
+                </p>
+                <p>
+                    Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>Third-Party Content & External Links</h2>
+                <p>
+                    This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
+                </p>
+                <p>
+                    If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Good-Faith Reporting</h2>
+                <p>
+                    All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Contact</h2>
+                <p>
+                    For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
+                </p>
+            </div>
+
+            <!-- Enhanced Contact Card -->
+            <div class="contact-card">
+                <h2>Report an Issue</h2>
+                <p>
+                    For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">DMCA & Compliance Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Send Email Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY VIEW CONTENT -->
+        <div id="privacy-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">LEGAL & PRIVACY</div>
+            <h1>Privacy Policy</h1>
+            <p class="page-desc">
+                This Privacy Policy explains how this website handles visitor information. We keep this page simple so every visitor can understand what happens while browsing.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Introduction</h2>
+                <p>
+                    Welcome to our Privacy Policy page. Respecting visitor privacy is a priority for us. This document outlines the types of information that may be collected when you access or browse this website, how that data is used, and the measures taken to safeguard your browsing experience.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information We Collect</h2>
+                <p>
+                    We may receive basic log information such as browser type, device type, pages visited, approximate time, referring page, and IP address through normal server logs. This is used for security, troubleshooting, analytics, and improving page performance.
+                </p>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>How We Use Information</h2>
+                <p>
+                    The log data collected is strictly utilized to maintain website functionality, ensure network security, analyze performance metrics, and troubleshoot potential server errors.
+                </p>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Cookies and Similar Technologies</h2>
+                <p>
+                    Our pages may use basic cookies, or third-party services may set cookies when you open external links, ads, analytics, or other embedded content. You can disable cookies in your browser settings at any time.
+                </p>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Third-Party Services and Links</h2>
+                <p>
+                    This website may contain educational information and links to external websites. We do not control the privacy practices of third-party websites. Please read their privacy policies before submitting any personal information on those sites.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>No File Hosting</h2>
+                <p>
+                    We do not host panel files, APKs, cheat tools, or any third-party software on our own servers. Some pages may reference or link to external sources for informational purposes. If a link violates rights, game rules, or our policy, you may report it and we will review it promptly.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Data Security & Data Retention</h2>
+                <p>
+                    We implement standard technical measures to protect server log details against unauthorized access. Server log information is retained only as long as required for maintenance, security monitoring, and diagnostic purposes.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Children’s Privacy</h2>
+                <p>
+                    This website is intended for a general audience. If you believe a child has shared personal data with us, please contact us and we will remove it where applicable.
+                </p>
+            </div>
+
+            <!-- 09 -->
+            <div class="section-card">
+                <div class="section-number">09</div>
+                <h2>Your Privacy Rights & Changes to This Policy</h2>
+                <p>
+                    You have the right to request clarification, correction, or removal regarding any information submitted to us via direct email contact.
+                </p>
+                <p>
+                    We reserve the right to update this Privacy Policy as needed to reflect operational changes. Updates will be published on this page with a revised date.
+                </p>
+            </div>
+
+            <!-- Privacy Contact Card -->
+            <div class="contact-card">
+                <h2>Contact Us</h2>
+                <p>
+                    For privacy requests, corrections, or removal questions, please email us at the contact address provided on this website.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">Privacy Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email Privacy Team
+                    </a>
+                </div>
+                <div>
+                    <a href="#home" class="back-home-btn">← Back to Home</a>
+                </div>
             </div>
         </div>
 
         <footer>
             Educational content only • Not affiliated with any game company
+            <div class="footer-nav">
+                <a href="#home" class="footer-link">Home</a>
+                <span style="color: #444;">•</span>
+                <a href="#privacy" class="footer-link">Privacy Policy</a>
+            </div>
         </footer>
     </div>
+
+    <script>
+        function handleNavigation() {
+            var hash = window.location.hash;
+            var homeView = document.getElementById('home-view');
+            var privacyView = document.getElementById('privacy-view');
+            var topBackBtn = document.getElementById('top-back-btn');
+
+            if (hash === '#privacy') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'block';
+                topBackBtn.setAttribute('href', '#home');
+            } else {
+                homeView.style.display = 'block';
+                privacyView.style.display = 'none';
+                topBackBtn.setAttribute('href', 'index.htm1');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('hashchange', handleNavigation);
+        window.addEventListener('DOMContentLoaded', handleNavigation);
+    </script>
 </body>
 </html>
