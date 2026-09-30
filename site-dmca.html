@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMCA & Game Rules Violation Policy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+
+        /* Header */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 24px;
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background: #1c1c1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .top-bar-spacer {
+            width: 36px;
+        }
+
+        .logo-img {
+            max-height: 32px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Category */
+        .category {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* Main Headline */
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .page-desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .last-updated {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 32px;
+        }
+
+        /* Notice Card */
+        .notice-card {
+            background: #1c1c1e;
+            border-left: 4px solid #ff3b30;
+            padding: 18px 20px;
+            margin-bottom: 36px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .notice-label {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .notice-card p {
+            font-size: 15px;
+            color: #d0d0d0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px 22px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #c8c8c8;
+            margin-bottom: 14px;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin: 12px 0 8px 20px;
+        }
+
+        ul li {
+            font-size: 15.5px;
+            color: #c8c8c8;
+            margin-bottom: 9px;
+            line-height: 1.55;
+        }
+
+        /* Enhanced Contact Card */
+        .contact-card {
+            background: linear-gradient(145deg, #1c1c1e 0%, #121214 100%);
+            border: 1px solid #2c2c2e;
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin-top: 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #ff3b30;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .contact-card h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            font-size: 15px;
+            color: #b0b0b0;
+            margin-bottom: 24px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-email-box {
+            background: #111113;
+            border: 1px solid #2a2a2c;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 0 auto 24px auto;
+            display: inline-block;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .contact-email-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff3b30;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .contact-email-box .email-address {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #ff3b30;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 13px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3);
+        }
+
+        .contact-btn:hover {
+            background: #e0352b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(255, 59, 48, 0.45);
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            .container {
+                padding: 16px 16px 50px;
+            }
+
+            .section-card {
+                padding: 20px 16px;
+            }
+
+            .contact-card {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="top-bar">
+            <a href="index.htm1" class="back-btn">←</a>
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <div class="top-bar-spacer"></div>
+        </div>
+
+        <!-- Hero -->
+        <div class="category">LEGAL & COMPLIANCE</div>
+        <h1>DMCA & Game Rules Violation Policy</h1>
+        <p class="page-desc">
+            Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
+        </p>
+        <div class="last-updated">Last Updated: September 29, 2026</div>
+
+        <!-- Notice -->
+        <div class="notice-card">
+            <div class="notice-label">NOTICE</div>
+            <p>
+                This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
+            </p>
+        </div>
+
+        <!-- 01 -->
+        <div class="section-card">
+            <div class="section-number">01</div>
+            <h2>Copyright / DMCA Requests</h2>
+            <p>
+                If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
+            </p>
+        </div>
+
+        <!-- 02 -->
+        <div class="section-card">
+            <div class="section-number">02</div>
+            <h2>Information Required</h2>
+            <p>To process a DMCA request, please include the following:</p>
+            <ul>
+                <li>Full name and company/organization name where applicable</li>
+                <li>Valid contact email address</li>
+                <li>Exact URL(s) on this website being reported</li>
+                <li>Identification of the copyrighted work claimed to be infringed</li>
+                <li>Evidence of ownership or authorization to act on behalf of the owner</li>
+                <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
+                <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
+            </ul>
+        </div>
+
+        <!-- 03 -->
+        <div class="section-card">
+            <div class="section-number">03</div>
+            <h2>Game Rules / Terms of Service Violations</h2>
+            <p>
+                If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
+            </p>
+            <p>Examples of such tools may include:</p>
+            <ul>
+                <li>Cheats</li>
+                <li>Unauthorized game modifications</li>
+                <li>Aimbots</li>
+                <li>Wallhacks</li>
+                <li>Other unauthorized gameplay tools</li>
+            </ul>
+        </div>
+
+        <!-- 04 -->
+        <div class="section-card">
+            <div class="section-number">04</div>
+            <h2>Information Required for Game Rule Reports</h2>
+            <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
+            <ul>
+                <li>Your name and contact email</li>
+                <li>The exact URL on this website where the link or content appears</li>
+                <li>A clear description of why the linked material may violate the game’s rules</li>
+                <li>Any supporting information that helps us review the report</li>
+            </ul>
+        </div>
+
+        <!-- 05 -->
+        <div class="section-card">
+            <div class="section-number">05</div>
+            <h2>Review & Removal Process</h2>
+            <p>
+                After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
+            </p>
+            <p>
+                Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
+            </p>
+        </div>
+
+        <!-- 06 -->
+        <div class="section-card">
+            <div class="section-number">06</div>
+            <h2>Third-Party Content & External Links</h2>
+            <p>
+                This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
+            </p>
+            <p>
+                If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
+            </p>
+        </div>
+
+        <!-- 07 -->
+        <div class="section-card">
+            <div class="section-number">07</div>
+            <h2>Good-Faith Reporting</h2>
+            <p>
+                All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
+            </p>
+        </div>
+
+        <!-- 08 -->
+        <div class="section-card">
+            <div class="section-number">08</div>
+            <h2>Contact</h2>
+            <p>
+                For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
+            </p>
+        </div>
+
+        <!-- Enhanced Contact Card -->
+        <div class="contact-card">
+            <h2>Report an Issue</h2>
+            <p>
+                For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
+            </p>
+            <div class="contact-email-box">
+                <span class="label">DMCA & Compliance Contact</span>
+                <span class="email-address">spaicy.net@gmail.com</span>
+            </div>
+            <div>
+                <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Send Email Report
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            Educational content only • Not affiliated with any game company
+        </footer>
+    </div>
+</body>
+</html>
