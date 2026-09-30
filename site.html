@@ -19,69 +19,44 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #050505;
+            background-color: #000000;
             color: #ffffff;
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #080808;
+            background: #0a0a0a;
         }
         ::-webkit-scrollbar-thumb {
             background: #222226;
-            border-radius: 5px;
-            border: 2px solid #080808;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #ff3b30;
         }
 
-        /* Background Subtle Ambient Glow */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 59, 48, 0.08) 0%, rgba(0,0,0,0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .container {
-            max-width: 860px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 24px 24px 80px;
-            position: relative;
-            z-index: 1;
+            padding: 20px 20px 60px;
         }
 
-        /* Header Navigation */
+        /* Header */
         .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: rgba(18, 18, 20, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            margin-bottom: 36px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            padding: 12px 0 24px;
         }
 
         .back-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: #1c1c1e;
             border-radius: 50%;
             display: flex;
@@ -90,163 +65,112 @@
             color: #fff;
             font-size: 18px;
             text-decoration: none;
-            transition: all 0.25s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
         }
 
         .back-btn:hover {
-            background: #ff3b30;
-            color: #ffffff;
-            transform: translateX(-3px);
-            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
-            border-color: #ff3b30;
+            background: #2c2c2e;
+            transform: translateX(-2px);
+            color: #ff3b30;
         }
 
         .top-bar-spacer {
-            width: 40px;
+            width: 36px;
         }
 
         .logo-img {
-            max-height: 34px;
+            max-height: 32px;
             width: auto;
             object-fit: contain;
             display: block;
-            transition: transform 0.25s ease;
+            transition: transform 0.2s ease;
         }
 
         .logo-img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         /* Category */
         .category {
             color: #ff3b30;
             font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             margin-bottom: 14px;
-            display: inline-block;
-            background: rgba(255, 59, 48, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 59, 48, 0.2);
         }
 
         /* Main Headline */
         h1 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 800;
             line-height: 1.25;
             color: #ffffff;
             margin-bottom: 16px;
-            letter-spacing: -0.4px;
+            letter-spacing: -0.3px;
         }
 
         .page-desc {
-            font-size: 16.5px;
-            color: #b5b5b8;
-            margin-bottom: 14px;
-            line-height: 1.65;
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
 
         .last-updated {
             font-size: 13px;
             color: #777;
-            margin-bottom: 36px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .last-updated::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #ff3b30;
-            border-radius: 50%;
+            margin-bottom: 32px;
         }
 
         /* Notice Card */
         .notice-card {
-            background: linear-gradient(135deg, #1c1c1e 0%, #151517 100%);
+            background: #1c1c1e;
             border-left: 4px solid #ff3b30;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-right: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 22px 24px;
+            padding: 18px 20px;
             margin-bottom: 36px;
-            border-radius: 0 14px 14px 0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            transition: all 0.25s ease;
-        }
-
-        .notice-card:hover {
-            transform: translateX(4px);
-            border-left-color: #ff5247;
-            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.12);
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
         .notice-label {
             color: #ff3b30;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
 
         .notice-card p {
-            font-size: 15.5px;
-            color: #d0d0d5;
+            font-size: 15px;
+            color: #d0d0d0;
             margin: 0;
-            line-height: 1.65;
+            line-height: 1.6;
         }
 
         /* Section Cards */
         .section-card {
-            background: linear-gradient(145deg, #121214 0%, #0d0d0f 100%);
-            border: 1px solid #222226;
-            border-radius: 16px;
-            padding: 28px 26px;
+            background: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px 22px;
             margin-bottom: 24px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-        }
-
-        .section-card:hover {
-            border-color: rgba(255, 59, 48, 0.35);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 59, 48, 0.08);
-            background: linear-gradient(145deg, #161619 0%, #101012 100%);
+            transition: all 0.25s ease;
         }
 
         .section-number {
             color: #ff3b30;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            display: inline-block;
         }
 
         h2 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 23px;
+            font-size: 22px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 14px;
@@ -268,28 +192,28 @@
         }
 
         ul {
-            margin: 14px 0 8px 20px;
+            margin: 12px 0 8px 20px;
         }
 
         ul li {
             font-size: 15.5px;
             color: #c8c8c8;
-            margin-bottom: 10px;
-            line-height: 1.6;
+            margin-bottom: 9px;
+            line-height: 1.55;
         }
 
         /* Enhanced Contact Card */
         .contact-card {
-            background: linear-gradient(145deg, #1c1c1f 0%, #111113 100%);
-            border: 1px solid #2e2e33;
-            border-radius: 20px;
-            padding: 40px 30px;
-            margin-top: 44px;
+            background: linear-gradient(145deg, #1c1c1e 0%, #121214 100%);
+            border: 1px solid #2c2c2e;
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin-top: 40px;
             text-align: center;
             position: relative;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .contact-card::before {
@@ -298,61 +222,50 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
+            width: 100px;
             height: 3px;
-            background: linear-gradient(90deg, #ff3b30, #ff6b63);
+            background: #ff3b30;
             border-radius: 0 0 4px 4px;
         }
 
-        .contact-card:hover {
-            border-color: #3e3e45;
-            box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6);
-        }
-
         .contact-card h2 {
-            font-size: 26px;
+            font-size: 24px;
             margin-bottom: 12px;
         }
 
         .contact-card p {
-            font-size: 15.5px;
-            color: #b0b0b5;
-            margin-bottom: 26px;
-            max-width: 540px;
+            font-size: 15px;
+            color: #b0b0b0;
+            margin-bottom: 24px;
+            max-width: 520px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .contact-email-box {
-            background: #0d0d0f;
-            border: 1px solid #2a2a2e;
-            border-radius: 14px;
-            padding: 18px 24px;
-            margin: 0 auto 26px auto;
+            background: #111113;
+            border: 1px solid #2a2a2c;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 0 auto 24px auto;
             display: inline-block;
             width: 100%;
-            max-width: 460px;
-            transition: all 0.25s ease;
-        }
-
-        .contact-email-box:hover {
-            border-color: #ff3b30;
-            background: #121215;
-            box-shadow: 0 4px 16px rgba(255, 59, 48, 0.15);
+            max-width: 440px;
+            transition: all 0.2s ease;
         }
 
         .contact-email-box .label {
             font-size: 12px;
             font-weight: 700;
             color: #ff3b30;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: block;
         }
 
         .contact-email-box .email-address {
-            font-size: 16.5px;
+            font-size: 16px;
             font-weight: 600;
             color: #ffffff;
             word-break: break-all;
@@ -363,21 +276,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #ff3b30 0%, #e02d23 100%);
+            background: #ff3b30;
             color: #fff;
             font-size: 15px;
             font-weight: 600;
-            padding: 14px 34px;
-            border-radius: 12px;
+            padding: 13px 32px;
+            border-radius: 10px;
             text-decoration: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 16px rgba(255, 59, 48, 0.35);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3);
         }
 
         .contact-btn:hover {
-            background: linear-gradient(135deg, #ff5247 0%, #e02d23 100%);
+            background: #e0352b;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 59, 48, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.45);
         }
 
         .back-home-btn {
@@ -387,126 +300,191 @@
             gap: 8px;
             background: #1c1c1e;
             color: #ffffff;
-            border: 1px solid #333338;
+            border: 1px solid #333;
             font-size: 15px;
             font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 12px;
+            padding: 12px 28px;
+            border-radius: 10px;
             text-decoration: none;
-            margin-top: 16px;
-            transition: all 0.25s ease;
+            margin-top: 14px;
+            transition: all 0.2s ease;
         }
 
         .back-home-btn:hover {
-            background: #28282c;
+            background: #2c2c2e;
             color: #ffffff;
-            border-color: #484850;
-            transform: translateY(-2px);
+            border-color: #444;
+            transform: translateY(-1px);
         }
 
         footer {
-            margin-top: 60px;
-            padding-top: 28px;
-            border-top: 1px solid #1a1a1c;
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 1px solid #222;
             text-align: center;
             font-size: 13px;
-            color: #77777c;
+            color: #666;
         }
 
         .footer-nav {
-            margin-top: 16px;
+            margin-top: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 14px 20px;
+            gap: 12px 16px;
         }
 
         .footer-link {
             color: #ff3b30;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 13.5px;
+            font-weight: 500;
+            font-size: 13px;
             transition: all 0.2s ease;
-            padding: 2px 6px;
-            border-radius: 6px;
         }
 
         .footer-link:hover {
-            color: #ff6b63;
-            background: rgba(255, 59, 48, 0.1);
+            text-decoration: underline;
+            color: #e0352b;
         }
 
-        /* DESKTOP SPECIFIC ENHANCEMENTS (768px and up) */
+        /* ENHANCED DESKTOP LAYOUT (OPTIMIZED SCREEN UTILIZATION) */
         @media (min-width: 768px) {
             .container {
-                padding: 40px 32px 90px;
+                max-width: 1080px;
+                padding: 32px 40px 80px;
             }
 
             .top-bar {
-                padding: 18px 28px;
-                margin-bottom: 44px;
+                padding: 16px 0 28px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                margin-bottom: 32px;
+            }
+
+            .back-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .logo-img {
+                max-height: 38px;
+            }
+
+            .top-bar-spacer {
+                width: 42px;
             }
 
             h1 {
-                font-size: 40px;
-                letter-spacing: -0.6px;
-                margin-bottom: 20px;
+                font-size: 38px;
+                letter-spacing: -0.5px;
+                margin-bottom: 18px;
             }
 
             .page-desc {
                 font-size: 18px;
                 margin-bottom: 18px;
+                max-width: 850px;
+            }
+
+            /* Desktop Grid view mapping */
+            #home-view:not([style*="display: none"]), 
+            #privacy-view:not([style*="display: none"]), 
+            #contact-view:not([style*="display: none"]), 
+            #about-view:not([style*="display: none"]) {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            #home-view[style*="display: none"], 
+            #privacy-view[style*="display: none"], 
+            #contact-view[style*="display: none"], 
+            #about-view[style*="display: none"] {
+                display: none !important;
+            }
+
+            /* Full Width Grid Spans */
+            .category, h1, .page-desc, .last-updated, .notice-card, .contact-card {
+                grid-column: 1 / -1;
             }
 
             .notice-card {
-                padding: 26px 32px;
-                border-radius: 0 16px 16px 0;
+                padding: 24px 28px;
+                border-radius: 0 12px 12px 0;
+                margin-bottom: 12px;
+            }
+
+            .notice-card:hover {
+                transform: translateX(4px);
+                background: #222226;
             }
 
             .section-card {
-                padding: 32px 32px;
-                margin-bottom: 28px;
+                padding: 28px 26px;
+                border-radius: 14px;
+                margin-bottom: 0;
+                display: flex;
+                flex-direction: column;
             }
 
-            .section-card h2 {
-                font-size: 25px;
+            .section-card:hover {
+                border-color: #333336;
+                background: #141416;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
             }
 
             .contact-card {
-                padding: 48px 40px;
+                padding: 42px 36px;
+                border-radius: 18px;
+                margin-top: 16px;
             }
 
-            .contact-card h2 {
-                font-size: 28px;
+            .contact-card:hover {
+                border-color: #3a3a3d;
+                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+            }
+
+            .contact-email-box {
+                padding: 18px 28px;
+                border-radius: 14px;
+            }
+
+            .contact-email-box:hover {
+                border-color: #ff3b30;
+                background: #151518;
+            }
+
+            footer {
+                margin-top: 60px;
+                padding-top: 28px;
             }
 
             .footer-nav {
                 gap: 24px;
             }
+
+            .footer-link {
+                font-size: 14px;
+            }
         }
 
-        /* MOBILE SPECIFIC ADJUSTMENTS */
         @media (max-width: 480px) {
             h1 {
                 font-size: 26px;
             }
 
             .container {
-                padding: 16px 16px 60px;
-            }
-
-            .top-bar {
-                border-radius: 30px;
-                padding: 10px 14px;
+                padding: 16px 16px 50px;
             }
 
             .section-card {
-                padding: 20px 18px;
+                padding: 20px 16px;
             }
 
             .contact-card {
-                padding: 28px 18px;
+                padding: 24px 16px;
             }
         }
     </style>
@@ -516,12 +494,12 @@
 
         <!-- Header -->
         <div class="top-bar">
-            <a href="index.htm1" class="back-btn" id="top-back-btn">←</a>
+            <a href="/" class="back-btn" id="top-back-btn">←</a>
             <img src="logo.png" alt="Logo" class="logo-img">
             <div class="top-bar-spacer"></div>
         </div>
 
-        <!-- HOME / DMCA VIEW CONTENT -->
+        <!-- HOME VIEW CONTENT -->
         <div id="home-view">
             <!-- Hero -->
             <div class="category">LEGAL & COMPLIANCE</div>
@@ -766,7 +744,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -840,7 +818,7 @@
                     Return to the home page or browse other sections of our site.
                 </p>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -877,7 +855,7 @@
             <div class="notice-card">
                 <div class="notice-label">CORRECTIONS & REPORTS</div>
                 <p>
-                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="site-contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
+                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="#contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
                 </p>
             </div>
 
@@ -888,10 +866,10 @@
                     Have feedback, questions, or need to report an issue? Visit our Contact Us section.
                 </p>
                 <div>
-                    <a href="site-contact" class="contact-btn">Go to Contact Page</a>
+                    <a href="#contact" class="contact-btn">Go to Contact Page</a>
                 </div>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -899,87 +877,55 @@
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
-                <a href="site-dmca" class="footer-link">Home</a>
+                <a href="/" class="footer-link">Home</a>
                 <span style="color: #444;">•</span>
-                <a href="site-about" class="footer-link">About Us</a>
+                <a href="#about" class="footer-link">About Us</a>
                 <span style="color: #444;">•</span>
-                <a href="site-privacy" class="footer-link">Privacy Policy</a>
+                <a href="#privacy" class="footer-link">Privacy Policy</a>
                 <span style="color: #444;">•</span>
-                <a href="site-contact" class="footer-link">Contact Us</a>
+                <a href="#contact" class="footer-link">Contact Us</a>
             </div>
         </footer>
     </div>
 
     <script>
-        function getActiveRoute() {
-            var path = window.location.pathname.toLowerCase();
-            var hash = window.location.hash.toLowerCase();
-
-            if (path.endsWith('site-privacy') || path.endsWith('site-privacy/') || hash === '#privacy') {
-                return 'privacy';
-            } else if (path.endsWith('site-contact') || path.endsWith('site-contact/') || hash === '#contact') {
-                return 'contact';
-            } else if (path.endsWith('site-about') || path.endsWith('site-about/') || hash === '#about') {
-                return 'about';
-            } else if (path.endsWith('site-dmca') || path.endsWith('site-dmca/') || hash === '#dmca') {
-                return 'dmca';
-            }
-            return 'home';
-        }
-
         function handleNavigation() {
-            var route = getActiveRoute();
+            var hash = window.location.hash;
             var homeView = document.getElementById('home-view');
             var privacyView = document.getElementById('privacy-view');
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
 
-            homeView.style.display = 'none';
-            privacyView.style.display = 'none';
-            contactView.style.display = 'none';
-            aboutView.style.display = 'none';
-
-            if (route === 'privacy') {
+            if (hash === '#privacy') {
+                homeView.style.display = 'none';
                 privacyView.style.display = 'block';
-            } else if (route === 'contact') {
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
+            } else if (hash === '#contact') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
                 contactView.style.display = 'block';
-            } else if (route === 'about') {
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
+            } else if (hash === '#about') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
                 aboutView.style.display = 'block';
+                topBackBtn.setAttribute('href', '/');
             } else {
                 homeView.style.display = 'block';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
             }
-
-            topBackBtn.setAttribute('href', 'index.htm1');
             window.scrollTo(0, 0);
         }
 
-        document.addEventListener('click', function(e) {
-            var link = e.target.closest('a');
-            if (!link) return;
-            var href = link.getAttribute('href');
-            if (!href) return;
-
-            var cleanRoutes = ['site-contact', 'site-dmca', 'site-privacy', 'site-about', 'site.html'];
-            
-            if (cleanRoutes.indexOf(href) !== -1 || href.startsWith('#')) {
-                var targetRoute = href;
-                if (href === '#privacy') targetRoute = 'site-privacy';
-                else if (href === '#contact') targetRoute = 'site-contact';
-                else if (href === '#about') targetRoute = 'site-about';
-                else if (href === '#dmca' || href === '#home') targetRoute = 'site-dmca';
-
-                if (cleanRoutes.indexOf(targetRoute) !== -1) {
-                    e.preventDefault();
-                    if (window.location.pathname.replace(/\/$/, "") !== "/" + targetRoute) {
-                        history.pushState(null, "", targetRoute);
-                    }
-                    handleNavigation();
-                }
-            }
-        });
-
-        window.addEventListener('popstate', handleNavigation);
+        window.addEventListener('hashchange', handleNavigation);
         window.addEventListener('DOMContentLoaded', handleNavigation);
     </script>
 </body>
