@@ -19,11 +19,10 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #08080a;
+            background-color: #000000;
             color: #ffffff;
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         /* Custom Scrollbar */
@@ -31,7 +30,7 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #08080a;
+            background: #0a0a0a;
         }
         ::-webkit-scrollbar-thumb {
             background: #222226;
@@ -41,28 +40,24 @@
             background: #ff3b30;
         }
 
-        /* Top Sticky Navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(12, 12, 15, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            width: 100%;
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
         }
 
-        .navbar-inner {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 14px 24px;
+        /* Header Bar */
+        .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid #1c1c1e;
+            margin-bottom: 28px;
         }
 
-        .nav-left {
+        .header-brand {
             display: flex;
             align-items: center;
             gap: 16px;
@@ -72,7 +67,6 @@
             width: 38px;
             height: 38px;
             background: #1c1c1e;
-            border: 1px solid #2a2a2e;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -81,13 +75,14 @@
             font-size: 18px;
             text-decoration: none;
             transition: all 0.2s ease;
+            border: 1px solid #2c2c2e;
         }
 
         .back-btn:hover {
             background: #2c2c2e;
-            border-color: #3a3a3e;
             transform: translateX(-2px);
             color: #ff3b30;
+            border-color: #ff3b30;
         }
 
         .logo-img {
@@ -102,157 +97,149 @@
             transform: scale(1.03);
         }
 
-        .nav-links-desktop {
+        /* Top Header Nav (Desktop) */
+        .header-nav {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 20px;
         }
 
-        .nav-header-link {
-            color: #a0a0ab;
+        .header-nav-link {
+            color: #a0a0a0;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 8px;
             transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
         }
 
-        .nav-header-link:hover {
+        .header-nav-link:hover, .header-nav-link.active {
             color: #ffffff;
-            background: rgba(255, 255, 255, 0.05);
+            background: #1c1c1e;
         }
 
-        .nav-header-link.active {
-            color: #ffffff;
-            background: rgba(255, 59, 48, 0.12);
-            border: 1px solid rgba(255, 59, 48, 0.25);
+        .header-nav-link.active {
+            color: #ff3b30;
+            font-weight: 600;
         }
 
-        /* Container & Layout */
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 24px 24px 60px;
-        }
-
-        /* Breadcrumbs */
+        /* Breadcrumb Navigation */
         .breadcrumb {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 13px;
-            color: #777780;
-            margin-bottom: 28px;
-            padding: 8px 0;
+            color: #777777;
+            margin-bottom: 24px;
+            font-weight: 500;
         }
 
         .breadcrumb a {
-            color: #a0a0ab;
+            color: #a0a0a0;
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
         .breadcrumb a:hover {
             color: #ff3b30;
         }
 
-        .breadcrumb .separator {
-            color: #44444a;
-            font-size: 11px;
+        .breadcrumb span.sep {
+            color: #444444;
         }
 
-        .breadcrumb .current {
-            color: #ffffff;
-            font-weight: 500;
+        .breadcrumb span.current {
+            color: #ff3b30;
+            font-weight: 600;
         }
 
-        /* Two Column Layout */
-        .layout-wrapper {
+        /* Two Column Layout Wrapper */
+        .main-wrapper {
             display: flex;
             flex-direction: column;
             gap: 32px;
         }
 
-        /* Sidebar Navigation */
-        .sidebar {
-            display: none; /* Mobile default */
-        }
-
-        .sidebar-card {
-            background: #121215;
+        /* Left Sidebar Nav */
+        .sidebar-nav {
+            background: #111113;
             border: 1px solid #222226;
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 20px;
-            position: sticky;
-            top: 90px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .sidebar-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: #ff3b30;
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             padding-left: 10px;
         }
 
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sidebar-link {
+        .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 11px 14px;
-            color: #a0a0ab;
+            justify-content: space-between;
+            padding: 12px 14px;
+            color: #b0b0b0;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
         }
 
-        .sidebar-link:hover {
+        .sidebar-item:hover {
+            background: #1c1c1e;
             color: #ffffff;
-            background: rgba(255, 255, 255, 0.04);
         }
 
-        .sidebar-link.active {
+        .sidebar-item.active {
+            background: #1c1c1e;
             color: #ffffff;
-            background: rgba(255, 59, 48, 0.1);
-            border-left-color: #ff3b30;
             font-weight: 600;
+            border-left-color: #ff3b30;
         }
 
-        /* Main Content Area */
-        .main-content {
+        .sidebar-item.active .badge {
+            background: #ff3b30;
+            color: #ffffff;
+        }
+
+        .badge {
+            font-size: 11px;
+            background: #222226;
+            color: #888888;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        /* Right Content Area */
+        .content-area {
             flex: 1;
             min-width: 0;
         }
 
-        /* Category Badge */
+        /* Category Header */
         .category {
             color: #ff3b30;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 14px;
-            display: inline-block;
-            background: rgba(255, 59, 48, 0.1);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 59, 48, 0.2);
+            margin-bottom: 12px;
         }
 
-        /* Main Headline */
+        /* Headlines & Typography */
         h1 {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 32px;
@@ -264,7 +251,7 @@
         }
 
         .page-desc {
-            font-size: 16px;
+            font-size: 16.5px;
             color: #b0b0b0;
             margin-bottom: 12px;
             line-height: 1.6;
@@ -272,28 +259,23 @@
 
         .last-updated {
             font-size: 13px;
-            color: #777780;
+            color: #777;
             margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         /* Notice Card */
         .notice-card {
-            background: #141418;
-            border: 1px solid #222228;
+            background: #1c1c1e;
             border-left: 4px solid #ff3b30;
-            padding: 20px 22px;
+            padding: 20px 24px;
             margin-bottom: 32px;
             border-radius: 0 12px 12px 0;
             transition: transform 0.2s ease, background 0.2s ease;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
 
         .notice-label {
             color: #ff3b30;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -309,22 +291,20 @@
 
         /* Section Cards */
         .section-card {
-            background: #121215;
+            background: #111111;
             border: 1px solid #222226;
             border-radius: 14px;
             padding: 26px 24px;
             margin-bottom: 24px;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .section-number {
             color: #ff3b30;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: inline-block;
+            margin-bottom: 8px;
         }
 
         h2 {
@@ -363,14 +343,14 @@
 
         /* Enhanced Contact Card */
         .contact-card {
-            background: linear-gradient(145deg, #18181c 0%, #101013 100%);
-            border: 1px solid #2c2c32;
-            border-radius: 18px;
+            background: linear-gradient(145deg, #1c1c1e 0%, #121214 100%);
+            border: 1px solid #2c2c2e;
+            border-radius: 16px;
             padding: 36px 28px;
             margin-top: 40px;
             text-align: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             overflow: hidden;
             transition: all 0.25s ease;
         }
@@ -381,7 +361,7 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
+            width: 100px;
             height: 3px;
             background: #ff3b30;
             border-radius: 0 0 4px 4px;
@@ -402,10 +382,10 @@
         }
 
         .contact-email-box {
-            background: #0d0d10;
-            border: 1px solid #28282d;
-            border-radius: 14px;
-            padding: 18px 24px;
+            background: #111113;
+            border: 1px solid #2a2a2c;
+            border-radius: 12px;
+            padding: 16px 20px;
             margin: 0 auto 24px auto;
             display: inline-block;
             width: 100%;
@@ -457,36 +437,36 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: #1c1c20;
+            background: #1c1c1e;
             color: #ffffff;
-            border: 1px solid #333338;
+            border: 1px solid #333;
             font-size: 15px;
             font-weight: 600;
             padding: 12px 28px;
             border-radius: 10px;
             text-decoration: none;
-            margin-top: 16px;
+            margin-top: 14px;
             transition: all 0.2s ease;
         }
 
         .back-home-btn:hover {
-            background: #28282e;
+            background: #2c2c2e;
             color: #ffffff;
-            border-color: #44444a;
+            border-color: #444;
             transform: translateY(-1px);
         }
 
         footer {
             margin-top: 60px;
             padding-top: 28px;
-            border-top: 1px solid #1a1a1e;
+            border-top: 1px solid #222226;
             text-align: center;
             font-size: 13px;
-            color: #666670;
+            color: #666;
         }
 
         .footer-nav {
-            margin-top: 16px;
+            margin-top: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -498,7 +478,7 @@
             color: #ff3b30;
             text-decoration: none;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 13.5px;
             transition: all 0.2s ease;
         }
 
@@ -507,33 +487,39 @@
             color: #e0352b;
         }
 
-        /* DESKTOP RESPONSIVE ENHANCEMENTS */
+        /* DESKTOP UI SPECIFIC ENHANCEMENTS */
         @media (min-width: 992px) {
-            .layout-wrapper {
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 40px;
-            }
-
-            .sidebar {
-                display: block;
-                width: 280px;
-                flex-shrink: 0;
-            }
-
             .container {
-                padding: 32px 24px 80px;
+                padding: 32px 36px 80px;
+            }
+
+            .top-bar {
+                padding: 20px 0 28px;
+            }
+
+            .main-wrapper {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 40px;
+                align-items: start;
+            }
+
+            .sidebar-nav {
+                position: sticky;
+                top: 32px;
+                padding: 24px 18px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             }
 
             h1 {
-                font-size: 40px;
+                font-size: 38px;
                 letter-spacing: -0.5px;
                 margin-bottom: 20px;
             }
 
             .page-desc {
                 font-size: 18px;
-                margin-bottom: 16px;
+                margin-bottom: 18px;
             }
 
             .notice-card {
@@ -542,19 +528,18 @@
 
             .notice-card:hover {
                 transform: translateX(4px);
-                background: #18181c;
+                background: #222226;
             }
 
             .section-card {
                 padding: 32px 30px;
-                border-radius: 16px;
             }
 
             .section-card:hover {
-                border-color: #33333b;
-                background: #151519;
+                border-color: #333336;
+                background: #141416;
                 transform: translateY(-2px);
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
             }
 
             .contact-card {
@@ -562,18 +547,22 @@
             }
 
             .contact-card:hover {
-                border-color: #3a3a42;
-                box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+                border-color: #3a3a3d;
+                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+            }
+
+            .contact-email-box {
+                padding: 18px 28px;
             }
 
             .contact-email-box:hover {
                 border-color: #ff3b30;
-                background: #111115;
+                background: #151518;
             }
         }
 
         @media (max-width: 991px) {
-            .nav-links-desktop {
+            .header-nav {
                 display: none;
             }
         }
@@ -598,59 +587,58 @@
     </style>
 </head>
 <body>
-
-    <!-- Sticky Header Navigation -->
-    <header class="navbar">
-        <div class="navbar-inner">
-            <div class="nav-left">
-                <a href="index.html" class="back-btn" id="top-back-btn" title="Back to Home">←</a>
-                <a href="index.html" style="text-decoration:none;">
-                    <img src="logo.png" alt="Logo" class="logo-img">
-                </a>
-            </div>
-            <nav class="nav-links-desktop">
-                <a href="index.html" class="nav-header-link">Home</a>
-                <a href="#about" class="nav-header-link" id="nav-head-about">About Us</a>
-                <a href="#privacy" class="nav-header-link" id="nav-head-privacy">Privacy Policy</a>
-                <a href="#contact" class="nav-header-link" id="nav-head-contact">Contact Us</a>
-            </nav>
-        </div>
-    </header>
-
     <div class="container">
 
-        <!-- Breadcrumb Navigation -->
-        <div class="breadcrumb">
-            <a href="index.html">Home</a>
-            <span class="separator">/</span>
-            <span class="current" id="breadcrumb-current">DMCA & Compliance Policy</span>
+        <!-- Header -->
+        <div class="top-bar">
+            <div class="header-brand">
+                <a href="index.html" class="back-btn" id="top-back-btn" title="Back to Home">←</a>
+                <img src="logo.png" alt="Logo" class="logo-img">
+            </div>
+
+            <!-- Header Desktop Navigation -->
+            <nav class="header-nav">
+                <a href="index.html" class="header-nav-link">Home</a>
+                <a href="index.html" class="header-nav-link active" id="nav-dmca">DMCA Policy</a>
+                <a href="#about" class="header-nav-link" id="nav-about">About Us</a>
+                <a href="#privacy" class="header-nav-link" id="nav-privacy">Privacy Policy</a>
+                <a href="#contact" class="header-nav-link" id="nav-contact">Contact Us</a>
+            </nav>
         </div>
 
-        <div class="layout-wrapper">
+        <!-- Breadcrumb Bar -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">/</span>
+            <span class="current" id="breadcrumb-current">DMCA Policy</span>
+        </div>
 
-            <!-- Desktop Sticky Sidebar -->
-            <aside class="sidebar">
-                <div class="sidebar-card">
-                    <div class="sidebar-title">Documentation</div>
-                    <nav class="sidebar-nav">
-                        <a href="index.html" class="sidebar-link" id="side-link-home">
-                            <span>📄</span> DMCA & Policy
-                        </a>
-                        <a href="#about" class="sidebar-link" id="side-link-about">
-                            <span>ℹ️</span> About Us
-                        </a>
-                        <a href="#privacy" class="sidebar-link" id="side-link-privacy">
-                            <span>🔒</span> Privacy Policy
-                        </a>
-                        <a href="#contact" class="sidebar-link" id="side-link-contact">
-                            <span>✉️</span> Contact Us
-                        </a>
-                    </nav>
-                </div>
+        <!-- Main Grid Wrapper -->
+        <div class="main-wrapper">
+
+            <!-- Left Sidebar Navigation -->
+            <aside class="sidebar-nav">
+                <div class="sidebar-title">DOCUMENTATION</div>
+                <a href="index.html" class="sidebar-item active" id="side-dmca">
+                    <span>DMCA Policy</span>
+                    <span class="badge">Legal</span>
+                </a>
+                <a href="#about" class="sidebar-item" id="side-about">
+                    <span>About Us</span>
+                    <span class="badge">Info</span>
+                </a>
+                <a href="#privacy" class="sidebar-item" id="side-privacy">
+                    <span>Privacy Policy</span>
+                    <span class="badge">Privacy</span>
+                </a>
+                <a href="#contact" class="sidebar-item" id="side-contact">
+                    <span>Contact Us</span>
+                    <span class="badge">Support</span>
+                </a>
             </aside>
 
-            <!-- Main Content Area -->
-            <main class="main-content">
+            <!-- Right Main Content Area -->
+            <main class="content-area">
 
                 <!-- HOME VIEW CONTENT -->
                 <div id="home-view">
@@ -660,9 +648,7 @@
                     <p class="page-desc">
                         Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
                     </p>
-                    <div class="last-updated">
-                        <span>🕒</span> Last Updated: September 29, 2026
-                    </div>
+                    <div class="last-updated">Last Updated: September 29, 2026</div>
 
                     <!-- Notice -->
                     <div class="notice-card">
@@ -796,9 +782,7 @@
                     <p class="page-desc">
                         This Privacy Policy explains how this website handles visitor information. We keep this page simple so every visitor can understand what happens while browsing.
                     </p>
-                    <div class="last-updated">
-                        <span>🕒</span> Last Updated: September 30, 2026
-                    </div>
+                    <div class="last-updated">Last Updated: September 30, 2026</div>
 
                     <!-- 01 -->
                     <div class="section-card">
@@ -914,9 +898,7 @@
                     <p class="page-desc">
                         Use the correct email so your request reaches the right place. Please include the page URL and a short description of the issue.
                     </p>
-                    <div class="last-updated">
-                        <span>🕒</span> Last Updated: September 30, 2026
-                    </div>
+                    <div class="last-updated">Last Updated: September 30, 2026</div>
 
                     <!-- Notice -->
                     <div class="notice-card">
@@ -990,9 +972,7 @@
                     <p class="page-desc">
                         This website is built as a simple, fast, and mobile-friendly educational platform focused on Free Fire and Battle Royale game awareness.
                     </p>
-                    <div class="last-updated">
-                        <span>🕒</span> Last Updated: September 30, 2026
-                    </div>
+                    <div class="last-updated">Last Updated: September 30, 2026</div>
 
                     <!-- 01 -->
                     <div class="section-card">
@@ -1053,35 +1033,31 @@
     </div>
 
     <script>
-        function updateActiveNavState(activeHash) {
-            // Header Links
-            document.querySelectorAll('.nav-header-link').forEach(function(link) {
-                link.classList.remove('active');
-            });
-            // Sidebar Links
-            document.querySelectorAll('.sidebar-link').forEach(function(link) {
-                link.classList.remove('active');
+        function updateActiveState(activeId) {
+            var sideItems = ['side-dmca', 'side-about', 'side-privacy', 'side-contact'];
+            var navItems = ['nav-dmca', 'nav-about', 'nav-privacy', 'nav-contact'];
+
+            sideItems.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) {
+                    if (id === 'side-' + activeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                }
             });
 
-            if (activeHash === '#about') {
-                var hAbout = document.getElementById('nav-head-about');
-                var sAbout = document.getElementById('side-link-about');
-                if (hAbout) hAbout.classList.add('active');
-                if (sAbout) sAbout.classList.add('active');
-            } else if (activeHash === '#privacy') {
-                var hPriv = document.getElementById('nav-head-privacy');
-                var sPriv = document.getElementById('side-link-privacy');
-                if (hPriv) hPriv.classList.add('active');
-                if (sPriv) sPriv.classList.add('active');
-            } else if (activeHash === '#contact') {
-                var hCont = document.getElementById('nav-head-contact');
-                var sCont = document.getElementById('side-link-contact');
-                if (hCont) hCont.classList.add('active');
-                if (sCont) sCont.classList.add('active');
-            } else {
-                var sHome = document.getElementById('side-link-home');
-                if (sHome) sHome.classList.add('active');
-            }
+            navItems.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) {
+                    if (id === 'nav-' + activeId) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                }
+            });
         }
 
         function handleNavigation() {
@@ -1100,7 +1076,7 @@
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
                 if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Privacy Policy';
-                updateActiveNavState('#privacy');
+                updateActiveState('privacy');
             } else if (hash === '#contact') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
@@ -1108,7 +1084,7 @@
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
                 if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Contact Us';
-                updateActiveNavState('#contact');
+                updateActiveState('contact');
             } else if (hash === '#about') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
@@ -1116,17 +1092,17 @@
                 aboutView.style.display = 'block';
                 topBackBtn.setAttribute('href', 'index.html');
                 if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'About Us';
-                updateActiveNavState('#about');
+                updateActiveState('about');
             } else {
                 homeView.style.display = 'block';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.html');
-                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'DMCA & Compliance Policy';
-                updateActiveNavState('#home');
+                if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'DMCA Policy';
+                updateActiveState('dmca');
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo(0, 0);
         }
 
         window.addEventListener('hashchange', handleNavigation);
