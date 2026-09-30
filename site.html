@@ -1,1135 +1,932 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-<meta charset="UTF-8" /> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
-<title>Product Checkout Website</title> 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> 
-<style> 
-/* GLITCH, SCROLL & OVERFLOW FIXES */ 
-*, *::before, *::after { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-  -webkit-font-smoothing: antialiased; 
-  -moz-osx-font-smoothing: grayscale; 
-} 
-:root { 
-  --bg: #000000; 
-  --text: #ffffff; 
-  --muted: #94a3b8; 
-  --line: rgba(255, 255, 255, 0.08); 
-  --accent-red: #ff0015; 
-  --accent-glow: rgba(255, 0, 21, 0.55); 
-  --glass-bg: rgba(10, 10, 14, 0.85); 
-  --card-bg: #070710; 
-  --purple: #9130ff; 
-  --blue: #20a4ff; 
-  --pink: #ff2aac; 
-} 
-html, body { 
-  width: 100%; 
-  min-height: 100%; 
-  background: var(--bg); 
-  color: var(--text); 
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-  overflow-x: hidden !important; 
-  overflow-y: auto !important; 
-  position: relative; 
-  -webkit-tap-highlight-color: transparent; 
-} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMCA & Game Rules Violation Policy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
 
-/* Hide media controls completely */ 
-video::-webkit-media-controls, video::-webkit-media-controls-start-playback-button, video::-webkit-media-controls-play-button, video::-webkit-media-controls-panel { 
-  display: none !important; 
-  -webkit-appearance: none !important; 
-  opacity: 0 !important; 
-} 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* TOP HEADER */ 
-.top-header { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 80px; 
-  background: transparent; 
-  backdrop-filter: none; 
-  -webkit-backdrop-filter: none; 
-  border-bottom: none; 
-  padding: 0 40px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  z-index: 10003; 
-} 
+        html {
+            scroll-behavior: smooth;
+        }
 
-.brand-logo { 
-  display: flex; 
-  align-items: center; 
-  text-decoration: none; 
-  user-select: none; 
-} 
-.brand-logo img { 
-  height: 38px; 
-  width: auto; 
-  object-fit: contain; 
-  display: block; 
-} 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
 
-.header-actions { 
-  display: flex; 
-  align-items: center; 
-  gap: 20px; 
-} 
-.login-btn { 
-  position: relative; 
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%); 
-  color: #fff; 
-  border: 1px solid rgba(255, 255, 255, 0.2); 
-  padding: 10px 26px; 
-  border-radius: 40px; 
-  font-size: 13px; 
-  font-weight: 700; 
-  letter-spacing: 1px; 
-  text-transform: uppercase; 
-  cursor: pointer; 
-  text-decoration: none; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-  backdrop-filter: blur(8px); 
-} 
-.login-btn:hover { 
-  background: var(--accent-red); 
-  color: #ffffff; 
-  border-color: var(--accent-red); 
-  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8); 
-  transform: translateY(-2px); 
-} 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222226;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff3b30;
+        }
 
-.menu-icon { 
-  display: none; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  gap: 5px; 
-  cursor: pointer; 
-  padding: 6px; 
-  width: 44px; 
-  height: 44px; 
-  position: relative; 
-  z-index: 10004; 
-  border-radius: 50%; 
-  background: rgba(255, 255, 255, 0.05); 
-  border: 1px solid rgba(255, 255, 255, 0.12); 
-  transition: all 0.3s ease; 
-} 
-.menu-icon span { 
-  display: block; 
-  width: 20px; 
-  height: 2px; 
-  background: #fff; 
-  border-radius: 2px; 
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
-} 
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
 
-.menu-icon.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); } 
-.menu-icon.active span:nth-child(2) { opacity: 0; } 
-.menu-icon.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); } 
+        /* Header */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 24px;
+        }
 
-.desktop-nav-container { 
-  display: flex; 
-  align-items: center; 
-  gap: 30px; 
-} 
-.desktop-nav { 
-  display: flex; 
-  gap: 25px; 
-  list-style: none; 
-} 
-.desktop-nav a { 
-  color: #ffffff; 
-  text-decoration: none; 
-  font-size: 15px; 
-  font-weight: 500; 
-  transition: color 0.3s ease; 
-} 
-.desktop-nav a:hover { color: var(--accent-red); } 
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background: #1c1c1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
 
-.desktop-contact-link { 
-  color: #ffffff; 
-  text-decoration: none; 
-  font-size: 15px; 
-  font-weight: 500; 
-  background: transparent; 
-  padding: 0; 
-  border-radius: 0; 
-  transition: color 0.3s ease; 
-} 
-.desktop-contact-link:hover { color: var(--accent-red); background: transparent; } 
+        .back-btn:hover {
+            background: #2c2c2e;
+            transform: translateX(-2px);
+            color: #ff3b30;
+        }
 
-.top-dropdown-panel { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100vw; 
-  background: rgba(8, 8, 12, 0.98); 
-  backdrop-filter: blur(25px); 
-  -webkit-backdrop-filter: blur(25px); 
-  border-bottom: 1px solid var(--line); 
-  z-index: 10002; 
-  transform: translateY(-100%); 
-  will-change: transform; 
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-  display: none; 
-  flex-direction: column; 
-  align-items: center; 
-  padding: 95px 24px 35px; 
-} 
-.top-dropdown-panel.open { transform: translateY(0); } 
-.top-nav { 
-  display: flex; 
-  flex-direction: column; 
-  width: 100%; 
-  max-width: 480px; 
-} 
-.top-nav a { 
-  color: #ffffff; 
-  text-decoration: none; 
-  font-size: 21px; 
-  font-weight: 500; 
-  padding: 18px 0; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
-  transition: color 0.3s ease, padding-left 0.3s ease; 
-} 
-.top-nav a:hover { color: var(--muted); padding-left: 6px; } 
-.menu-contact-btn { 
-  width: 100%; 
-  max-width: 480px; 
-  margin-top: 28px; 
-  background: #ffffff; 
-  color: #000000; 
-  text-decoration: none; 
-  font-size: 18px; 
-  font-weight: 600; 
-  padding: 16px; 
-  border-radius: 8px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 10px; 
-} 
-.menu-overlay { 
-  position: fixed; 
-  inset: 0; 
-  background: rgba(0, 0, 0, 0.75); 
-  z-index: 10001; 
-  opacity: 0; 
-  visibility: hidden; 
-  will-change: opacity, visibility; 
-  transition: opacity 0.3s ease, visibility 0.3s ease; 
-} 
-.menu-overlay.active { opacity: 1; visibility: visible; } 
+        .top-bar-spacer {
+            width: 36px;
+        }
 
-/* SITE CONTENT */ 
-.site-content { 
-  position: relative; 
-  z-index: 1; 
-  width: 100%; 
-} 
+        .logo-img {
+            max-height: 32px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.2s ease;
+        }
 
-/* HERO SECTION */ 
-.video-section { 
-  position: relative; 
-  width: 100%; 
-  height: 62vh; 
-  min-height: 420px; 
-  max-height: 550px; 
-  overflow: hidden; 
-  background: #000; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding-top: 80px; 
-} 
-.video-section video { 
-  position: absolute; 
-  inset: 0; 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  filter: brightness(0.6); 
-} 
-.video-overlay { 
-  position: relative; 
-  z-index: 3; 
-  text-align: center; 
-  padding: 0 20px; 
-  max-width: 1050px; 
-  margin: 0 auto; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 16px; 
-} 
-.hero-headline { 
-  font-size: clamp(32px, 5.5vw, 68px); 
-  font-weight: 900; 
-  line-height: 1.05; 
-  letter-spacing: -1px; 
-  text-transform: uppercase; 
-  color: #ffffff; 
-  text-shadow: 0 10px 30px rgba(0,0,0,0.9); 
-} 
-.hero-headline .highlight-text { 
-  background: linear-gradient(135deg, #ffffff 10%, #e50914 100%); 
-  -webkit-background-clip: text; 
-  background-clip: text; 
-  color: transparent; 
-  display: inline-block; 
-} 
+        .logo-img:hover {
+            transform: scale(1.03);
+        }
 
-.customers-counter-container { 
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 10px; 
-  padding: 6px 12px; 
-} 
-.counter-icon { 
-  color: var(--accent-red); 
-  display: flex; 
-  align-items: center; 
-} 
-.counter-icon svg { 
-  width: 22px; 
-  height: 22px; 
-  fill: none; 
-  stroke: currentColor; 
-  stroke-width: 2.2; 
-  stroke-linecap: round; 
-  stroke-linejoin: round; 
-} 
-.counter-number { 
-  font-size: 20px; 
-  font-weight: 900; 
-  color: #ffffff; 
-  letter-spacing: 0.5px; 
-} 
-.counter-label { 
-  font-size: 12px; 
-  font-weight: 700; 
-  color: #cbd5e1; 
-  text-transform: uppercase; 
-  letter-spacing: 1.2px; 
-} 
+        /* Category */
+        .category {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
 
-/* COLLECTIONS SECTION */ 
-.collections-section { 
-  padding: 80px 20px 40px; 
-  background: #000000; 
-  text-align: center; 
-  position: relative; 
-  overflow: hidden; 
-} 
-.speech-badge { 
-  position: absolute; 
-  padding: 10px 22px; 
-  border-radius: 25px; 
-  font-size: 14px; 
-  font-weight: 800; 
-  color: #fff; 
-  z-index: 10; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5); 
-  animation: badgeFloat 3.5s ease-in-out infinite alternate; 
-  pointer-events: none; 
-} 
-.badge-left { background: #0088ff; top: 135px; left: 10%; transform: rotate(-12deg); } 
-.badge-right { background: #ff8800; top: 140px; right: 10%; transform: rotate(12deg); } 
-@keyframes badgeFloat { 
-  0% { transform: translateY(0px) rotate(-10deg); } 
-  100% { transform: translateY(-12px) rotate(-6deg); } 
-} 
-.collections-header { 
-  position: relative; 
-  margin-bottom: 50px; 
-  z-index: 5; 
-} 
-.collections-header h3 { 
-  font-size: 32px; 
-  font-weight: 400; 
-  color: #ffffff; 
-  margin-bottom: -10px; 
-  letter-spacing: -0.5px; 
-} 
-.collections-header h2 { 
-  font-size: clamp(48px, 8vw, 100px); 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  letter-spacing: -2px; 
-  color: #ffffff; 
-  line-height: 0.95; 
-} 
-.collections-fan-container { 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  max-width: 1350px; 
-  margin: 20px auto 50px; 
-  position: relative; 
-  padding: 30px 0; 
-  perspective: 1000px; 
-} 
-.collection-card { 
-  position: relative; 
-  width: 210px; 
-  height: 390px; 
-  border-radius: 20px; 
-  overflow: hidden; 
-  background: #111; 
-  margin: 0 -12px; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
-  cursor: pointer; 
-  will-change: transform, box-shadow; 
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden; 
-  transform-style: preserve-3d; 
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease; 
-} 
-.collection-card.is-hidden { display: none !important; } 
-.collection-card:nth-child(1) { transform: rotate(-8deg) translateY(10px) translateZ(0); z-index: 1; } 
-.collection-card:nth-child(2) { transform: rotate(-4deg) translateY(-5px) translateZ(0); z-index: 2; } 
-.collection-card:nth-child(3) { transform: rotate(-1deg) translateY(-15px) translateZ(0); z-index: 3; } 
-.collection-card:nth-child(4) { transform: rotate(2deg) translateY(-10px) translateZ(0); z-index: 4; } 
-.collection-card:nth-child(5) { transform: rotate(5deg) translateY(0px) translateZ(0); z-index: 5; } 
-.collection-card:nth-child(6) { transform: rotate(9deg) translateY(15px) translateZ(0); z-index: 6; } 
-.collection-card:hover { 
-  transform: rotate(0deg) scale(1.08) translateY(-15px) translateZ(0) !important; 
-  z-index: 50 !important; 
-  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.4), 0 0 15px rgba(255,255,255,0.2); 
-} 
-.collection-card video { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  pointer-events: none; 
-} 
-.collection-badge { 
-  position: absolute; 
-  top: 15px; 
-  right: 15px; 
-  background: #ff2d2d; 
-  color: #ffffff; 
-  padding: 5px 12px; 
-  border-radius: 20px; 
-  font-size: 11px; 
-  font-weight: 800; 
-  z-index: 3; 
-  letter-spacing: 0.5px; 
-  box-shadow: 0 4px 10px rgba(255, 45, 45, 0.4); 
-} 
-.collection-card-overlay { 
-  position: absolute; 
-  inset: 0; 
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); 
-  display: flex; 
-  align-items: flex-end; 
-  justify-content: center; 
-  padding: 20px 12px; 
-  z-index: 2; 
-} 
+        /* Main Headline */
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
 
-.buy-now-btn { 
-  color: #ffffff; 
-  font-size: 12px; 
-  font-weight: 800; 
-  background: linear-gradient(135deg, #ff1a26 0%, #cc0010 100%); 
-  padding: 10px 14px; 
-  border-radius: 50px; 
-  box-shadow: 0 0 15px var(--accent-glow), inset 0 2px 3px rgba(255, 255, 255, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.4); 
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; 
-  letter-spacing: 0.5px; 
-  text-transform: uppercase; 
-  cursor: pointer; 
-  border: 1px solid rgba(255, 100, 100, 0.4); 
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 6px; 
-  width: 100%; 
-  max-width: 160px; 
-  white-space: nowrap; 
-  text-decoration: none; 
-} 
-.buy-now-btn:hover { 
-  background: linear-gradient(135deg, #ff333f 0%, #e60012 100%); 
-  transform: scale(1.04); 
-  box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 4px rgba(255, 255, 255, 0.4); 
-} 
+        .page-desc {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
 
-.collections-footer-quote { 
-  max-width: 800px; 
-  margin: 40px auto 25px; 
-  font-size: 18px; 
-  font-weight: 600; 
-  line-height: 1.5; 
-  color: #ffffff; 
-} 
-.explore-btn { 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 10px; 
-  background: transparent; 
-  color: #ffffff; 
-  border: 1px solid rgba(255, 255, 255, 0.6); 
-  padding: 12px 32px; 
-  border-radius: 30px; 
-  font-size: 15px; 
-  font-weight: 700; 
-  cursor: pointer; 
-  text-decoration: none; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-} 
-.explore-btn:hover { 
-  background: #ffffff; 
-  color: #000000; 
-  border-color: #ffffff; 
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); 
-  transform: translateY(-3px); 
-} 
+        .last-updated {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 32px;
+        }
 
-/* WHAT IS PANEL & LATEST NEWS SECTION */ 
-.content-banner-section { 
-  max-width: 1100px; 
-  margin: 40px auto; 
-  padding: 0 20px; 
-  text-align: left; 
-  opacity: 0; 
-  transform: translateY(30px); 
-  transition: opacity 0.8s ease, transform 0.8s ease; 
-} 
+        /* Notice Card */
+        .notice-card {
+            background: #1c1c1e;
+            border-left: 4px solid #ff3b30;
+            padding: 18px 20px;
+            margin-bottom: 36px;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
 
-.content-banner-section.reveal-active { 
-  opacity: 1; 
-  transform: translateY(0); 
-} 
+        .notice-label {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
 
-.section-title { 
-  font-size: clamp(24px, 3.5vw, 36px); 
-  font-weight: 900; 
-  color: #ffffff; 
-  text-transform: uppercase; 
-  line-height: 1.1; 
-  margin-bottom: 20px; 
-  letter-spacing: -0.5px; 
-} 
-.section-title .slashes { 
-  display: block; 
-  color: var(--accent-red); 
-  font-size: 15px; 
-  font-weight: 900; 
-  letter-spacing: 2px; 
-  margin-top: 4px; 
-} 
+        .notice-card p {
+            font-size: 15px;
+            color: #d0d0d0;
+            margin: 0;
+            line-height: 1.6;
+        }
 
-.banner-link { 
-  text-decoration: none; 
-  color: inherit; 
-  display: block; 
-} 
+        /* Section Cards */
+        .section-card {
+            background: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px 22px;
+            margin-bottom: 24px;
+            transition: all 0.25s ease;
+        }
 
-.news-article-card { 
-  display: flex; 
-  flex-direction: row; 
-  align-items: flex-start; 
-  justify-content: space-between; 
-  gap: 16px; 
-  width: 100%; 
-} 
+        .section-number {
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
 
-.news-article-content { 
-  flex: 1 1 55%; 
-  min-width: 0; 
-} 
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
 
-.news-article-title { 
-  font-size: clamp(15px, 2.2vw, 28px); 
-  font-weight: 800; 
-  color: #ffffff; 
-  line-height: 1.25; 
-  margin-bottom: 8px; 
-} 
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 20px 0 10px;
+        }
 
-.news-article-desc { 
-  font-size: clamp(12px, 1.4vw, 15px); 
-  color: #94a3b8; 
-  line-height: 1.4; 
-  margin-bottom: 14px; 
-  font-weight: 400; 
-} 
+        p {
+            font-size: 16px;
+            color: #c8c8c8;
+            margin-bottom: 14px;
+            line-height: 1.7;
+        }
 
-.news-view-all { 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px; 
-  color: #ffffff; 
-  font-size: 11px; 
-  font-weight: 900; 
-  text-decoration: none; 
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
-  transition: color 0.3s ease; 
-} 
+        ul {
+            margin: 12px 0 8px 20px;
+        }
 
-.news-view-all span { 
-  color: var(--accent-red); 
-  font-weight: 900; 
-  transition: transform 0.3s ease; 
-} 
+        ul li {
+            font-size: 15.5px;
+            color: #c8c8c8;
+            margin-bottom: 9px;
+            line-height: 1.55;
+        }
 
-.news-article-card:hover .news-view-all, 
-.news-view-all:hover { 
-  color: var(--accent-red); 
-} 
+        /* Enhanced Contact Card */
+        .contact-card {
+            background: linear-gradient(145deg, #1c1c1e 0%, #121214 100%);
+            border: 1px solid #2c2c2e;
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin-top: 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
 
-.news-article-card:hover .news-view-all span, 
-.news-view-all:hover span { 
-  transform: translateX(4px); 
-} 
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #ff3b30;
+            border-radius: 0 0 4px 4px;
+        }
 
-.news-article-image-wrapper { 
-  flex: 0 0 42%; 
-  height: 140px; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  background: #111; 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
-} 
+        .contact-card h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
 
-.news-article-image-wrapper img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  display: block; 
-  transition: transform 0.5s ease; 
-} 
+        .contact-card p {
+            font-size: 15px;
+            color: #b0b0b0;
+            margin-bottom: 24px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.news-article-card:hover .news-article-image-wrapper img { 
-  transform: scale(1.05); 
-} 
+        .contact-email-box {
+            background: #111113;
+            border: 1px solid #2a2a2c;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 0 auto 24px auto;
+            display: inline-block;
+            width: 100%;
+            max-width: 440px;
+            transition: all 0.2s ease;
+        }
 
-.content-divider { 
-  max-width: 1100px; 
-  margin: 30px auto 0; 
-  border: none; 
-  border-top: 1px solid rgba(255, 255, 255, 0.1); 
-} 
+        .contact-email-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff3b30;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
 
-/* FOOTER */ 
-.footer { 
-  background: #09090c; 
-  color: #94a3b8; 
-  padding: 60px 40px 30px; 
-  width: 100%; 
-  border-top: 1px solid rgba(255, 255, 255, 0.06); 
-  font-size: 13px; 
-  margin-top: 90px; 
-} 
-.footer-top-row { 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  display: grid; 
-  grid-template-columns: 1.5fr 1fr 1fr 2fr; 
-  gap: 40px; 
-  padding-bottom: 50px; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
-} 
-.footer-col { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 16px; 
-} 
-.footer-brand-logo { 
-  text-decoration: none; 
-  display: inline-block; 
-} 
-.footer-brand-logo img { 
-  height: 32px; 
-  width: auto; 
-  object-fit: contain; 
-  display: block; 
-} 
-.footer-socials { 
-  display: flex; 
-  gap: 12px; 
-  margin-top: 4px; 
-} 
-.footer-social-link { 
-  color: #fff; 
-  background: rgba(255, 255, 255, 0.05); 
-  width: 32px; 
-  height: 32px; 
-  border-radius: 6px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  text-decoration: none; 
-  font-size: 13px; 
-  transition: background 0.2s ease, transform 0.2s ease; 
-} 
-.footer-social-link:hover { 
-  background: var(--accent-red); 
-  transform: translateY(-2px); 
-} 
-.footer-heading { 
-  color: #ffffff; 
-  font-weight: 600; 
-  font-size: 14px; 
-  margin-bottom: 4px; 
-} 
-.footer-links-list { 
-  list-style: none; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px; 
-} 
-.footer-links-list a { 
-  color: #94a3b8; 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-  font-size: 13px; 
-} 
-.footer-links-list a:hover { color: #ffffff; } 
-.footer-newsletter-text { 
-  color: #94a3b8; 
-  font-size: 13px; 
-  margin-bottom: 2px; 
-} 
-.footer-newsletter-form { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 14px; 
-} 
-.footer-input { 
-  background: transparent; 
-  border: none; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-  padding: 8px 0; 
-  color: #fff; 
-  font-size: 14px; 
-  outline: none; 
-  transition: border-color 0.2s ease; 
-} 
-.footer-input:focus { border-color: var(--accent-red); } 
-.footer-signup-btn { 
-  background: var(--accent-red); 
-  color: #ffffff; 
-  border: none; 
-  padding: 12px 24px; 
-  border-radius: 4px; 
-  font-weight: 700; 
-  font-size: 13px; 
-  cursor: pointer; 
-  text-transform: uppercase; 
-  letter-spacing: 0.5px; 
-  width: fit-content; 
-  transition: background 0.2s ease, transform 0.2s ease; 
-} 
-.footer-signup-btn:hover { 
-  background: #ff1e27; 
-  transform: translateY(-1px); 
-} 
+        .contact-email-box .email-address {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            word-break: break-all;
+        }
 
-.footer-bottom-row { 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  padding-top: 25px; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  flex-wrap: wrap; 
-  gap: 15px; 
-  font-size: 11px; 
-  color: #64748b; 
-} 
-.footer-legal-links { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 20px; 
-} 
-.footer-legal-links a { 
-  color: #64748b; 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-} 
-.footer-legal-links a:hover { color: #ffffff; } 
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #ff3b30;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 13px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3);
+        }
 
-.back-to-top { 
-  position: fixed; 
-  right: 20px; 
-  bottom: 20px; 
-  width: 48px; 
-  height: 48px; 
-  border: none; 
-  border-radius: 50%; 
-  background: #fff; 
-  color: #000; 
-  font-size: 24px; 
-  cursor: pointer; 
-  z-index: 20; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); 
-} 
+        .contact-btn:hover {
+            background: #e0352b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.45);
+        }
 
-/* RESPONSIVE MEDIA QUERIES */ 
-@media (min-width: 769px) {
-  .news-article-image-wrapper {
-    height: 240px;
-  }
-}
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #1c1c1e;
+            color: #ffffff;
+            border: 1px solid #333;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 14px;
+            transition: all 0.2s ease;
+        }
 
-@media (max-width: 900px) { 
-  .top-header { padding: 0 20px; background: var(--glass-bg); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(255, 255, 255, 0.08); } 
-  .desktop-nav-container { display: none; } 
-  .menu-icon { display: flex; } 
-  .top-dropdown-panel { display: flex; } 
-  .collections-fan-container { flex-wrap: wrap; gap: 20px; padding: 0; perspective: none; } 
-  .collection-card { margin: 0; transform: none !important; width: 45%; height: 320px; } 
-  .speech-badge { display: none; } 
-  .footer-top-row { grid-template-columns: 1fr 1fr; gap: 30px; } 
-} 
+        .back-home-btn:hover {
+            background: #2c2c2e;
+            color: #ffffff;
+            border-color: #444;
+            transform: translateY(-1px);
+        }
 
-@media (max-width: 600px) { 
-  .footer-top-row { grid-template-columns: 1fr; gap: 30px; } 
-  .footer-bottom-row { flex-direction: column; align-items: flex-start; } 
-} 
+        footer {
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 1px solid #222;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
 
-@media (max-width: 520px) { 
-  .video-section { height: 52vh; min-height: 360px; } 
-  .collection-card { width: 100%; height: 360px; } 
-  .collections-header h2 { font-size: 42px; } 
-  .collections-footer-quote { font-size: 15px; } 
-  .hero-headline { font-size: 28px; } 
-  .counter-number { font-size: 18px; } 
-  .news-article-image-wrapper { height: 110px; }
-} 
-</style> 
-</head> 
-<body> 
+        .footer-nav {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+        }
 
-<!-- HOME PAGE SECTION --> 
-<div id="home-page-section" class="page-section active-page"> 
+        .footer-link {
+            color: #ff3b30;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
 
-  <!-- TOP HEADER --> 
-  <header class="top-header"> 
-    <a href="/" class="brand-logo"> 
-      <img src="logo.png" alt="Logo" /> 
-    </a> 
-    
-    <div class="desktop-nav-container"> 
-      <nav class="desktop-nav"> 
-        <a href="#services">Services</a> 
-        <a href="products.html">Products</a> 
-        <a href="#creators">Creators</a> 
-        <a href="#blogs">Blogs</a> 
-        <a href="#about">About</a> 
-        <a href="site.html#contact" class="desktop-contact-link">Contact Us</a> 
-      </nav> 
-      <a href="#login" class="login-btn">Login</a> 
-    </div> 
+        .footer-link:hover {
+            text-decoration: underline;
+            color: #e0352b;
+        }
 
-    <div class="header-actions"> 
-      <div class="menu-icon" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()"> 
-        <span></span> 
-        <span></span> 
-        <span></span> 
-      </div> 
-    </div> 
-  </header> 
+        /* ENHANCED DESKTOP LAYOUT (OPTIMIZED SCREEN UTILIZATION) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1080px;
+                padding: 32px 40px 80px;
+            }
 
-  <!-- TOP DROPDOWN PANEL (Mobile Only) --> 
-  <div id="topDropdownPanel" class="top-dropdown-panel"> 
-    <nav class="top-nav"> 
-      <a href="#services" onclick="closeMenu()">Services</a> 
-      <a href="products.html">Products</a> 
-      <a href="#creators" onclick="closeMenu()">Creators</a> 
-      <a href="#blogs" onclick="closeMenu()">Blogs</a> 
-      <a href="#about" onclick="closeMenu()">About</a> 
-    </nav> 
-    <a href="site.html#contact" class="menu-contact-btn" onclick="closeMenu()"> 
-      Contact Us <span class="arrow">→</span> 
-    </a> 
-  </div> 
-  <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div> 
+            .top-bar {
+                padding: 16px 0 28px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                margin-bottom: 32px;
+            }
 
-  <!-- SITE CONTENT --> 
-  <div id="siteContent" class="site-content"> 
+            .back-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
 
-    <!-- BACKGROUND VIDEO SECTION --> 
-    <section class="video-section"> 
-      <video id="bgVideo" autoplay muted loop playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback" preload="auto"> 
-        <source src="background.mp4" type="video/mp4" /> 
-      </video> 
-      <div class="video-overlay"> 
-        <h1 class="hero-headline"> 
-          DOMINATE THE <br /> 
-          <span class="highlight-text">BATTLEFIELD</span> 
-        </h1> 
-        <div class="customers-counter-container"> 
-          <div class="counter-icon"> 
-            <svg viewBox="0 0 24 24"> 
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path> 
-              <circle cx="9" cy="7" r="4"></circle> 
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path> 
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> 
-            </svg> 
-          </div> 
-          <span class="counter-number" id="customerCount">0</span> 
-          <span class="counter-label">Happy Customers</span> 
-        </div> 
-      </div> 
-    </section> 
+            .logo-img {
+                max-height: 38px;
+            }
 
-    <!-- COLLECTIONS SECTION --> 
-    <section class="collections-section"> 
-      <div class="speech-badge badge-left">Be Your Own Style</div> 
-      <div class="speech-badge badge-right">Style Speaks Louder</div> 
-      <div class="collections-header"> 
-        <h3>The Ultimate</h3> 
-        <h2>COLLECTIONS</h2> 
-      </div> 
-      <div class="collections-fan-container"> 
-        <!-- Cards --> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection1.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Custom%20Graphic%20Design&img=https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&price=199" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection2.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Urban%20Oversized%20Asset&img=https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&price=299" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection3.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Premium%20Leather%20Jacket&img=https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&price=499" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection4.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Classic%20Crew%20Sweatshirt&img=https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&price=249" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection5.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Athletic%20Fit%20Tracksuit&img=https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&price=399" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-        <div class="collection-card"> 
-          <span class="collection-badge">PAID</span> 
-          <video src="collection6.mp4" muted loop autoplay playsinline onerror="hideBrokenCard(this)"></video> 
-          <div class="collection-card-overlay"> 
-            <a href="checkout.html?title=Limited%20Edition%20Streetwear&img=https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&price=599" class="buy-now-btn"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a> 
-          </div> 
-        </div> 
-      </div> 
-      <p class="collections-footer-quote"> 
-        We Do Not Create Our Collections To Showcase We Create<br /> New Attitude Every Week, And We In A Few Items 
-      </p> 
-      <a href="products.html" class="explore-btn">Explore More <span>→</span></a> 
-    </section> 
+            .top-bar-spacer {
+                width: 42px;
+            }
 
-    <!-- WHAT IS PANEL SECTION (Clickable -> education.html) --> 
-    <section class="content-banner-section"> 
-      <a href="education.html" class="banner-link"> 
-        <h2 class="section-title"> 
-          WHAT IS<br>PANEL 
-          <span class="slashes">/////</span> 
-        </h2> 
-        
-        <div class="news-article-card"> 
-          <div class="news-article-content"> 
-            <h3 class="news-article-title">What is a Panel in Battle Royale Games?</h3> 
-            <p class="news-article-desc"> 
-              A Panel (also called Mod Menu, Hack Menu, or Cheat Panel) is a third-party tool that overlays a floating menu on top of a Battle Royale game. These tools are not made by the official game developers. 
-            </p> 
-            <span class="news-view-all">VIEW ALL <span>&gt;&gt;</span></span> 
-          </div> 
-          
-          <div class="news-article-image-wrapper"> 
-            <img src="background-image1.png" alt="What Is Panel" /> 
-          </div> 
-        </div> 
-      </a> 
-    </section> 
+            h1 {
+                font-size: 38px;
+                letter-spacing: -0.5px;
+                margin-bottom: 18px;
+            }
 
-    <hr class="content-divider" /> 
+            .page-desc {
+                font-size: 18px;
+                margin-bottom: 18px;
+                max-width: 850px;
+            }
 
-    <!-- LATEST NEWS SECTION --> 
-    <section class="content-banner-section"> 
-      <h2 class="section-title"> 
-        LATEST<br>NEWS 
-        <span class="slashes">/////</span> 
-      </h2> 
-      
-      <div class="news-article-card"> 
-        <div class="news-article-content"> 
-          <h3 class="news-article-title">Inside iconic horror game Silent Hill's Scottish makeover</h3> 
-          <p class="news-article-desc"> 
-            One of gaming's biggest horror franchises has come to the UK. Can it live up to the original? 
-          </p> 
-          <a href="#" class="news-view-all">VIEW ALL <span>&gt;&gt;</span></a> 
-        </div> 
-        
-        <div class="news-article-image-wrapper"> 
-          <img src="background-image2.png" alt="Latest News" /> 
-        </div> 
-      </div> 
-    </section> 
+            /* Desktop Grid view mapping */
+            #home-view:not([style*="display: none"]), 
+            #privacy-view:not([style*="display: none"]), 
+            #contact-view:not([style*="display: none"]), 
+            #about-view:not([style*="display: none"]) {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
 
-    <!-- FOOTER --> 
-    <footer class="footer"> 
-      <div class="footer-top-row"> 
-        <div class="footer-col"> 
-          <a href="/" class="footer-brand-logo"> 
-            <img src="logo.png" alt="Logo" /> 
-          </a> 
-          <div class="footer-socials"> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-facebook-f"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-instagram"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-twitter"></i></a> 
-            <a href="#" class="footer-social-link"><i class="fa-brands fa-youtube"></i></a> 
-          </div> 
-        </div> 
-        <div class="footer-col"> 
-          <h4 class="footer-heading">Support</h4> 
-          <ul class="footer-links-list"> 
-            <li><a href="site-contact">Contact Us</a></li> 
-            <li><a href="site-dmca">DMCA</a></li> 
-            <li><a href="#">Downloads</a></li> 
-            <li><a href="#">Locate A Dealer</a></li> 
-            <li><a href="#">Product Registration</a></li> 
-            <li><a href="#">Spare Parts</a></li> 
-          </ul> 
-        </div> 
-        <div class="footer-col"> 
-          <h4 class="footer-heading">Company</h4> 
-          <ul class="footer-links-list"> 
-            <li><a href="#">About Us</a></li> 
-            <li><a href="#">Our Design</a></li> 
-            <li><a href="#">Careers</a></li> 
-            <li><a href="#">Newsroom</a></li> 
-            <li><a href="#">Access</a></li> 
-            <li><a href="#">Affiliates</a></li> 
-          </ul> 
-        </div> 
-        <div class="footer-col"> 
-          <div class="footer-newsletter-text"><i class="fa-regular fa-envelope" style="margin-right: 8px;"></i> Stay up to date on the latest updates</div> 
-          <div class="footer-newsletter-form"> 
-            <input type="email" placeholder="Enter your e-mail address" class="footer-input"> 
-            <button class="footer-signup-btn">Sign Up</button> 
-          </div> 
-        </div> 
-      </div> 
-      <div class="footer-bottom-row"> 
-        <div class="footer-legal-links"> 
-          <a href="site.html#terms">Terms and Conditions</a> 
-          <a href="site.html#privacy">Privacy Policy</a> 
-          <a href="site.html#disclaimer">Disclaimer</a> 
-          <a href="site.html#dmca">DMCA Policy</a> 
-          <a href="site.html#contact">Contact</a> 
-        </div> 
-        <div class="footer-copyright"> 
-          © 2026 Copyright 
-        </div> 
-      </div> 
-    </footer> 
+            #home-view[style*="display: none"], 
+            #privacy-view[style*="display: none"], 
+            #contact-view[style*="display: none"], 
+            #about-view[style*="display: none"] {
+                display: none !important;
+            }
 
-    <button class="back-to-top" onclick="scrollToTop()">↑</button> 
-  </div> 
-</div> 
+            /* Full Width Grid Spans */
+            .category, h1, .page-desc, .last-updated, .notice-card, .contact-card {
+                grid-column: 1 / -1;
+            }
 
-<script> 
-function unlockScroll() { 
-  document.body.style.overflow = 'auto'; 
-  document.body.style.overflowY = 'auto'; 
-  document.documentElement.style.overflow = 'auto'; 
-  document.documentElement.style.overflowY = 'auto'; 
-} 
+            .notice-card {
+                padding: 24px 28px;
+                border-radius: 0 12px 12px 0;
+                margin-bottom: 12px;
+            }
 
-window.addEventListener('DOMContentLoaded', () => { 
-  animateCounter(1000, 1800); 
-  unlockScroll(); 
-  initScrollAnimations(); 
-}); 
+            .notice-card:hover {
+                transform: translateX(4px);
+                background: #222226;
+            }
 
-function initScrollAnimations() { 
-  const sections = document.querySelectorAll('.content-banner-section'); 
-  const observer = new IntersectionObserver((entries) => { 
-    entries.forEach(entry => { 
-      if (entry.isIntersecting) { 
-        entry.target.classList.add('reveal-active'); 
-      } 
-    }); 
-  }, { threshold: 0.15 }); 
+            .section-card {
+                padding: 28px 26px;
+                border-radius: 14px;
+                margin-bottom: 0;
+                display: flex;
+                flex-direction: column;
+            }
 
-  sections.forEach(section => observer.observe(section)); 
-} 
+            .section-card:hover {
+                border-color: #333336;
+                background: #141416;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            }
 
-const menuToggle = document.getElementById("menuToggle"); 
-const topDropdownPanel = document.getElementById("topDropdownPanel"); 
-const menuOverlay = document.getElementById("menuOverlay"); 
-let counterAnimated = false; 
+            .contact-card {
+                padding: 42px 36px;
+                border-radius: 18px;
+                margin-top: 16px;
+            }
 
-function animateCounter(targetNumber, duration) { 
-  if (counterAnimated) return; 
-  counterAnimated = true; 
-  const counterElement = document.getElementById("customerCount"); 
-  const startTime = performance.now(); 
-  function updateNumber(currentTime) { 
-    const elapsedTime = currentTime - startTime; 
-    const progress = Math.min(elapsedTime / duration, 1); 
-    const easeProgress = 1 - Math.pow(1 - progress, 3); 
-    const currentCount = Math.floor(easeProgress * targetNumber); 
-    counterElement.textContent = currentCount.toLocaleString() + "+"; 
-    if (progress < 1) { 
-      requestAnimationFrame(updateNumber); 
-    } else { 
-      counterElement.textContent = targetNumber.toLocaleString() + "+"; 
-    } 
-  } 
-  requestAnimationFrame(updateNumber); 
-} 
+            .contact-card:hover {
+                border-color: #3a3a3d;
+                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+            }
 
-function hideBrokenCard(videoElem) { 
-  const card = videoElem.closest('.collection-card'); 
-  if (card) card.classList.add('is-hidden'); 
-} 
+            .contact-email-box {
+                padding: 18px 28px;
+                border-radius: 14px;
+            }
 
-function toggleMenu() { 
-  menuToggle.classList.toggle("active"); 
-  topDropdownPanel.classList.toggle("open"); 
-  menuOverlay.classList.toggle("active"); 
-} 
+            .contact-email-box:hover {
+                border-color: #ff3b30;
+                background: #151518;
+            }
 
-function closeMenu() { 
-  menuToggle.classList.remove("active"); 
-  topDropdownPanel.classList.remove("open"); 
-  menuOverlay.classList.remove("active"); 
-  unlockScroll(); 
-} 
+            footer {
+                margin-top: 60px;
+                padding-top: 28px;
+            }
 
-function scrollToTop() { 
-  window.scrollTo({ top: 0, behavior: "smooth" }); 
-} 
-</script> 
-</body> 
+            .footer-nav {
+                gap: 24px;
+            }
+
+            .footer-link {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            .container {
+                padding: 16px 16px 50px;
+            }
+
+            .section-card {
+                padding: 20px 16px;
+            }
+
+            .contact-card {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="top-bar">
+            <a href="/" class="back-btn" id="top-back-btn">←</a>
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <div class="top-bar-spacer"></div>
+        </div>
+
+        <!-- HOME VIEW CONTENT -->
+        <div id="home-view">
+            <!-- Hero -->
+            <div class="category">LEGAL & COMPLIANCE</div>
+            <h1>DMCA & Game Rules Violation Policy</h1>
+            <p class="page-desc">
+                Information about copyright complaints, third-party links, and reports concerning potential violations of game rules or Terms of Service.
+            </p>
+            <div class="last-updated">Last Updated: September 29, 2026</div>
+
+            <!-- Notice -->
+            <div class="notice-card">
+                <div class="notice-label">NOTICE</div>
+                <p>
+                    This website does not knowingly host, store, upload, or distribute third-party panel files, cheat tools, APKs, or software on its own servers. Our website may contain informational content and links to third-party websites and resources.
+                </p>
+            </div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Copyright / DMCA Requests</h2>
+                <p>
+                    If you are a copyright owner or an authorized representative and believe that content or a link on this website infringes your copyright, you may submit a formal DMCA notice. We take valid copyright complaints seriously and will review them promptly.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information Required</h2>
+                <p>To process a DMCA request, please include the following:</p>
+                <ul>
+                    <li>Full name and company/organization name where applicable</li>
+                    <li>Valid contact email address</li>
+                    <li>Exact URL(s) on this website being reported</li>
+                    <li>Identification of the copyrighted work claimed to be infringed</li>
+                    <li>Evidence of ownership or authorization to act on behalf of the owner</li>
+                    <li>A good-faith statement that the use is not authorized by the copyright owner, its agent, or the law</li>
+                    <li>A statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner</li>
+                </ul>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>Game Rules / Terms of Service Violations</h2>
+                <p>
+                    If you believe that a link published on our website promotes, references, or provides access to tools that violate a game’s official rules or Terms of Service, you may submit a report for review.
+                </p>
+                <p>Examples of such tools may include:</p>
+                <ul>
+                    <li>Cheats</li>
+                    <li>Unauthorized game modifications</li>
+                    <li>Aimbots</li>
+                    <li>Wallhacks</li>
+                    <li>Other unauthorized gameplay tools</li>
+                </ul>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Information Required for Game Rule Reports</h2>
+                <p>When submitting a report related to game rules or Terms of Service, please provide:</p>
+                <ul>
+                    <li>Your name and contact email</li>
+                    <li>The exact URL on this website where the link or content appears</li>
+                    <li>A clear description of why the linked material may violate the game’s rules</li>
+                    <li>Any supporting information that helps us review the report</li>
+                </ul>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Review & Removal Process</h2>
+                <p>
+                    After receiving a valid report, we will review the reported page or link. Where appropriate, we may remove or disable access to the content or link under our control.
+                </p>
+                <p>
+                    Incomplete, inaccurate, misleading, or abusive reports may require additional clarification before any action is taken.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>Third-Party Content & External Links</h2>
+                <p>
+                    This website does not control third-party servers and cannot directly remove files or content hosted on external websites. We can only remove references or links that appear on our own pages.
+                </p>
+                <p>
+                    If the content is hosted elsewhere, you may also need to contact the relevant third-party website operator or hosting provider to request removal.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Good-Faith Reporting</h2>
+                <p>
+                    All reports should be submitted in good faith. Please ensure the information you provide is accurate and supported by relevant details. False or abusive reports may be disregarded.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Contact</h2>
+                <p>
+                    For all DMCA notices and Game Rules / Terms of Service violation reports, please use the official contact method provided below.
+                </p>
+            </div>
+
+            <!-- Enhanced Contact Card -->
+            <div class="contact-card">
+                <h2>Report an Issue</h2>
+                <p>
+                    For DMCA notices, copyright concerns, and Game Rules or Terms of Service violation reports, please contact our compliance team directly via email.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">DMCA & Compliance Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Send Email Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY VIEW CONTENT -->
+        <div id="privacy-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">LEGAL & PRIVACY</div>
+            <h1>Privacy Policy</h1>
+            <p class="page-desc">
+                This Privacy Policy explains how this website handles visitor information. We keep this page simple so every visitor can understand what happens while browsing.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Introduction</h2>
+                <p>
+                    Welcome to our Privacy Policy page. Respecting visitor privacy is a priority for us. This document outlines the types of information that may be collected when you access or browse this website, how that data is used, and the measures taken to safeguard your browsing experience.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Information We Collect</h2>
+                <p>
+                    We may receive basic log information such as browser type, device type, pages visited, approximate time, referring page, and IP address through normal server logs. This is used for security, troubleshooting, analytics, and improving page performance.
+                </p>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>How We Use Information</h2>
+                <p>
+                    The log data collected is strictly utilized to maintain website functionality, ensure network security, analyze performance metrics, and troubleshoot potential server errors.
+                </p>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Cookies and Similar Technologies</h2>
+                <p>
+                    Our pages may use basic cookies, or third-party services may set cookies when you open external links, ads, analytics, or other embedded content. You can disable cookies in your browser settings at any time.
+                </p>
+            </div>
+
+            <!-- 05 -->
+            <div class="section-card">
+                <div class="section-number">05</div>
+                <h2>Third-Party Services and Links</h2>
+                <p>
+                    This website may contain educational information and links to external websites. We do not control the privacy practices of third-party websites. Please read their privacy policies before submitting any personal information on those sites.
+                </p>
+            </div>
+
+            <!-- 06 -->
+            <div class="section-card">
+                <div class="section-number">06</div>
+                <h2>No File Hosting</h2>
+                <p>
+                    We do not host panel files, APKs, cheat tools, or any third-party software on our own servers. Some pages may reference or link to external sources for informational purposes. If a link violates rights, game rules, or our policy, you may report it and we will review it promptly.
+                </p>
+            </div>
+
+            <!-- 07 -->
+            <div class="section-card">
+                <div class="section-number">07</div>
+                <h2>Data Security & Data Retention</h2>
+                <p>
+                    We implement standard technical measures to protect server log details against unauthorized access. Server log information is retained only as long as required for maintenance, security monitoring, and diagnostic purposes.
+                </p>
+            </div>
+
+            <!-- 08 -->
+            <div class="section-card">
+                <div class="section-number">08</div>
+                <h2>Children’s Privacy</h2>
+                <p>
+                    This website is intended for a general audience. If you believe a child has shared personal data with us, please contact us and we will remove it where applicable.
+                </p>
+            </div>
+
+            <!-- 09 -->
+            <div class="section-card">
+                <div class="section-number">09</div>
+                <h2>Your Privacy Rights & Changes to This Policy</h2>
+                <p>
+                    You have the right to request clarification, correction, or removal regarding any information submitted to us via direct email contact.
+                </p>
+                <p>
+                    We reserve the right to update this Privacy Policy as needed to reflect operational changes. Updates will be published on this page with a revised date.
+                </p>
+            </div>
+
+            <!-- Privacy Contact Card -->
+            <div class="contact-card">
+                <h2>Contact Us</h2>
+                <p>
+                    For privacy requests, corrections, or removal questions, please email us at the contact address provided on this website.
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">Privacy Contact</span>
+                    <span class="email-address">spaicy.net@gmail.com</span>
+                </div>
+                <div>
+                    <a href="mailto:spaicy.net@gmail.com" class="contact-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email Privacy Team
+                    </a>
+                </div>
+                <div>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT US VIEW CONTENT -->
+        <div id="contact-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">GET IN TOUCH</div>
+            <h1>Contact Us</h1>
+            <p class="page-desc">
+                Use the correct email so your request reaches the right place. Please include the page URL and a short description of the issue.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
+
+            <!-- Notice -->
+            <div class="notice-card">
+                <div class="notice-label">IMPORTANT</div>
+                <p>
+                    This website does not host panel files, APKs, or any third-party tools. We only respond about website pages, educational information, and listed links.
+                </p>
+            </div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>General Support</h2>
+                <p>
+                    For general questions, inquiry assistance, or website feedback, please send an email to our support team:
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">General Support Email</span>
+                    <span class="email-address">support@yourdomain.com</span>
+                </div>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>DMCA / Copyright</h2>
+                <p>
+                    For legal concerns, official takedown notices, or copyright inquiries, please email our dedicated DMCA compliance address:
+                </p>
+                <div class="contact-email-box">
+                    <span class="label">DMCA / Copyright Email</span>
+                    <span class="email-address">dmca@yourdomain.com</span>
+                </div>
+            </div>
+
+            <!-- 03 -->
+            <div class="section-card">
+                <div class="section-number">03</div>
+                <h2>Game Rules / Panel Related Reports</h2>
+                <p>
+                    Include the exact page URL and a clear description of the issue. We review valid reports regularly.
+                </p>
+            </div>
+
+            <!-- 04 -->
+            <div class="section-card">
+                <div class="section-number">04</div>
+                <h2>Broken Link</h2>
+                <p>
+                    Share the exact page URL and the name of the link or button that is not working.
+                </p>
+            </div>
+
+            <!-- Back to Home Action -->
+            <div class="contact-card">
+                <h2>Need Anything Else?</h2>
+                <p>
+                    Return to the home page or browse other sections of our site.
+                </p>
+                <div>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT US VIEW CONTENT -->
+        <div id="about-view" style="display: none;">
+            <!-- Hero -->
+            <div class="category">ABOUT OUR PLATFORM</div>
+            <h1>About Us</h1>
+            <p class="page-desc">
+                This website is built as a simple, fast, and mobile-friendly educational platform focused on Free Fire and Battle Royale game awareness.
+            </p>
+            <div class="last-updated">Last Updated: September 30, 2026</div>
+
+            <!-- 01 -->
+            <div class="section-card">
+                <div class="section-number">01</div>
+                <h2>Educational Awareness</h2>
+                <p>
+                    Our goal is to help users understand topics such as panels, anti-cheat systems, privacy risks, and fair play through clear and easy-to-read articles. We keep the layout lightweight so it works well on slow networks and small devices.
+                </p>
+            </div>
+
+            <!-- 02 -->
+            <div class="section-card">
+                <div class="section-number">02</div>
+                <h2>Lightweight & Responsible Design</h2>
+                <p>
+                    We focus on clean navigation, straightforward explanations, and helpful educational content. We do not host panel files, APKs, or any third-party tools on our server.
+                </p>
+            </div>
+
+            <!-- Notice / Report Card -->
+            <div class="notice-card">
+                <div class="notice-label">CORRECTIONS & REPORTS</div>
+                <p>
+                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="#contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
+                </p>
+            </div>
+
+            <!-- About Action Card -->
+            <div class="contact-card">
+                <h2>Get In Touch</h2>
+                <p>
+                    Have feedback, questions, or need to report an issue? Visit our Contact Us section.
+                </p>
+                <div>
+                    <a href="#contact" class="contact-btn">Go to Contact Page</a>
+                </div>
+                <div>
+                    <a href="/" class="back-home-btn">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Educational content only • Not affiliated with any game company
+            <div class="footer-nav">
+                <a href="/" class="footer-link">Home</a>
+                <span style="color: #444;">•</span>
+                <a href="#about" class="footer-link">About Us</a>
+                <span style="color: #444;">•</span>
+                <a href="#privacy" class="footer-link">Privacy Policy</a>
+                <span style="color: #444;">•</span>
+                <a href="#contact" class="footer-link">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function handleNavigation() {
+            var hash = window.location.hash;
+            var homeView = document.getElementById('home-view');
+            var privacyView = document.getElementById('privacy-view');
+            var contactView = document.getElementById('contact-view');
+            var aboutView = document.getElementById('about-view');
+            var topBackBtn = document.getElementById('top-back-btn');
+
+            if (hash === '#privacy') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'block';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
+            } else if (hash === '#contact') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'block';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
+            } else if (hash === '#about') {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'block';
+                topBackBtn.setAttribute('href', '/');
+            } else {
+                homeView.style.display = 'block';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', '/');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('hashchange', handleNavigation);
+        window.addEventListener('DOMContentLoaded', handleNavigation);
+    </script>
+</body>
 </html>
