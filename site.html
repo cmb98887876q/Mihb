@@ -890,42 +890,34 @@
 
     <script>
         function handleNavigation() {
-            var path = window.location.pathname;
+            var fullPath = window.location.pathname.toLowerCase().replace(/\/$/, '');
+            var hash = window.location.hash.toLowerCase().replace('#', '');
+            
             var homeView = document.getElementById('home-view');
             var privacyView = document.getElementById('privacy-view');
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
 
-            if (path.endsWith('site-privacy')) {
-                homeView.style.display = 'none';
+            homeView.style.display = 'none';
+            privacyView.style.display = 'none';
+            contactView.style.display = 'none';
+            aboutView.style.display = 'none';
+
+            if (fullPath.endsWith('site-privacy') || hash === 'privacy' || hash === 'site-privacy') {
                 privacyView.style.display = 'block';
-                contactView.style.display = 'none';
-                aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'site');
-            } else if (path.endsWith('site-contact')) {
-                homeView.style.display = 'none';
-                privacyView.style.display = 'none';
+            } else if (fullPath.endsWith('site-contact') || hash === 'contact' || hash === 'site-contact') {
                 contactView.style.display = 'block';
-                aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'site');
-            } else if (path.endsWith('site-about')) {
-                homeView.style.display = 'none';
-                privacyView.style.display = 'none';
-                contactView.style.display = 'none';
+            } else if (fullPath.endsWith('site-about') || hash === 'about' || hash === 'site-about') {
                 aboutView.style.display = 'block';
                 topBackBtn.setAttribute('href', 'site');
-            } else if (path.endsWith('site-dmca')) {
+            } else if (fullPath.endsWith('site-dmca') || hash === 'dmca' || hash === 'site-dmca') {
                 homeView.style.display = 'block';
-                privacyView.style.display = 'none';
-                contactView.style.display = 'none';
-                aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.htm1');
             } else {
                 homeView.style.display = 'block';
-                privacyView.style.display = 'none';
-                contactView.style.display = 'none';
-                aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.htm1');
             }
             window.scrollTo(0, 0);
