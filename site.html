@@ -744,7 +744,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="site" class="back-home-btn">← Back to Home</a>
+                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -818,7 +818,7 @@
                     Return to the home page or browse other sections of our site.
                 </p>
                 <div>
-                    <a href="site" class="back-home-btn">← Back to Home</a>
+                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -869,7 +869,7 @@
                     <a href="site-contact" class="contact-btn">Go to Contact Page</a>
                 </div>
                 <div>
-                    <a href="site" class="back-home-btn">← Back to Home</a>
+                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -877,7 +877,7 @@
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
-                <a href="site" class="footer-link">Home</a>
+                <a href="site-dmca" class="footer-link">Home</a>
                 <span style="color: #444;">•</span>
                 <a href="site-about" class="footer-link">About Us</a>
                 <span style="color: #444;">•</span>
@@ -890,34 +890,36 @@
 
     <script>
         function handleNavigation() {
-            var fullPath = window.location.pathname.toLowerCase().replace(/\/$/, '');
-            var hash = window.location.hash.toLowerCase().replace('#', '');
-            
+            var path = window.location.pathname;
             var homeView = document.getElementById('home-view');
             var privacyView = document.getElementById('privacy-view');
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
 
-            homeView.style.display = 'none';
-            privacyView.style.display = 'none';
-            contactView.style.display = 'none';
-            aboutView.style.display = 'none';
-
-            if (fullPath.endsWith('site-privacy') || hash === 'privacy' || hash === 'site-privacy') {
+            if (path.includes('site-privacy')) {
+                homeView.style.display = 'none';
                 privacyView.style.display = 'block';
-                topBackBtn.setAttribute('href', 'site');
-            } else if (fullPath.endsWith('site-contact') || hash === 'contact' || hash === 'site-contact') {
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', 'index.htm1');
+            } else if (path.includes('site-contact')) {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
                 contactView.style.display = 'block';
-                topBackBtn.setAttribute('href', 'site');
-            } else if (fullPath.endsWith('site-about') || hash === 'about' || hash === 'site-about') {
+                aboutView.style.display = 'none';
+                topBackBtn.setAttribute('href', 'index.htm1');
+            } else if (path.includes('site-about')) {
+                homeView.style.display = 'none';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
                 aboutView.style.display = 'block';
-                topBackBtn.setAttribute('href', 'site');
-            } else if (fullPath.endsWith('site-dmca') || hash === 'dmca' || hash === 'site-dmca') {
-                homeView.style.display = 'block';
                 topBackBtn.setAttribute('href', 'index.htm1');
             } else {
                 homeView.style.display = 'block';
+                privacyView.style.display = 'none';
+                contactView.style.display = 'none';
+                aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.htm1');
             }
             window.scrollTo(0, 0);
@@ -927,7 +929,7 @@
             var target = e.target.closest('a');
             if (target) {
                 var href = target.getAttribute('href');
-                if (href === 'site' || href === 'site-about' || href === 'site-privacy' || href === 'site-contact' || href === 'site-dmca') {
+                if (href && (href.includes('site-about') || href.includes('site-privacy') || href.includes('site-contact') || href.includes('site-dmca'))) {
                     e.preventDefault();
                     history.pushState(null, '', href);
                     handleNavigation();
