@@ -744,7 +744,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="site.html#dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -818,7 +818,7 @@
                     Return to the home page or browse other sections of our site.
                 </p>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="site.html#dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -855,7 +855,7 @@
             <div class="notice-card">
                 <div class="notice-label">CORRECTIONS & REPORTS</div>
                 <p>
-                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="site-contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
+                    If you find incorrect information, broken links, or content that should be removed, please use the <a href="site.html#contact" style="color: #ff3b30; text-decoration: underline;">contact page</a>.
                 </p>
             </div>
 
@@ -866,10 +866,10 @@
                     Have feedback, questions, or need to report an issue? Visit our Contact Us section.
                 </p>
                 <div>
-                    <a href="site-contact" class="contact-btn">Go to Contact Page</a>
+                    <a href="site.html#contact" class="contact-btn">Go to Contact Page</a>
                 </div>
                 <div>
-                    <a href="site-dmca" class="back-home-btn">← Back to Home</a>
+                    <a href="site.html#dmca" class="back-home-btn">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -877,39 +877,39 @@
         <footer>
             Educational content only • Not affiliated with any game company
             <div class="footer-nav">
-                <a href="site-dmca" class="footer-link">Home</a>
+                <a href="site.html#dmca" class="footer-link">Home</a>
                 <span style="color: #444;">•</span>
-                <a href="site-about" class="footer-link">About Us</a>
+                <a href="site.html#about" class="footer-link">About Us</a>
                 <span style="color: #444;">•</span>
-                <a href="site-privacy" class="footer-link">Privacy Policy</a>
+                <a href="site.html#privacy" class="footer-link">Privacy Policy</a>
                 <span style="color: #444;">•</span>
-                <a href="site-contact" class="footer-link">Contact Us</a>
+                <a href="site.html#contact" class="footer-link">Contact Us</a>
             </div>
         </footer>
     </div>
 
     <script>
         function handleNavigation() {
-            var path = window.location.pathname;
+            var hash = window.location.hash;
             var homeView = document.getElementById('home-view');
             var privacyView = document.getElementById('privacy-view');
             var contactView = document.getElementById('contact-view');
             var aboutView = document.getElementById('about-view');
             var topBackBtn = document.getElementById('top-back-btn');
 
-            if (path.includes('site-privacy')) {
+            if (hash === '#privacy') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'block';
                 contactView.style.display = 'none';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.htm1');
-            } else if (path.includes('site-contact')) {
+            } else if (hash === '#contact') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'block';
                 aboutView.style.display = 'none';
                 topBackBtn.setAttribute('href', 'index.htm1');
-            } else if (path.includes('site-about')) {
+            } else if (hash === '#about') {
                 homeView.style.display = 'none';
                 privacyView.style.display = 'none';
                 contactView.style.display = 'none';
@@ -925,19 +925,7 @@
             window.scrollTo(0, 0);
         }
 
-        document.addEventListener('click', function(e) {
-            var target = e.target.closest('a');
-            if (target) {
-                var href = target.getAttribute('href');
-                if (href && (href.includes('site-about') || href.includes('site-privacy') || href.includes('site-contact') || href.includes('site-dmca'))) {
-                    e.preventDefault();
-                    history.pushState(null, '', href);
-                    handleNavigation();
-                }
-            }
-        });
-
-        window.addEventListener('popstate', handleNavigation);
+        window.addEventListener('hashchange', handleNavigation);
         window.addEventListener('DOMContentLoaded', handleNavigation);
     </script>
 </body>
